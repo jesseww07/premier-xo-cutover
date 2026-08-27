@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>XO Cutover Tracker — Premier Lighting</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600;700&display=swap');
+:root{--steel:#385887;--teal:#176e8d;--bluelight:#b7c8e1;--ink:#131313;--head:#232323;--body:#3d3d3d;--muted:#676767;--border:#dadada;--offwhite:#f8f8f8;--success:#337239;--warn:#bd6b1b;--danger:#CA4141;}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter','Segoe UI',Helvetica,Arial,sans-serif;background:#fff;color:var(--body);font-size:14px;}
+.topbar{background:var(--ink);color:#fff;padding:8px 24px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;display:flex;justify-content:space-between;}
+.header{background:#fff;border-bottom:2px solid var(--border);padding:20px 24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+.brand{font-family:'Playfair Display',Georgia,serif;color:var(--steel);font-weight:700;font-size:22px;letter-spacing:.04em;}
+.brand small{display:block;font-family:'Inter',sans-serif;font-weight:500;font-size:10px;letter-spacing:.28em;color:var(--muted);text-transform:uppercase;margin-top:2px;}
+h1{font-family:'Playfair Display',Georgia,serif;color:var(--head);font-size:20px;font-weight:600;}
+.countdown{background:var(--steel);color:#fff;padding:10px 18px;text-align:center;}
+.countdown .num{font-size:26px;font-weight:700;line-height:1;}
+.countdown .lbl{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--bluelight);margin-top:2px;}
+.wrap{max-width:1080px;margin:0 auto;padding:24px;}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px;}
+.kpi{border:2px solid var(--border);padding:14px 16px;background:#fff;}
+.kpi .v{font-size:26px;font-weight:700;color:var(--steel);}
+.kpi .l{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-top:2px;}
+.bar{height:8px;background:var(--offwhite);border:1px solid var(--border);margin-top:8px;}
+.bar>div{height:100%;background:var(--teal);width:0%;transition:width .3s;}
+.phase{border:2px solid var(--border);margin-bottom:18px;background:#fff;}
+.phase-head{background:var(--steel);color:#fff;padding:12px 16px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;user-select:none;}
+.phase-head h2{font-size:14px;font-weight:600;letter-spacing:.03em;}
+.phase-head .meta{font-size:11px;color:var(--bluelight);display:flex;gap:14px;align-items:center;}
+.phase-head .pct{background:#fff;color:var(--steel);font-weight:700;padding:2px 8px;font-size:12px;min-width:44px;text-align:center;}
+.tasks{padding:6px 0;}
+.task{display:flex;align-items:flex-start;gap:12px;padding:10px 16px;border-bottom:1px solid var(--offwhite);}
+.task:last-child{border-bottom:none;}
+.task:hover{background:var(--offwhite);}
+.task input[type=checkbox]{width:17px;height:17px;margin-top:1px;accent-color:var(--teal);cursor:pointer;flex-shrink:0;}
+.task .t{flex:1;}
+.task .name{font-weight:500;color:var(--head);cursor:pointer;}
+.task.done .name{color:var(--muted);text-decoration:line-through;}
+.task .note{font-size:12px;color:var(--muted);margin-top:2px;}
+.badge{font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-weight:700;padding:3px 8px;border-radius:999px;white-space:nowrap;flex-shrink:0;margin-top:2px;}
+.b-gate{background:var(--danger);color:#fff;}
+.b-tyler{background:var(--warn);color:#fff;}
+.b-sdf{background:var(--teal);color:#fff;}
+.b-sbx{background:var(--bluelight);color:var(--ink);}
+.b-cw{background:var(--ink);color:#fff;}
+.saving{position:fixed;bottom:16px;right:16px;background:var(--ink);color:#fff;font-size:11px;padding:6px 12px;letter-spacing:.08em;text-transform:uppercase;opacity:0;transition:opacity .25s;pointer-events:none;}
+.saving.show{opacity:1;}
+.collapsed .tasks{display:none;}
+.footer{background:var(--ink);color:var(--bluelight);text-align:center;padding:14px;font-size:11px;letter-spacing:.1em;text-transform:uppercase;margin-top:32px;}
+button.reset{background:none;border:1px solid var(--border);color:var(--muted);font-family:inherit;font-size:10px;letter-spacing:.1em;text-transform:uppercase;padding:6px 12px;cursor:pointer;}
+button.reset:hover{border-color:var(--danger);color:var(--danger);}
+</style>
+</head>
+<body>
+<div class="topbar"><span>Systems &amp; Operations · LA → XO Cutover</span><span id="today"></span></div>
+<div class="header">
+  <div class="brand">PREMIER<small>L I G H T I N G</small></div>
+  <h1>XO Go-Live Tracker</h1>
+  <div class="countdown"><div class="num" id="days">—</div><div class="lbl">Days to Sep 1</div></div>
+</div>
+<div class="wrap">
+  <div class="kpis">
+    <div class="kpi"><div class="v" id="k-total">0%</div><div class="l">Overall</div><div class="bar"><div id="bar-total"></div></div></div>
+    <div class="kpi"><div class="v" id="k-done">0</div><div class="l">Tasks Done</div></div>
+    <div class="kpi"><div class="v" id="k-open">0</div><div class="l">Tasks Open</div></div>
+    <div class="kpi"><div class="v" id="k-gates">0</div><div class="l">Open Gates</div></div>
+  </div>
+  <div id="phases"></div>
+  <div style="text-align:right;margin-top:8px;"><button class="reset" onclick="resetAll()">Reset all progress</button></div>
+</div>
+<div class="footer">Premier Lighting · ShopPremier · XO Cutover September 1, 2026</div>
+<div class="saving" id="saving">Saved</div>
+
+<script>
+const PHASES = [
+ {id:"p1", name:"Phase 1 — Field Mapping & Verification (now → Aug 26)", tasks:[
+  {id:"t1a", name:"LA→XO field mapping (68 fields) verified on 687 joined Minka products", note:"Delivered — mapping CSV in hand", badge:null, done:true},
+  {id:"t1b", name:"Fan Extra-* columns verified on Minka-Aire export (1,308 rows)", note:"All 13 LA fan fields mapped — Fan form unblocked. Watch: Sweep=span, Reversible Blades ≠ motor reverse, 3 downrod naming schemes", badge:null, done:true},
+  {id:"t1c", name:"Escalate to Tyler: XOItemID Excel-mangling in backend export", note:"164/1683 rows corrupted (Oct-93 pattern); custitem7 now sources from ItemID instead", badge:"tyler"},
+  {id:"t1d", name:"Escalate to Tyler: Vendor Ship Method mixed value domains", note:"Yes/No vs UPS/Small Parcel/Truck depending on source file", badge:"tyler"},
+  {id:"t1e", name:"Confirm daily export switches to backend full-catalog format", note:"Owners' full-data requirement; current export is qty/pricing only", badge:"tyler"},
+  {id:"t1f", name:"Decide: does verbatim glass detail matter? (Clear Seedy → Clear fidelity loss)", note:"If yes, add to Tyler list", badge:null},
+ ]},
+ {id:"p2", name:"Phase 2 — NetSuite Field Dispositions (Aug 24 → Sep 1)", tasks:[
+  {id:"t2a", name:"Approve disposition list: rename/re-source, repurpose, retire, add", note:"Part 2 of plan doc — rename preserves scriptid + history", badge:null},
+  {id:"t2b", name:"Relabel custitem_la_* spec fields (drop 'LA', neutral names)", note:"Label-only change; internal ids untouched", badge:null},
+  {id:"t2c", name:"custitem7 → 'XO Item ID' sourced from ItemID (corrected)", note:"NOT the XOItemID column — it's corrupted", badge:null},
+  {id:"t2d", name:"Build custitem_xo_* new fields in SDF ACP", note:"UMAP, backorder, order min/multiple, change-date quartet, compliance, bucket pairs", badge:"sdf"},
+  {id:"t2e", name:"Build 4 category entry forms in SDF ACP", note:"Fields deploy before forms — Fan form field list now confirmed", badge:"sdf"},
+  {id:"t2f", name:"Deploy SDF ACP to sandbox → validate → production", note:"", badge:"sbx"},
+ ]},
+ {id:"p3", name:"Phase 3 — Script & Search Impact (Aug 26 → Sep 12)", tasks:[
+  {id:"t3a", name:"Grep SDF project source for every retiring-field scriptid", note:"Retire list: 3 LA IDs, Atlas remainder, Solupay, Beam Spread, Dim Weight, Parts Diagram, Notes, Crystal", badge:null},
+  {id:"t3b", name:"'Used in Searches' audit per retiring field (UI — not SuiteQL-queryable)", note:"", badge:null},
+  {id:"t3c", name:"Confirm dropship_check_ue.js reads none of the retiring fields", note:"Also still pending: author 15383 validation before redeploy", badge:null},
+  {id:"t3d", name:"Rewrite ingest logic against XO columns", note:"Coalesce dup columns, strip units (60 W / 120 V), FileDescr keyword matching for docs, GTIN zero-strip", badge:null},
+  {id:"t3e", name:"Extend weekly Cowork delta / daily ingest to full field set", note:"Keep Handle+Title strip rule on the Shopify side", badge:"cw"},
+ ]},
+ {id:"p4", name:"Phase 4 — LA Retirement: Freeze & Snapshot (Sep 1 → Sep 5)", tasks:[
+  {id:"t4a", name:"Sep 1: disable all Zastro/LA scheduled script deployments and CSV import jobs", note:"", badge:null},
+  {id:"t4b", name:"Revoke/disable LA/Zastro integration user and tokens", note:"", badge:null},
+  {id:"t4c", name:"Confirm FarApp Product sync remains off", note:"", badge:null},
+  {id:"t4d", name:"SuiteQL snapshot of all LA custom record contents + 3 LA ID field values → Box archive", note:"Rollback + audit trail before anything is touched", badge:null},
+ ]},
+ {id:"p5", name:"Phase 5 — LA Retirement: Reference Sweep & Inactivate (Sep 5 → Sep 30)", tasks:[
+  {id:"t5a", name:"Dependency list per Zastro/LA custom record type (scripts, searches, List/Record fields, workflows)", note:"", badge:null},
+  {id:"t5b", name:"Inventory Zastro-deployed scripts; retire deployments, then script records", note:"", badge:null},
+  {id:"t5c", name:"Inactivate LA saved searches (check script/schedule references first)", note:"", badge:null},
+  {id:"t5d", name:"Delete saved LA CSV import maps", note:"", badge:null},
+  {id:"t5e", name:"Inactivate LA custom record instances, retired fields, LA custom lists", note:"Inactivate only — reversible; 60-day soak begins", badge:null},
+ ]},
+ {id:"p6", name:"Phase 6 — Post-Soak Deletion (~Dec 1)", tasks:[
+  {id:"t6a", name:"Two clean months confirmed; second Box snapshot check", note:"", badge:null},
+  {id:"t6b", name:"Delete record instances → record types → scripts/files → retired fields", note:"Per-save UE scripts disabled during bulk deletes", badge:null},
+ ]},
+];
+const KEY="xo-cutover-tracker-v1";
+let state={};
+
+function badgeEl(b){
+  if(!b) return "";
+  const map={gate:["b-gate","GATE"],tyler:["b-tyler","TYLER"],sdf:["b-sdf","SDF"],sbx:["b-sbx","SANDBOX"],cw:["b-cw","COWORK"]};
+  const [cls,txt]=map[b];return `<span class="badge ${cls}">${txt}</span>`;
+}
+function render(){
+  const root=document.getElementById("phases");root.innerHTML="";
+  let done=0,total=0,gates=0;
+  PHASES.forEach(p=>{
+    let pd=0;
+    const div=document.createElement("div");div.className="phase";
+    if(state["col_"+p.id])div.classList.add("collapsed");
+    let rows="";
+    p.tasks.forEach(t=>{
+      const chk=!!state[t.id];total++;if(chk){done++;pd++;}
+      if(t.badge==="gate"&&!chk)gates++;
+      rows+=`<div class="task ${chk?"done":""}"><input type="checkbox" ${chk?"checked":""} onchange="toggle('${t.id}',this.checked)">
+        <div class="t"><div class="name" onclick="toggle('${t.id}',!${chk});">${t.name}</div>${t.note?`<div class="note">${t.note}</div>`:""}</div>${badgeEl(t.badge)}</div>`;
+    });
+    const pct=Math.round(pd/p.tasks.length*100);
+    div.innerHTML=`<div class="phase-head" onclick="collapse('${p.id}')"><h2>${p.name}</h2>
+      <div class="meta"><span>${pd}/${p.tasks.length}</span><span class="pct">${pct}%</span></div></div>
+      <div class="tasks">${rows}</div>`;
+    root.appendChild(div);
+  });
+  const pct=total?Math.round(done/total*100):0;
+  document.getElementById("k-total").textContent=pct+"%";
+  document.getElementById("bar-total").style.width=pct+"%";
+  document.getElementById("k-done").textContent=done;
+  document.getElementById("k-open").textContent=total-done;
+  document.getElementById("k-gates").textContent=gates;
+}
+async function save(){
+  try{ if(window.storage){await window.storage.set(KEY,JSON.stringify(state));
+    const s=document.getElementById("saving");s.classList.add("show");setTimeout(()=>s.classList.remove("show"),900);}
+  }catch(e){console.error("save failed",e);}
+}
+window.toggle=(id,val)=>{state[id]=val;render();save();};
+window.collapse=(id)=>{state["col_"+id]=!state["col_"+id];render();save();};
+window.resetAll=()=>{if(confirm("Clear all progress?")){state={};PHASES[0].tasks.filter(t=>t.done).forEach(t=>state[t.id]=true);render();save();}};
+(async function init(){
+  const now=new Date();
+  document.getElementById("today").textContent=now.toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+  const golive=new Date("2026-09-01T00:00:00");
+  const d=Math.max(0,Math.ceil((golive-now)/86400000));
+  document.getElementById("days").textContent=d;
+  try{ if(window.storage){const r=await window.storage.get(KEY); if(r&&r.value)state=JSON.parse(r.value);}
+  }catch(e){ /* first run — no saved state */ }
+  if(Object.keys(state).length===0){PHASES[0].tasks.filter(t=>t.done).forEach(t=>state[t.id]=true);}
+  render();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_236_7513000_144" standard="STDTMPLPURCHORDST">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Inbound Purchase PDF/HTML Template</title>
+  <trantype>PURCHORD</trantype>
+</advancedpdftemplate>

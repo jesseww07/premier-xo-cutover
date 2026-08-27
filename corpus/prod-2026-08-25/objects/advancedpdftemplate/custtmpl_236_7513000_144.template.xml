@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+	<macrolist>
+		<macro id="nlheader">
+			<table style="width: 100%; font-size: 10pt;">
+				<tr>
+					<td rowspan="1" style="padding-left: -10px;">
+						<#if companyInformation.logoUrl?length != 0>
+							<img src="${companyInformation.logoUrl}" style="float: left; margin: 1px; width: 209px; height: 101px" />
+						</#if>
+					</td>
+					<td align="right">
+						<span style="font-size: 20pt; font-weight: bold;">Purchase Order ${record.tranid}</span><br/>
+						<span style="font-size: 14pt;">${record.entity}</span>
+					</td>
+				</tr>
+			</table>
+		</macro>
+		<macro id="nlfooter">
+			<table class="footer" style="width: 100%;">
+				<tr>
+					
+					<#assign aDateTime = .now>
+					<td colspan="2" align="right"><pagenumber/> of <totalpages/><br/>${aDateTime?string.short}</td>
+				</tr>
+			</table>
+		</macro>
+	</macrolist>
+	<style type="text/css">
+	* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+	}
+	body { font-size: 9pt; }
+	table { width: 100%; border-collapse: collapse; }
+	td { padding: 4px 6px; }
+	th {
+		background-color: #e3e3e3;
+		color: #333333;
+		font-weight: bold;
+		font-size: 8pt;
+		padding: 6px;
+	}
+	b { font-weight: bold; color: #333333; }
+	table.footer td { padding: 0; font-size: 8pt; }
+	.address-table td { vertical-align: top; }
+	.address-box { vertical-align: top; padding-right: 10px; }
+	.details-table { table-layout: fixed; }
+	.details-table td { padding: 2px 4px; vertical-align: top; }
+	.details-label { width: 38%; font-weight: bold; white-space: nowrap; }
+	.details-value { width: 62%; }
+	.shipnotes-box { margin-top: 15px; border: 1px solid #d3d3d3; background-color: #f9f9f9; }
+	.shipnotes-box td { padding: 8px; vertical-align: top; }
+	.itemtable { margin-top: 18px; table-layout: fixed; }
+	.itemtable td { padding: 6px; vertical-align: top; }
+	.itemtable .itemcol { width: 20%; font-size: 8pt; line-height: 110%; word-break: normal; }
+	.itemtable .desccol { width: 36%; line-height: 115%; }
+	.itemtable .qtycol { width: 13%; }
+	.itemtable .ratecol { width: 16%; }
+	.itemtable .amtcol { width: 15%; }
+	.uom-note { font-size: 7pt; color: #666666; }
+	.item-note { font-size: 7pt; color: #922C2C; }
+	.totals { margin-top: 20px; }
+	.totals td { padding: 6px; }
+	.total-row { background-color: #e3e3e3; font-weight: bold; }
+	hr { width: 100%; color: #d3d3d3; background-color: #d3d3d3; height: 1px; }
+	</style>
+</head>
+<body header="nlheader" header-height="90pt" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+
+<!-- ================================================================== -->
+<!-- ADDRESS / DETAILS SECTION                                          -->
+<!-- Bound to the `record` data source (inboundData object).            -->
+<!-- Ship-To resolution order — DO NOT REORDER these branches:          -->
+<!--   1. Location contains-match -> hardcoded warehouse address.       -->
+<!--      Uses ?contains() rather than exact = match, so location       -->
+<!--      strings like "Phoenix Retail" or "Broadway : Phoenix Retail"  -->
+<!--      both resolve correctly regardless of exact formatting.        -->
+<!--   2. Fallback -> real record.shipaddress.                          -->
+<!-- NOTE: the Suitelet now BLOCKS printing when the consolidated POs   -->
+<!-- carry more than one location, so the location driving this branch  -->
+<!-- is guaranteed homogeneous by the time the template renders.        -->
+<!-- ================================================================== -->
+
+<table class="address-table" style="margin-bottom: 15px;">
+	<tr>
+		<td class="address-box" style="width: 30%;">
+			<strong>Vendor:</strong><br/><br/>
+			${record.billaddress}
+		</td>
+
+		<td class="address-box" style="width: 35%;">
+			<strong>Ship To:</strong><br/><br/>
+			<#if record.location?contains("Broadway") || record.location?contains("Phoenix Retail")>
+				Premier Lighting, LLC<br/>
+				4024 E Broadway Rd, Ste 1001<br/>
+				Phoenix, AZ 85040<br/>
+				Ph: (866) 907-2669
+			<#elseif record.location?contains("TUC-WH")>
+				Northside Warehouse<br/>
+				630 E. Ft. Lowell Road<br/>
+				Receiving Hours: 9:30am-3:00pm M-F<br/>
+				Tucson, AZ 85705<br/>
+				Ph: (866) 907-2669
+			<#else>
+				${record.shipaddress}
+			</#if>
+		</td>
+
+		<td class="address-box" style="width: 35%;">
+			<table class="details-table">
+				<!-- Due Date is now the EARLIEST real PO due date across the
+				     consolidation (supplied by the Suitelet). When no PO
+				     carries a due date the row is hidden rather than
+				     printing the created date labeled as a due date. -->
+				<#if record.duedate?has_content>
+				<tr>
+					<td class="details-label" align="right">Due Date:</td>
+					<td class="details-value">${record.duedate}</td>
+				</tr>
+				</#if>
+				<tr>
+					<td class="details-label" align="right">Vendor #:</td>
+					<td class="details-value">${record.otherrefnum}</td>
+				</tr>
+				<tr>
+					<td class="details-label" align="right">PO #:</td>
+					<td class="details-value">${record.tranid}</td>
+				</tr>
+				<tr>
+					<td class="details-label" align="right">Date Created:</td>
+					<td class="details-value">${record.trandate}</td>
+				</tr>
+				<tr>
+					<td class="details-label" align="right">Terms:</td>
+					<td class="details-value">${record.terms}</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<hr/>
+
+<!-- Guarded with ?trim so a box only renders when it has actual content.
+     (The old Suitelet returned a single space for empty fields, which made
+     ?has_content always true and printed an empty box on every PO.)
+
+     Vendor Shipping Instructions and the Rich Memo (record.richText, from
+     custrecord_zas_rich_memo) share ONE row:
+       - both populated -> side by side, 50/50, so the block is only as tall
+         as the taller of the two (no added vertical space);
+       - only one populated -> that cell is the only one emitted and fills
+         the full width;
+       - neither -> the whole table is skipped.
+     record.richText is intentionally NOT XML-escaped by the Suitelet so its
+     formatting renders; it must be well-formed XHTML or BFO will fault. -->
+<#assign hasVendorNotes = record.custbody_vendor_ship_notes?has_content && record.custbody_vendor_ship_notes?trim?has_content>
+<#assign hasRichMemo = record.richText?has_content && record.richText?trim?has_content>
+<#if hasVendorNotes || hasRichMemo>
+<table class="shipnotes-box">
+	<tr>
+		<#if hasVendorNotes>
+		<td<#if hasRichMemo> style="width: 50%; border-right: 1px solid #d3d3d3;"</#if>>
+			<span style="font-weight: bold;">Vendor Shipping Instructions:</span><br/>
+			${record.custbody_vendor_ship_notes}
+		</td>
+		</#if>
+		<#if hasRichMemo>
+		<td<#if hasVendorNotes> style="width: 50%;"</#if>>
+			<span style="font-weight: bold;">Shipment Notes:</span><br/>
+			${record.richText}
+		</td>
+		</#if>
+	</tr>
+</table>
+</#if>
+
+<!-- ================================================================== -->
+<!-- ITEM TABLE                                                          -->
+<!-- Bound to the `results` data source (results.results array).        -->
+<!-- item = vendor's item name, so the vendor sees their own reference. -->
+<!-- line.itemnote = PL item # disambiguator, populated ONLY when two    -->
+<!--   distinct items share a vendor code and the print was forced.      -->
+<!-- line.uom = purchase unit label for pack items ("10 PACK"), so       -->
+<!--   Quantity and Rate are unambiguous: qty is packs, rate is per      -->
+<!--   pack, and rate x qty = amount on every line.                      -->
+<!-- ================================================================== -->
+
+<#if results?has_content && results.results?has_content>
+<table class="itemtable">
+	<thead>
+		<tr>
+			<th class="itemcol" align="left">Item</th>
+			<th class="desccol" align="left">Description</th>
+			<th class="qtycol" align="center">Quantity</th>
+			<th class="ratecol" align="right">Rate</th>
+			<th class="amtcol" align="right">Amount</th>
+		</tr>
+	</thead>
+	<tbody>
+	<#list results.results as line>
+		<tr style="background-color: <#if (line_index % 2)==0>white<#else>#ededed</#if>;">
+			<td class="itemcol" align="left">${line.item}<#if line.itemnote?has_content><br/><span class="item-note">${line.itemnote}</span></#if></td>
+			<td class="desccol" align="left">${line.description}</td>
+			<td class="qtycol" align="center">${line.quantity}<#if line.uom?has_content><br/><span class="uom-note">${line.uom}</span></#if></td>
+			<td class="ratecol" align="right">${line.rate}<#if line.uom?has_content><br/><span class="uom-note">per pack</span></#if></td>
+			<td class="amtcol" align="right">${line.amount}</td>
+		</tr>
+	</#list>
+	</tbody>
+</table>
+</#if>
+
+<hr/>
+
+<!-- ================================================================== -->
+<!-- TOTALS — bound to the `record` data source.                        -->
+<!-- The Suitelet derives subtotal/total from the SAME line array        -->
+<!-- printed above, so the totals row always equals the sum of lines.   -->
+<!-- ================================================================== -->
+
+<table class="totals" style="page-break-inside: avoid;">
+	<tr>
+		<td style="width: 70%;">&nbsp;</td>
+		<td align="right" style="width: 15%; font-weight: bold;">Subtotal</td>
+		<td align="right" style="width: 15%;">${record.subtotal}</td>
+	</tr>
+	<tr class="total-row">
+		<td>&nbsp;</td>
+		<td align="right">Total</td>
+		<td align="right">${record.total}</td>
+	</tr>
+</table>
+
+</body>
+</pdf>

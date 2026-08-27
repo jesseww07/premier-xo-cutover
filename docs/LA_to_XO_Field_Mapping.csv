@@ -1,0 +1,69 @@
+LA Feed Field,XO Backend Source (primary),XO Alternates / Facets,Transform & Notes,Status
+LightsAmerica SKU,— none —,,LA-native identity. Retire. XO identity = Item Number / ItemID.,RETIRE
+Manufacturer Name,Vendor Name,"Catalog, Catalog Names",Verified exact.,MAPPED
+Manufacturer Number,Item Number,"Base Item Number (parent), Default Item Number, Clean Item Number","Item Number = variant-level MPN (join key verified, 687/687). Base Item Number = family parent.",MAPPED
+UPC,GTIN,,"XO ships 14-digit GTIN-14 with leading zeros ('00747396123301' vs LA '747396123301'). Store as-is; strip leading zeros only for comparison, per existing UPC-matching rule.",MAPPED
+Cost,Item Cost,"Vendor Discounted Cost, Cost With Shipping, Base Cost, Precise COGS",Verified exact match. XO adds 4 additional cost tiers not available from LA.,MAPPED
+Regular Price,Web Price,"IMAP (75% fill), Precise Price, Full Price","Web Price = 100% fill, exact match to LA Regular Price. IMAP matches where populated.",MAPPED
+List Price,MSRP,Compare Price,Values DIFFER (LA 1015 vs XO 870 on same item) — LA List Price used a different/stale markup. XO MSRP is vendor-current and authoritative going forward. Expect value shifts at cutover.,MAPPED-DELTA
+Product Name,Item Name,Combined Item Name,XO richer: prepends collection ('Caprio - 4 Light Pendant' vs 'Four Light Pendant').,MAPPED
+Description,Short Description,Long Description (0% fill this vendor),"Different copy, equivalent purpose. XO 81% fill vs LA 96%.",MAPPED
+Collection,Family,Extra-Family,Verified exact.,MAPPED
+Designer,Extra-Designer,,Both sparse (~1-3%).,MAPPED
+Manufacturer Finish,Extra-Finish,"Standard-Finish (normalized facet), Extra-Descriptive Finish","Extra-Finish = verbatim vendor value (verified exact). Standard-Finish = XO-normalized facet — use for filtering, keep Extra-Finish for display.",MAPPED
+Manufacturer Glass,Standard-Glass Finish or Style,"Extra-Glass (2%), Standard-Glass Form",FIDELITY LOSS: LA 'Clear Seedy' → XO Standard 'Clear'. Verbatim Extra-Glass only 2% filled for Minka. Flag to Tyler if glass detail matters.,MAPPED-DEGRADED
+Crystal,— none —,Extra-Material (contains 'Crystal' in composite),No XO column. LA fill was 5%. Retire; crystal presence survives inside Material string.,NO MATCH
+Notes,— none —,Extra-Additional Info (0% fill),"LA Notes was a mixed bag (MAP notes, repl-glass memos). No populated XO equivalent. Retire from feed; keep any internal notes internal.",NO MATCH
+Width / Diameter,Width,,Verified exact.,MAPPED
+Height,Height,"Extra-Overall Height, Extra-Overall Min/Max Height, Extra-MIN Height",Verified exact. XO adds adjustable-height min/max.,MAPPED
+Length,Length,,Verified.,MAPPED
+Weight,Extra-Weight,"Extra-Ship Weight (shipping wt, 99% fill)",Verified exact (product weight).,MAPPED
+Extension,Extra-Extension,,Verified exact.,MAPPED
+Chain,Extra-Chain Length,"Extra-Chain Included (DIRTY: holds lengths, not Y/N)","LA stored inches with quote marks (180"") — XO numeric. Note: Extra-Chain Included duplicates Chain Length values; coalesce, don't trust as boolean.",MAPPED
+Wire,Extra-Wire Cord Length,"Extra-Cord Length, Extra-Wire Length (0%), Extra-Wire Included","Verified (LA '7""' → XO '7'). Strip quote marks on legacy compare.",MAPPED
+Bulbs Included?,Extra-Bulb Included,,Verified Yes/Yes.,MAPPED
+Number of Bulbs,Extra-Number of Bulbs,Extra-Number Of Bulbs (case-variant duplicate column!),Verified exact. XO carries BOTH 'of' and 'Of' columns — coalesce on ingest.,MAPPED
+Max Wattage,Extra-Bulb Wattage,"Standard-Wattage ('60w'), Extra-Total Wattage, Extra-Max Wattage (0%)",XO embeds units ('60 W') — strip on ingest. Standard-Wattage is the normalized facet.,MAPPED
+Bulb Type,Extra-Bulb Type,,XO richer: prefixes light source ('LED B10.5' vs LA 'B10.5').,MAPPED
+Bulb Base,Extra-Bulb Base,Extra-Bulb Base 2,XO richer: 'Candelabra - E12' vs LA 'Candelabra'.,MAPPED
+Light Source,Extra-LED,derivable from Extra-Bulb Type prefix,XO is Yes/No boolean vs LA 'LED' text. Transform: Yes→LED.,MAPPED
+Light Output,Extra-Initial Lumens,"Standard-Lumens (facet), Extra-Delivered Lumens",Verified exact (622=622).,MAPPED
+Color Temperature,Extra-Kelvin,"Standard-Kelvin (facet), Extra-CCT",Verified exact.,MAPPED
+CRI,Extra-Bulb CRI,,Verified exact.,MAPPED
+Dimmable?,Extra-Bulb Dimmable,,Verified exact.,MAPPED
+Beam Spread,— none —,,0% fill in LA anyway. Retire.,RETIRE
+Rated Average Life,Extra-Bulb Hours,Extra-Rated Life Hours (1%),Verified exact.,MAPPED
+Voltage,Extra-Voltage,Standard-Voltage (facet),XO embeds units ('120 V') — strip on ingest.,MAPPED
+Fan Airflow,Extra-CFM High,"Extra-CFM Low, Extra-High CFM, Extra-Low CFM, Extra-Air Flow CFM (all variants — coalesce)",Verified on Minka-Aire (e.g. 3290.33 CFM). High/Low pair replaces LA's single value.,MAPPED
+Fan Electricity Use,Extra-Amperage,"Extra-Low Amps, Extra-High Amps, Extra-Amps Low","XO reports amps, not watts. Watts derivable from CFM ÷ CFM/Watts if needed.",MAPPED-TRANSFORM
+Airflow Efficiency,Extra-High CFM/Watts,"Extra-Low CFM/Watts, Extra-High/Low CFM Per Watts (variants — coalesce)",Verified (70.01 CFM/W).,MAPPED
+Blade Pitch,Extra-Blade Pitch,Dynamic Variant-Blade Pitch,Verified (12°).,MAPPED
+Blade Span,Extra-Blade Sweep,Extra-Blade Span (4% variant — coalesce),"NAMING: XO calls span 'Blade Sweep' (42, 52, 60...). 'Blade Span' column exists but sparse.",MAPPED
+Blade Type,Extra-Blade Material,Dynamic Variant-Blade Material,"Verified (MDF, Plywood).",MAPPED
+Blade Finish,Extra-Blade Finish,Dynamic Variant-Blade Finish,"Verified. Known from Fanimation option-collapse work — non-selectable, stays a metafield/attribute.",MAPPED
+Blade Qty,Extra-Number of Blades,Standard-Number of Blades (facet),Verified (5).,MAPPED
+Reverse Air,Extra-Reverse Capable,"Extra-Control Type (contains 'Manual Reverse'), Extra-Reverse Switch Location","CAUTION: 'Extra-Reversible Blades' is a DIFFERENT attribute (two-sided blade finish), not motor reverse. Don't coalesce them.",MAPPED
+Fan Speeds,Extra-Number of Speeds,Extra-Number Of Speeds (case-variant duplicate — coalesce),"Verified (3, 6).",MAPPED
+Light Kit,Extra-Light Kit Included,"Extra-Light Kit Compatible, Extra-Light Kit Adapter, Extra-Light Kit Included-2 (dup)",Verified.,MAPPED
+Fan Control,Extra-Control Type,"Extra-Compatible Wall Controls, Extra-Compatible Smart Control, Extra-Integrated Smart Control, Extra-Remote Control Included, Extra-Pull Chain Control",Verified ('Pull Chain with Manual Reverse'). XO far richer than LA's single field.,MAPPED
+Fan Downrod,Extra-Downrod Included,"Extra-Downrod Length/Width 1-2, Extra-Downrod 1 Length/Width + Extra-Down Rod Included (naming variants — coalesce)",Verified. THREE naming schemes for the same downrod data — coalesce all.,MAPPED
+Product URL,Item URL,,Relative path ('/brand-minka-lavery/...') — prepend storefront/XO domain. LA field was 0% fill; net gain.,MAPPED
+Material,Extra-Material,Extra-Material-2,Verified exact.,MAPPED
+Country of Origin,Extra-Country of Origin,,Verified exact. XO 99% fill vs LA 45% — big gain.,MAPPED
+Safety Listing,Extra-Safety Rating,"Extra-ETL Listed, Extra-UL Listed, Extra-CSA Listed (all ~0%)",'ETL' → 'ETL Approved'. NAMING TRAP: XO's 'Safety Rating' = LA's 'Safety Listing'.,MAPPED
+Safety Rating,Extra-Location Rating,Standard-Location Rating (facet),'Damp' → 'Damp Rated'. NAMING TRAP: LA's 'Safety Rating' actually held location rating.,MAPPED
+Energy Star?,Extra-Energy Star,"Extra-Energy Efficient, Extra-Title 20, Extra-Title 24, Extra-CEC Compliant","XO 43% fill vs LA 0% — net gain, plus CA compliance fields LA never had.",MAPPED
+ADA?,Extra-ADA Compliant,,XO 59% vs LA 2% — big gain.,MAPPED
+Dark Sky?,Extra-Dark Sky,,XO 56% vs LA 1% — big gain.,MAPPED
+Manufacturer Warranty,Extra-Warranty,Extra-Warranty-2,Verified (minor phrasing diff).,MAPPED
+Intro Date,Extra-Introduction Date,Creation Date (XO record create),"Dates differ slightly (10/2 vs 9/22/2017) — different source events, same purpose.",MAPPED
+Spec Sheet,file-N-FilePath where FileDescr contains 'Spec',,"POSITIONAL TRAP: file-1/2/3 slots are NOT fixed by type. Match on FileDescr keyword ('Spec Sheet' / 'Installation' / 'Warranty' / 'Maintenance'), never by slot index.",MAPPED-LOGIC
+Instructions,file-N-FilePath where FileDescr contains 'Installation',,Same FileDescr-matching rule.,MAPPED-LOGIC
+Parts Diagram,— none —,file slots may carry 'Product Maintenance'/'Use and care',No parts-diagram descriptor seen; LA 0% fill. Retire.,NO MATCH
+Image,Image Path,"Image Name, image-1..15 FilePath (gallery)",Primary = Image Path (82% fill). Gallery adds up to 15 images LA never provided.,MAPPED
+Shipped Via,Extra-Vendor Ship Method,Extra-Small Parcel (~0%),DIRTY: mixed value domains by Data Source file (Yes/No vs UPS/Small Parcel/Truck). ESCALATE TO TYLER — need one consistent ship-method domain.,MAPPED-DIRTY
+Drop Ship,— none —,"(Extra-Sold By is a UOM, not drop-ship)","No XO equivalent. This is Premier-internal fulfillment config — keep the NS field, stop sourcing from feed.",INTERNAL
+Carton Volume,Extra-Volume,"Extra-Carton Cubic Feet, Extra-Case Pack Volume",Verified exact.,MAPPED
+Dimensional Weight,— none —,derivable: Ship Carton L×W×H (94% fill) / divisor,0% fill in LA. Derive if needed; don't store.,RETIRE
+Active?,Discontinued (inverse),"Allow Purchase, In Stock, Back Order Date",Locked decision: backend Discontinued 0/1 flag is the discontinuation signal. Active = (Discontinued=0).,MAPPED
+Unique ID,— none —,,LA-native identity. Retire. See XO identity note below.,RETIRE

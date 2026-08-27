@@ -1,0 +1,31 @@
+<itemcustomfield scriptid="custitem_xo_lumens_bucket">
+  <accesslevel>2</accesslevel>
+  <appliestogroup>F</appliestogroup>
+  <appliestoinventory>T</appliestoinventory>
+  <appliestokit>F</appliestokit>
+  <appliestononinventory>F</appliestononinventory>
+  <appliestoothercharge>F</appliestoothercharge>
+  <appliestopricelist>F</appliestopricelist>
+  <appliestoservice>F</appliestoservice>
+  <appliestospecificitems>F</appliestospecificitems>
+  <appliestosubplan>F</appliestosubplan>
+  <applyformatting>F</applyformatting>
+  <checkspelling>F</checkspelling>
+  <defaultchecked>F</defaultchecked>
+  <displaytype>NORMAL</displaytype>
+  <encryptatrest>F</encryptatrest>
+  <fieldtype>TEXT</fieldtype>
+  <globalsearch>F</globalsearch>
+  <help>Normalized facet bucket. XO source: Standard-Lumens.</help>
+  <includechilditems>F</includechilditems>
+  <isformula>F</isformula>
+  <ismandatory>F</ismandatory>
+  <isparent>F</isparent>
+  <itemsubtype>BOTH</itemsubtype>
+  <label>Lumens Bucket</label>
+  <searchlevel>2</searchlevel>
+  <showhierarchy>F</showhierarchy>
+  <showinlist>F</showinlist>
+  <storevalue>T</storevalue>
+  <subtab>[scriptid=custtab_25_t2379072_560]</subtab>
+</itemcustomfield>

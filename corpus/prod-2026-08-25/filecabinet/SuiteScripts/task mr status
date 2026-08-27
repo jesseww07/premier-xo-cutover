@@ -1,0 +1,44 @@
+/**
+ * @NApiVersion 2.1
+ * @NScriptType ScheduledScript
+ */
+define(['N/task', 'N/log'], function(task, log) {
+
+    function execute(context) {
+        try {
+            // Create a Map/Reduce task
+            var mrTask = task.create({
+                taskType: task.TaskType.MAP_REDUCE,
+                scriptId: 'customscript_jww_upc_fill',
+                deploymentId: 'customdeploy_jww_upc_fill' 
+            });
+
+            // Submit the task
+            var taskId = mrTask.submit();
+            log.audit({
+                title: 'Map/Reduce Task Submitted',
+                details: 'Task ID: ' + taskId
+            });
+
+            // Monitor the task status
+            var taskStatus = task.checkStatus({
+                taskId: taskId
+            });
+
+            log.audit({
+                title: 'Task Status',
+                details: 'Status: ' + taskStatus.status
+            });
+
+        } catch (e) {
+            log.error({
+                title: 'Task Script Error',
+                details: e.toString()
+            });
+        }
+    }
+
+    return {
+        execute: execute
+    };
+});

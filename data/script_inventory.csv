@@ -1,0 +1,1403 @@
+id,name,scriptid,scripttype,owner,scriptfile,isinactive
+18,3Way Check Subs Match Field WS,customscript_3way_ws_checksubsmatchfield,ACTION,5,51,F
+1087,Add Inv. Adj. Items To Stored SO,customscript_add_inv_adj_items_to_so,ACTION,4,204460,F
+326,Approve Item Change Request,customscript326,ACTION,5,2969,F
+283,Backorder Uncons PO,customscript43,ACTION,5,2466,F
+53,Batch Approval Notification,customscript_2663_batch_approval_notify,ACTION,5,1007,F
+1063,Batch Approval Notification SS2,customscript_15767_batch_approval_wf,ACTION,-5,193430,F
+54,Batch Rejection Notification,customscript_2663_batch_rejection_notify,ACTION,5,1007,F
+1064,Batch Rejection Notification SS2,customscript_15767_batch_rejection_wf,ACTION,-5,193428,F
+324,Bin Duplication,customscript324,ACTION,8,2665,F
+325,Bucket Consolidated PO Items v2,customscript325,ACTION,5,2767,F
+807,Calculate Sales Order Percentages,customscript807,ACTION,5,33121,F
+2798,Consolidated Purchasing WFA Trigger,customscript_zas_consolidated_wfa,ACTION,5,991943,F
+833,Create Invoice off IFUL,customscript833,ACTION,5,83273,F
+699,De/Re-Commit Inv,customscript699,ACTION,5,17189,F
+19,IAW Is Customer First Invoice WS,customscript_iaw_ws_iscustomerfirstinv,ACTION,5,50,F
+581,Internal ID as Code,customscript_internal_as_code,ACTION,8,5319,T
+3562,LA SKU to Item WFA,customscript_la_sku_to_item_wfa,ACTION,17891,1475869,F
+347,Link PO Back to Sales Order,customscript347,ACTION,5,3000,F
+282,Mark Consolidated,customscript3,ACTION,5,2465,F
+20,NAW Check Feature Availability WS,customscript_naw_ws_check_feature,ACTION,5,53,F
+21,NAW Create Exception Record WS,customscript_naw_ws_create_exceptionrec,ACTION,5,57,F
+23,NAW Get User Preferences WS,customscript_naw_ws_get_user_pref,ACTION,5,56,F
+17,NAW Show Exceptions WS,customscript_ws_showexceptions,ACTION,5,54,F
+22,NAW delete Exception Record WS,customscript_naw_ws_delete_exceptionrec,ACTION,5,55,F
+1084,NEW STORED INITIATOR,customscript_pr_new_stored_initiator,ACTION,15382,199594,F
+1210,PL Invoice Tax Percentage WFA,customscript1210,ACTION,8,387407,T
+806,PL Set User Location on SO WFA,customscript806,ACTION,8,26418,T
+5541,Prelin Sent,customscript_prelin_sent,ACTION,17891,1709355,F
+803,Premier Lighting Line Item Totals,customscript_pl_lineitem_totals,ACTION,2768,3160,F
+2830,Premier Link Connector WFA,customscript_premier_link_connector_wfa,ACTION,8,1028719,F
+553,Robson Calculations,customscript553,ACTION,5,4377,F
+281,SO Items to Unconsolidated (WF),customscript1,ACTION,5,2464,F
+1911,STE WF Transaction Compliance Text Act,customscript_ste_wf_trans_comp_text_act,ACTION,17891,799483,F
+3167,Steal Inventory | Action Taker,customscript3167,ACTION,5,1189789,F
+304,Stored Inventory Workflow,customscript153,ACTION,5,2642,F
+3176,Stored Inventory | Reallocator Action Ta,customscript3176,ACTION,5,1212966,F
+280,Sum Total Cost of Unconsolidated,customscript4,ACTION,5,2463,F
+2797,Utility | Mark All Consolidated SO,customscript2894,ACTION,5,991942,F
+323,WF - 2.0 Create PO - Consolidated,customscript323,ACTION,5,2664,F
+292,WF - Auto Close Created Mult Quotes,customscript292,ACTION,5,2475,F
+297,WF - Consolidate Items off SO v2,customscript297,ACTION,5,2635,F
+832,WF - Mass Gen IFULs,customscript832,ACTION,5,82333,F
+318,WF Stored - Mark Shipped,customscript318,ACTION,5,2657,T
+319,pr_settaxcode,customscript319,ACTION,8,2658,T
+5439,BAI2 Plugin Implementation,customscript_bsp_parser_bai2,BANKSTATEMENTPARSER,17891,1692882,F
+5436,CAMT053 Plugin Implementation,customscript_bsp_parser_camt053,BANKSTATEMENTPARSER,17891,1692883,F
+588,EU and Other Countries Bank Feeds Parser,customscript_bf_parser_se,BANKSTATEMENTPARSER,3,6206,T
+5438,MT940 Plugin Implementation,customscript_bsp_parser_mt940,BANKSTATEMENTPARSER,17891,1692889,F
+5437,OFX/QFX Plugin Implementation,customscript_bsp_parser_ofx,BANKSTATEMENTPARSER,17891,1692884,F
+587,US and CA Bank Feeds Parser,customscript_bf_parser_bf,BANKSTATEMENTPARSER,3,6207,T
+5430,BSP Bundle Installation,customscript_bsp_bundle_installation,BUNDLEINSTALLATION,17891,1692837,F
+1910,Bundle Installation,customscript_ste_bundle_install,BUNDLEINSTALLATION,17891,799026,F
+162,Campaign Assistant Bundle Install,customscript_campaign_assistant_bundle,BUNDLEINSTALLATION,5,1076,F
+2807,Dashboard Tiles BI,customscript_dt_bi_migration,BUNDLEINSTALLATION,-5,994083,F
+270,ED Bundle Installation,customscript_ed_bundle_installation,BUNDLEINSTALLATION,5,1391,F
+327,EP Bundle Installation SS2,customscript_15486_ep_bundle_install,BUNDLEINSTALLATION,-5,2970,F
+6,Enhanced Sales Center Bundle Script,customscript_esc_bundle_script,BUNDLEINSTALLATION,5,11,F
+1213,FAM SuiteApp Install,customscript_fam_suiteappinstall_bi,BUNDLEINSTALLATION,4,498815,F
+44,License Client Installation,customscript_8299_license_client_is,BUNDLEINSTALLATION,5,260,F
+16,NWB Bundle Installation,customscript_nwb_bi_setup,BUNDLEINSTALLATION,5,47,F
+2821,Navigation Portlet BI,customscript_nav_bi_migration,BUNDLEINSTALLATION,-5,1002548,F
+486,SCM Bundle Installation,customscript_scm_bundle_installation,BUNDLEINSTALLATION,4,3216,F
+1970,STE VAT DATA BUNDLE INSTALL,customscript_vat_bundle_install,BUNDLEINSTALLATION,17891,799494,F
+1971,STR Bundle Installer,customscript_str_bundle_installation,BUNDLEINSTALLATION,17891,806572,F
+555,StickyNotes Bundle Install Script,customscript_stick_bundle_install,BUNDLEINSTALLATION,5,4496,F
+7,Subsidiary Navigator Bundle Install,customscript_snav_bundle_install,BUNDLEINSTALLATION,5,13,F
+3185,Versapay Bundle Installation Script,customscript_versapay_bundle_install,BUNDLEINSTALLATION,17891,1250188,F
+2022,Adjustment Journal CS,customscript_str_adjustment_jrnl_cs,CLIENT,17891,806975,F
+853,Alert of Open Vendor Deposit/Prepayment,customscript853,CLIENT,5,138686,F
+851,All Deliveries Report CL,customscript851,CLIENT,5,118217,F
+3683,BC Estimate Client Script,customscript_bc_estimate_cs,CLIENT,36092,1501126,F
+3685,BC Expenses Validator Client Script,customscript_bc_exp_val_client,CLIENT,36092,1501127,F
+3715,BC Source Project Segments,customscript_bc_source_project_segments,CLIENT,36092,1501135,T
+3716,BC Source Project Segments All,customscript_bc_source_project_segs_all,CLIENT,36092,1501135,F
+3681,BCContractsClientScript,customscript_bc_contracts_cls,CLIENT,36092,1501123,F
+3687,BCInvoiceClientScript,customscript_bc_invoice_cls,CLIENT,36092,1501129,T
+3736,BCProjectAddressClientScript,customscript_bc_project_address_cs,CLIENT,36092,1501130,F
+3724,BCProjectClientScript,customscript_bc_proj_client_script,CLIENT,36092,1501131,F
+3695,BCTransactionLinesValidatorClientScript,customscript_bc_trans_lines_val,CLIENT,36092,1501143,T
+3728,BCVendorBillClientScript,customscript_bc_vendor_bill_cls,CLIENT,36092,1501144,F
+5434,BSP CS Format Profile,customscript_bsp_cs_format_profile,CLIENT,17891,1692885,F
+150,Bank Fee Schedule CS,customscript_11724_bank_fee_cs,CLIENT,5,1020,F
+169,CA Info Page Client,customscript_ca_cs_infopage,CLIENT,5,1084,F
+168,Campaign Assistant Client,customscript_ca_cs_campaignassistant,CLIENT,5,1082,F
+859,Cash 360 - Account Category CS,customscript_cash360_cs_accountcategory,CLIENT,-5,164160,F
+698,China Consolidated CL,customscript698,CLIENT,5,16564,F
+3048,Clear Special Order on SO,customscript_pr_cl_so_clear_special_ord,CLIENT,4,1142398,F
+684,Client - Move to Hold,customscript684,CLIENT,5,9789,F
+313,Client - Stored Inv,customscript156,CLIENT,5,2651,F
+312,Client Delivery Slip,customscript162,CLIENT,5,2650,F
+311,Client Print Picking,customscript158,CLIENT,5,2649,F
+695,Consolidated Pack - Delivery Slip CL,customscript695,CLIENT,5,12880,F
+691,Consolidated Packing Slip - Client,customscript708,CLIENT,5,12561,F
+690,Consolidated Packing Slip BASE - Client,customscript704,CLIENT,5,12560,F
+1097,Consolidated Test - CL,customscript_pr_consol_cl,CLIENT,15382,217244,F
+573,Correct Tax Code Dialog,customscript573,CLIENT,8,4584,T
+855,Create Sales Order - Client,customscript_pr_create_so_client,CLIENT,15382,140470,F
+40,Dashboard Tile Client,customscript_dt_cs_translation,CLIENT,5,994112,F
+39,Dashboard Tile Client,customscript_dt_cs_tile,CLIENT,5,179,F
+548,ECO Engineering Change Notice CS,customscript_eco_cs_eng_change_notice,CLIENT,4,4112,F
+161,Electronic Payments Entity Details CS,customscript_2663_entity_details_cs,CLIENT,5,1022,F
+151,Electronic Payments Entity Details CS 2,customscript_14552_entity_details_cs,CLIENT,5,946,F
+153,Electronic Payments Payment CS,customscript_9997_payment_cs,CLIENT,5,949,F
+148,Electronic Payments Preference CS,customscript_ep_preference_cs,CLIENT,5,967,F
+344,Electronic Payments Preference CS SS2,customscript_15486_ep_preference_cs,CLIENT,-5,2982,F
+149,Entity Bank Details CS,customscript_10782_entity_bank_cs,CLIENT,5,1001,F
+1345,FAM Alternate Depreciation CS,customscript_fam_altdepreciation_cs,CLIENT,4,499101,F
+1347,FAM Alternate Method CS,customscript_fam_altmethod_cs,CLIENT,4,499079,F
+1354,FAM Asset CS,customscript_fam_asset_cs,CLIENT,4,499100,F
+1351,FAM Asset Proposal CS,customscript_fam_proposal_cs,CLIENT,4,499099,F
+1352,FAM Asset Type CS,customscript_fam_assettype_cs,CLIENT,4,499078,F
+1349,FAM Default Alt Depreciation CS,customscript_fam_defaltdepreciation_cs,CLIENT,4,499059,F
+1355,FAM Depreciation Method CS,customscript_fam_depreciationmethod_cs,CLIENT,4,499119,F
+1348,FAM Lease Proposal CS,customscript_fam_leaseproposal_cs,CLIENT,4,499046,F
+1350,FAM Proposal Alt Depreciation CS,customscript_fam_propaltdepreciation_cs,CLIENT,4,499157,F
+1346,FAM Show Depreciation History CS,customscript_fam_showdeprhistory_cs,CLIENT,4,499120,F
+1353,FAM Tran Field Map CS,customscript_fam_tranfieldmap_cs,CLIENT,4,499058,F
+575,Generate SO Labels - Client,customscript_pre_gen_so_labels_client,CLIENT,15382,4597,T
+154,Generic Bank Details Validation,customscript_2663_bank_details_cs,CLIENT,5,983,F
+152,Generic Bank Details Validation 2,customscript_14552_bank_details_cs,CLIENT,5,1004,F
+143,Generic Entity Bank Detail Validator,customscript_2663_entity_bank_details_cs,CLIENT,5,987,F
+147,Generic File Format Validator,customscript_2663_file_format_cs,CLIENT,5,1056,F
+343,Generic File Format Validator SS2,customscript_15486_file_format_cs,CLIENT,-5,2996,F
+342,Generic Payment Aggregation CS SS2,customscript_15486_pay_aggregation_cs,CLIENT,-5,2987,F
+155,Generic Payment Aggregation Validation,customscript_2663_payment_aggregation_cs,CLIENT,5,1021,F
+1081,Generic Payment File Management CS SS2,customscript_15767_payment_file_mgmt_cs,CLIENT,-5,193426,F
+156,Generic Payment File Record Validation,customscript_2663_payment_file_mgmt_cs,CLIENT,5,964,F
+144,Generic Payment Jumplet Validation,customscript_2663_jumplet_cs,CLIENT,5,1063,F
+145,Generic Payment Module Field Validator,customscript_2663_field_validator_cs,CLIENT,5,1013,F
+159,Generic Payment Module Field Validator 2,customscript_14552_field_validator_cs,CLIENT,5,1009,F
+146,Generic Payment Selection Client Script,customscript_ep_selection_cs,CLIENT,5,974,F
+2795,Inbound | Ack PO CL,customscript2581,CLIENT,5,991937,F
+2023,Item CS,customscript_str_item_cs,CLIENT,17891,806995,F
+542,Item Substitute Transactions CS,customscript_scm_is_transactions_cs,CLIENT,4,4120,F
+4117,LRC Field Manager Client Script,customscript_lrc_field_manager_cs,CLIENT,17891,1587358,F
+5,LSA CS Custom Button,customscript_lsa_cs_custom_button,CLIENT,-5,7,F
+2813,Lock Consolidated in Client of PREMCOL,customscript2813,CLIENT,17891,999673,F
+3345,Lock Record Client,customscript_lock_record_client,CLIENT,17891,1380692,T
+3166,MLI Steal Inv Bttn 1 CL,customscript_mli_stealinvbtn1_cl,CLIENT,5,1189787,F
+1092,Mark Change to Item Quantity - Consol,customscript_pr_mark_change_qty_consol,CLIENT,15382,214659,T
+827,Mass IFUL Client Call on SL,customscript827,CLIENT,5,77543,F
+300,Merge Location - CL,customscript300,CLIENT,5,2638,F
+4616,NS | CS | SFTP - Folder Mapping Record,customscript_ns_cs_folder_mapping_record,CLIENT,17891,1631202,F
+4615,NS | CS | SFTP - InBound Folder Mapping,customscript_cs_ib_folder_mapping,CLIENT,17891,1631206,F
+4619,NS | CS | SFTP Call Suitelet,customscript_ns_cs_sftp_ib_call_suitelet,CLIENT,17891,1631210,F
+4617,NS | CS | SFTP Call Suitelet,customscript_ns_cs_sftp_call_suitelet,CLIENT,17891,1631207,F
+4618,NS | CS | SFTP Call Suitelet,customscript_ns_cs_sftp_dt_call_suitelet,CLIENT,17891,1631208,F
+4620,NS | CS | SFTP | Display status,customscriptns_cs_sftp_display_status,CLIENT,17891,1631209,F
+31,Navigation Category Entry CS,customscript_nav_cs_navcategoryentry,CLIENT,5,112,F
+808,PL - Check Pref Vendor on Item - CS,customscript808,CLIENT,8,58963,F
+2828,PL Cancel REQ CL,customscript_pl_cancelreq_cl,CLIENT,8,1012907,F
+843,PL Create Item List Client Script,customscript_pl_create_item_list_cl,CLIENT,2768,100310,F
+845,PL IFUL Pallet Label CS,customscript845,CLIENT,8,108571,T
+837,PL Pallet Label CS,customscript837,CLIENT,8,90077,T
+817,PL Rec Summ CL,customscript817,CLIENT,8,64278,F
+831,PL Receiving Report CS,customscript831,CLIENT,8,78150,F
+1105,PL Sales Order Job Label CL,customscript1105,CLIENT,8,250435,F
+801,PL Set Sales Team VF Client,customscript801,CLIENT,8,21679,T
+1103,PL Showroom Tags CL,customscript1103,CLIENT,8,236111,F
+1080,Payment Batch Selection CS SS2,customscript_15767_batch_selection_cs,CLIENT,-5,340,F
+160,Payment Batch Selection Main CS,customscript_2663_batch_select_main_cs,CLIENT,5,1049,F
+157,Payment File Format CS,customscript_payment_file_format_cs,CLIENT,5,1038,F
+158,Payment Schedule CS,customscript_2663_payment_schedule_cs,CLIENT,5,1044,F
+345,Payment Schedule CS SS2,customscript_15486_payment_schedule_cs,CLIENT,-5,2993,F
+302,Print Item Labels -CL - Consolidation,customscript302,CLIENT,5,2640,T
+822,Project Management/Fulfill CL,customscript822,CLIENT,5,66720,F
+2426,RAC CS Case Record,customscript_rac_cs_caserecord,CLIENT,17891,911523,F
+578,Robson Estimate Client,customscript578,CLIENT,5,5206,F
+538,SCM Customer Part Record CS,customscript_scm_cpn_cs_customerpartrec,CLIENT,4,4151,F
+541,SCM Item Subtab CS,customscript_scm_cpn_cs_itemsubtab,CLIENT,4,4141,F
+544,SCM LC Item Subtab CS,customscript_scm_lc_cs_itemsubtab,CLIENT,4,4142,F
+549,SCM LC Landed Cost Template CS,customscript_scm_lc_cs_costcatprofile,CLIENT,4,4106,F
+545,SCM LC Transactions CS,customscript_scm_lc_cs_transactions,CLIENT,4,4165,F
+543,SCM Preferences CS,customscript_scm_cs_preferences,CLIENT,4,4173,F
+540,SCM Print Count Sheet CS,customscript_scm_cs_printcountsheet,CLIENT,4,4085,F
+550,SCM Print Dispatch List CS,customscript_scm_cs_printdispatchlist,CLIENT,4,4160,F
+547,SCM Print EOD Shipping CS,customscript_scm_cs_printeodshipping,CLIENT,4,4079,F
+551,SCM Print Mfg Traveler CS,customscript_scm_cs_printtraveler,CLIENT,4,4127,F
+539,SCM Report Status CS,customscript_scm_cs_reportstatus,CLIENT,4,4148,F
+546,SCM Transactions CS,customscript_scm_cpn_cs_transactions,CLIENT,4,4088,F
+1963,STE CS Entity,customscript_ste_cs_entity,CLIENT,17891,1753241,F
+1967,STE CS Nexus,customscript_ste_cs_nexus,CLIENT,17891,1753239,F
+1964,STE CS OSS Setup,customscript_ste_cs_oss_setup,CLIENT,17891,1753237,F
+1965,STE CS Roles And Permissions Detail,customscript_ste_cs_rol_perm_detail,CLIENT,17891,1753238,F
+3342,STE CS Tax Code UI,customscript_ste_cs_taxcode_ui,CLIENT,-5,1753236,F
+1968,STE CS Tax Schedule Detail,customscript_ste_cs_taxschedule_detail,CLIENT,17891,1753235,F
+1966,STE CS Transaction,customscript_ste_cs_transaction,CLIENT,17891,1753240,F
+1060,Set Commit Value On SO Line Item CL,customscript_idle_set_commit_so_item_cl,CLIENT,4,169985,T
+3447,Set Location From Customer,customscript_set_location_from_customer,CLIENT,17891,1411789,F
+815,Set Pref Payment Processing Profile,customscript815,CLIENT,5,64276,F
+479,Solupay ACH Payment,customscript_solupay_ach_payment,CLIENT,2759,3027,F
+468,Solupay Bank Deposit,customscript_solupay_bankdeposit_cs,CLIENT,2759,3131,F
+467,Solupay Customer Invoice Email Reminder,customscript_solupay_customer_email,CLIENT,2759,3038,F
+482,Solupay EMV-ERP,customscript_solupay_emv_erp_cs,CLIENT,2759,3043,F
+478,Solupay ERP CloudPay Display 2.0,customscript_solupay_cloudpaydisplay2_cs,CLIENT,2759,3087,F
+476,Solupay Email Token Request 2.0,customscript_solupay_emailtokenreq_cs,CLIENT,2759,3145,F
+471,Solupay Inv. Email Contacts CS,customscript_solupay_email_contacts_cs,CLIENT,2759,3037,F
+475,Solupay Partial Fulfillment,customscript_solupay_partial_fulfill_cs,CLIENT,2759,3020,F
+473,Solupay Payment Token List,customscript_solupay_paymenttoken_lst_cs,CLIENT,2759,3057,F
+472,Solupay Reconciliation,customscript_solupay_reconciliation_cs,CLIENT,2759,3070,F
+470,Solupay Signifyd,customscript_solupay_signifyd_cs,CLIENT,2759,3090,F
+466,Solupay Suite Token,customscript_solupay_suitetoken_cs,CLIENT,2759,3138,F
+474,Solupay Token Request Email,customscript_solupay_tokenreq_email_cs,CLIENT,2759,3113,F
+570,StickyNotes Setup CS,customscript_stick_config_cs,CLIENT,5,4565,F
+316,Stored Inventory - Bin Transfer Client,customscript316,CLIENT,5,2655,F
+322,Stored Inventory - Issue Return CL,customscript322,CLIENT,5,2663,F
+2224,USR CS Transaction,customscript_usr_cs_transaction,CLIENT,17891,807330,F
+3230,Versapay Auto Script Deployment,customscript_versapay_auto_scrpt_dply_cs,CLIENT,17891,1250280,F
+3234,Versapay Auto Script Deployment CS,customscript_vpy_auto_dply_cs,CLIENT,17891,1250263,F
+465,Versapay CDS Wallet,customscript_versapay_cds_wallet_cs,CLIENT,2759,3041,F
+469,Versapay CDS Wallet Edit,customscript_versapay_wallet_edit_cs,CLIENT,2759,3142,F
+3227,Versapay CS Dynamic Payment Instrument,customscript_versapay_cs_dynamic_payins,CLIENT,17891,1250274,F
+3228,Versapay CS Paylink,customscript_vpy_cs_paylink,CLIENT,17891,1250203,T
+477,Versapay Cust Deposit ClientScript,customscript_versapay_cust_dep_cs,CLIENT,2759,3073,F
+481,Versapay Customer Deposit Set Amount,customscript_versapay_cust_dep_set_amt_c,CLIENT,2759,3123,F
+3232,Versapay Customer Messages,customscript_versapay_customer_msg_cs,CLIENT,17891,3021,F
+3231,Versapay Customer Refund,customscript_vp_customer_refund_cs,CLIENT,17891,1250259,F
+480,Versapay Invites Contacts Client Script,customscript_versapay_invite_contacts_cs,CLIENT,2759,3099,F
+3229,Versapay Partial Payment CS,customscript_vp_partial_payment_cs,CLIENT,17891,1250196,F
+3233,Versapay SuiteBilling Recurring Helper,customscript_versapay_suitebill_recur_cs,CLIENT,17891,1250274,F
+2842,billing_box_cs,customscriptbillingcs,CLIENT,17891,1093451,T
+2785,pagination_cs.js,customscript_pagination_cs_js,CLIENT,17891,991113,T
+314,pr_client_bulb,customscript314,CLIENT,8,2653,T
+4921,Prompt Library App,custtoolset_ns_prompt_app_script,CUSTOMTOOL,,1643850,F
+4415,Record Tools,custtoolset_ns_records_script,CUSTOMTOOL,,1413239,F
+4416,Reporting Tools,custtoolset_ns_reporting_script,CUSTOMTOOL,,1618271,F
+4417,Search Tools,custtoolset_ns_search_script,CUSTOMTOOL,,1413243,F
+4418,SuiteQL Tools,custtoolset_ns_suiteql_script,CUSTOMTOOL,,1413245,F
+2228,Sales Tax Analysis,customscript_usr_pl_ds_sales_tax_anlys,DATASETBUILDER,17891,807331,F
+2229,Sales Tax Liability by Tax Agency,customscript_usr_pl_ds_sls_tax_by_agency,DATASETBUILDER,17891,807334,F
+2230,Sales Tax Liability by Tax Item,customscript_usr_pl_ds_sls_tax_by_item,DATASETBUILDER,17891,807332,F
+2231,Sales by State Analysis,customscript_usr_pl_ds_sls_tax_by_state,DATASETBUILDER,17891,807333,F
+2232,Tax by State Analysis,customscript_usr_pl_ds_tax_by_state,DATASETBUILDER,17891,807335,F
+5222,APG Email Capture Plugin,customscript_apg_email_capture,EMAILCAPTURE,24451,1661588,F
+571,StickyNotes Email Capture,customscript_stick_email_capture,EMAILCAPTURE,5,4564,F
+592,EU Bank Feeds Connectivity,customscript_fi_account_aggr_partner_se,FICONNECTIVITY,3,6203,F
+591,EU Non-PSD2 Bank Feeds Connectivity,customscript_fi_account_aggr_eu_unreg_se,FICONNECTIVITY,3,6202,F
+590,Other Countries Bank Feeds Connectivity,customscript_fi_account_aggr_acctinf_se,FICONNECTIVITY,3,6200,F
+5330,SFTP Connectivity,customscript_absi_connectivity_sftp,FICONNECTIVITY,17891,1692324,F
+589,US and CA Bank Feeds Connectivity,customscript_fi_account_aggr,FICONNECTIVITY,3,1657572,F
+3065,US and CA Bank Feeds Connectivity MX,customscript_fi_account_aggr_mx,FICONNECTIVITY,-5,1182250,F
+5435,CSV Plugin Implementation,customscript_bsp_parser_csv,FIPARSER,17891,1692888,F
+3910,EU and Other Countries Salt Edge Parser,customscript_bf_fi_parser_se,FIPARSER,-5,1568533,F
+3064,US and CA Bank Feeds Parser (MX),customscript_bf_parser_mx,FIPARSER,-5,1182251,F
+3911,US and CA Bank Feeds Parser (Yodlee),customscript_bf_parser_ydl,FIPARSER,-5,1568534,F
+1209,ACH EP Migration MR - CA,customscript_ca_ach_ep_migration_mr,MAPREDUCE,-5,381943,F
+834,ACH EP Migration MR - US,customscript_ach_ep_migration_mr,MAPREDUCE,-5,87164,F
+5221,APG Batch Result Fetcher,customscript_apg_batch_result_mr,MAPREDUCE,24451,1661587,F
+3774,BC Allocate Resource MR,customscript_bc_allocate_resource_mr,MAPREDUCE,36092,1501211,F
+3772,BC Baseline Creation MR,customscript_bc_baseline_creation_mr,MAPREDUCE,36092,1501212,F
+5747,BC File Cabinet Cleanup M/R,customscript_bc_file_cleanup_mr,MAPREDUCE,-5,1744935,F
+3723,BC Project Copy Map/Reduce,customscript_bc_proj_cpy_mr,MAPREDUCE,36092,1501215,F
+3743,BC Project Issue Date MR,customscript_bc_project_issue_date_mr,MAPREDUCE,36092,1501217,F
+3746,BCCostCodeFillSubsidiaryMapReduce,customscript_bc_cc_fill_subsidiary,MAPREDUCE,36092,1501213,F
+3747,BCUnlockBudgetMapReduce,customscript_bc_mr_unlock_budget,MAPREDUCE,36092,1501218,F
+5433,BSP CSV Error File Cleanup,customscript_bsp_error_file_cleanup_csv,MAPREDUCE,17891,1692886,F
+586,Bank Feeds Audit Trail Cleanup,customscript_bf_model_ns_audittrailclean,MAPREDUCE,3,6166,F
+2692,Box - Migration: Account Association,customscript_box_app_v3_mi_acct_assoc,MAPREDUCE,17891,966978,F
+2693,Box - Migration: Integration Config,customscript_box_app_v3_mi_int_conf,MAPREDUCE,17891,966979,F
+2695,Box - Migration: Record Folder,customscript_box_app_v3_mi_rcd_fdr,MAPREDUCE,17891,966980,F
+2694,Box - Migration: Record Type Config,customscript_box_app_v3_mi_rcd_conf,MAPREDUCE,17891,966981,F
+2696,Box - Migration: Type Folder,customscript_box_app_v3_mi_type_fdr,MAPREDUCE,17891,966983,F
+3236,Cash 360 | MR SO PO Order Lead Time Calc,customscript_cash360_mr_so_po_calc,MAPREDUCE,-5,1304450,F
+295,Check Include Children,customscript295,MAPREDUCE,5,2629,F
+1062,Consolidate Items - MR,customscript_pr_consolidate_items_mr,MAPREDUCE,15382,188179,F
+2826,Consolidated Record | Link Inbound & IPO,customscript_pr_link_inbound_ipo,MAPREDUCE,5,1010637,F
+2804,Consolidated Search | Update Fields,customscript_pr_update_consol_fields,MAPREDUCE,5,991950,F
+2810,Dashboard Tiles Redwood Data Migration,customscript_dt_mr_rw_datamigration,MAPREDUCE,-5,994113,F
+1708,Delete Records,customscript1708,MAPREDUCE,8,760852,F
+536,ECO Details MR Delete Orphans,customscript_ecodetails_mr_deleteorphans,MAPREDUCE,4,4168,F
+537,ECO MR Bulk Process,customscript_eco_mr_bulk_process,MAPREDUCE,4,4139,F
+133,EP Delete BEPIs MR,customscript_ep_delete_bepi_mr,MAPREDUCE,5,1012,F
+142,EP Email Notification MR,customscript_8859_email_notification_mr,MAPREDUCE,5,948,F
+129,EP Failed Transaction Unlinker MR,customscript_9997_trans_unlinker_mr,MAPREDUCE,5,1061,F
+137,EP Payment Processor,customscript_8858_payment_processor_mr,MAPREDUCE,5,957,F
+135,EP Reverse Payments MR,customscript_8858_reverse_payments_mr,MAPREDUCE,5,975,F
+141,EP Rollback MR,customscript_8859_ep_rollback_mr,MAPREDUCE,5,1008,F
+140,EP Transaction Marker,customscript_8859_transaction_marker,MAPREDUCE,5,1070,F
+138,EP Update BEPIs MR,customscript_ep_update_bepi_mr,MAPREDUCE,5,1051,F
+3346,FA | MR Sync - Update FA,customscript_fa_mr_sync_update_fa,MAPREDUCE,17891,1400961,F
+3347,FA | MR Sync - Update NS,customscript_fa_mr_sync_update_ns,MAPREDUCE,17891,1400962,F
+1311,FAM - Update Asset Invoice MR,customscript_fam_mr_updateassetinvoice,MAPREDUCE,4,499065,F
+1314,FAM Add Asset Values MR,customscript_fam_addassetvals_mr,MAPREDUCE,4,499052,F
+1341,FAM Asset Generation MR,customscript_fam_generateasset_mr,MAPREDUCE,4,499149,F
+1326,FAM Attach Invalid Lease Payments MR,customscript_fam_attachleasepayment_mr,MAPREDUCE,4,499113,F
+1337,FAM Clean Up Depreciation Files MR,customscript_fam_cleanupdeprfiles_mr,MAPREDUCE,4,499112,F
+1324,FAM Convert Asset IDs Asset Reset Data,customscript_fam_convertassetids_mr,MAPREDUCE,4,499151,F
+1339,FAM Create Compound Asset MR,customscript_fam_createcompound_mr,MAPREDUCE,4,499094,F
+1323,FAM Create Journal MR,customscript_fam_createjournal_mr,MAPREDUCE,4,499184,F
+1315,FAM Create Lease Payments,customscript_fam_createleasepayment_mr,MAPREDUCE,4,499070,F
+1340,FAM Create Summaries MR,customscript_fam_createsummaries_mr,MAPREDUCE,4,499051,F
+1295,FAM Deactivate Lease Payment MR,customscript_fam_deactivate_lpay_mr,MAPREDUCE,4,499050,F
+1310,FAM Delete Asset DHR MR,customscript_fam_deleteassetdhr_mr,MAPREDUCE,4,499150,F
+1325,FAM Delete Asset MR,customscript_fam_deleteasset_mr,MAPREDUCE,4,499069,F
+1329,FAM Delete Old Forecasts MR,customscript_fam_deleteoldforecast_mr,MAPREDUCE,4,499093,F
+1330,FAM Delete Schedule DHR MR,customscript_fam_deletescheduledhr_mr,MAPREDUCE,4,499134,F
+1303,FAM Dispose Asset MR,customscript_fam_disposeasset_mr,MAPREDUCE,4,499133,F
+1305,FAM Finalize Lease Proposal MR,customscript_fam_finalizeleaseprop_mr,MAPREDUCE,4,499092,F
+1328,FAM Generate Depr Monthly Report MR,customscript_fam_generatedeprmonth_mr,MAPREDUCE,4,499166,F
+1299,FAM Generate Depr Sched Report MR,customscript_fam_generatedeprsched_mr,MAPREDUCE,4,499165,F
+1344,FAM Generate Derogatory DHRs MR,customscript_fam_generatederogatorydhrs,MAPREDUCE,4,499091,F
+1309,FAM Generate Lease Schedules MR,customscript_fam_generateleasesched_mr,MAPREDUCE,4,499183,F
+1307,FAM Japan Reset Assets M/R,customscript_fam_resetjpassets_mr,MAPREDUCE,4,499132,F
+1306,FAM Migrate Generic MR,customscript_fam_migrate_generic_mr,MAPREDUCE,4,499182,F
+1318,FAM Migrate Lease Contract MR,customscript_fam_migrateleasecontract_mr,MAPREDUCE,4,499111,F
+1322,FAM Migrate Lease Summary MR,customscript_fam_migrateleasesummary_mr,MAPREDUCE,4,499164,F
+1331,FAM Migrate Posting Tax MR,customscript_fam_migrate_postingtax_mr,MAPREDUCE,4,499181,F
+1321,FAM Migrate to Precompute MR,customscript_fam_migratetoprecompute_mr,MAPREDUCE,4,499163,F
+1298,FAM Orphaned DHRs Diagnostic MR,customscript_fam_orphaneddhrsdiag_mr,MAPREDUCE,4,499068,F
+1308,FAM Post Depreciation Mapping,customscript_fam_postdepr_mapdhr_mr,MAPREDUCE,4,499180,F
+1312,FAM Post Depreciation Update No Book,customscript_fam_postdepr_nobook_mr,MAPREDUCE,4,499131,F
+1335,FAM Post Process MR,customscript_fam_mr_postprocess,MAPREDUCE,4,499090,F
+1301,FAM Post-Upgrades Check MR,customscript_fam_postupgradeschk_mr,MAPREDUCE,4,499110,F
+1319,FAM Precalc MR,customscript_fam_precalc_mr,MAPREDUCE,4,499162,F
+1313,FAM Proposal Split MR,customscript_fam_mr_proposalsplit,MAPREDUCE,4,499109,F
+1343,FAM Propose Asset MR,customscript_fam_proposeasset_mr,MAPREDUCE,4,499148,F
+1320,FAM Recognize Lease Interest MR,customscript_fam_recognize_leaseint_mr,MAPREDUCE,4,499130,F
+1297,FAM Reports Cleanup MR,customscript_fam_reportscleanup_mr,MAPREDUCE,4,499108,F
+1304,FAM Reset Asset Values MR,customscript_fam_resetassetvals_mr,MAPREDUCE,4,499089,F
+1332,FAM Retrieve Asset Values MR,customscript_fam_retrieve_assetvalues_mr,MAPREDUCE,4,499067,F
+1296,FAM Revalue Asset MR,customscript_fam_revalueasset_mr,MAPREDUCE,4,499066,F
+1327,FAM Reverse Interest Journals MR,customscript_fam_reverse_intjrns_mr,MAPREDUCE,4,499129,F
+4110,FAM Revised Delete Old Forecast MR,customscript_fam_reviseddelforecast_mr,MAPREDUCE,-5,1573942,F
+1317,FAM Rollback Script,customscript_fam_mr_rollbackrecords,MAPREDUCE,4,499179,F
+1342,FAM Set Alt Depr Subsidiary MR,customscript_fam_setaltdeprsubs_mr,MAPREDUCE,4,499128,F
+1334,FAM Setup Account Records,customscript_fam_setup_accountrecords,MAPREDUCE,4,499178,F
+1300,FAM Split MR,customscript_fam_split_mr,MAPREDUCE,4,499161,F
+1338,FAM Transfer Asset MR,customscript_fam_transferasset_mr,MAPREDUCE,4,499107,F
+1336,FAM Transfer Validate Assets MR,customscript_fam_transfer_validate_mr,MAPREDUCE,4,499177,F
+1316,FAM Update Compound Assets - PreCalc MR,customscript_fam_updcomass_mr,MAPREDUCE,4,499088,F
+1302,FAM Validate Asset MR,customscript_fam_validateasset_mr,MAPREDUCE,4,499087,F
+2801,Generate Special Order Data Records MR,customscript_zas_generate_spcl_ord_data,MAPREDUCE,5,991946,F
+134,Global Entity Migration Script MR,customscript_9572_migration_script_mr,MAPREDUCE,5,954,F
+3877,Inbound PO Link MR,customscript_inbounk_po_link_mr,MAPREDUCE,17891,1535727,F
+5540,Item Inactivate,customscript_item_inactivate,MAPREDUCE,17891,1702802,T
+4119,LA Bulk Actions,customscript_lsp_bulkaction_mr,MAPREDUCE,17891,1587379,F
+289,LA Item Update from CSV,customscript289,MAPREDUCE,5,2472,T
+3775,LA Name fix,customscript_la_name_fix,MAPREDUCE,17891,1501893,T
+4121,LA Payment Templates Component MR,customscript_payment_temp_register_mr,MAPREDUCE,17891,1587381,F
+3558,LA SKU to Item,customscript_la_sku_to_item,MAPREDUCE,17891,1458894,T
+3568,LA Sku to Item MR2.js,customscript_la_sku_to_item_mr2js,MAPREDUCE,17891,1492696,F
+2481,LA Step 1 CSV ROW CustRec CREATOR MR,customscript_la_csvrowcreator,MAPREDUCE,8,939046,T
+2480,LA Step 2 CSV Row To LA Item Rec MR,customscript_la_csvrow_toitemrec,MAPREDUCE,8,939045,T
+4120,LA registration,customscript_lsp_registration_mr,MAPREDUCE,17891,1587380,F
+1702,Lights CSV Import: Generate Queue,customscript_zastro_la_gen_queue,MAPREDUCE,8,759334,T
+1694,Lights CSV Import: Step 1: Import CSV,customscript_zastro_la_step_1,MAPREDUCE,8,759329,T
+1697,Lights CSV Import: Step 4: Link Item,customscript_zastro_la_step_4,MAPREDUCE,8,759332,T
+1703,Lights CSV Import: Step 5: Create Item,customscript_zastro_la_step_5,MAPREDUCE,8,759333,T
+1700,Lights: Adhoc Processor,customscript_zastro_la_adhoc,MAPREDUCE,8,759322,F
+1091,LightsAmerica  Link Item & Custom,customscript1091,MAPREDUCE,5,213417,T
+1089,LightsAmerica - CSV Creator,customscript1089,MAPREDUCE,5,209873,T
+1100,LightsAmerica - Create Items,customscript1100,MAPREDUCE,5,234690,T
+1099,LightsAmerica - Update Items,customscript1099,MAPREDUCE,5,234588,T
+1090,LightsAmerica CSV to Custom Record,customscript1090,MAPREDUCE,5,213216,T
+1909,Load n Save MR,customscript1909,MAPREDUCE,8,789147,F
+3058,Look up Field ID MR,customscript_cat_mr_look_up_field_id,MAPREDUCE,8,1153669,F
+572,Move Customer Deposit,customscript572,MAPREDUCE,5,4583,T
+4621,NS | MR | File Download - Manual,customscript_ns_mr_auto_file_download,MAPREDUCE,17891,1631211,F
+4623,NS | MR | File Download - Scheduled,customscript_ns_mr_file_download_sched,MAPREDUCE,17891,1631212,F
+4622,NS | MR | File Transfer - Manual,customscript_ns_mr_auto_file_transfer,MAPREDUCE,17891,1631213,F
+4624,NS | MR | File Transfer - Scheduled,customscript_ns_mr_file_transfer_sched,MAPREDUCE,17891,1631214,F
+131,Nacha Encrypt Entity Bank MR,customscript_15152_nacha_entity_bank_mr,MAPREDUCE,5,1066,F
+132,Nacha Encrypt company Bank MR,customscript_15152_nacha_company_bank_m,MAPREDUCE,5,961,F
+2822,Navigation Category Migration MR,customscript_nav_mr_navcategorymigration,MAPREDUCE,-5,1002561,F
+2823,Navigation Role Mass Update MR,customscript_nav_mr_rolemassupdate,MAPREDUCE,-5,1002560,F
+858,ONE TIME item update,customscript858,MAPREDUCE,5,147723,T
+2945,PL LA Step 1 MR,customscript_pl_la_step1_mr,MAPREDUCE,8,1123930,F
+2425,PL Step 1 Papa MR,customscript2425,MAPREDUCE,8,868385,T
+130,Payment to Admin Linker MR,customscript_9997_payment_to_admin_mr,MAPREDUCE,5,1018,F
+1333,Post-Depreciate Map/Reduce Script,customscript_fam_postdepr_updateasset_mr,MAPREDUCE,4,499049,F
+3446,Prem Delete Skuless Items MR,customscript3446,MAPREDUCE,8,1403936,F
+2020,QueryTask Processor MR,customscript_str_querytask_proc_mr,MAPREDUCE,17891,806996,F
+2021,ReportSchema Installer MR,customscript_reportschema_installer_mr,MAPREDUCE,17891,806999,F
+346,SI Bin Delete,customscript346,MAPREDUCE,8,2999,F
+2947,STE MR Automated Data Update,customscript_ste_mr_auto_data_update,MAPREDUCE,-5,1127579,F
+1958,STE MR Confirmation Email,customscript_ste_mr_confirmation_email,MAPREDUCE,17891,799398,F
+1957,STE MR Create Records,customscript_ste_mr_create_records,MAPREDUCE,17891,799435,F
+1961,STE MR Data Provisioning,customscript_ste_mr_data_provisioning,MAPREDUCE,17891,799420,F
+1960,STE MR Data Update,customscript_ste_mr_data_update,MAPREDUCE,17891,799443,F
+1956,STE MR Exempt Cert All Items Saving,customscript_ste_mr_exempt_allitems_save,MAPREDUCE,17891,799471,F
+1962,STE MR Exempt Certificate Items Saving,customscript_ste_mr_exempt_items_save,MAPREDUCE,17891,799485,F
+1959,STE MR Item Tax Exemption Saving,customscript_ste_mr_item_tax_exempt_save,MAPREDUCE,17891,799472,F
+1954,STE MR Item Tax Rules Saving,customscript_ste_mr_item_tax_rules_save,MAPREDUCE,17891,799474,F
+1952,STE MR Item Tax Rules Saving from Search,customscript_ste_mr_itr_save_from_search,MAPREDUCE,17891,799473,F
+3182,STE MR Item Tax Setup Saving,customscript_ste_mr_item_tax_setup_save,MAPREDUCE,-5,1243943,F
+3181,STE MR Item Tax Setup Saving From Setup,customscript_ste_mr_its_save_from_setup,MAPREDUCE,-5,1243942,F
+3180,STE MR Item Tax Setup Saving from Search,customscript_ste_mr_its_save_from_search,MAPREDUCE,-5,1243941,F
+1951,STE MR OSS Tax Schedule Item Saving,customscript_ste_mr_oss_taxschd_itemsave,MAPREDUCE,17891,799429,F
+1955,STE MR Tax Schedule Item Saving,customscript_ste_mr_taxschedule_itemsave,MAPREDUCE,17891,799467,F
+2018,STR Search Installer MR,customscript_str_searchinstaller_mr,MAPREDUCE,17891,807007,F
+2019,SearchTask Processor MR,customscript_str_searchtask_proc_mr,MAPREDUCE,17891,806980,F
+2017,TaxReportingCategory Installer MR,customscript_str_trc_installer_mr,MAPREDUCE,17891,806970,F
+139,Template Generator MR,customscript_13438_template_generator_mr,MAPREDUCE,5,998,F
+2682,UPC Fill,customscript_jww_upc_fill,MAPREDUCE,17891,966006,T
+3561,Unified Catalog Analysis MR,customscript_unified_catalog_analysis_mr,MAPREDUCE,17891,1475868,F
+136,Update Customer DD File Format MR,customscript_9997_update_ddfileformat_mr,MAPREDUCE,5,1033,F
+804,Update Display Name,customscript804,MAPREDUCE,5,24866,F
+4314,Update Inbound Shipment Pricing MR,customscript_update_inbound_pricing_mr,MAPREDUCE,17891,1594279,F
+836,Update LA Item Fields,customscript836,MAPREDUCE,5,87166,T
+462,Versapay Cloudplatform Credit Mem Export,customscript_versapay_clpf_crm_export,MAPREDUCE,2759,3111,F
+461,Versapay Cloudplatform Customer Export,customscript_versapay_clpf_cust_export,MAPREDUCE,2759,3050,F
+464,Versapay Cloudplatform Invoice Export,customscript_versapay_clpf_inv_export,MAPREDUCE,2759,3110,F
+459,Versapay Cloudplatform Payment Export,customscript_versapay_clpf_pmt_export,MAPREDUCE,2759,3032,F
+463,Versapay Customer Auto Sync MR,customscript_versapay_cust_autosync,MAPREDUCE,2759,3031,F
+458,Versapay Customer Auto Sync MR (Company),customscript_versapay_custcomp_autosync,MAPREDUCE,2759,3152,F
+3226,Versapay Customer CC Migration,customscript_versapay_cc_migration_mr,MAPREDUCE,17891,1250278,F
+3221,Versapay EFT Exp Sync MR,customscript_versapay_eft_exp_sync_mr,MAPREDUCE,17891,1250233,F
+460,Versapay Initial Export - Customers DPR,customscript_versapay_initialcustexp_mr,MAPREDUCE,2759,3010,F
+3225,Versapay MR Set Paylink,customscript_versapay_mr_setpaylink,MAPREDUCE,17891,1250241,F
+3222,Versapay Massive Customer Wallet Update,customscript_versapay_mr_masscustwallet,MAPREDUCE,17891,1250229,F
+457,Versapay NS-ARC Auto Sync MR,customscript_versapay_arc_autosync_mr,MAPREDUCE,2759,3112,F
+3223,Versapay Settlement and Fee Recon,customscript_versapay_settlement_recon,MAPREDUCE,17891,1250287,F
+3220,Versapay UCP Sales Order - Map/Reduce,customscript_versapay_ucp_so_mr,MAPREDUCE,17891,1250270,F
+3224,Versapay eFeatures Batching,customscript_versapay_efeatures_batch_mr,MAPREDUCE,17891,1250293,F
+3725,[DEPRECATED]BC Inactivate/Activat,customscript_bc_proj_inac_activ_mr,MAPREDUCE,36092,1501216,F
+4,Last Sales Activity Mass Update,customscript_lsa_massupdate,MASSUPDATE,-5,8,F
+483,Solupay SuitePayment,customscript_solupaysuitepayments,PAYMENTGATEWAY,2759,3077,F
+4116,LRC Field Manager Plugin Type,customscript_lrc_field_manager,PLUGINTYPE,17891,1587359,F
+2478,Report Customization PT,customscript_str_reportcustomization_pt,PLUGINTYPE,-5,923198,F
+5846,AP Aged Unbilled PL,customscript_ap_aged_unbilled_pl,PORTLET,17891,1756890,F
+5225,AP Genius Pre-Check PL,customscript_ap_genius_precheck_pl,PORTLET,17891,1674260,F
+3690,BlueCollar Release Portlet,customscript_bc_release_portlet,PORTLET,36092,1501234,F
+3337,Case Formula Portlet,customscript_case_formula_portlet,PORTLET,17891,1344384,F
+38,Dashboard Tile Portlet,customscript_dt_portlet_tiles,PORTLET,5,177,F
+1358,EP Global Batch Processing Portlet,customscript_17801_ep_gebatch_process_pt,PORTLET,-5,2988,F
+341,EP Payment Batch Processing Portlet SS2,customscript_15486_ep_batch_process_pt,PORTLET,-5,2988,F
+279,Employee Directory Portlet,customscript_ed_emp_dir_portlet,PORTLET,5,2455,F
+1294,FAM Diagnostics,customscript_fam_diagnostics_pl,PORTLET,4,499141,F
+3172,Inventory Lookup Portlet,customscript2953,PORTLET,17891,1193873,F
+3171,Inventory Portlet,customscript_inventory_portlet,PORTLET,17891,1193872,T
+3352,Key Benefits,customscript_fa_pl_keybenefits,PORTLET,17891,1400963,F
+30,Navigation Portlet,customscript_nav_po_navigationportlet,PORTLET,5,113,F
+3353,NetSuite Connector Link,customscript_fa_pl_nsconnectorlink,PORTLET,17891,1400964,F
+128,Payment Batch Processing Portlet,customscript_2663_batch_processing_p,PORTLET,5,1032,F
+4625,SFTP Dashboard,customscript_sftp_dashboard_pt,PORTLET,17891,1631215,F
+15,Subsidiary Navigator,customscript_snav_portlet_app,PORTLET,5,45,F
+4515,Tax Lookup Portlet,customscript_tax_lookup_portlet_pl,PORTLET,17891,1622814,F
+3170,linksportlet,customscript_links_portlet,PORTLET,17891,1193871,F
+127,8859_batch_updater_rs,customscript_8859_batch_updater_rs,RESTLET,5,959,F
+4315,BCChangeRequestApprovalRestlet,customscript_bc_ch_req_apprvl_restlet,RESTLET,-5,1604673,F
+3677,BCChangeRequestFormToolRestlet,customscript_bc_change_req_restlet,RESTLET,36092,1501116,F
+5745,BCFinancialToolBudgetItemsRestlet,customscript_bc_budget_updates_restlet,RESTLET,-5,1744934,F
+5746,BCProjectInactivateActivateRestlet,customscript_bc_proj_inactivate_restlet,RESTLET,-5,1744936,F
+3700,BCSearchesPostDeploymentSteps,customscript_bc_searches_restlet,RESTLET,36092,1501248,F
+126,Entity Bank Details RS,customscript_11187_entitybank_details_rs,RESTLET,5,947,F
+3348,FA | RL Web Services,customscript_farapp_web_services,RESTLET,17891,1400965,F
+1292,FAM Check Custom Report Column RESTlet,customscript_fam_checkcustreportcols_rs,RESTLET,4,499140,F
+1290,FAM Create Lease Journal RESTlet,customscript_fam_createleasejrn_rs,RESTLET,4,499187,F
+1289,FAM Delete Files RESTlet,customscript_fam_deletefiles_rs,RESTLET,4,499186,F
+1291,FAM Modify Lease RESTlet,customscript_fam_modifylease_rs,RESTLET,4,499116,F
+1293,FAM ResX Client RESTlet,customscript_fam_resxclient_rs,RESTLET,4,499097,F
+4114,Fetch Record Fields,customscript_fetch_record_fields,RESTLET,17891,1587419,F
+1698,Lights America API 2,customscript_lights_america_restlet_api2,RESTLET,8,759327,F
+3563,Monday Sync Restlet,customscript_monday_sync_restlet,RESTLET,17891,1487665,F
+124,Payment Batch Updater RS,customscript_2663_batch_updater_rs,RESTLET,5,1073,F
+1360,Ramp API,customscript_ramp_restlet,RESTLET,-5,705207,F
+125,Runtime Settings RS,customscript_12050_runtime_settings_rs,RESTLET,5,1011,F
+1950,STE RL Country Manager,customscript_ste_rl_country_manager,RESTLET,17891,799410,F
+3340,STE RL Get Repeat From SS,customscript_ste_rl_get_repeat_from_ss,RESTLET,-5,1379366,F
+2784,STR Report Generator,customscript_str_reportgenerator_rs,RESTLET,-5,977025,F
+2016,STR logger RS,customscript_str_logger_rs,RESTLET,17891,806961,F
+454,Solupay Connector,customscript_solupay_connector_rs,RESTLET,2759,3046,F
+456,Solupay Customer Statement,customscript_solupay_customerpayment_rs,RESTLET,2759,3103,F
+452,Solupay E-Customer Deposit,customscript_solupay_ecustomerdeposit_rs,RESTLET,2759,3022,F
+453,Solupay E-Invoice 2 Cash,customscript_solupay_einvoice_cash_rs,RESTLET,2759,3146,F
+451,Solupay E-Quote 2 Cash,customscript_solupay_equote_cash_rs,RESTLET,2759,3074,F
+455,Solupay External Quote,customscript_solupay_externalquote,RESTLET,2759,3143,F
+3218,Versapay Customer Communication Email,customscript_versapay_cust_comm_email_rs,RESTLET,17891,1250290,F
+3219,Versapay RS Clover,customscript_versapay_rs_clover,RESTLET,17891,1250231,F
+123,8859_payment_batch_on_demand,customscript_8859_paymnt_batch_on_demand,SCHEDULED,5,1015,F
+4727,AI Companion Prompt Usage Rollup,customscript_atlas_aicomp_usage_rollup,SCHEDULED,17891,1641545,F
+4725,AI Companion Role Sync Weekly,customscript_atlas_aicomp_role_sync,SCHEDULED,17891,1641544,F
+819,Assign Refund Amounts to SO,customscript819,SCHEDULED,5,64280,F
+340,Auto Process Queued PFA,customscript_15531_auto_queued_pfa_ss,SCHEDULED,-5,2983,F
+3669,BC Project Copy Imports Sch,customscript_bc_proj_copy_imports,SCHEDULED,36092,1501261,F
+5022,BC Redeployment Scheduled,customscript_bc_redeployment_scheduled,SCHEDULED,-5,1652477,F
+3740,BC Usage Statistical Data Push,customscript_bc_statdata_push_ss,SCHEDULED,36092,1501263,F
+3741,BCAccountBudgetingSyncScheduled,customscript_bc_acc_budg_sync_sch,SCHEDULED,36092,1501255,F
+5230,BCContractAssociationCleanUpScheduled,customscript_bc_cntrc_assoc_clnp_sch,SCHEDULED,-5,1679761,F
+3066,Bank Feeds MX Get Supported FIs,customscript_bf_model_mx_getfis,SCHEDULED,-5,1182238,F
+3055,Big Data Deleter SS,customscript_str_bigdatadeleter_ss,SCHEDULED,-5,1144635,F
+2005,Big Data Generator SS,customscript_str_bigdatagenerator_ss,SCHEDULED,17891,807006,F
+3737,BlueCollar Active/Inactive Proj Sch,customscript_bc_sch_act_inac_projects,SCHEDULED,36092,1501256,F
+1094,Connect SO and Special Order,customscript_pr_connect_so_special,SCHEDULED,15382,216636,F
+2812,Consolidated | Duplication Check of Spec,customscript2812,SCHEDULED,5,995723,F
+485,Create Deposits,customscript485,SCHEDULED,5,3213,F
+41,Create Merchandise Hierarchy Levels,customscript_mh_ss_create_mh,SCHEDULED,5,208,F
+37,Dashboard Tile Update on Role Scheduled,customscript_dt_ss_updateroles,SCHEDULED,5,174,F
+692,Delivery Record- Link Customer,customscript692,SCHEDULED,5,12777,F
+108,EP Entity Data Update,customscript_2663_entity_update_ss,SCHEDULED,5,1030,F
+1079,EP Migrate PFA to SS2 SS,customscript_ep_migrate_pfa_to_ss2_ss,SCHEDULED,-5,193418,F
+116,EP Script Scheduler,customscript_8858_scheduler_ss,SCHEDULED,5,1002,F
+117,EP Update Batch Settings,customscript_ep_update_batch_settings_ss,SCHEDULED,5,1068,F
+582,Estimate Deletion,customscript582,SCHEDULED,5,5873,F
+3349,FA | SS Push SuiteApp Version,customscript_fa_ss_push_version,SCHEDULED,17891,1400969,F
+1356,FAM Construct Revaluation Details SS,customscript_fam_constructrevaldetail_ss,SCHEDULED,-5,568189,F
+1283,FAM Construct Split Details SS,customscript_fam_constructsplitdetail_ss,SCHEDULED,4,499174,F
+1279,FAM Diagnosis Scan SS,customscript_fam_diagnosisscan_ss,SCHEDULED,4,499074,F
+1286,FAM Diagnostics Schedule Setup SS,customscript_fam_diagnosisschedsetup_ss,SCHEDULED,4,499077,F
+1272,FAM Migrate to Precompute SS,customscript_fam_migratetoprecompute_ss,SCHEDULED,4,499117,F
+1285,FAM Process Manager SS,customscript_fam_processmanager_ss,SCHEDULED,4,499057,F
+1280,FAM Render Asset Register Report SS,customscript_fam_renderregreport_ss,SCHEDULED,4,499173,F
+1287,FAM Render Asset Summary Report SS,customscript_fam_rendersummreport_ss,SCHEDULED,4,499156,F
+1284,FAM Render Depr Monthly Report SS,customscript_fam_renderdeprmonth_ss,SCHEDULED,4,499056,F
+1274,FAM Render Schedule 16 SS,customscript_fam_renderschedule16_ss,SCHEDULED,4,499155,F
+1282,FAM Search Asset Register Report Data SS,customscript_fam_searchregreportdata_ss,SCHEDULED,4,499076,F
+1276,FAM Search Asset Register Report SZV SS,customscript_fam_searchregreportszv_ss,SCHEDULED,4,499075,F
+1273,FAM Search JP Special Depr Vals SS,customscript_fam_searchjpspecdeprvals_ss,SCHEDULED,4,499154,F
+1281,FAM Transfer Asset CSV SS,customscript_fam_transferassetscsv_ss,SCHEDULED,4,499142,F
+3338,FAM Trigger Datafix,customscript_fam_triggerdatafix_ss,SCHEDULED,-5,1356871,F
+1270,FAM Trigger Error Handling SS,customscript_fam_triggererrorhandling_ss,SCHEDULED,4,499073,F
+1278,FAM Trigger Pre-Compute SS,customscript_fam_triggerprecompute_ss,SCHEDULED,4,499118,F
+1277,FAM Trigger Process SS,customscript_fam_triggerprocess_ss,SCHEDULED,4,499055,F
+1275,FAM Trigger Reports Cleanup SS,customscript_fam_trigrptcleanup_ss,SCHEDULED,4,499045,F
+1288,FAM Trigger Reset Process (Scheduled) SS,customscript_fam_triggerresetsched_ss,SCHEDULED,4,499153,F
+1271,FAM Update Alt Method Subsidiary SS,customscript_fam_updatealtmethodsubs_ss,SCHEDULED,4,499172,F
+1707,File Cabinet Delete,customscript1707,SCHEDULED,8,760850,F
+121,Generic Payment Notification,customscript_2663_notify_payments_ss,SCHEDULED,5,1057,F
+111,Generic Payment Processing,customscript_2663_payment_processing_ss,SCHEDULED,5,982,F
+110,Generic Payment Record Processing,customscript_ep_payment_creator_ss,SCHEDULED,5,966,F
+114,Generic Payment Reversals,customscript_2663_reverse_payments_ss,SCHEDULED,5,1074,F
+122,Generic Payment Rollback,customscript_2663_rollback_ss,SCHEDULED,5,953,F
+119,Global Entity Migration Script SS,customscript_9572_migration_script_ss,SCHEDULED,5,1058,F
+2800,In Arrear PO Creator,customscript2500,SCHEDULED,5,991945,F
+3559,Item Record Quick Report,customscript_item_record_quick_report,SCHEDULED,17891,1475561,F
+1704,Item Update Price Checker Scheduler,customscript_zastro_lights_item_updater,SCHEDULED,8,759326,F
+1706,Lights America Wishlist Scheduler 2.0,customscript_zastro_lights_wishlist_2,SCHEDULED,8,759328,F
+1701,Lights CSV Import: Delete Items,customscript_zastro_la_delete_util,SCHEDULED,8,759320,T
+1695,Lights CSV: Step 2: Process Import,customscript_zastro_la_step_2,SCHEDULED,8,759330,T
+1696,Lights CSV: Step 3: Delete Files,customscript_zastro_la_step_3,SCHEDULED,8,759331,T
+3344,Lock Record Scheduled,customscript_lock_record_scheduled,SCHEDULED,17891,1380080,T
+42,MH Relink CS with Levels,customscript_mh_ss_relink_levels_with_cs,SCHEDULED,5,209,F
+1085,NEW STORED INITIATOR - SS,customscript1085,SCHEDULED,15382,156053,F
+29,Navigation Role Mass Update SS,customscript_nav_ss_rolemassupdate,SCHEDULED,5,110,F
+1359,New Inititator - TEST,customscript_test_new_initiator,SCHEDULED,15382,637789,F
+113,On Demand Batch Processing,customscript_2663_on_demand_batch_ss,SCHEDULED,5,965,F
+278,Org Browser Tree Generator SS,customscript_ob_org_browser_tree_ss,SCHEDULED,5,2456,F
+802,PL Address Phone scheduled,customscript802,SCHEDULED,8,21784,F
+826,PL Create Quote from Parent andChild SCH,customscript826,SCHEDULED,8,72940,F
+840,PL Email Daily Rec Report,customscript_pl_email_daily_rec_rep,SCHEDULED,8,99305,F
+2424,PL Email Daily Rec Report(On Demand),customscript_pl_email_daily_rec_rep_once,SCHEDULED,21680,834371,T
+2946,PL LA Step 2 SCH,customscript_pl_la_step2_sch,SCHEDULED,8,1124031,F
+825,PL Link Quote Parent to Quote Child SCH,customscript825,SCHEDULED,8,72637,F
+824,PL Quote Child Item SCH,customscript824,SCHEDULED,8,71419,F
+820,PL Quote Parent Customer SCH,customscript820,SCHEDULED,8,65910,F
+848,PL Time Stamp SO Completion Date SCH,customscript848,SCHEDULED,8,113161,F
+849,PL Time Stamp SO UNDO SCH,customscript849,SCHEDULED,8,113263,F
+841,PR Rec Summary Generate SCH,customscript841,SCHEDULED,8,99808,F
+120,Payment Batch Processing,customscript_2663_batch_processing_ss,SCHEDULED,5,969,F
+109,Payment Batch Processing,customscript_8859_batch_processing_ss,SCHEDULED,5,1072,F
+118,Payment File Generator SS,customscript_9997_file_generation_ss,SCHEDULED,5,1024,F
+2015,Query Runner SS,customscript_str_queryrunner_ss,SCHEDULED,17891,806998,F
+2007,QueryTask Processor SS,customscript_str_querytask_proc_ss,SCHEDULED,17891,806997,F
+3053,QueryTask Runner SS,customscript_str_querytask_runner_ss,SCHEDULED,-5,1144636,F
+1211,REC REPORT V2,customscript1211,SCHEDULED,8,451105,F
+2011,Record Loader SS,customscript_str_recordloader_ss,SCHEDULED,17891,806966,F
+2014,Report Postprocessor SS,customscript_str_reportpostprocessor_ss,SCHEDULED,17891,806984,F
+2006,Report Preprocessor SS,customscript_str_reportpreprocessor_ss,SCHEDULED,17891,806964,F
+51,Request  License SS,customscript_8299_license_request_ss,SCHEDULED,5,296,F
+1104,Reverse Inventory Adjustments,customscript_pr_rev_inv_adj,SCHEDULED,15382,242071,F
+528,SCM Background Cleanup Process SS,customscript_scm_ss_bgcleanupprocess,SCHEDULED,4,4132,F
+529,SCM Background Process SS,customscript_scm_ss_bgprocess,SCHEDULED,4,4100,F
+527,SCM CPN Cleaner SS,customscript_scm_cpn_ss_cleaner,SCHEDULED,4,4122,F
+526,SCM Delete Report Status SS,customscript_scm_ss_deletereportstatus,SCHEDULED,4,4174,F
+2009,STR Bundle Installer SS,customscript_str_bundle_installer_ss,SCHEDULED,17891,806979,F
+2003,STR Job Manager Runner SS,customscript_str_jmrunner_ss,SCHEDULED,17891,806994,F
+2012,STR Job Manager SS,customscript_str_jobmanager_ss,SCHEDULED,17891,806986,F
+2013,Search Installer,customscript_str_search_installer_ss,SCHEDULED,17891,806956,F
+2010,Search Runner SS,customscript_str_searchrunner_ss,SCHEDULED,17891,806958,F
+2004,SearchTask Processor SS,customscript_str_searchtask_proc_ss,SCHEDULED,17891,806962,F
+3054,SearchTask Runner SS,customscript_str_searchtask_runner_ss,SCHEDULED,-5,1144637,F
+1212,Set PO on Unconsolidated PO Record,customscript_pr_set_po_on_unconsol_po,SCHEDULED,15382,480268,T
+1098,Set Room Location - Backfill,customscript_pr_set_room_loc_backfill,SCHEDULED,15382,221314,F
+1086,Set Stored Link on Original SO,customscriptpr_set_stored_on_orig_so,SCHEDULED,15382,203119,F
+435,Solupay Bank Deposit,customscript_solupay_bankdeposit_sc,SCHEDULED,2759,3151,F
+450,Solupay Billing Schedule,customscript_solupay_billing_sched_sch,SCHEDULED,2759,3025,F
+449,Solupay Billing Schedule 2.0,customscript_solupay_billing_sched_ss,SCHEDULED,2759,3149,F
+448,Solupay EMV,customscript_solupaysp_emv,SCHEDULED,2759,3024,F
+444,Solupay Reconciliation,customscript_solupay_reconciliation_sc,SCHEDULED,2759,3069,F
+438,Solupay Reconciliation Matched,customscript_solupay_reconciliation_m_sc,SCHEDULED,2759,3117,F
+443,Solupay Recurring 2.0,customscript_solupay_recurring_ss,SCHEDULED,2759,3116,F
+569,StickyNotes Sched Script Queue Handler,customscript_stick_sched_script_queue_ha,SCHEDULED,5,4570,F
+800,Stored - Correct Undo of Delivery Record,customscript800,SCHEDULED,5,20944,F
+14,SubNav - Copy Subsidiary Logo SS,customscript_snav_copysublogo,SCHEDULED,5,35,F
+5644,TRF Configuration Script,customscript_usr_trf_configuration,SCHEDULED,-5,1714792,F
+2008,Tax Filing Scheduled Script,customscript_str_tax_filing_ss,SCHEDULED,17891,807009,F
+112,Template Generator SS,customscript_13438_template_generator_ss,SCHEDULED,5,1054,F
+115,Update Customer DD File Format SS,customscript_9997_update_ddfileformat_ss,SCHEDULED,5,1055,F
+4112,Update SL Link,customscript_update_sl_link_js,SCHEDULED,17891,1584567,F
+437,Versapay ARC Credit Memo Export,customscript_versapay_arc_crmemexport_sc,SCHEDULED,2759,3132,F
+445,Versapay ARC Customer Export,customscript_versapay_arc_custexport_sc,SCHEDULED,2759,3008,F
+447,Versapay ARC Invoice Export,customscript_versapay_arc_invcexport_sc,SCHEDULED,2759,3106,F
+441,Versapay ARC to NS Payment schedule,customscript_versapay_arc_to_ns_pmt_sc,SCHEDULED,2759,3153,F
+440,Versapay Auto Sync schedule,customscript_versapay_cplf_autosync_sc,SCHEDULED,2759,3066,F
+439,Versapay Cloud Platform Initial Exp DPR,customscript_versapay_cloudplfm_exp_sc,SCHEDULED,2759,3009,F
+446,Versapay Cloud Platform Payment Sync DPR,customscript_versapay_cloud_platform_sc,SCHEDULED,2759,3136,F
+442,Versapay Cloudplatform Initial Export,customscript_versapay_clpf_init_export,SCHEDULED,2759,3049,F
+436,Versapay Recon,customscript_versapay_recon_sc,SCHEDULED,2759,3079,F
+3217,Versapay populate custom record list,customscriptvpy_pop_cust_rec_lst_sc,SCHEDULED,17891,1250219,F
+2683,task mr status,customscript2683,SCHEDULED,17891,966009,F
+5331,ABSI Suitelet Configuration SFTP,customscript_absi_su_config_sftp,SCRIPTLET,17891,1692328,F
+4721,AI Companion Library,customscript_atlas_aicomp_prompt_library,SCRIPTLET,17891,1641548,F
+4723,AI Companion Role Mapper Config,customscript_atlas_aicomp_role_map_cfg,SCRIPTLET,17891,1641549,F
+5845,AP Aged Unbilled,customscript_ap_aged_unbilled,SCRIPTLET,17891,1756889,F
+5224,AP Genius Pre-Check SL,customscript_ap_genius_precheck_sl,SCRIPTLET,17891,1674259,F
+4715,APG OCR Configuration,customscript_apg_config,SCRIPTLET,24451,1635798,F
+4716,APG OCR Vendor Bill Suitelet,customscript_apg_ocr_suitelet,SCRIPTLET,24451,1635801,F
+1997,Account List Service SU,customscript_str_account_svc_su,SCRIPTLET,17891,806959,F
+3051,Add Items To Order SL,customscript_pr_sl_add_item,SCRIPTLET,4,1142810,T
+1989,Adjust Return,customscript_str_adjust_return_su,SCRIPTLET,17891,806985,F
+3063,Advanced Email PO SL,customscript_pr_sl_adv_email,SCRIPTLET,4,1163621,F
+850,All Deliveries Report SL,customscript850,SCRIPTLET,5,118216,F
+3748,BC Auth Tool Router,customscript_bc_auth_tool_router,SCRIPTLET,36092,1500648,F
+3679,BC Contract UI,customscript_bc_contract_ui,SCRIPTLET,36092,1501151,F
+3680,BC Contracts Center Tool,customscript_bc_contracts_center_ui,SCRIPTLET,36092,1501153,F
+3742,BC Documentation Suitelet,customscript_bc_doc_suitelet,SCRIPTLET,36092,1501180,F
+3744,BC Management Suitelet,customscript_bc_management_ui,SCRIPTLET,36092,1501209,F
+3734,BC Project Address Tool,customscript_bc_project_address_tool,SCRIPTLET,36092,1501227,F
+3720,BC Project Copy Request Suitelet,customscript_bc_project_copy_request,SCRIPTLET,36092,1501229,F
+3727,BC Project Inactivate/Activate Suitelet,customscript_bc_project_inactivate_reque,SCRIPTLET,36092,1501231,F
+3699,BC WIP Report Tool,customscript_bc_wip_report_ui,SCRIPTLET,36092,1501362,F
+3701,BCAccountRouter,customscript_bc_account_r,SCRIPTLET,36092,1500642,F
+3670,BCBillingToolSuiteletRouter,customscript_bc_billing_tool_r,SCRIPTLET,36092,1500653,F
+3702,BCBudgetItemRouter,customscript_bc_budget_item_r,SCRIPTLET,36092,1500657,F
+3703,BCChangeRequestBillingItemRouter,customscript_bc_ch_req_billing_item_r,SCRIPTLET,36092,1501106,F
+3676,BCChangeRequestFormTool,customscript_bc_change_req_r,SCRIPTLET,36092,1501117,F
+3731,BCChangeRequestListTool,customscript_bc_change_req_ui,SCRIPTLET,36092,1501119,F
+3719,BCCommitedCostsRouter,customscript_bc_commited_costs_r,SCRIPTLET,36092,1501147,F
+3704,BCContractSOVRouter,customscript_bc_contract_sov_r,SCRIPTLET,36092,1501149,F
+3705,BCCostCodeRouter,customscript_bc_cost_code_r,SCRIPTLET,36092,1501172,F
+3706,BCCustomSegmentRouter,customscript_bc_custom_segment_r,SCRIPTLET,36092,1501174,F
+3707,BCDeploymentsRouter,customscript_bc_deployments_r,SCRIPTLET,36092,1501178,F
+3708,BCEmployeeRouter,customscript_bc_employee_r,SCRIPTLET,36092,1501182,F
+3692,BCFinancialToolSuiteletRouter,customscript_bc_report_tool_r,SCRIPTLET,36092,1501190,F
+3709,BCGlobalPreferencesRouter,customscript_bc_global_preferences,SCRIPTLET,36092,1501192,F
+3710,BCInvoiceRouter,customscript_bc_invoice_r,SCRIPTLET,36092,1501202,T
+3711,BCItemRouter,customscript_bc_item_r,SCRIPTLET,36092,1501204,F
+3729,BCMaterialsRequisitionToolSuitelet,customscript_bc_mat_req_router,SCRIPTLET,36092,1501223,F
+3712,BCProjectRouter,customscript_bc_project_r,SCRIPTLET,36092,1501233,F
+3691,BCReleaseTool,customscript_bc_release_tool,SCRIPTLET,36092,1501236,T
+3713,BCResourceRateTemplateRouter,customscript_bc_res_rate_temp_r,SCRIPTLET,36092,1501247,F
+3693,BCRevenueRecognitionUI,customscript_bc_rev_recog_ui,SCRIPTLET,36092,1501252,F
+3769,BCSchedulingToolSuitelet,customscript_bcp_scheduling_router,SCRIPTLET,36092,1501265,F
+5021,BCVisualizationRouter,customscript_bc_visualization_ui,SCRIPTLET,-5,1652487,F
+5432,BSP CSV Parser Configuration,customscript_bsp_su_configuration_csv,SCRIPTLET,17891,1692890,F
+593,Bank Feeds Auto Close,customscript_bf_su_autoclose,SCRIPTLET,3,6186,F
+1709,Bank Feeds Delete Partner Registration,customscript_bf_su_delete_se_eu_reg,SCRIPTLET,-5,765405,F
+594,Bank Feeds Delete Service,customscript_bf_su_delete,SCRIPTLET,3,6160,F
+595,Bank Feeds FastLink,customscript_bf_su_fastlink_bf,SCRIPTLET,3,1657579,F
+3068,Bank Feeds MX User Agreement,customscript_bf_su_useragreement_mx,SCRIPTLET,-5,1657574,F
+598,Bank Feeds Manage EU Connections,customscript_bf_su_manage_se,SCRIPTLET,3,6222,F
+597,Bank Feeds Manage Non-PSD2 Connections,customscript_bf_su_manage_eu_unreg_se,SCRIPTLET,3,6221,F
+596,Bank Feeds Manage Other Connections,customscript_bf_su_manage_acctinf_se,SCRIPTLET,3,6219,F
+3067,Bank Feeds Manage US CA (MX) Connections,customscript_bf_su_manage_mx,SCRIPTLET,-5,1657573,F
+601,Bank Feeds Manage US and CA Connections,customscript_bf_view_cfg_yodlee_manage,SCRIPTLET,3,1657577,F
+600,Bank Feeds Partner Registration,customscript_bf_su_register_se,SCRIPTLET,3,1657575,F
+599,Bank Feeds Update or Rebuild Connection,customscript_bf_su_rebuild_update_se,SCRIPTLET,3,6191,F
+700,Bank Feeds Yodlee Disclaimer,customscript_bf_su_disclaimer_ydl,SCRIPTLET,-5,1657576,F
+701,Bank Feeds Yodlee User Agreement,customscript_bf_su_useragreement_ydl,SCRIPTLET,-5,1657578,F
+93,Bank Payment File Generation,customscript_9997_eft_file_generation,SCRIPTLET,5,990,F
+2685,Box - Analytics,customscript_box_app_analytics,SCRIPTLET,17891,966947,F
+2686,Box - Client,customscript_box_app_client_ss21,SCRIPTLET,17891,966948,F
+2684,Box - Credentials,customscript_box_app_credentials,SCRIPTLET,17891,967005,F
+2688,Box - Integration Suitelet,customscript_box_app_integration_ss21,SCRIPTLET,17891,966951,F
+2691,Box - Migration Suitelet,customscript_box_app_migration_suitelet,SCRIPTLET,17891,966952,F
+2697,Box - Sign Suitelet,customscript_box_sign_suitelet,SCRIPTLET,17891,966985,F
+2698,Box - Sign Sync Suitelet,customscript_box_sign_sync_suitelet,SCRIPTLET,17891,966987,F
+165,CA Campaign Target Group Suitelet,customscript_ca_ss_campaigntargetgroup,SCRIPTLET,5,1085,F
+166,CA Campaign Template Suitelet,customscript_ca_ss_campaigntemplate,SCRIPTLET,5,1088,F
+167,CA File Suitelet,customscript_ca_ss_file,SCRIPTLET,5,1087,F
+163,CA Saved Search Suitelet,customscript_ca_ss_savedsearch,SCRIPTLET,5,1080,F
+164,Campaign Assistant,customscript_ca_ss_campaignassistant,SCRIPTLET,5,1089,F
+862,Cash 360 - AR and AP Data,customscript_cash360_su_arap,SCRIPTLET,-5,164147,F
+860,Cash 360 - Account Category Validation,customscript_cash360_su_accountcategory,SCRIPTLET,-5,164161,F
+861,Cash 360 - Application Data,customscript_cash360_su_application_data,SCRIPTLET,-5,164148,F
+4010,Cash 360 - Billing Schedule Data,customscript_cash360_su_bill_sched,SCRIPTLET,-5,1568849,F
+863,Cash 360 - Inflow and Outflow Data,customscript_cash360_su_inflow_outflow,SCRIPTLET,-5,164149,F
+864,Cash 360 - Opening Balance Data,customscript_cash360_su_opening_balance,SCRIPTLET,-5,164150,F
+865,Cash 360 - Page Redirection Handler,customscript_cash360_su_page_redirect,SCRIPTLET,-5,164151,F
+866,Cash 360 - Preference Data,customscript_cash360_su_preference,SCRIPTLET,-5,164152,F
+1108,Cash 360 - Redirect,customscript_cash360_su_redirect,SCRIPTLET,-5,309249,F
+3237,Cash 360 - SO PO Data,customscript_cash360_su_so_po,SCRIPTLET,-5,1304443,F
+696,China Consolidated SL,customscript696,SCRIPTLET,5,16561,F
+1095,Consolidate Test,customscript_pr_consol_sl,SCRIPTLET,15382,216740,F
+693,Consolidated Pack - Delivery Slip Suitle,customscript693,SCRIPTLET,5,12878,F
+689,Consolidated Packing Slip - SL,customscript705,SCRIPTLET,5,12559,F
+688,Consolidated Print Packing - SL,customscript706,SCRIPTLET,5,12558,F
+2833,Consolidated | Stock Selector- Create SO,customscript2833,SCRIPTLET,5,1044919,F
+1988,Country Form SU,customscript_str_country_form_su,SCRIPTLET,17891,807010,F
+1996,Country Tax Report,customscript_str_country_report_su,SCRIPTLET,17891,807012,F
+1984,Country Tax Report Options Service SU,customscript_ctr_options_svc_su,SCRIPTLET,17891,806992,F
+1995,Country Tax Reports Preferences,customscript_str_report_preferences_su,SCRIPTLET,17891,806971,F
+856,Create Sales Order - SL,customscript_pr_create_so_sl,SCRIPTLET,15382,140471,F
+1991,Custom Configuration Service,customscript_str_config_svc_su,SCRIPTLET,17891,806963,F
+33,DT Translation Query Backend Suitelet,customscript_dt_su_translation_query,SCRIPTLET,5,173,F
+36,Dashboard Tile Backend Suitelet,customscript_dt_su_tile_backend,SCRIPTLET,5,176,F
+2809,Dashboard Tile Data Manager,customscript_dt_su_data_manager,SCRIPTLET,-5,994109,F
+34,Dashboard Tile Mass Update on Roles Page,customscript_dt_su_updatepage,SCRIPTLET,5,178,F
+35,Dashboard Tile Translation Suitelet,customscript_dt_su_translation,SCRIPTLET,5,994110,F
+520,ECO Get ECO Details Data SU,customscript_scm_ecn_get_eco_details,SCRIPTLET,4,4095,F
+509,ECO Implement Log SU,customscript_scm_ecn_implement_eco_log,SCRIPTLET,4,4093,F
+517,ECO Implement SU,customscript_scm_ecn_implement_eco,SCRIPTLET,4,4156,F
+272,ED Employee Search Backend Su,customscript_ed_emp_search_backend_su,SCRIPTLET,5,2458,F
+275,ED Preferences Backend Su,customscript_ed_preferences_backend_su,SCRIPTLET,5,2451,F
+273,ED Preferences Su,customscript_ed_preferences_su,SCRIPTLET,5,2457,F
+1078,EFT Payment Selection SS2,customscript_15767_eft_paymt_selection_s,SCRIPTLET,-5,193420,F
+100,EP Admin Data Lookup,customscript_2663_admin_data_lookup_s,SCRIPTLET,5,1050,F
+338,EP Admin Data Lookup SS2,customscript_15486_ep_admin_data_lookup,SCRIPTLET,-5,2989,F
+106,EP Admin Data Submit,customscript_2663_admin_data_submit_s,SCRIPTLET,5,1046,F
+339,EP Admin Data Submit SS2,customscript_15486_ep_admin_data_submit,SCRIPTLET,-5,2992,F
+105,EP Customer Refund,customscript_2663_cust_ref_selection_s,SCRIPTLET,5,1000,F
+1076,EP Customer Refund SS2,customscript_15767_ep_customer_refund_su,SCRIPTLET,-5,193425,F
+76,EP Edition Checking,customscript_10782_edition_check_su,SCRIPTLET,5,1010,F
+91,EP Encryption Suitelet,customscript_15152_encryption_suitelet,SCRIPTLET,5,1003,F
+86,EP Exchange Rates Loader,customscript_2663_exchangerates_loader_s,SCRIPTLET,5,960,F
+1068,EP Exchange Rates Loader SS2,customscript_15767_exchangrate_loader_su,SCRIPTLET,-5,193419,F
+80,EP Failed Transaction Unlinker SU,customscript_9997_trans_unlinker_su,SCRIPTLET,5,1014,F
+84,EP Get Taxreg Number,customscript_ep_get_taxregnumber,SCRIPTLET,5,979,F
+1208,EP Global Customer Refund SS2,customscript_15889_ep_ge_cust_refund_su,SCRIPTLET,-5,381945,F
+107,EP License Info Service SU,customscript_12474_ep_license_info_su,SCRIPTLET,5,976,F
+96,EP Payment Batch Updater,customscript_2663_batch_updater_s,SCRIPTLET,5,970,F
+1072,EP Payment Processor Bridge SU,customscript_15767_processor_bridge_su,SCRIPTLET,-5,193432,F
+102,EP Payment Reversal Selection,customscript_2663_payment_reversal_s,SCRIPTLET,5,951,F
+337,EP Payment Reversal Selection SS2,customscript_15486_payment_reversal_su,SCRIPTLET,-5,2990,F
+95,Electronic Payments License Updater,customscript_2663_license_updater_s,SCRIPTLET,5,1042,F
+103,Electronic Payments Preferences,customscript_2663_preference_s,SCRIPTLET,5,1047,F
+335,Electronic Payments Preferences SU SS2,customscript_15486_ep_preference_su,SCRIPTLET,-5,2995,F
+81,Email Notification SS2.0,customscript_7716_payment_notification_s,SCRIPTLET,5,999,F
+274,Employee Directory,customscript_ed_emp_dir_su,SCRIPTLET,5,2454,F
+3351,FA | SL Connector Setup,customscript_fa_sl_setup,SCRIPTLET,17891,1400968,F
+3350,FA | SL Marketplace Configurator,customscript_fa_sl_marketplace_config,SCRIPTLET,17891,1400967,F
+1259,FAM - Import CSV,customscript_fam_su_importcsv,SCRIPTLET,4,499084,F
+1256,FAM - Proposal Split Su,customscript_fam_su_proposalsplit,SCRIPTLET,4,499123,F
+1255,FAM Asset Depreciation Su,customscript_fam_assetdepreciation_su,SCRIPTLET,4,499064,F
+1265,FAM Asset Disposal Su,customscript_fam_disposal_su,SCRIPTLET,4,499126,F
+1269,FAM Asset Proposal Customization Su,customscript_fam_assetproposal_custom_su,SCRIPTLET,4,499127,F
+1266,FAM Asset Proposal Su,customscript_fam_assetproposal_su,SCRIPTLET,4,499086,F
+1245,FAM Asset Revaluation Su,customscript_fam_assetrevaluation_su,SCRIPTLET,4,499085,F
+1247,FAM Asset Split Su,customscript_fam_su_assetsplit,SCRIPTLET,4,499106,F
+1243,FAM Asset Transfer Su,customscript_fam_assettransfer_su,SCRIPTLET,4,499160,F
+1248,FAM Compound Asset Su,customscript_fam_compound_asset_su,SCRIPTLET,4,499105,F
+1252,FAM Delete Asset Su,customscript_fam_deleteasset_su,SCRIPTLET,4,499159,F
+1239,FAM Diagnosis Scan Suitelet,customscript_fam_diagnosisscan_su,SCRIPTLET,4,499104,F
+1263,FAM Finalize Lease Proposal,customscript_fam_finalizeleaseprop_su,SCRIPTLET,4,499048,F
+1254,FAM Generate Lease Schedules SU,customscript_fam_generateleasesched_su,SCRIPTLET,4,499125,F
+1236,FAM Generate Report Su,customscript_fam_generatereport_su,SCRIPTLET,4,499063,F
+1238,FAM Lease Modification Su,customscript_fam_leasemodification_su,SCRIPTLET,4,499147,F
+1241,FAM Manage Asset Proposal,customscript_fam_manageassetproposal_su,SCRIPTLET,4,499062,F
+1264,FAM Migrate Lease Contract Su,customscript_fam_migrateleasecontract_su,SCRIPTLET,4,499102,F
+1267,FAM Migrate Lease Summary Su,customscript_fam_migrateleasesummary_su,SCRIPTLET,4,499060,F
+1260,FAM Process Record Errors,customscript_fam_fprerrors_su,SCRIPTLET,4,499083,F
+1258,FAM Process Record Status,customscript_fam_fprstatus_su,SCRIPTLET,4,499176,F
+1268,FAM Process Record Summary,customscript_fam_fprsummary_su,SCRIPTLET,4,499124,F
+1235,FAM Recognize Lease Interest Su,customscript_fam_recognizeleaseint_su,SCRIPTLET,4,499122,F
+1257,FAM Report Download Su,customscript_fam_reportdlopts_su,SCRIPTLET,4,499158,F
+1234,FAM Report Template Column Su,customscript_fam_reporttemplatecolumn_su,SCRIPTLET,4,499047,F
+1261,FAM Report Template Su,customscript_fam_reporttemplate_su,SCRIPTLET,4,499145,F
+1242,FAM Reports History,customscript_fam_reportshistory_su,SCRIPTLET,4,499146,F
+1249,FAM Review Assets w/o Asset Values,customscript_fam_reviewassets_novals_su,SCRIPTLET,4,499082,F
+1253,FAM Review Derogatory DHR Su,customscript_fam_reviewderogatorydhr_su,SCRIPTLET,4,499144,F
+1237,FAM Review Orphaned DHRs,customscript_fam_review_orphaneddhrs_su,SCRIPTLET,4,499103,F
+1240,FAM Server API Caller Su,customscript_fam_serverapi_su,SCRIPTLET,4,499061,F
+1251,FAM Show Depreciation History Su,customscript_fam_showdeprhistory_su,SCRIPTLET,4,499143,F
+1246,FAM Special Depreciation Su,customscript_fam_specialdepr_su,SCRIPTLET,4,499081,F
+1250,FAM System Setup Su,customscript_fam_systemsetup_su,SCRIPTLET,4,499121,F
+1244,FAM Trigger Process Redirect,customscript_fam_triggerprocredirect_su,SCRIPTLET,4,499080,F
+1262,FAM Trigger Process Su,customscript_fam_triggerprocess_su,SCRIPTLET,4,499175,F
+334,Field Validator Processing SS2,customscript_15486_field_validator_su,SCRIPTLET,-5,2986,F
+75,File Reference Service SU,customscript_15152_file_ref_service_su,SCRIPTLET,5,1006,F
+3056,Generate Inbound from Standalone PO - SL,customscript_gli_gen_inbound_po_sl,SCRIPTLET,15382,1149296,F
+2796,Generate Master Consolidated POs,customscript_illuminet_generate_master_p,SCRIPTLET,5,991941,F
+574,Generate SO Labels - SL,customscript_pre_gen_so_labels_sl,SCRIPTLET,15382,4595,T
+101,Generic Direct Debit Selection,customscript_2663_payment_ar_selection_s,SCRIPTLET,5,972,F
+1074,Generic Direct Debit Selection SS2,customscript_15767_ep_direct_debit_su,SCRIPTLET,-5,193421,F
+336,Generic EP Configuration Loader SS2,customscript_15486_ep_admin_data_loader,SCRIPTLET,-5,2984,F
+97,Generic Field Validator Processing,customscript_2663_field_validator_s,SCRIPTLET,5,984,F
+79,Generic Pay Processing & File Creation,customscript_2663_payment_selection_s,SCRIPTLET,5,1045,F
+89,Generic Payment Jumplet,customscript_2663_jumplet_s,SCRIPTLET,5,971,F
+1073,Generic Payment Jumplet SS2,customscript_15767_pfa_jumplet_su,SCRIPTLET,-5,193423,F
+78,Generic Payment Resource Manager,customscript_2663_resource_mgr_s,SCRIPTLET,5,,F
+90,Generic Payment Selection Processor,customscript_2663_payment_sel_proc_s,SCRIPTLET,5,992,F
+83,Generic Payments Configuration Loader,customscript_ep_admin_data_loader_s,SCRIPTLET,5,986,F
+98,Generic Positive Pay Selection,customscript_2663_payment_pp_selection_s,SCRIPTLET,5,1039,F
+88,Get Permission ID,customscript_get_customrecord_id,SCRIPTLET,5,993,F
+1067,Global DD Payment Selection,customscript_10184_global_dd_selection,SCRIPTLET,-5,193434,F
+1077,Global DD Payment Selection SS2,customscript_15767_ge_dd_selection_su,SCRIPTLET,-5,193431,F
+1357,Global EFT Batch Selection,customscript_17801_ge_batch_list_su,SCRIPTLET,-5,571053,F
+333,Global EFT Payment Selection,customscript_15529_global_eft_selection,SCRIPTLET,-5,2998,F
+1070,Global EFT Payment Selection SS2,customscript_15767_ge_eft_selection_su,SCRIPTLET,-5,193424,F
+2794,Inbound Printing | Purchase Order SL,customscript_illuminet_print_po_sl,SCRIPTLET,4,991936,F
+2948,Inbound Ship | Update ESD and Tracking S,customscript_pre_inbd_ship_update_es_sl,SCRIPTLET,15382,1135079,F
+2793,Inbound Shipment | Add Items,customscript_lyte_sl_add_item,SCRIPTLET,4,991935,F
+519,Item Substitute Transactions Popup SU,customscript_scm_is_trans_popup_su,SCRIPTLET,4,4134,F
+1983,Job Manager SU,customscript_str_jobmanager_su,SCRIPTLET,17891,807005,F
+4118,LA Backend Controller,customscript_lsp_backendcontroller_sl,SCRIPTLET,17891,1587383,F
+293,LA Create CSV Files for Update,customscript293,SCRIPTLET,5,2476,F
+3,LSA Update On-Demand,customscript_lsa_sl_update_lsa,SCRIPTLET,-5,5,F
+47,License Client Admin Page,customscript_8299_client_admin_page,SCRIPTLET,5,291,F
+48,License Client Set Test Mode,customscript_8299_su_set_test_mode,SCRIPTLET,5,285,F
+49,License Info Retrieval SU,customscript_8299_su_app_get_license,SCRIPTLET,5,302,F
+50,License Info Retrieval for SuiteApps SU,customscript_8299_su_get_license,SCRIPTLET,5,287,F
+3059,Look up Field ID SL,customscript_cat_sl_look_up_field_id,SCRIPTLET,8,1153670,F
+46,Manual License Request SU,customscript_8299_manual_request_su,SCRIPTLET,5,286,F
+828,Mass IFUL - Set Details,customscript828,SCRIPTLET,5,77945,F
+298,Merge Location - SL,customscript298,SCRIPTLET,5,2636,F
+287,Most Ordered Items SL,customscript44,SCRIPTLET,5,2469,F
+25,NAW ShowExceptions SU,customscript_wd_naw_su_showexc,SCRIPTLET,5,52,F
+4633,NS | SL | Forge,customscript_sftp_ctr_config_ns_sl_forge,SCRIPTLET,17891,1631216,F
+4626,NS | SL | SFTP Decrypt Files,customscript_ns_sl_sftp_dt_files,SCRIPTLET,17891,1631222,F
+4627,NS | SL | SFTP Folders to Process,customscript_ns_sl_sftp_folders_to_proc,SCRIPTLET,17891,1631223,F
+4634,NS | SL | SFTP Folders to Process IB,customscript_sl_sftp_ib_folders_to_proc,SCRIPTLET,17891,1631224,F
+4629,NS | SL | SFTP Set Password,customscript_ns_sl_sftp_set_ib_password,SCRIPTLET,17891,1631218,F
+4630,NS | SL | SFTP Set Password,customscript_ns_sl_sftp_set_password,SCRIPTLET,17891,1631219,F
+4628,NS | SL | SFTP Test Connection,customscript_ns_sl_sftp_ib_test,SCRIPTLET,17891,1631217,F
+4631,NS | SL | SFTP Test Connection,customscript_ns_sl_sftp_test,SCRIPTLET,17891,1631220,F
+4632,NS | SL | SFTP Transfer,customscript_ns_sl_sftp_transfer,SCRIPTLET,17891,1631221,F
+172,NSAPM AH SL Lists v2,customscript_nsapm_ah_sl_lists_v2,SCRIPTLET,5,1094,F
+173,NSAPM AH SL Main,customscript_nsapm_ah_sl_main,SCRIPTLET,5,1093,F
+174,NSAPM AH SL Overview v2,customscript_nsapm_ah_sl_overview_v2,SCRIPTLET,5,1095,F
+175,NSAPM AH SL Smell Details v2,customscript_nsapm_ah_sl_smelldetails_v2,SCRIPTLET,5,1096,F
+176,NSAPM AH SL Snooze v2,customscript_nsapm_ah_sl_snooze_v2,SCRIPTLET,5,1097,F
+177,NSAPM APM Setup SL Main,customscript_nsapm_apmsetup_sl_main,SCRIPTLET,5,1290,F
+178,NSAPM CD SL Concurrency v2,customscript_nsapm_cd_sl_concurrency_v2,SCRIPTLET,5,1183,F
+179,NSAPM CD SL Instances v2,customscript_nsapm_cd_sl_instances_v2,SCRIPTLET,5,1184,F
+180,NSAPM CD SL Main,customscript_nsapm_cd_sl_main,SCRIPTLET,5,1182,F
+181,NSAPM CD SL Violations v2,customscript_nsapm_cd_sl_violations_v2,SCRIPTLET,5,1185,F
+182,NSAPM CM SL Concurrency v2,customscript_nsapm_cm_sl_concurrency_v2,SCRIPTLET,5,1192,F
+183,NSAPM CM SL Main,customscript_nsapm_cm_sl_main,SCRIPTLET,5,1191,F
+184,NSAPM CM SL Violations v2,customscript_nsapm_cm_sl_violations_v2,SCRIPTLET,5,1193,F
+185,NSAPM PRF SL FRHT Logs v2,customscript_nsapm_prf_sl_frhtlogs_v2,SCRIPTLET,5,1227,F
+186,NSAPM PRF SL KPI v2,customscript_nsapm_prf_sl_kpi_v2,SCRIPTLET,5,1228,F
+187,NSAPM PRF SL Main,customscript_nsapm_prf_sl_main,SCRIPTLET,5,1226,F
+188,NSAPM PTD SL Instances v2,customscript_nsapm_ptd_sl_instances_v2,SCRIPTLET,5,1235,F
+189,NSAPM PTD SL Main,customscript_nsapm_ptd_sl_main,SCRIPTLET,5,1234,F
+190,NSAPM PTD SL SS Details v2,customscript_nsapm_ptd_sl_ssdetails_v2,SCRIPTLET,5,1236,F
+191,NSAPM PTS SL ETE Summary v2,customscript_nsapm_pts_sl_etesummary_v2,SCRIPTLET,5,1243,F
+192,NSAPM PTS SL ETE Time v2,customscript_nsapm_pts_sl_etetime_v2,SCRIPTLET,5,1244,F
+193,NSAPM PTS SL Main,customscript_nsapm_pts_sl_main,SCRIPTLET,5,1242,F
+195,NSAPM PTS SL SS Detail v2,customscript_nsapm_pts_sl_ssdetail_v2,SCRIPTLET,5,1246,F
+194,NSAPM PTS SL Setup v2,customscript_nsapm_pts_sl_setup_v2,SCRIPTLET,5,1245,F
+196,NSAPM RPA SL Integration v2,customscript_nsapm_rpa_sl_integration_v2,SCRIPTLET,5,1253,F
+197,NSAPM RPA SL Main,customscript_nsapm_rpa_sl_main,SCRIPTLET,5,1252,F
+199,NSAPM RPA SL Oper Det Logs v2,customscript_nsapm_rpa_sl_operdetlogs_v2,SCRIPTLET,5,1255,F
+198,NSAPM RPA SL Oper Details v2,customscript_nsapm_rpa_sl_operdetails_v2,SCRIPTLET,5,1254,F
+200,NSAPM RPA SL Overview v2,customscript_nsapm_rpa_sl_overview_v2,SCRIPTLET,5,1256,F
+201,NSAPM RPA SL Top Oper v2,customscript_nsapm_rpa_sl_topoper_v2,SCRIPTLET,5,1257,F
+202,NSAPM RPM SL Main,customscript_nsapm_rpm_sl_main,SCRIPTLET,5,1263,F
+203,NSAPM RPM SL Record Charts v2,customscript_nsapm_rpm_sl_rec_charts_v2,SCRIPTLET,5,1264,F
+204,NSAPM RPM SL Record Tile v2,customscript_nsapm_rpm_sl_record_tile_v2,SCRIPTLET,5,1265,F
+205,NSAPM RPM SL Setup Date Range v2,customscript_nsapm_rpm_sl_setup_date_v2,SCRIPTLET,5,1266,F
+206,NSAPM RPM SL Setup General v2,customscript_nsapm_rpm_sl_setup_gen_v2,SCRIPTLET,5,1267,F
+207,NSAPM RPM SL Setup Record Page v2,customscript_nsapm_rpm_sl_setup_rec_v2,SCRIPTLET,5,1268,F
+208,NSAPM SCPM SL Concurrency Det,customscript_nsapm_scpm_sl_concurrdet,SCRIPTLET,5,1275,F
+209,NSAPM SCPM SL Concurrency HM,customscript_nsapm_scpm_sl_concurrencyhm,SCRIPTLET,5,1276,F
+210,NSAPM SCPM SL Deployments,customscript_nsapm_scpm_sl_deployments,SCRIPTLET,5,1277,F
+211,NSAPM SCPM SL Elevated Prio,customscript_nsapm_scpm_sl_elevatedprio,SCRIPTLET,5,1278,F
+212,NSAPM SCPM SL KPI,customscript_nsapm_scpm_sl_kpi,SCRIPTLET,5,1279,F
+213,NSAPM SCPM SL Main,customscript_nsapm_scpm_sl_main,SCRIPTLET,5,1274,F
+214,NSAPM SCPM SL Proc Settings,customscript_nsapm_scpm_sl_procsettings,SCRIPTLET,5,1280,F
+215,NSAPM SCPM SL Queue Details,customscript_nsapm_scpm_sl_queuedetails,SCRIPTLET,5,1281,F
+216,NSAPM SCPM SL Script Priority,customscript_nsapm_scpm_sl_scriptprio,SCRIPTLET,5,1282,F
+217,NSAPM SCPM SL Statuses,customscript_nsapm_scpm_sl_statuses,SCRIPTLET,5,1283,F
+218,NSAPM SCPM SL Utilization,customscript_nsapm_scpm_sl_utilization,SCRIPTLET,5,1284,F
+219,NSAPM SL Record Types v2,customscript_nsapm_sl_recordtypes_v2,SCRIPTLET,5,1106,F
+220,NSAPM SPA SL Main,customscript_nsapm_spa_sl_main,SCRIPTLET,5,1291,F
+221,NSAPM SPA SL Tiles v2,customscript_nsapm_spa_sl_tiles_v2,SCRIPTLET,5,1292,F
+222,NSAPM SPD SL Main,customscript_nsapm_spd_sl_main,SCRIPTLET,5,1298,F
+223,NSAPM SPD SL SS Context v2,customscript_nsapm_spd_sl_sscontext_v2,SCRIPTLET,5,1299,F
+224,NSAPM SPD SL SS Details v2,customscript_nsapm_spd_sl_ssdetails_v2,SCRIPTLET,5,1300,F
+225,NSAPM SPD SL SS List v2,customscript_nsapm_spd_sl_sslist_v2,SCRIPTLET,5,1301,F
+226,NSAPM SPD SL SS Logs v2,customscript_nsapm_spd_sl_sslogs_v2,SCRIPTLET,5,1302,F
+227,NSAPM SPJD SL Deployment List,customscript_nsapm_spjd_sl_deploylist,SCRIPTLET,5,1309,F
+228,NSAPM SPJD SL Instance Details,customscript_nsapm_spjd_sl_instancedet,SCRIPTLET,5,1310,F
+229,NSAPM SPJD SL Main,customscript_nsapm_spjd_sl_main,SCRIPTLET,5,1308,F
+230,NSAPM SSA SL Details v2,customscript_nsapm_ssa_sl_details_v2,SCRIPTLET,5,1317,F
+231,NSAPM SSA SL Main,customscript_nsapm_ssa_sl_main,SCRIPTLET,5,1316,F
+232,NSAPM SSA SL Perfchart v2,customscript_nsapm_ssa_sl_perfchart_v2,SCRIPTLET,5,1318,F
+233,NSAPM SSA SL Scripts v2,customscript_nsapm_ssa_sl_scripts_v2,SCRIPTLET,5,1319,F
+234,NSAPM SSA SL Summary v2,customscript_nsapm_ssa_sl_summary_v2,SCRIPTLET,5,1320,F
+235,NSAPM WSA SL API v2,customscript_nsapm_wsa_sl_api_v2,SCRIPTLET,5,1327,F
+236,NSAPM WSA SL Integration v2,customscript_nsapm_wsa_sl_integration_v2,SCRIPTLET,5,1328,F
+237,NSAPM WSA SL KPI v2,customscript_nsapm_wsa_sl_kpi_v2,SCRIPTLET,5,1329,F
+238,NSAPM WSA SL Main,customscript_nsapm_wsa_sl_main,SCRIPTLET,5,1326,F
+239,NSAPM WSA SL Statuses v2,customscript_nsapm_wsa_sl_statuses_v2,SCRIPTLET,5,1330,F
+240,NSAPM WSA SL Top Operations v2,customscript_nsapm_wsa_sl_topoper_v2,SCRIPTLET,5,1331,F
+241,NSAPM WSA SL Top WSRP v2,customscript_nsapm_wsa_sl_topwsrp_v2,SCRIPTLET,5,1332,F
+242,NSAPM WSA SL WSRP Details v2,customscript_nsapm_wsa_sl_wsrpdetails_v2,SCRIPTLET,5,1333,F
+243,NSAPM WSOD SL KPI v2,customscript_nsapm_wsod_sl_kpi_v2,SCRIPTLET,5,1340,F
+244,NSAPM WSOD SL Main,customscript_nsapm_wsod_sl_main,SCRIPTLET,5,1339,F
+245,NSAPM WSOD SL Perf Details v2,customscript_nsapm_wsod_sl_perfdet_v2,SCRIPTLET,5,1341,F
+246,NSAPM WSOD SL Top Rec Perf v2,customscript_nsapm_wsod_sl_toprecperf_v2,SCRIPTLET,5,1342,F
+247,NSAPM WSOD SL WSO Logs v2,customscript_nsapm_wsod_sl_wsologs_v2,SCRIPTLET,5,1343,F
+248,NSAPM WSOD SL WSRP Logs v2,customscript_nsapm_wsod_sl_wsrplogs_v2,SCRIPTLET,5,1344,F
+82,Nacha setup page,customscript_nacha_setup_page,SCRIPTLET,5,1064,F
+27,Navigation Portlet Su,customscript_nav_su_navigationportlet,SCRIPTLET,5,111,F
+28,Navigation Role Mass Update Su,customscript_nav_su_rolemassupdate,SCRIPTLET,5,109,F
+580,New v. Print Delivery Suitelet,customscript580,SCRIPTLET,5,5208,F
+276,Org Browser Backend Su,customscript_ob_org_browser_backend_su,SCRIPTLET,5,2452,F
+277,Org Browser UI Su,customscript_ob_org_browser_su,SCRIPTLET,5,2453,F
+5847,PL AR Search Builder,customscript_pl_ar_search_builder,SCRIPTLET,17891,1762915,F
+2829,PL Cancel REQ SL,customscript_pl_cancelreq_sl,SCRIPTLET,8,1012908,F
+844,PL Create Item List Suitelet,customscript_pl_create_item_list_sl,SCRIPTLET,2768,100511,F
+2818,PL Email Inbound SL,customscript_pl_email_inbound_sl,SCRIPTLET,8,1000194,F
+847,PL IFUL Pallet Label SL,customscript847,SCRIPTLET,8,108573,T
+839,PL Pallet Label SL,customscript839,SCRIPTLET,8,90079,T
+1107,PL Sales Order Job Label SL,customscript1107,SCRIPTLET,8,250437,F
+1101,PL Showroom Tags SL,customscript1101,SCRIPTLET,8,236009,F
+77,Payment Batch Selection,customscript_8859_batch_selection_main,SCRIPTLET,5,1071,F
+104,Payment Batch Selection Main,customscript_2663_batch_selection_main_s,SCRIPTLET,5,1029,F
+1075,Payment Batch Selection SS2,customscript_15767_batch_selection_su,SCRIPTLET,-5,1071,F
+92,Payment Portal AP Suitelet,customscript_2663_batch_selection_ap_s,SCRIPTLET,5,981,F
+1069,Payment Portal AP Suitelet SS2,customscript_15767_batch_selection_ap_su,SCRIPTLET,-5,193429,F
+818,Pl Rec Summ SL,customscript818,SCRIPTLET,8,64279,F
+1071,Positive Pay Suitelet SS2,customscript_15767_positive_pay_su,SCRIPTLET,-5,193422,F
+2838,Premier Kill Queue SL,customscript_pl_killqueue,SCRIPTLET,8,1065032,F
+2792,Print Inbound Shipment | Labels SL View,customscript_mag_sl_print_label_form,SCRIPTLET,5,991934,F
+286,Print Item Labels,customscript5,SCRIPTLET,5,2468,F
+301,Print Item Labels - Consolidation,customscript301,SCRIPTLET,5,2639,T
+310,Print Picking,customscript155,SCRIPTLET,5,2648,F
+821,Project Management/Fulfill SL,customscript821,SCRIPTLET,5,66719,F
+2427,RAC SU Transaction Search,customscript_rac_su_transactionsearch,SCRIPTLET,17891,911525,F
+2428,RAC Select Transaction Line,customscript_rac_su_transactionline,SCRIPTLET,17891,911528,F
+829,Receiving Report SL Call,customscript829,SCRIPTLET,8,78148,F
+577,Robson Estimate Suitelet,customscript577,SCRIPTLET,5,5205,F
+512,SCM Admin Background Process Su,customscript_scm_su_admin_bgp,SCRIPTLET,4,4101,F
+522,SCM CPN Cleaner Su,customscript_scm_cpn_su_cleaner,SCRIPTLET,4,4121,F
+516,SCM Delete Report Status Su,customscript_scm_su_deletereportstatus,SCRIPTLET,4,4146,F
+514,SCM Dictionary Loader,customscript_scm_dictionary_loader_su,SCRIPTLET,4,4137,F
+511,SCM Get Domain,customscript_scm_get_domain_su,SCRIPTLET,4,4114,F
+506,SCM LC Item Template Mapping Redirect Su,customscript_scm_lc_su_itemmaprdrct,SCRIPTLET,4,4096,F
+521,SCM Landing Page SU,customscript_scm_landing_page_su,SCRIPTLET,4,4155,F
+507,SCM Preferences Su v2,customscript_scm_su_preferences,SCRIPTLET,4,4167,F
+515,SCM Print Count Sheet Su,customscript_scm_su_printcountsheet,SCRIPTLET,4,4084,F
+523,SCM Print Dispatch List Su,customscript_scm_su_printdispatchlist,SCRIPTLET,4,4158,F
+513,SCM Print EOD Shipping Su,customscript_scm_su_printeodshipping,SCRIPTLET,4,4126,F
+524,SCM Print Mfg Traveler Su,customscript_scm_su_printtraveler,SCRIPTLET,4,4116,F
+508,SCM Report Status Su,customscript_scm_su_reportstatus,SCRIPTLET,4,4145,F
+510,SCM View PDF File Su,customscript_scm_su_viewpdffile,SCRIPTLET,4,4109,F
+1928,STE Data Provisioning,customscript_ste_sl_dataprovisioning,SCRIPTLET,17891,799464,F
+1942,STE OSS Setup,customscript_ste_sl_oss_setup,SCRIPTLET,17891,799451,F
+1940,STE OSS Setup List,customscript_ste_sl_oss_setup_list,SCRIPTLET,17891,799450,F
+1945,STE SL Backend Admin,customscript_ste_sl_backend_admin,SCRIPTLET,17891,799399,F
+1946,STE SL Backend Restricted,customscript_ste_sl_backend_restricted,SCRIPTLET,17891,799455,F
+1933,STE SL EXEMPTION CERTIFICATES LIST,customscript_ste_sl_exempt_cert_list,SCRIPTLET,17891,799444,F
+1931,STE SL Exemption Certificate Detail,customscript_ste_sl_exempt_cert_detail,SCRIPTLET,17891,799421,F
+1926,STE SL Item Taxability Rules Detail,customscript_ste_sl_item_tax_rules_det,SCRIPTLET,17891,799432,F
+1925,STE SL Item Taxability Rules List,customscript_ste_sl_item_tax_rules_list,SCRIPTLET,17891,799445,F
+3179,STE SL Item Taxability Setup Detail,customscript_ste_sl_item_tax_setup_det,SCRIPTLET,-5,1243940,F
+3178,STE SL Item Taxability Setup List,customscript_ste_sl_item_tax_setup_list,SCRIPTLET,-5,1243939,F
+1929,STE SL OSS Tax Schedule Detail,customscript_ste_sl_oss_taxsched_detail,SCRIPTLET,17891,799463,F
+1941,STE SL OSS Tax Schedule List,customscript_ste_sl_oss_taxsched_list,SCRIPTLET,17891,799395,F
+1932,STE SL Roles and Permissions Detail,customscript_ste_sl_rol_perm_detail,SCRIPTLET,17891,799431,F
+1927,STE SL Roles and Permissions List,customscript_ste_sl_rol_perm_list,SCRIPTLET,17891,799466,F
+1939,STE SL Rounding Group Detail,customscript_ste_sl_roundinggroup_detail,SCRIPTLET,17891,799449,F
+1936,STE SL Rounding Group List,customscript_ste_sl_roundinggroup_list,SCRIPTLET,17891,799416,F
+1930,STE SL Subsidiary Service,customscript_ste_sl_subsidiary_service,SCRIPTLET,17891,799484,F
+1924,STE SL Tax Group Detail,customscript_ste_sl_taxgroup_detail,SCRIPTLET,17891,799438,F
+1922,STE SL Tax Group List,customscript_ste_sl_tax_group_list,SCRIPTLET,17891,799452,F
+1934,STE SL Tax Reg. Format Detail,customscript_ste_sl_reg_format_detail,SCRIPTLET,17891,799430,F
+1937,STE SL Tax Reg. Format List,customscript_ste_sl_reg_format_list,SCRIPTLET,17891,799417,F
+1943,STE SL Tax Schedule Detail,customscript_ste_sl_taxschedule_detail,SCRIPTLET,17891,799418,F
+1935,STE SL Tax Schedule List,customscript_ste_sl_taxschedule_list,SCRIPTLET,17891,799408,F
+1938,STE SL Tax Validation,customscript_ste_sl_tax_validation,SCRIPTLET,17891,799440,F
+1923,STE SL Transaction Type,customscript_ste_sl_transaction_type,SCRIPTLET,17891,799437,F
+1986,STR Big Data Download,customscript_str_bdownload_su,SCRIPTLET,17891,806993,F
+1994,STR Output Data Reader SU,customscript_str_output_data_reader_su,SCRIPTLET,17891,806969,F
+1979,STR Recoverability SU,customscript_str_recoverability_su,SCRIPTLET,17891,806978,F
+1980,STR Report Job Progress SU,customscript_str_report_job_progress_su,SCRIPTLET,17891,806960,F
+1993,STR Roles,customscript_str_roles_su,SCRIPTLET,17891,806977,F
+1985,STR TAF SU,customscript_str_taf_su,SCRIPTLET,17891,807004,F
+1982,STR Tax Returns Setup,customscript_str_tax_return_setup_su,SCRIPTLET,17891,806983,F
+1998,Schema Editor,customscript_str_schema_editor_su,SCRIPTLET,17891,807011,F
+87,Search Summary Service,customscript_9997_search_summary_service,SCRIPTLET,5,952,F
+1061,Set Commit Value On SO Line Item SL,customscript_pl_set_commit_so_item_sl,SCRIPTLET,4,169986,T
+434,Solupay - Synchrony,customscript_solupay_synchrony_ss,SCRIPTLET,2759,3054,F
+433,Solupay Amazon Pay,customscript_solupay_amazonpay_ss,SCRIPTLET,2759,3026,F
+432,Solupay CDS Customer Inv Email Contacts,customscript_solupay_contacts_selection,SCRIPTLET,2759,3080,F
+431,Solupay Credentials,customscript_solupay_credentials_ss,SCRIPTLET,2759,3086,F
+430,Solupay Customer Invoice Email,customscript_solupay_cust_inv_email_ss,SCRIPTLET,2759,3044,F
+429,Solupay Customer Suite Token GB,customscript_solupay_token_cust_gb_ss,SCRIPTLET,2759,3013,F
+428,Solupay Customer Suite Token UI,customscript_solupay_token_cust_ui_ss,SCRIPTLET,2759,3053,F
+427,Solupay Deployment Controller,customscript_solupay_deploy_control_ss,SCRIPTLET,2759,3130,F
+426,Solupay Deployment Tool,customscript_solupay_deployment_tool_ss,SCRIPTLET,2759,3084,F
+425,Solupay Donation,customscript_solupay_donation_ss,SCRIPTLET,2759,3129,F
+424,Solupay E-Invoice 2 Cash Email Invoice,customscript_solupay_einvoice_cashema_ss,SCRIPTLET,2759,3128,F
+422,Solupay EMV Cloudpay Display Logging,customscript_solupay_emvlogging_ss,SCRIPTLET,2759,3101,F
+421,Solupay EMV-ERP,customscript_solupay_emv_erp_ss,SCRIPTLET,2759,3075,F
+423,Solupay Email Token Request 2.0,customscript_solupay_emailtokenreq_ss,SCRIPTLET,2759,3144,F
+420,Solupay JWT,customscript_solupay_jwt_ss,SCRIPTLET,2759,3072,F
+419,Solupay Merchants,customscript_solupay_merchants_ss,SCRIPTLET,2759,3134,F
+418,Solupay Payment Token,customscript_solupay_payment_token_ss,SCRIPTLET,2759,3056,F
+417,Solupay Payment Token 2.0,customscript_solupay_payment_token2_ss,SCRIPTLET,2759,3058,F
+416,Solupay Payment Token Global,customscript_solupay_payment_token_gb_ss,SCRIPTLET,2759,3094,F
+415,Solupay Payment Token List,customscript_solupay_paymenttoken_lst_ss,SCRIPTLET,2759,3120,F
+414,Solupay Picketing Ticket Void Auth,customscript_solupay_pickticket_void_ss,SCRIPTLET,2759,3093,F
+413,Solupay Refund Receipt,customscript_solupay_refund_receipt_ss,SCRIPTLET,2759,3159,F
+412,Solupay SCA eCheck,customscript_solupay_sca_echeck_ss,SCRIPTLET,2759,3091,F
+411,Solupay Signature Capture,customscript_solupay_sig_capture_ss,SCRIPTLET,2759,3016,F
+410,Solupay Suite Token UI,customscript_solupay_suitetoken_ui_ss,SCRIPTLET,2759,3012,F
+409,Solupay Token PMT,customscript_solupay_token_pmt_ss,SCRIPTLET,2759,3137,F
+408,Solupay Token Request Email,customscript_solupay_tokenreq_email_ss,SCRIPTLET,2759,3089,F
+3165,Steal Inventory | Stage 1,customscript_steal_send_to,SCRIPTLET,4,1189786,F
+3164,Steal Inventory | Stage 2,customscript_ill_sl_steal_inventory,SCRIPTLET,4,1189785,F
+562,StickyNotes Admin Backend Suitelet,customscript_stick_admin_backend_sl,SCRIPTLET,5,4576,F
+561,StickyNotes Board Frontend Suitelet,customscript_stick_board_frontend_sl,SCRIPTLET,5,4567,F
+567,StickyNotes CSV Export Suitelet,customscript_stick_csvexport_sl,SCRIPTLET,5,4571,F
+566,StickyNotes File DnD Suitelet,customscript_stick_file_dnd_sl,SCRIPTLET,5,4577,F
+568,StickyNotes File Download Suitelet,customscript_stick_file_dl_sl,SCRIPTLET,5,4577,F
+564,StickyNotes Setup,customscript_stick_config_sl,SCRIPTLET,5,4574,F
+563,StickyNotes User Backend Suitelet,customscript_stick_user_backend_sl,SCRIPTLET,5,4579,F
+565,Stickynotes Generate CSS Suitelet,customscript_stick_generate_css,SCRIPTLET,5,4568,F
+315,Stored Inventory - Bin Transfer,customscript315,SCRIPTLET,5,2654,F
+320,Stored Inventory - Issue Return SL,customscript320,SCRIPTLET,5,2661,F
+309,Stored Inventory Suitelet,customscript154,SCRIPTLET,4,2647,F
+3173,Stored Inventory | Reallocator,customscript3173,SCRIPTLET,5,1208581,F
+3174,Stored Inventory | Reallocator Hyperlink,customscript_pr_stored_reallocator,SCRIPTLET,5,1208582,F
+9,Subsidiary Navigator CSS Suitelet,customscript_snav_generate_css,SCRIPTLET,5,39,F
+13,Subsidiary Navigator Service Admin,customscript_snav_service_admin_sl,SCRIPTLET,5,36,F
+11,Subsidiary Navigator Service User,customscript_snav_service_user_sl,SCRIPTLET,5,46,F
+12,Subsidiary Navigator Suitelet,customscript_snav_suitelet,SCRIPTLET,5,34,F
+3336,SuiteQL Runner,customscript_suiteql_runner,SCRIPTLET,17891,1331779,F
+683,Suitelet - Move to Hold,customscript683,SCRIPTLET,5,9788,F
+308,Suitelet Delivery Slip,customscript160,SCRIPTLET,5,2646,F
+3876,TAF Form SU,customscript_str_taf_form_su,SCRIPTLET,-5,1510069,F
+4717,TSS Onboarding Rejection/Approval,customscript_tss_id_onboarding_reje_appr,SCRIPTLET,24451,1635793,F
+4718,TSS SL VP OCR Trigger Vendor Bills,customscript_tss_sl_vp_ocr_trigger_bills,SCRIPTLET,24451,1635794,F
+2002,Tax Filing Authorization SU,customscript_str_tax_filing_auth_su,SCRIPTLET,17891,806989,F
+1987,Tax Filing Progress SU,customscript_str_tax_filing_progress_su,SCRIPTLET,17891,807003,F
+2001,Tax Filing SU,customscript_str_tax_filing_su,SCRIPTLET,17891,807000,F
+1981,Tax Filing Setup,customscript_str_tax_filing_setup,SCRIPTLET,17891,806988,F
+4516,Tax Lookup Portlet SL,customscript_tax_lookup_portlet_sl,SCRIPTLET,17891,1622815,F
+1990,Test Journal Entry Service SU,customscript_str_journal_entry_svc_su,SCRIPTLET,17891,806976,F
+94,Translation Service SU,customscript_8858_translation_service_su,SCRIPTLET,5,1059,F
+85,Translation Strings Loader,customscript_strings_loader,SCRIPTLET,5,1017,F
+10,Translation Suitelet,customscript_translation_suitelet,SCRIPTLET,5,41,F
+2225,USR SS Report Generation,customscript_usr_ss_report_gen,SCRIPTLET,17891,807354,F
+2226,USR SS SPA,customscript_usr_ss_spa,SCRIPTLET,17891,807355,F
+2815,Update Inbound Pricing SL,customscript_update_inbound_sl,SCRIPTLET,8,1000091,T
+3049,Update Inbound Shipment Pricing SL,customscript_pr_sl_update_inbound,SCRIPTLET,4,1142704,F
+2806,Update PO ESDs from Vendor,customscript2488,SCRIPTLET,5,991953,F
+1992,VAT Drilldown SU,customscript_str_vat_drilldown_su,SCRIPTLET,17891,806965,F
+3210,Versapay Auto Script Deployment,customscript_versapay_auto_script_dplymt,SCRIPTLET,17891,1250281,F
+407,Versapay CDS Wallet,customscript_versapay_wallet_cds_ss,SCRIPTLET,2759,3098,F
+406,Versapay CDS Wallet Addr Exp Date Update,customscript_versapay_wallet_cds_exp_add,SCRIPTLET,2759,3141,F
+405,Versapay Customer Dep Set Amount,customscript_versapay_cust_dep_set_am,SCRIPTLET,2759,3036,F
+404,Versapay Customer Deposit Request,customscript_versapay_cust_dep_req,SCRIPTLET,2759,3035,F
+3215,Versapay Customer Invoice Email,customscript_versapay_cust_inv_email_ss,SCRIPTLET,17891,1250245,F
+3205,Versapay EFT Exceptions,customscript_versapay_eft_exceptions_sl,SCRIPTLET,17891,1250220,F
+3212,Versapay Ecommerce Payments,customscript_versapay_ecommerce_pays_ss,SCRIPTLET,17891,1250236,F
+3216,Versapay Gateway Routes SL,customscript_versapay_gatewayroutes_sl,SCRIPTLET,17891,1250271,F
+403,Versapay Invite Contacts SS,customscript_versapay_invite_contacts_ss,SCRIPTLET,2759,3042,F
+402,Versapay Invoice Reminder,customscript_versapay_invoice_remindr_ss,SCRIPTLET,2759,3005,F
+3204,Versapay Massive Customer Wallet Sync,customscript_versapay_sl_mass_wallet_syn,SCRIPTLET,17891,1250289,F
+401,Versapay Reconcile,customscript_versapay_recon_ss,SCRIPTLET,2759,3030,F
+3207,Versapay Resolve Settlement Batch,customscript_versapay_settlement_batch,SCRIPTLET,17891,1250250,F
+3211,Versapay Resolve Settlement Batch Exc,customscript_versapay_settlem_batch_exc,SCRIPTLET,17891,1250195,F
+3209,Versapay SL Paylink,customscript_versapay_sl_paylink,SCRIPTLET,17891,1250202,T
+3206,Versapay SS Clover Device List,customscript_versapay_ss_device_list,SCRIPTLET,17891,1250230,F
+3214,Versapay SS Wizard,customscript_versapay_ss_wizard,SCRIPTLET,17891,1250249,F
+3213,Versapay Settlement and Fee Report,customscript_versapay_settlement_fee_sl,SCRIPTLET,17891,1250257,F
+3208,Versapay Signature Capture,customscript_versapay_sig_capture_ss,SCRIPTLET,17891,1250266,F
+3169,inventory_lookup_suitelet.js,customscript_inventory_lookup_suitelet,SCRIPTLET,17891,1193870,F
+99,payment_batch_updater_su,customscript_8859_batch_updater_su,SCRIPTLET,5,1023,F
+3449,unlock_suitelet.js,customscript_unlocksuiteletjs,SCRIPTLET,17891,1413027,F
+4724,AI Companion Role Mapper Install,customscript_atlas_aicomp_role_mapper,SDFINSTALLATION,17891,1641547,F
+4726,AI Companion SDF Prompt Loader,customscript_atlas_aicomp_sdf_prmtldr,SDFINSTALLATION,17891,1641546,F
+583,BF SDF Installation - Cert Creation,customscript_bf_sdf_install_certcreation,SDFINSTALLATION,3,6154,F
+585,BF SDF Installation - FI FP Creation,customscript_bf_sdf_install_fifpcreation,SDFINSTALLATION,3,6156,F
+584,BF SDF Installation - Migrate Exclusion,customscript_bf_sdf_install_exclusion,SDFINSTALLATION,3,6155,F
+1809,BF SDF Installation - Unregister SE,customscript_bf_sdf_install_issue792636,SDFINSTALLATION,-5,773934,F
+3359,FA | SDF Installation,customscript_fa_sdf_install,SDFINSTALLATION,17891,1400966,F
+4115,LA Installation Script,customscript_lsp_sdf_installation,SDFINSTALLATION,17891,1587252,F
+171,NSAPM After Install,customscript_nsapm_afterinstall,SDFINSTALLATION,5,1092,F
+170,NSAPM Before Install,customscript_nsapm_beforeinstall,SDFINSTALLATION,5,1091,F
+3569,Ramp Installation Script,customscript_ramp_sdf_installation,SDFINSTALLATION,-5,1498631,F
+5643,USR - SDF Installer,customscript_usr_sdf_installer,SDFINSTALLATION,-5,1714791,F
+959,spa_scriptname_custspa_cash360,custscript_custspa_cash360,SPASERVERSCRIPT,-5,164096,F
+4214,spa_scriptname_custspa_lsp_isocustomization,custscript_custspa_lsp_isocustomization,SPASERVERSCRIPT,17891,1587403,F
+4215,spa_scriptname_custspa_lsp_page,custscript_custspa_lsp_page,SPASERVERSCRIPT,17891,1587370,F
+4216,spa_scriptname_custspa_lsp_templates_page,custscript_custspa_lsp_templates_page,SPASERVERSCRIPT,17891,1587365,F
+5543,spa_scriptname_custspa_usr_drilldown,custscript_custspa_usr_drilldown,SPASERVERSCRIPT,-5,1714795,F
+2324,spa_scriptname_custspa_usr_report_gen,custscript_custspa_usr_report_gen,SPASERVERSCRIPT,17891,807349,F
+1969,SuiteTax Engine,customscript_ste_suitetaxengine,TAXCALCULATION,17891,1487768,F
+4722,AI Companion Record Locking,customscript_atlas_aicomp_rec_lock_ue,USEREVENT,17891,1641550,F
+5223,APG UE Batch Submit,customscript_apg_ue_batch_submit,USEREVENT,24451,1661589,F
+3052,Add Items To Order BTT,customscript_pr_ue_add_item_btt,USEREVENT,4,1142811,T
+1974,Adjustment Journal UE,customscript_str_adjusment_jrnl_ue,USEREVENT,17891,806991,F
+3062,Advanced Email UE,customscript_pr_ue_adv_email_btt,USEREVENT,4,1163619,F
+852,All Deliveries Report UE,customscript852,USEREVENT,5,118218,F
+3730,BC Adjustment Item User Event,customscript_bc_adjustmentitem_ues,USEREVENT,36092,1501308,F
+3773,BC Allocate Resource Request UES,customscript_bc_allocateresource_req_ues,USEREVENT,36092,1501309,F
+3771,BC Baseline Creation Request UES,customscript_bc_baselinecreation_req_ues,USEREVENT,36092,1501310,F
+3697,BC Budget Item User Event Script,customscript_bc_budget_item_ues,USEREVENT,36092,1501311,F
+3674,BC Change Req Billing Line UES,customscript_bc_ch_req_billing_line_ues,USEREVENT,36092,1501312,F
+3673,BC Change Req Cost Line UES,customscript_bc_ch_req_billing_cost_ues,USEREVENT,36092,1501314,F
+3671,BC Change Request UIs Loader,customscript_bc_ch_req_uis_loader,USEREVENT,36092,1501315,F
+3672,BC Change Request User Event,customscript_bc_ch_request_ues,USEREVENT,36092,1501316,F
+3678,BC Contract Cost History UES,customscript_bc_contract_cost_hist_ues,USEREVENT,36092,1501318,F
+3698,BC Cost Code Correlation UES,customscript_bc_cost_corr_ues,USEREVENT,36092,1501320,F
+3675,BC Create Change Order Btn,customscript_bc_change_ord_btn,USEREVENT,36092,1501329,F
+3745,BC Employee UES,customscript_bc_employee_ues,USEREVENT,36092,1501323,F
+3684,BC Estimate User Event,customscript_bc_estimate_ues,USEREVENT,36092,1501324,F
+3686,BC Expenses Validator UES,customscript_bc_exp_val_ues,USEREVENT,36092,1501325,F
+3722,BC Project Copy Request Action Buttons,customscript_bc_proj_cpy_req_act_btn_ues,USEREVENT,36092,1501332,F
+3721,BC Project Copy UES,customscript_bc_proj_cpy_ues,USEREVENT,36092,1501333,F
+3689,BC Project General History User Event,customscript_bc_projet_gen_hist_ues,USEREVENT,36092,1501334,F
+3726,BC Project Inactivate/Activa Request UES,customscript_bc_proj_inact_act_req_ues,USEREVENT,36092,1501335,F
+3770,BC Project Task Validations,customscript_bc_proj_task_val,USEREVENT,36092,1501338,F
+3717,BC Source Project Segments UES,customscript_bc_source_project_segs_ues,USEREVENT,36092,1501342,T
+3718,BC Source Project Segments UES All,customscript_bc_source_p_sgs_ue_all,USEREVENT,36092,1501342,F
+3732,BCAccountUserEvent,customscript_bc_account_ues,USEREVENT,36092,1501307,F
+3739,BCContractAssociationUserEvent,customscript_bc_contract_association_ues,USEREVENT,36092,1501317,F
+3682,BCContractsUserEvent,customscript_bc_contracts_ues,USEREVENT,36092,1501319,F
+3749,BCGlobalPermissionsUserEvent,customscript_bc_global_perm_ue,USEREVENT,36092,1501326,F
+3688,BCInvoiceUserEvent,customscript_bc_invoice_ues,USEREVENT,36092,1501328,T
+3735,BCProjectAddressUserEvent,customscript_bc_project_address_ues,USEREVENT,36092,1501330,F
+3733,BCProjectAdvancedPreferencesUserEvent,customscript_bc_proj_adv_pref_ues,USEREVENT,36092,1501331,F
+3714,BCProjectsUserEvent,customscript_bc_projects_ues,USEREVENT,36092,1501339,F
+3738,BCSalesOrderUserEvent,customscript_bc_salesorder_ues,USEREVENT,36092,1501341,F
+3694,BCTransactionLinesValidationUserEvent,customscript_bc_tlines_val,USEREVENT,36092,1501357,F
+3696,BCUILoaderUserEvent,customscript_bc_ui_loader_ues,USEREVENT,36092,1501358,F
+5431,BSP UE Format Profile,customscript_bsp_ue_format_profile,USEREVENT,17891,1692887,F
+72,Bank Fee Schedule UE,customscript_11724_bank_fee_ue,USEREVENT,5,991,F
+2687,Box - Integration Config Validator,customscript_box_app_int_conf_v_ss21,USEREVENT,17891,966997,F
+2689,Box - Record Type Config Validator,customscript_box_app_rt_conf_v_ss21,USEREVENT,17891,966998,F
+2699,Box - Sign User Event,customscript_box_sign_user_event_ss21,USEREVENT,17891,966986,F
+2690,Box - Subtab,customscript_box_app_subtab_ss21,USEREVENT,17891,966950,F
+868,Cash 360 - Account Category UE,customscript_cash360_ue_accountcategory,USEREVENT,-5,164163,F
+867,Cash 360 - Account UE,customscript_cash360_ue_account,USEREVENT,-5,164162,F
+2843,Cash 360 - Chart of Account UE,customscript_cash360_ue_accountrecord,USEREVENT,-5,1099835,F
+3239,Cash 360 - Preference UE,customscript_cash360_ue_preference,USEREVENT,-5,1304446,F
+3238,Cash360 - Entity UE,customscript_cash360_ue_entity,USEREVENT,-5,1304445,F
+45,Check Executing Script,customscript_8299_check_executing_script,USEREVENT,5,299,F
+697,China Consolidated UE,customscript697,USEREVENT,5,16562,F
+66,Company Bank Details UE (SS2),customscript_10782_bank_details_ue,USEREVENT,5,1041,F
+694,Consolidated Pack - Delivery Slip UE,customscript694,USEREVENT,5,12879,F
+687,Consolidated Packing Slip - UE,customscript703,USEREVENT,5,12557,F
+686,Consolidated Print Packing Slip - UE,customscript707,USEREVENT,5,12556,F
+2811,Consolidated | Auto Create CR off PO,customscript2811,USEREVENT,4,994115,F
+2803,Consolidated | Link PO Key and Fields,customscript2803,USEREVENT,5,991949,F
+2834,Consolidated | Stock Sel Btn- Create SO,customscript2834,USEREVENT,17891,1044920,F
+1460,Converted SO,customscript_mark_estimate_so,USEREVENT,17891,705307,F
+854,Create Sales Order Button - UE,customscript_pr_create_so_ue,USEREVENT,15382,140469,F
+32,Dashboard Tile Translation UE,customscript_dt_ue_translation,USEREVENT,5,994111,F
+2808,Dashboard Tile User Event,customscript_dt_ue_tile,USEREVENT,-5,994114,F
+503,ECO Implement Log UE,customscript_scm_ecn_implem_eco_log_ue,USEREVENT,4,4162,F
+1065,Electronic Payments Logs UE,customscript_15906_ep_logs_ue,USEREVENT,-5,193433,F
+62,Electronic Payments Payment UE,customscript_9997_payment_ue,USEREVENT,5,978,F
+56,Electronic Payments Preference UE,customscript_ep_preference_ue,USEREVENT,5,1062,F
+330,Electronic Payments Preference UE SS2,customscript_15486_ep_preference_ue,USEREVENT,-5,2985,F
+68,Encryption Details UE,customscript_encryption_details_ue,USEREVENT,5,1065,F
+489,Engineering Change Order Detail UE,customscript_eco_detail_ue,USEREVENT,4,4138,F
+496,Engineering Change Order Type UE,customscript_scm_ecn_eco_type_ue,USEREVENT,4,4133,F
+495,Engineering Change Order UE,customscript_scm_engr_change_notice_ue,USEREVENT,4,4150,F
+63,Entity Bank Details UE,customscript_10782_entity_bank_ue,USEREVENT,5,950,F
+3355,FA | Fix Shipping Tax,customscript_fa_ue_fix_ship_tax,USEREVENT,17891,1400972,F
+3356,FA | Fix Tax Rate,customscript_fa_ue_fix_tax_rate,USEREVENT,17891,1400971,F
+3776,FA | UE Check Tax Lines,customscript_fa_ue_check_tax_lines,USEREVENT,-5,1507417,F
+3354,FA | UE Fix Order Item Group Prices,customscript_fa_ue_order_item_grp_prices,USEREVENT,17891,1400970,F
+3357,FA | UE Order Total Validation,customscript_fa_ue_order_total_valid,USEREVENT,17891,1400973,F
+3358,FA | UE Sync - Update FA,customscript_fa_ue_push_item_updates,USEREVENT,17891,1400974,F
+1222,FAM - Asset UE,customscript_fam_ue_asset,USEREVENT,4,499171,F
+1214,FAM Alt Depr UE,customscript_fam_ue_alt_depr,USEREVENT,4,499072,F
+1215,FAM Alternate Method UE,customscript_fam_altmethod_ue,USEREVENT,4,499054,F
+1219,FAM Asset Proposal UE,customscript_fam_assetproposal_ue,USEREVENT,4,499115,F
+1229,FAM Asset Type UE,customscript_fam_assettype_ue,USEREVENT,4,499139,F
+1230,FAM Asset Value UE,customscript_fam_ue_asset_val,USEREVENT,4,499170,F
+1233,FAM BG Summary Records UE,customscript_fam_bgsummary_ue,USEREVENT,4,499185,F
+1232,FAM BGProcess UE,customscript_fam_ue_bgprocess,USEREVENT,4,499071,F
+1218,FAM Custom Journal UE,customscript_fam_custjournal_ue,USEREVENT,4,499169,F
+1216,FAM Default Alt Depreciation UE,customscript_fam_defaltdepreciation_ue,USEREVENT,4,499138,F
+1228,FAM Depreciation History UE,customscript_fam_deprhistory_ue,USEREVENT,4,499167,F
+1225,FAM Depreciation Method UE,customscript_fam_ue_deprmethod,USEREVENT,4,499168,F
+1231,FAM Job Completion,customscript_fam_project_ue,USEREVENT,4,499152,F
+1226,FAM Lease Contract UE,customscript_fam_ue_leasecontract,USEREVENT,4,499137,F
+1223,FAM Lease Payment UE,customscript_fam_ue_leasepayment,USEREVENT,4,499096,F
+1220,FAM Lease Proposal UE,customscript_fam_ue_leaseproposal,USEREVENT,4,499136,F
+1217,FAM Process UE,customscript_fam_ue_process,USEREVENT,4,499114,F
+1227,FAM Proposal Alt Depreciation UE,customscript_fam_propaltdepreciation_ue,USEREVENT,4,499135,F
+1221,FAM System Setup UE,customscript_fam_ue_system_setup,USEREVENT,4,499053,F
+1224,FAM Transaction Field Map UE,customscript_fam_tranfieldmap_ue,USEREVENT,4,499095,F
+296,Fetch Price for PO,customscript296,USEREVENT,8,2634,F
+67,Format Details UE,customscript_15152_format_details_ue,USEREVENT,5,1048,F
+3057,Generate Inbound from Standalone PO - UE,customscript_pr_gen_inbound_po_ue,USEREVENT,15382,1149295,F
+288,Generate PO (UE),customscript288,USEREVENT,5,2470,F
+576,Generate SO Labels - UE,customscript_pre_gen_so_labels_ue,USEREVENT,15382,4598,T
+65,Generic Bank Details Linker,customscript_2663_bank_details_ue,USEREVENT,5,977,F
+73,Generic Entity Bank Detail Initializer,customscript_2663_entity_bank_details_ue,USEREVENT,5,1026,F
+60,Generic Entity Initializer,customscript_2663_entity_ue,USEREVENT,5,1005,F
+69,Generic Entity Initializer 2,customscript_14552_entity_ue,USEREVENT,5,1031,F
+57,Generic File Format Updater,customscript_2663_file_format_ue,USEREVENT,5,1069,F
+331,Generic File Format Updater SS2,customscript_15486_file_format_ue,USEREVENT,-5,2994,F
+329,Generic Payment Aggregation UE SS2,customscript_15486_pay_aggregation_ue,USEREVENT,-5,2981,F
+59,Generic Payment File Management,customscript_2663_payment_file_mgmt_ue,USEREVENT,5,1034,F
+1066,Generic Payment File Management UE SS2,customscript_15767_payment_file_mgmt_ue,USEREVENT,-5,193427,F
+58,Generic Payment Information Hider,customscript_2663_payment_info_ue,USEREVENT,5,1053,F
+328,Generic Payment Information Hider SS2,customscript_15486_payment_info_ue,USEREVENT,-5,2991,F
+554,Hide PO Cost,customscript554,USEREVENT,5,4491,F
+3060,IPO Deletion | Clear SO Fields,customscript3060,USEREVENT,17473,1155438,F
+2831,Inbound Check UE,customscript2831,USEREVENT,8,1030486,F
+2824,Inbound Email List,customscript2824,USEREVENT,5,1008687,T
+2791,Inbound Printing | Item Labels UE,customscript_illuminet_print_labels_ue,USEREVENT,5,991933,F
+2790,Inbound Printing | Purchase Order UE,customscript_zas_print_po,USEREVENT,5,991932,F
+2949,Inbound Ship | Update ESD and Tracking,customscript_pre_inbd_ship_update_esd_ue,USEREVENT,15382,1135080,F
+2789,Inbound Shipment | Add Items UE,customscript2583,USEREVENT,5,991931,F
+2825,Inbound Tab | Related Records - SO Data,customscript2825,USEREVENT,5,1008990,F
+3458,Inbound shipment po links ue,customscript_inbound_shipment_po_links_u,USEREVENT,17891,1458076,F
+2788,Inbound | Ack PO,customscript2580,USEREVENT,5,991930,F
+3061,Inbound | Congregate Billing,customscript3061,USEREVENT,5,1156568,F
+2787,Inbound | Set Vendor,customscript2582,USEREVENT,5,991929,F
+3168,Inbound | UoM Check,customscript3168,USEREVENT,5,1189790,F
+1699,Item Mirror UE Helper,customscript_zastro_item_mirror_ue_hlpr,USEREVENT,8,759325,F
+501,Item Substitute Item UE,customscript_scm_is_item_ue,USEREVENT,4,4149,F
+487,Item Substitute Transactions UE,customscript_scm_is_transactions_ue,USEREVENT,4,4094,F
+488,Item Substitute UE,customscript_scm_is_itemsubstitute_ue,USEREVENT,4,4154,F
+1976,Item UE,customscript_str_item_ue,USEREVENT,17891,806967,F
+1972,Job Details UI,customscript_str_job_details_ue,USEREVENT,17891,806987,F
+1978,Job UE,customscript_str_job_ue,USEREVENT,17891,806982,F
+4122,LRC Field Manager User Event,customscript_lrc_field_manager_ue,USEREVENT,17891,1587360,F
+2,LSA UE Communication,customscript_lsa_ue_communication,USEREVENT,-5,3,F
+1,"LSA UE L/P/C, Contact and Opportunity",customscript_lsa_ue_lead,USEREVENT,-5,2,F
+1705,LightsAmerica Scheduler Trigger,customscript_zastro_lights_trigger,USEREVENT,8,759446,F
+3343,Lock Record UE,customscript_lock_record_ue,USEREVENT,17891,1380079,T
+43,MH UE Configuration Upload,customscript_mh_ue_configuration_upload,USEREVENT,5,210,F
+299,Merge Location - UE,customscript299,USEREVENT,5,2637,F
+285,Most Ordered Items Button,customscript45,USEREVENT,5,2467,F
+291,Mult Quote Premier Default Set,customscript163,USEREVENT,5,2474,F
+290,Multiple Quotes,customscript_zastro_multiple_quotes,USEREVENT,5,2473,F
+24,NAW Delete Exception Record UE,customscript_naw_ue_delete_exception,USEREVENT,5,49,F
+4637,NS | UE | SFTP  Decrypt Add Button,customscript_ns_ue_sftp_dt_add_button,USEREVENT,17891,1631226,F
+4638,NS | UE | SFTP Add Button,customscript_ns_ue_sftp_ib_add_button,USEREVENT,17891,1631228,F
+4635,NS | UE | SFTP Add Button,customscript_ns_ue_sftp_add_button,USEREVENT,17891,1631225,F
+4636,NS | UE | SFTP Display status,customscript_ns_ue_sftp_display_status,USEREVENT,17891,1631227,F
+26,Navigation Category Entry UE,customscript_nav_ue_navcategoryentry,USEREVENT,5,114,F
+271,OB Employee UE,customscript_ob_employee_ue,USEREVENT,5,2449,F
+2827,PL Cancel REQ UE,customscript_pl_cancel_req_ue,USEREVENT,8,1012905,F
+5744,PL Collections - Last Customer Note,customscript_pl_ue_last_note,USEREVENT,17891,1744529,F
+842,PL Create Item List Button,customscript_pl_create_item_list_button,USEREVENT,4,99809,F
+2817,PL Email Inbound UE,customscript_pl_email_inbound_ue,USEREVENT,8,1000193,F
+846,PL IFUL Pallet Label UE,customscript846,USEREVENT,8,108572,T
+838,PL Pallet Label UE,customscript838,USEREVENT,8,90078,T
+816,PL Rec Summ UE,customscript816,USEREVENT,8,64277,F
+1106,PL Sales Order Job Label UE,customscript1106,USEREVENT,8,250436,F
+1088,PL Turn Commit Off For Scottsdale SO,customscript_pl_commit_off_scotts_so,USEREVENT,4,209765,F
+2820,PL Write Inbound to CSO UE,customscript_pl_inbound_to_cso_ue,USEREVENT,8,1000716,F
+74,Payment Aggregation UE,customscript_7716_pay_aggregation,USEREVENT,5,963,F
+71,Payment Batch UE,customscript_2663_payment_batch_ue,USEREVENT,5,968,F
+64,Payment File Administration UE,customscript_12050_payment_file_mgmt_ue,USEREVENT,5,985,F
+61,Payment File Template Request UE,customscript_12194_template_request_ue,USEREVENT,5,962,F
+70,Payment Schedule UE,customscript_2663_payment_schedule_ue,USEREVENT,5,980,F
+332,Payment Schedule UE SS2,customscript_15486_payment_schedule_ue,USEREVENT,-5,2997,F
+2837,Premier Kill Queue Req UE,customscript_prem_killqueue_ue,USEREVENT,8,1062588,F
+303,Print Item Labels -UE - Consolidation,customscript303,USEREVENT,5,2641,T
+294,Print Item Labels Button (UE),customscript6,USEREVENT,5,2526,F
+823,Project Management/Fulfill UE,customscript823,USEREVENT,5,66721,F
+2429,RAC UE Case Record,customscript_rac_ue_caserecord,USEREVENT,17891,911527,F
+2431,RAC UE Return Authorization Record,customscript_rac_ue_return_auth_record,USEREVENT,17891,911524,F
+2430,RAC UE Sales Order Record,customscript_rac_ue_so_record,USEREVENT,17891,911526,F
+830,Receiving Report UE,customscript830,USEREVENT,8,78149,F
+2786,Redirect to Inbound UE,customscript2579,USEREVENT,5,991928,F
+2802,Rename Purchase Order for Specials,customscript2802,USEREVENT,5,991948,F
+579,Robson Estimate Button,customscript579,USEREVENT,5,5207,F
+500,SCM Custom Record Lock Editing,customscript_scm_ue_lockedit,USEREVENT,4,4159,F
+491,SCM Customer Part Record UE,customscript_scm_cpn_ue_customerpartrec,USEREVENT,4,4136,F
+497,SCM Item UE,customscript_scm_cpn_ue_item_entry,USEREVENT,4,4090,F
+499,SCM LC Field Common Handling UE,customscript_scm_lc_ue_fieldhandling,USEREVENT,4,4105,F
+502,SCM LC Item Template Mapping UE,customscript_scm_lc_ue_itemprofilemap,USEREVENT,4,4110,F
+498,SCM LC Item UE,customscript_scm_lc_ue_item_entry,USEREVENT,4,4118,F
+504,SCM LC Landed Cost Template Detail UE,customscript_scm_lc_ue_costcatprofiledet,USEREVENT,4,4117,F
+490,SCM LC Landed Cost Template UE,customscript_scm_lc_ue_costcatprofile,USEREVENT,4,4153,F
+492,SCM LC Transactions UE,customscript_scm_lc_ue_transactions,USEREVENT,4,4135,F
+505,SCM Transactions UE,customscript_scm_cpn_ue_transactions,USEREVENT,4,4166,F
+3564,STE UE Entity Backend,customscript_ste_ue_entity_backend,USEREVENT,-5,1487772,F
+3565,STE UE Entity UI,customscript_ste_ue_entity_ui,USEREVENT,-5,1487770,F
+1914,STE UE Item,customscript_ste_ue_item,USEREVENT,17891,799409,F
+1917,STE UE Nexus,customscript_ste_ue_nexus,USEREVENT,17891,799397,F
+1918,STE UE OSS Setup,customscript_ste_ue_oss_setup,USEREVENT,17891,799461,F
+3456,STE UE Subsidiary Backend,customscript_ste_ue_subsidiary_backend,USEREVENT,-5,1418692,F
+5227,STE UE Subsidiary Submit,customscript_ste_ue_subsidiary_submit,USEREVENT,-5,1677715,F
+5229,STE UE Subsidiary UI BL,customscript_ste_ue_subsidiary_ui_bl,USEREVENT,-5,1677717,F
+3566,STE UE Tax Code,customscript_ste_ue_taxcode,USEREVENT,-5,1487771,F
+3567,STE UE Tax Code UI,customscript_ste_ue_taxcode_new_ui,USEREVENT,-5,1487769,F
+3457,STE UE Tax Type Backend,customscript_ste_ue_tax_type_backend,USEREVENT,-5,1418693,F
+3451,STE UE Tax Type Delete,customscript_ste_ue_tax_type_delete,USEREVENT,-5,1418687,F
+3453,STE UE Tax Type UI,customscript_ste_ue_tax_type_ui,USEREVENT,-5,1418689,F
+3455,STE UE Transaction AS,customscript_ste_ue_transaction_as,USEREVENT,-5,1418691,F
+3454,STE UE Transaction BL,customscript_ste_ue_transaction_bl,USEREVENT,-5,1418690,F
+5228,STE UE Transaction UI BL,customscript_ste_ue_trans_ui_bl,USEREVENT,-5,1677716,F
+5226,STE UE Transaction UI BS,customscript_ste_ue_trans_ui_bs,USEREVENT,-5,1677714,F
+1977,STR Roles and Permissions UE,customscript_str_roles_permissions_ue,USEREVENT,17891,806990,F
+1973,STR Subsidiary Settings UE,customscript_str_sub_settings_ue,USEREVENT,17891,806968,F
+2819,Sales Transactions | Hide Fields,customscript2819,USEREVENT,17891,1000710,F
+1059,Set Commit Value On SO Line Item,customscript_idle_set_commit_so_item,USEREVENT,4,169984,T
+857,Set PO Tran ID,customscript_pr_set_po_tran_id,USEREVENT,15382,141513,F
+2799,Set Randomly Generated Identifiers on SO,customscript_zas_random_gen,USEREVENT,4,991944,F
+364,Solupay - Synchrony,customscript_solupay_synchrony_btn_ue,USEREVENT,2759,3067,F
+395,Solupay 3D Secure Notification,customscript_solupay_3ds_notification_ue,USEREVENT,2759,3133,F
+400,Solupay ARC Cloud Element,customscript_solupay_arc_cloudelement_ue,USEREVENT,2759,3047,F
+375,Solupay Bank Deposit,customscript_solupay_bankdeposit_ue,USEREVENT,2759,3150,F
+391,Solupay Cash Drawer,customscript_solupay_cashdrawer_ue,USEREVENT,2759,3105,F
+390,Solupay Consolidated Invoice,customscript_solupay_ci_ue,USEREVENT,2759,3148,F
+357,Solupay Customer Center ACH Payment,customscript_solupay_custcent_achpmt_ue,USEREVENT,2759,3045,F
+399,Solupay Customer Invoice Email,customscript_solupay_cust_inv_email_ue,USEREVENT,2759,3085,F
+374,Solupay Customer Suite Token UI,customscript_solupay_token_cust_ui_ue,USEREVENT,2759,3033,F
+398,Solupay Donation,customscript_solupay_donation_btn_ue,USEREVENT,2759,3061,F
+394,Solupay E-Customer Deposit,customscript_solupay_ecustomerdeposit_ue,USEREVENT,2759,3081,F
+363,Solupay E-Invoice 2 Cash,customscript_solupay_einvoice_cash_ue,USEREVENT,2759,3083,F
+356,Solupay E-Invoice 2 Cash Invoice Btn,customscript_solupay_einvoice_cashbtn_ue,USEREVENT,2759,3060,F
+397,Solupay E-Quote 2 Cash,customscript_solupay_equote_cash_ue,USEREVENT,2759,3023,F
+373,Solupay ERP CloudPay Display 2.0,customscript_solupay_cloudpaydisplay2_ue,USEREVENT,2759,1250221,F
+355,Solupay Email Token Request 2.0,customscript_solupay_emailtokenreq_ue,USEREVENT,2759,3127,F
+387,Solupay External Inventory,customscript_solupay_extern_inventory_ue,USEREVENT,2759,3100,F
+372,Solupay External Payments 2.0,customscript_solupay_extern_payments_ue,USEREVENT,2759,3126,F
+354,Solupay Fulfillment Helper,customscript_solupay_fulfillment_help_ue,USEREVENT,2759,3082,F
+353,Solupay Partial Fulfillment,customscript_solupay_partial_fulfill_eu,USEREVENT,2759,3097,F
+386,Solupay Payment Amount Helper,customscript_solupay_pmtamt_helper_ue,USEREVENT,2759,3034,F
+371,Solupay Payment Amount Helper 2.0,customscript_solupay_paymtamt_helper_ue,USEREVENT,2759,3121,F
+393,Solupay Payment Token,customscript_solupay_payment_token_ue,USEREVENT,2759,3124,F
+379,Solupay Payment Token 2.0,customscript_solupay_payment_token2_ue,USEREVENT,2759,3095,F
+370,Solupay Payment Token Billing Assistant,customscript_solupay_pmttoken_billing_ue,USEREVENT,2759,3096,F
+369,Solupay Payment Token List,customscript_solupay_paymenttoken_lst_ue,USEREVENT,2759,3019,F
+368,Solupay Payment Token URL Generator,customscript_solupay_pmttoken_url_gen_ue,USEREVENT,2759,3122,F
+378,Solupay Picketing Ticket Void Auth,customscript_solupay_pickticket_void_ue,USEREVENT,2759,3119,F
+352,Solupay Reconciliation,customscript_solupay_reconciliation_ue,USEREVENT,2759,3055,F
+361,Solupay Refund Helper,customscript_solupay_refund_helper_ue,USEREVENT,2759,3017,F
+377,Solupay Refund Receipt,customscript_solupay_refund_receipt_ue,USEREVENT,2759,3158,F
+351,Solupay Signature Capture,customscript_solupay_sig_capture_ue,USEREVENT,2759,3015,F
+385,Solupay Signifyd,customscript_solupay_signifyd_ue,USEREVENT,2759,3115,F
+360,Solupay Suite Quote 2.0,customscript_solupay_process_quote_ue,USEREVENT,2759,3071,F
+359,Solupay Suite Token PMT,customscript_solupay_suitetoken_pmt_ue,USEREVENT,2759,3052,F
+392,Solupay Suite Token UI,customscript_solupay_suitetoken_ui_ue,USEREVENT,2759,3051,F
+367,Solupay SuiteBilling Recurring Helper,customscript_solupay_suitebill_recurr_ue,USEREVENT,2759,3068,F
+389,Solupay Synchrony Account,customscript_solupay_synchrony_acct_ue,USEREVENT,2759,3114,F
+396,Solupay Synchrony Balance Remaining,customscript_solupay_synchrony_balrem_ue,USEREVENT,2759,3014,F
+384,Solupay Synchrony Partial Payment,customscript_solupay_synchrony_partialpt,USEREVENT,2759,3139,F
+366,Solupay Synchrony Promo Description,customscript_solupay_synchrony_promo_ue,USEREVENT,2759,3157,F
+383,Solupay Token Request Email,customscript_solupay_tokenreq_email_ue,USEREVENT,2759,3156,F
+382,Solupay Virtual EMV Device,customscript_solupay_virtual_emv_device,USEREVENT,2759,3088,F
+350,Solupay Zero Auth ERP Helper,customscript_solupay_zeroauth_erp_ue,USEREVENT,2759,3155,F
+362,Solupay eInvoice2Cash 2.0,customscript_solupay_einvoice2cash_ue,USEREVENT,2759,3102,F
+557,StickyNotes Category User Event,customscript_stick_category_ue,USEREVENT,5,4572,F
+556,StickyNotes Font Size User Event,customscript_stick_font_size_ue,USEREVENT,5,4578,F
+559,StickyNotes Note Size User Event,customscript_stick_note_size_ue,USEREVENT,5,4581,F
+558,StickyNotes Record Page User Event,customscript_stick_record_page_ue,USEREVENT,5,4580,F
+3177,Stored Box Autocheck,customscript_stored_box,USEREVENT,17891,1232540,F
+317,Stored Inventory - Bin Transfer Button,customscript317,USEREVENT,5,2656,F
+321,Stored Inventory - Issue Return UE,customscript321,USEREVENT,5,2662,T
+3175,Stored Inventory | Reallocator UE,customscript3175,USEREVENT,5,1212048,F
+8,SubNav - Subsidiary UE,customscript_snav_subsidiary_ue,USEREVENT,5,42,F
+284,Sum Total Cost of Unconsolidated (UE),customscript9,USEREVENT,5,2463,F
+348,Sum Totals of Unconsolidated POs,customscript348,USEREVENT,5,3001,F
+4719,TSS UE Create Vendor Bill,customscript_tss_ue_create_bill,USEREVENT,24451,1635796,F
+4720,TSS UE VendBill Invoice,customscript_tss_ue_vendbill_inv,USEREVENT,24451,1635795,F
+2835,Tax Exempt Checkbox,customscript_tax_exempt_checkbox,USEREVENT,17891,1045836,F
+1975,Tax Filing UE,customscript_str_tax_filing_ue,USEREVENT,17891,806972,F
+307,UE - Stored Inv,customscript157,USEREVENT,5,2645,F
+306,UE Delivery Slip,customscript161,USEREVENT,5,2644,F
+305,UE Print Picking,customscript159,USEREVENT,5,2643,F
+2227,USR UE Transaction,customscript_usr_ue_transaction,USEREVENT,17891,807356,F
+2814,Update Inbound Pricing CSO UE,customscript_update_inbound_cso_ue,USEREVENT,8,1000090,T
+2816,Update Inbound Pricing UE,customscript_update_inbound_ue,USEREVENT,8,1000092,T
+3050,Update Inbound Shipment Pricing Btt,customscript_pr_ue_update_inb_btt,USEREVENT,4,1142805,F
+3235,Update Purchase Price,customscript_update_purchaseprice_ue,USEREVENT,17891,1276221,F
+1093,Update Quantity on Consol,customscript_pr_update_qty_on_consol,USEREVENT,15382,214661,T
+2805,Update Vendor ESD UE,customscript2489,USEREVENT,5,991952,F
+685,User Event - Move to Hold,customscript685,USEREVENT,5,9790,F
+4113,VPY UE Reset Paylink Fields,customscript_vpy_ue_reset_paylinkfields,USEREVENT,17891,1587251,F
+55,Vendor Prepayment Application UE,customscript_12793_vprepapp_ue,USEREVENT,5,1035,F
+3184,Vendor Promo Code,customscript_vendor_promo_codeue,USEREVENT,17891,1249464,F
+3189,Versapay AR Automation Update Custom,customscript_versapay_ara_upd_custfld_ue,USEREVENT,17891,1250226,F
+3201,Versapay AR Who Am I,customscript_versapay_ar_whoami,USEREVENT,17891,1250225,F
+381,Versapay CDS Customer Wallet,customscript_versapay_cds_cust_wallet,USEREVENT,2759,3040,F
+349,Versapay Cloud Platform API,customscript_versapay_cloud_platform_ue,USEREVENT,2759,3065,F
+3192,Versapay Custom Payment Data,customscript_versapay_multimid_routes_ue,USEREVENT,17891,1250262,F
+365,Versapay Customer Deposit Request,customscript_versapay_customer_deposit,USEREVENT,2759,3140,F
+3200,Versapay Customer Invoice Email,customscript_versapay_cust_inv_email_ue,USEREVENT,17891,1250292,F
+3199,Versapay Customer Refund,customscript_vp_customer_refund_ue,USEREVENT,17891,1250194,F
+3194,Versapay EFT Exceptions,customscript_versapay_eft_exceptions_ue,USEREVENT,17891,1250222,F
+3203,Versapay Ecommerce Payments,customscript_versapay_ecommerce_pays_ue,USEREVENT,17891,1250288,F
+3191,Versapay Gateway Routes UE,customscript_versapay_gatewayroutes_ue,USEREVENT,17891,1250267,F
+388,Versapay Invite Contacts UE,customscript_versapay_invite_contacts_ui,USEREVENT,2759,3125,F
+380,Versapay Invoice Reminder,customscript_versapay_invoice_remindr_ue,USEREVENT,2759,3059,F
+3198,Versapay Partial Payment,customscript_vp_partial_payment_ue,USEREVENT,17891,1250193,F
+3187,Versapay Signature Capture UE,customscript_versapay_sign_capture_ue,USEREVENT,17891,1250237,F
+3186,Versapay Token ACH and CC,customscript_versapay_add_payment_cc_ue,USEREVENT,17891,1250256,F
+3197,Versapay UE Clove Device List,customscript_versapay_ue_device_list,USEREVENT,17891,1250254,F
+3190,Versapay UE Dynamic Payment Instrument,customscript_versapay_ue_dynamic_instru,USEREVENT,17891,1250239,F
+3193,Versapay UE Payment Instrument Helper,customscript_versapay_ue_instr_helper,USEREVENT,17891,1250276,F
+3196,Versapay UE Update SO Balance,customscript_versapay_ue_updatesobalance,USEREVENT,17891,1250201,F
+3195,Versapay UP Hide Paylink Field,customscript_vp_up_hide_paylink_field_ue,USEREVENT,17891,1250200,F
+3202,Versapay UP Payment Link,customscript_vpy_up_pay_link_ue,USEREVENT,17891,1250272,F
+3188,Versapay UP Sales Payment Link,customscript_vpy_up_pay_link_ue_so,USEREVENT,17891,1250240,F
+376,Versapay Update Custom Field User Event,customscript_versapay_upd_cust_field_ue,USEREVENT,2759,3011,F
+358,Versapay Wallet CCToken Save Override,customscript_versapay_cds_wallet_cctoken,USEREVENT,2759,3039,F
+2841,billing_box_ue,customscriptbilling_box_ue,USEREVENT,17891,1093450,T
+2944,dropship_check_ue,customscriptdropship_check_ue,USEREVENT,17891,1117874,F
+1594,estimate.ue.js,customscript_estimate_ue,USEREVENT,17891,722105,F
+3878,inbound po link ue,customscript_inbound_po_link_ue,USEREVENT,17891,1535728,F
+2233,Sales Tax Analysis,customscript_usr_pl_wb_sales_tax_anlys,WORKBOOKBUILDER,17891,807336,F
+2234,Sales Tax Liability by Tax Agency,customscript_usr_pl_wb_sls_tax_by_agency,WORKBOOKBUILDER,17891,807339,F
+2235,Sales Tax Liability by Tax Item,customscript_usr_pl_wb_sls_tax_by_item,WORKBOOKBUILDER,17891,807337,F
+2236,Sales Tax by State Analysis,customscript_usr_pl_wb_sls_tax_by_state,WORKBOOKBUILDER,17891,807338,F

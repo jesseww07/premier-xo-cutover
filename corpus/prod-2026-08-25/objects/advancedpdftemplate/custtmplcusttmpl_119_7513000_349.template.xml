@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+    <head>
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+            src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+            src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        
+        <#if .locale=="zh_CN">
+            <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}"
+                src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+        <#elseif .locale=="zh_TW">
+            <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}"
+                src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+        <#elseif .locale=="ja_JP">
+            <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}"
+                src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+        <#elseif .locale=="ko_KR">
+            <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}"
+                src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+        <#elseif .locale=="th_TH">
+            <link name="NotoSansThai" type="font" subtype="opentype"
+                src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+        </#if>
+
+        <macrolist>
+            <macro id="nlheader">
+                <!-- Top Header: Logo, Title, SO Number -->
+                <table style="width: 100%; font-size: 10pt; margin-bottom: 15px;">
+                    <tr>
+                        <td style="width: 25%; vertical-align: top; border: none;">
+                            <#if companyInformation.logoUrl?length != 0>
+                                <img src="${companyInformation.logoUrl}" style="width: 150px; height: 70px;" />
+                            </#if>
+                        </td>
+                        <td style="width: 50%; text-align: center; vertical-align: middle; border: none;">
+                            <span style="font-size: 28pt; font-weight: bold;">Picking Ticket</span>
+                        </td>
+                        <td style="width: 25%; text-align: right; vertical-align: top; border: none; font-size: 12pt;">
+                            <#if results.results?size &gt; 0 && results.results[0].soId??>
+                                SO#${results.results[0].soId?html}
+                            </#if>
+                        </td>
+                    </tr>
+                </table>
+
+                <!-- Customer and Order Info Header -->
+                <table style="width: 100%; font-size: 10pt; border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th style="width: 50%; text-align: left; padding: 5px; background-color: #f2f2f2; border: 1px solid #ccc;">Deliver To:</th>
+                            <th style="width: 50%; text-align: left; padding: 5px; background-color: #f2f2f2; border: 1px solid #ccc;">Order Information</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="padding: 2px 8px; border: 1px solid #ccc; font-size: 11pt; font-weight: bold; border-bottom: none;">${(results.results[0].entity?html)!"&nbsp;"}</td>
+                            <td style="padding: 2px 8px; border: 1px solid #ccc; border-bottom: none;"><strong>Order Date:</strong> ${(results.results[0].transactionDate?html)!"&nbsp;"}</td>
+                        </tr>
+                        <#if results.results[0].attention?has_content>
+                            <tr>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; font-size: 11pt; border-top: none; border-bottom: none;">${(results.results[0].attention?html)!"&nbsp;"}</td>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none; border-bottom: none;"><strong>SideMark:</strong> ${(results.results[0].otherRefNum?html)!"&nbsp;"}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; font-size: 11pt; border-top: none; border-bottom: none;">${(results.results[0].addr1?html)!"&nbsp;"}</td>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none; border-bottom: none;"><strong>Ship Via:</strong> ${(results.results[0].shipMethod?html)!"&nbsp;"}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; font-size: 11pt; border-top: none;">${(results.results[0].city?html)!"&nbsp;"}, ${(results.results[0].state?html)!"&nbsp;"} ${(results.results[0].zip?html)!"&nbsp;"}</td>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none;"><strong>Est. Ship Date:</strong> ${(results.results[0].shipDate?html)!"&nbsp;"}</td>
+                            </tr>
+                             <tr>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none;">&nbsp;</td>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none;"><strong>Sales Rep:</strong> ${(results.results[0].salesRep?html)!"&nbsp;"}</td>
+                            </tr>
+                        <#else>
+                            <tr>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; font-size: 11pt; border-top: none; border-bottom: none;">${(results.results[0].addr1?html)!"&nbsp;"}</td>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none; border-bottom: none;"><strong>SideMark:</strong> ${(results.results[0].otherRefNum?html)!"&nbsp;"}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; font-size: 11pt; border-top: none;">${(results.results[0].city?html)!"&nbsp;"}, ${(results.results[0].state?html)!"&nbsp;"} ${(results.results[0].zip?html)!"&nbsp;"}</td>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none;"><strong>Ship Via:</strong> ${(results.results[0].shipMethod?html)!"&nbsp;"}</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none;">&nbsp;</td>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none;"><strong>Est. Ship Date:</strong> ${(results.results[0].shipDate?html)!"&nbsp;"}</td>
+                            </tr>
+                             <tr>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none;">&nbsp;</td>
+                                <td style="padding: 2px 8px; border: 1px solid #ccc; border-top: none;"><strong>Sales Rep:</strong> ${(results.results[0].salesRep?html)!"&nbsp;"}</td>
+                            </tr>
+                        </#if>
+                    </tbody>
+                </table>
+            </macro>
+
+            <macro id="nlfooter">
+                <table style="width: 100%; font-size: 8pt;">
+                    <tr>
+                        <td style="width: 50%; border: none;"></td>
+                        <td style="width: 50%; text-align: right; border: none;">
+                            Page <pagenumber /> of <totalpages />
+                        </td>
+                    </tr>
+                </table>
+            </macro>
+        </macrolist>
+
+
+        <style type="text/css">
+            * {
+                <#if .locale=="zh_CN">font-family: NotoSans, NotoSansCJKsc, sans-serif;
+                <#elseif .locale=="zh_TW">font-family: NotoSans, NotoSansCJKtc, sans-serif;
+                <#elseif .locale=="ja_JP">font-family: NotoSans, NotoSansCJKjp, sans-serif;
+                <#elseif .locale=="ko_KR">font-family: NotoSans, NotoSansCJKkr, sans-serif;
+                <#elseif .locale=="th_TH">font-family: NotoSans, NotoSansThai, sans-serif;
+                <#else>font-family: NotoSans, sans-serif;
+                </#if>
+            }
+            table {
+                font-size: 9pt;
+                table-layout: fixed;
+                border-collapse: collapse;
+            }
+
+            th {
+                font-weight: bold;
+                font-size: 8pt;
+                vertical-align: middle;
+                padding: 5px 6px 3px;
+                background-color: #EAEAEA;
+                color: #333333;
+                border: none;
+                border-bottom: 1px solid #ccc;
+            }
+
+            td {
+                padding: 6px;
+                vertical-align: top;
+                border-left: none;
+                border-right: none;
+                border-top: none;
+                border-bottom: 1px solid #ccc;
+            }
+
+            .item-row {
+                page-break-inside: avoid;
+            }
+            
+            .initials-box {
+                border: 1px solid #000;
+                height: 25px;
+                width: 90%;
+            }
+        </style>
+    </head>
+
+    <body header="nlheader" header-height="28%" footer="nlfooter" footer-height="15pt" 
+          padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+        
+        <!-- Items Table -->
+        <table style="width: 100%; margin-top: 10px;">
+       <thead>
+                <tr>
+                   <th style="width: 26%; text-align: left;">Product SKU / Description</th>
+                    <th style="width: 8%; text-align: left;">Options</th>
+                    <th style="width: 19%; text-align: left;">Room Location</th>
+                    <th style="width: 19%; text-align: left;">Bin Locations</th>
+                    <th style="width: 7%; text-align: center;">Requested</th>
+                    <th style="width: 7%; text-align: center;">Committed</th>
+                    <th style="width: 7%; text-align: center;">Remaining</th>
+                    <th style="width: 7%; text-align: center;">Initials</th>
+                </tr>
+            </thead>
+            <tbody>
+                <#list results.results as item>
+                    <tr class="item-row" <#if item_index % 2 != 0>style="background-color: #f9f9f9;"</#if>>
+                        <td style="word-wrap: break-word;">
+                            <strong>${(item.itemName?html)!""}</strong><br/>
+                            <span style="font-size: 8pt; color: #666;">
+                                ${(item.itemDescription?html)!""}
+                            </span>
+                        </td>
+                        <td style="word-wrap: break-word;">
+                             ${(item.itemOptions?html)!"N/A"}
+                        </td>
+                      <td style="word-wrap: break-word;">
+                            ${(item.itemRoomLocation?html)!""}
+                        </td>
+                        <td style="word-wrap: break-word;">
+                            <#if item.bins?? && item.bins?size &gt; 0>
+                                <#list item.bins as bin>
+                                     ${bin?html}<#if bin_has_next><br /></#if>
+                                </#list>
+                            <#else>
+                                No bins found
+                            </#if>
+                        </td>
+                        <td style="text-align: center;">
+                            ${(item.qty?html)!"0"}
+                        </td>
+                        <td style="text-align: center;">
+                            ${(item.qtyCommitted?html)!"0"}
+                        </td>
+                        <td style="text-align: center;">
+                            ${(item.qtyBackOrdered?html)!"0"}
+                        </td>
+                        <td style="text-align:center; vertical-align:middle;">
+                            <div class="initials-box" style="margin: 0 auto;"></div>
+                        </td>
+                    </tr>
+                </#list>
+            </tbody>
+        </table>
+
+        <!-- Footer Notes -->
+        <div style="margin-top: 20px; font-size: 8pt; color: #666;">
+            <p><strong>Instructions:</strong> Please initial each completed item in the rightmost column.</p>
+            <p><strong>Notes:</strong> Verify quantities and bin locations before picking.</p>
+        </div>
+
+    </body>
+</pdf>

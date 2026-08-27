@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_231_7513000_829" standard="STDTMPLPURCHORDST">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>DNU- Inbound Purchase PDF/HTML Template (SuiteTax)</title>
+  <trantype>PURCHORD</trantype>
+</advancedpdftemplate>

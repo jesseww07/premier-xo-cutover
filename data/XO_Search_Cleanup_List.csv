@@ -1,0 +1,65 @@
+﻿search_scriptid,search_title,retiring_targets_referenced
+customsearch1027,?,custitem_la_shipped_via
+customsearch1467,?,custitem_la_list_price
+customsearch1470,?,customrecord_zastro_lights_items
+customsearch1471,?,customrecord_zastro_lights_items
+customsearch1472,?,customrecord_zastro_lights_items
+customsearch1474,?,customrecord_zastro_lights_items
+customsearch1481,?,customrecord_zastro_lights_items
+customsearch1496,?,customrecord_zastro_lights_items
+customsearch1498,?,customrecord_zastro_lights_items
+customsearch1506,?,customrecord_zastro_lights_items
+customsearch1508,?,customrecord_zastro_lights_items
+customsearch1622,?,customrecord_zastro_lights_items
+customsearch1623,?,customrecord_zastro_lights_items
+customsearch1631,?,customrecord_zastro_lights_items
+customsearch1632,?,customrecord_zastro_lights_items
+customsearch1642,?,customrecord_manufacturer_mapping
+customsearch1985,?,"custitem_la_sku, custitem_la_spec_sheet, custitem_lights_sku, customrecord_zastro_lights_items"
+customsearch2192,?,customrecord_la_csv_row
+customsearch2312,?,custitem_la_spec_sheet
+customsearch2314,?,customrecord_la_csv_row
+customsearch2317,?,customrecord_manufacturer_mapping
+customsearch2340,?,custitem_la_manufacturer_name
+customsearch2348,?,customrecord_manufacturer_mapping
+customsearch2488,?,customrecord_zastro_lights_items
+customsearch2490,?,customrecord_la_csv_row
+customsearch2636,?,custitem_la_unique_id
+customsearch2648,?,customrecord_zastro_lights_items
+customsearch2783,?,customrecord_zastro_lights_items
+customsearch3212,?,customrecord_zastro_lights_items
+customsearch3325,?,customrecord_zastro_lights_items
+customsearch3452,?,"custitem_la_sku, customrecord_zastro_lights_items"
+customsearch3564,?,customrecord_zastro_lights_items
+customsearch3565,?,customrecord_zastro_lights_items
+customsearch3674,?,"custitem_la_sku, customrecord_zastro_lights_items"
+customsearch3675,?,customrecord_zastro_lights_items
+customsearch3676,?,"custitem_la_sku, custitem_lights_sku, customrecord_zastro_lights_items"
+customsearch3681,?,customrecord_zastro_lights_items
+customsearch3812,?,custitem_la_list_price
+customsearch4045,?,custitem_la_spec_sheet
+customsearch444,?,custitem_la_unique_id
+customsearch452,?,customrecord_manufacturer_mapping
+customsearch459,?,custitem_la_unique_id
+customsearch562,?,custitem_la_fan_airflow
+customsearch615,?,custitem_la_unique_id
+customsearch630,?,custitem_la_unique_id
+customsearch638,?,"custitem_la_manufacturer_name, custitem_la_manufacturer_number"
+customsearch937,?,customrecord_zastro_la_data_dump
+customsearch938,?,customrecord_zastro_la_data_dump
+customsearch939,?,"custitem_zastro_image_url, customrecord_zastro_la_data_dump"
+customsearch972,?,customrecord_zastro_la_data_dump
+customsearch_item_search_by_categoryfi_2,?,custitem_la_manufacturer_finish
+customsearch_item_search_by_categoryfini,?,custitem_la_manufacturer_finish
+customsearch_jwwrecently_created_items,?,"custitem_la_list_price, custitem_la_sku, custitem_la_spec_sheet, customrecord_zastro_lights_items"
+customsearch_la_name_fix,?,customrecord_zastro_lights_items
+customsearch_la_record_delete,?,customrecord_zastro_lights_items
+customsearch_la_sku_check,?,"custitem_la_sku, customrecord_zastro_lights_items"
+customsearch_la_sku_to_item_wfa_feed,?,"custitem_la_sku, customrecord_zastro_lights_items"
+customsearch_laitem_update,?,customrecord_la_csv_row
+customsearch_zastro_lights_p_queue,?,customrecord_zastro_lights_items
+customsearchvendoritemssublistview,?,"custitem_la_sku, customrecord_zastro_lights_items"
+customsearchvendoritemssublistview_5,?,"custitem_la_sku, customrecord_zastro_lights_items"
+customsearchvendoritemssublistview_6,?,"custitem_la_list_price, custitem_la_sku, customrecord_zastro_lights_items"
+customsearchvendoritemssublistview_7,?,custitem_la_manufacturer_name
+customsearchvendoritemssublistview_7_2,?,"custitem_la_manufacturer_name, custitem_la_manufacturer_number"

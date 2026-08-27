@@ -1,0 +1,116 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    name: Regenerate pipeline and check for drift
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run pipeline
+        run: |
+          python scripts/grep_matrix.py
+          python scripts/build_matrix.py
+          python scripts/search_cleanup.py
+          python scripts/gen_acp.py
+      - name: Fail on drift (data/ or sdf/ differ from what is committed)
+        run: |
+          git status --porcelain -- data sdf/xo-cutover-acp/src/Objects
+          git diff --exit-code -- data sdf/xo-cutover-acp/src/Objects \
+            || { echo "::error::Generated outputs differ from committed files. Run the pipeline locally and commit the results."; exit 1; }
+      - name: Status blocks in sync (PRs only; main auto-refreshes)
+        if: github.event_name == 'pull_request'
+        run: python scripts/build_status.py --check
+
+  sdf-validate:
+    name: SDF project:validate (local schema + dependency check)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Validate ACP
+        working-directory: sdf/xo-cutover-acp
+        run: |
+          cp project.json.example project.json
+          npx --yes @oracle/suitecloud-cli@latest project:validate
+      # Server-side validation against NetSuite. Enable by creating an auth in CI:
+      #   npx --yes @oracle/suitecloud-cli@latest account:setup:ci --authid ci \
+      #     --account ${{ secrets.NS_ACCOUNT }} --tokenid ${{ secrets.NS_TOKEN_ID }} \
+      #     --tokensecret ${{ secrets.NS_TOKEN_SECRET }} --savetoken
+      #   (needs SUITECLOUD_CI=1 and SUITECLOUD_CI_PASSKEY set) then:
+      #   npx --yes @oracle/suitecloud-cli@latest project:validate --server
+
+  refresh-status:
+    name: Refresh README / STATUS blocks (main)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: [verify]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Regenerate status blocks
+        run: python scripts/build_status.py
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- README.md docs/STATUS.md; then
+            echo "status blocks already current"; exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md docs/STATUS.md
+          git commit -m "chore(status): refresh auto-generated status blocks [skip ci]"
+          git push
+
+  wiki-sync:
+    name: Mirror docs to GitHub Wiki (opt-in)
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.WIKI_SYNC == 'true'
+    needs: [refresh-status]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Push docs into the wiki repository
+        env:
+          TOKEN: ${{ github.token }}
+        run: |
+          git clone "https://x-access-token:${TOKEN}@github.com/${{ github.repository }}.wiki.git" wiki \
+            || { echo "::warning::Wiki not initialized - create the first page in the GitHub UI once, then re-run."; exit 0; }
+          rm -f wiki/*.md
+          cp docs/*.md wiki/
+          { echo "# XO Cutover Wiki"; echo; echo "Mirrored from \`docs/\` on every push to main. Edit in the repo, not here."; echo;
+            for f in docs/*.md; do n=$(basename "$f" .md); echo "- [[$n]]"; done; } > wiki/Home.md
+          cd wiki
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git diff --cached --quiet && { echo "wiki already current"; exit 0; }
+          git commit -m "docs: sync from ${{ github.sha }}"
+          git push

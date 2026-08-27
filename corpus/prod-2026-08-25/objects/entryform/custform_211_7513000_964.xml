@@ -1,0 +1,295 @@
+<entryForm scriptid="custform_211_7513000_964" standard="STANDARDINBOUNDSHIPMENT">
+  <name>Premier Inbound Shipment Form Update</name>
+  <recordType>INBOUNDSHIPMENT</recordType>
+  <inactive>F</inactive>
+  <preferred>T</preferred>
+  <storedWithRecord>F</storedWithRecord>
+  <mainFields>
+    <fieldGroup scriptid="primaryinformation">
+      <label>Primary Information</label>
+      <visible>T</visible>
+      <showTitle>T</showTitle>
+      <singleColumn>F</singleColumn>
+      <fields position="MIDDLE">
+        <field>
+          <id>CUSTOMFORM</id>
+          <label>Custom Form</label>
+          <visible>T</visible>
+          <mandatory>T</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>SHIPMENTNUMBER</id>
+          <label>Shipment Number</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>EXTERNALDOCUMENTNUMBER</id>
+          <label>External Document Number</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>SHIPMENTSTATUS</id>
+          <label>Status</label>
+          <visible>T</visible>
+          <mandatory>T</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>EXPECTEDSHIPPINGDATE</id>
+          <label>Expected Ship Date</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>ACTUALSHIPPINGDATE</id>
+          <label>Actual Shipping Date</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>EXPECTEDDELIVERYDATE</id>
+          <label>Expected Delivery Date</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>ACTUALDELIVERYDATE</id>
+          <label>Actual Delivery Date</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>SHIPMENTMEMO</id>
+          <label>Memo</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>VESSELNUMBER</id>
+          <label>Vessel Number</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>BILLOFLADING</id>
+          <label>Bill Of Lading</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>SHIPMENTCREATEDDATE</id>
+          <label>Date Created</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>SHIPMENTBASECURRENCY</id>
+          <label>Base Currency</label>
+          <visible>F</visible>
+          <mandatory>T</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+      </fields>
+    </fieldGroup>
+    <defaultFieldGroup>
+      <fields position="MIDDLE">
+        <field>
+          <id>[scriptid=custrecord_ref_no]</id>
+          <label>Vendor Provided Reference</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[scriptid=custrecord_mli_inbound_vendor]</id>
+          <label>Vendor</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[scriptid=custrecord_mli_redirect_record]</id>
+          <label>Redirect Record</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[scriptid=custrecord_mli_ack_date]</id>
+          <label>PO Acknowledgement Date</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[scriptid=custrecord_zas_rich_memo]</id>
+          <label>Rich Memo</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[scriptid=custrecord_inbound_email_sent]</id>
+          <label>Email Sent Trigger</label>
+          <visible>T</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+        <field>
+          <id>[scriptid=custrecord_linked_customer]</id>
+          <label>Customer</label>
+          <visible>F</visible>
+          <mandatory>F</mandatory>
+          <displayType>NORMAL</displayType>
+          <columnBreak>F</columnBreak>
+          <sameRowAsPrevious>F</sameRowAsPrevious>
+        </field>
+      </fields>
+    </defaultFieldGroup>
+  </mainFields>
+  <tabs>
+    <tab>
+      <id>OTHERITEMS_TAB</id>
+      <label>Items</label>
+      <visible>T</visible>
+      <fieldGroups>
+        <defaultFieldGroup/>
+      </fieldGroups>
+      <subItems>
+        <subList>
+          <id>OTHERITEMS</id>
+          <label>Items</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+        </subList>
+      </subItems>
+    </tab>
+    <tab>
+      <id>OTHERLANDEDCOST_TAB</id>
+      <label>Landed Cost</label>
+      <visible>T</visible>
+      <fieldGroups>
+        <defaultFieldGroup/>
+      </fieldGroups>
+      <subItems>
+        <subList>
+          <id>OTHERLANDEDCOST</id>
+          <label>Landed Cost</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+        </subList>
+      </subItems>
+    </tab>
+    <tab>
+      <id>OTHERWORKFLOW</id>
+      <label>Workflow</label>
+      <visible>T</visible>
+      <fieldGroups>
+        <defaultFieldGroup/>
+      </fieldGroups>
+      <subItems>
+        <subList>
+          <id>OTHERACTIVEWORKFLOWS</id>
+          <label>Active Workflows</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+        </subList>
+        <subList>
+          <id>OTHERWORKFLOWHISTORY</id>
+          <label>Workflow History</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+        </subList>
+      </subItems>
+    </tab>
+    <tab>
+      <id>OTHERCOMMUNICATION</id>
+      <label>Communication</label>
+      <visible>T</visible>
+      <fieldGroups>
+        <defaultFieldGroup/>
+      </fieldGroups>
+      <subItems>
+        <subList>
+          <id>OTHERMEDIAITEM</id>
+          <label>Files</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+        </subList>
+        <subList>
+          <id>OTHERUSERNOTES</id>
+          <label>User Notes</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+        </subList>
+      </subItems>
+    </tab>
+    <tab>
+      <id>OTHERSYSTEMINFO</id>
+      <label>System Information</label>
+      <visible>T</visible>
+      <fieldGroups>
+        <defaultFieldGroup/>
+      </fieldGroups>
+      <subItems>
+        <subList>
+          <id>OTHERSYSTEMNOTES</id>
+          <label>System Notes</label>
+          <visible>T</visible>
+          <neverEmpty>F</neverEmpty>
+        </subList>
+      </subItems>
+    </tab>
+  </tabs>
+</entryForm>

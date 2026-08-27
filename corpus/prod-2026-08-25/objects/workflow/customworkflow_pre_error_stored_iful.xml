@@ -1,0 +1,64 @@
+<workflow scriptid="customworkflow_pre_error_stored_iful">
+  <description></description>
+  <initcontexts></initcontexts>
+  <initeventtypes></initeventtypes>
+  <initlocalizationcontext></initlocalizationcontext>
+  <initoncreate>T</initoncreate>
+  <initonvieworupdate>T</initonvieworupdate>
+  <initsavedsearchcondition></initsavedsearchcondition>
+  <inittriggertype>BEFORESUBMIT</inittriggertype>
+  <isinactive>F</isinactive>
+  <islogenabled>T</islogenabled>
+  <keephistory>ALWAYS</keephistory>
+  <name>Error Message Stored IFUL</name>
+  <recordtypes>ITEMFULFILLMENT</recordtypes>
+  <releasestatus>RELEASED</releasestatus>
+  <runasadmin>T</runasadmin>
+  <initcondition>
+    <formula><![CDATA["Ship Via" IN ("Shipping Method1") AND "Created From:Location (Line)" IN ("{#Location#}1")]]></formula>
+    <type>VISUAL_BUILDER</type>
+    <parameters>
+      <parameter>
+        <name>Ship Via</name>
+        <value>STDBODYSHIPMETHOD</value>
+      </parameter>
+      <parameter>
+        <name>Shipping Method1</name>
+        <selectrecordtype>-192</selectrecordtype>
+        <value>[ACCOUNT_SPECIFIC_VALUE]</value>
+      </parameter>
+      <parameter>
+        <name>Created From:Location (Line)</name>
+        <value>STDBODYCREATEDFROM:STDCOLLOCATION</value>
+      </parameter>
+      <parameter>
+        <name>{#Location#}1</name>
+        <selectrecordtype>-103</selectrecordtype>
+        <value>[ACCOUNT_SPECIFIC_VALUE]</value>
+      </parameter>
+    </parameters>
+  </initcondition>
+  <workflowstates>
+    <workflowstate scriptid="workflowstate296">
+      <description></description>
+      <donotexitworkflow>F</donotexitworkflow>
+      <name>State 1</name>
+      <positionx>243</positionx>
+      <positiony>133</positiony>
+      <workflowactions triggertype="BEFORESUBMIT">
+        <returnusererroraction scriptid="workflowaction1707">
+          <clienttriggerfields></clienttriggerfields>
+          <conditionsavedsearch></conditionsavedsearch>
+          <contexttypes></contexttypes>
+          <errortext>You are delivering this order back to Stored Inventory. Please change the Shipping Method on the Shipping tab.</errortext>
+          <eventtypes></eventtypes>
+          <isinactive>F</isinactive>
+          <initcondition>
+            <formula></formula>
+            <type>VISUAL_BUILDER</type>
+          </initcondition>
+        </returnusererroraction>
+      </workflowactions>
+    </workflowstate>
+  </workflowstates>
+</workflow>

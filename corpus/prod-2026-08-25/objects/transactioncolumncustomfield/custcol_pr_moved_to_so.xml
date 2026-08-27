@@ -1,0 +1,55 @@
+<transactioncolumncustomfield scriptid="custcol_pr_moved_to_so">
+  <accesslevel>2</accesslevel>
+  <aidescription></aidescription>
+  <applyformatting>F</applyformatting>
+  <colexpense>F</colexpense>
+  <colexpensereport>F</colexpensereport>
+  <colgrouponinvoices>F</colgrouponinvoices>
+  <colinventoryadjustment>F</colinventoryadjustment>
+  <colitemfulfillment>F</colitemfulfillment>
+  <colitemfulfillmentorder>F</colitemfulfillmentorder>
+  <colitemreceipt>F</colitemreceipt>
+  <colitemreceiptorder>F</colitemreceiptorder>
+  <coljournal>F</coljournal>
+  <colkititem>F</colkititem>
+  <colopportunity>F</colopportunity>
+  <colpackingslip>F</colpackingslip>
+  <colpickingticket>F</colpickingticket>
+  <colprintflag>F</colprintflag>
+  <colpurchase>F</colpurchase>
+  <colreturnform>F</colreturnform>
+  <colsale>T</colsale>
+  <colstore>F</colstore>
+  <colstorehidden>F</colstorehidden>
+  <colstorewithgroups>F</colstorewithgroups>
+  <coltime>F</coltime>
+  <coltransferorder>F</coltransferorder>
+  <columncustomtransactions></columncustomtransactions>
+  <defaultchecked>F</defaultchecked>
+  <defaultselection></defaultselection>
+  <defaultvalue></defaultvalue>
+  <description>Ticket 2462 - 12/13/22: This check box indicates that a line item has already been added to a sales order.&#xd;
+customscript_pr_create_so_sl sets this field on line items.</description>
+  <displayheight></displayheight>
+  <displaytype>NORMAL</displaytype>
+  <displaywidth></displaywidth>
+  <dynamicdefault></dynamicdefault>
+  <encryptatrest>F</encryptatrest>
+  <fieldtype>CHECKBOX</fieldtype>
+  <help>When this check box is marked, it indicates that the line item has already been added to a sales order.</help>
+  <isformula>F</isformula>
+  <ismandatory>F</ismandatory>
+  <label>Moved To SO</label>
+  <linktext></linktext>
+  <maxlength></maxlength>
+  <maxvalue></maxvalue>
+  <minvalue></minvalue>
+  <onparentdelete></onparentdelete>
+  <searchlevel>2</searchlevel>
+  <selectrecordtype></selectrecordtype>
+  <showhierarchy>F</showhierarchy>
+  <sourcefilterby></sourcefilterby>
+  <sourcefrom></sourcefrom>
+  <sourcelist></sourcelist>
+  <storevalue>T</storevalue>
+</transactioncolumncustomfield>

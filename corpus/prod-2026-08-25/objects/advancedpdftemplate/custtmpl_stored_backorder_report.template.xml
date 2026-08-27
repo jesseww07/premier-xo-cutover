@@ -1,0 +1,207 @@
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 9px;
+            margin: 5px;
+            color: #333;
+        }
+        
+        .header {
+           vertical-align: top;
+            margin-bottom: 2px;
+            border-bottom: 2px solid #333;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 14px;
+            font-weight: bold;
+            color: #1a1a1a;
+        }
+        
+        .header .subtitle {
+            margin: 3px 0 0 0;
+            font-size: 10px;
+            color: #666;
+        }
+        
+        .report-info {
+            margin-bottom: 5px;
+            font-size: 8px;
+            color: #666;
+        }
+        
+        .summary {
+            background-color: #f8f9fa;
+            padding: 8px;
+            margin-bottom: 5px;
+            border-left: 3px solid #007bff;
+            font-size: 9px;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1px;
+            font-size: 9px;
+            table-layout: fixed;
+        }
+        
+        .data-table th {
+            background-color: #343a40;
+            color: white;
+            padding: 8px 4px;
+            font-weight: bold;
+            border: 1px solid #dee2e6;
+            font-size: 9px;
+            line-height: 1.2;
+            word-break: normal;
+            white-space: normal;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .data-table td {
+            padding: 5px 4px;
+            border: 1px solid #dee2e6;
+            vertical-align: top;
+            word-break: normal;
+            white-space: normal;
+            text-align: center;
+        }
+        
+        .data-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        /* Column width definitions */
+        .col-doc-number {
+            width: 10%;
+        }
+        
+        .col-name {
+            width: 18%;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .col-item {
+            width: 15%;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .col-quantity {
+            width: 8%;
+        }
+        
+        .col-committed {
+            width: 8%;
+        }
+        
+        .col-fulfilled {
+            width: 8%;
+        }
+        
+        .col-billed {
+            width: 8%;
+        }
+        
+        .col-backorder {
+            width: 8%;
+        }
+        
+        .col-coordinator {
+            width: 17%;
+            text-align: left;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        /* Backorder highlighting - simplified for PDF */
+        .negative-backorder {
+            background-color: #fff882;
+            color: #000000;
+            font-weight: bold;
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+        
+        .footer {
+            margin-top: 5px;
+            text-align: left;
+            font-size: 7px;
+            color: #666;
+            border-top: 1px solid #dee2e6;
+            padding-top: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Stored Backorder Report</h1>
+        <div class="subtitle">Items with Outstanding Backorders</div>
+    </div>
+    
+    <div class="report-info">
+        <strong>Report Generated:</strong> ${.now?string("MM/dd/yyyy 'at' HH:mm:ss")} | 
+        <strong>Total Records:</strong> ${results?size}
+    </div>
+    
+    <div class="summary">
+        <strong>Summary:</strong> This report shows all sales order line items with outstanding backorders. 
+        Items highlighted in yellow indicate negative backorder/imbalance quantities requiring attention.
+    </div>
+
+    <table class="data-table">
+        <thead>
+            <tr>               
+                <th class="col-doc-number">Order#</th>
+                <th class="col-name">Customer/Project</th>
+                <th class="col-item">Item</th>
+                <th class="col-quantity">Quantity</th>
+                <th class="col-committed">Committed</th>
+                <th class="col-fulfilled">Fulfilled</th>
+                <th class="col-billed">Billed</th>
+                <th class="col-backorder">Backorder</th>
+                <th class="col-coordinator">Project Coordinator</th>
+            </tr>
+        </thead>
+        <tbody>
+            <#list results as result>
+            <tr>                
+                <td class="col-doc-number">${result.tranid!"N/A"}</td>
+                <td class="col-name">${result.entity!"N/A"}</td>
+                <td class="col-item">${result.item!"N/A"}</td>
+                <td class="col-quantity">${result.quantity!"0"}</td>
+                <td class="col-committed">${result.quantitycommitted!"0"}</td>
+                <td class="col-fulfilled">${result.quantityshiprecv!"0"}</td>
+                <td class="col-billed">${result.quantitybilled!"0"}</td>
+                <td class="col-backorder">
+                    <#-- Calculate backorder: (committed + fulfilled) - quantity -->
+                    <#assign committed = (result.quantitycommitted!"0")?replace(",", "")?number>
+                    <#assign fulfilled = (result.quantityshiprecv!"0")?replace(",", "")?number>
+                    <#assign quantity = (result.quantity!"0")?replace(",", "")?number>
+                    <#assign backorderQty = committed + fulfilled - quantity>
+                    <span class="negative-backorder">${backorderQty}</span>
+                </td>
+                <td class="col-coordinator">${result.custbody_project_coordinator!""}</td>
+            </tr>
+            </#list>
+        </tbody>
+    </table>
+
+    <div class="footer">
+        <p>JWW Stored Backorder Report | Generated from NetSuite</p>
+        <p>This report is automatically generated and scheduled. Please contact your system administrator for questions.</p>
+    </div>
+</body>
+</pdf>

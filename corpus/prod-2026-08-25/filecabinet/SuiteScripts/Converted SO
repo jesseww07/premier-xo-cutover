@@ -1,0 +1,66 @@
+/**
+ * @NApiVersion 2.x
+ * @NScriptType UserEventScript
+ */
+define(['N/record', 'N/error'], function (record, error) {
+    function afterSubmit(context) {
+        if (context.type !== context.UserEventType.CREATE) {
+            return;
+        }
+
+        var salesOrder = context.newRecord;
+        var originatingEstimate = salesOrder.getValue('createdfrom');
+
+        if (originatingEstimate) {
+            try {
+                var estimateRecord = record.load({
+                    type: record.Type.ESTIMATE,
+                    id: originatingEstimate,
+                    isDynamic: true
+                });
+
+                var estimateLineCount = estimateRecord.getLineCount({ sublistId: 'item' });
+
+                for (var i = 0; i < estimateLineCount; i++) {
+                    // Select the line to update in dynamic mode
+                    estimateRecord.selectLine({
+                        sublistId: 'item',
+                        line: i
+                    });
+
+                    // Retrieve line details from sales order and estimate to match the line items
+                    var soItemId = salesOrder.getSublistValue({ sublistId: 'item', fieldId: 'item', line: i });
+                    var estItemId = estimateRecord.getCurrentSublistValue({ sublistId: 'item', fieldId: 'item' });
+
+                    if (soItemId === estItemId) {
+                        // Set the custom field values in dynamic mode
+                        estimateRecord.setCurrentSublistValue({
+                            sublistId: 'item',
+                            fieldId: 'custcol_moved_checkbox',
+                            value: true
+                        });
+                        estimateRecord.setCurrentSublistValue({
+                            sublistId: 'item',
+                            fieldId: 'custcol_created_so',
+                            value: salesOrder.getValue('id')
+                        });
+                    }
+                    // Commit the changes to the current line
+                    estimateRecord.commitLine({ sublistId: 'item' });
+                }
+
+                estimateRecord.save();
+            } catch (e) {
+                log.error('Error updating Estimate', e);
+                throw error.create({
+                    name: 'UPDATE_ESTIMATE_ERROR',
+                    message: 'An error occurred while updating the Estimate record.'
+                });
+            }
+        }
+    }
+
+    return {
+        afterSubmit: afterSubmit
+    };
+});

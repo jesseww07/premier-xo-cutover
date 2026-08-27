@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_107_7513000_824" standard="STDTMPLUSVENDPYMT">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Premier Custom A/P Check Template</title>
+  <trantype>VENDPYMT</trantype>
+</advancedpdftemplate>

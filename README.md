@@ -1,0 +1,98 @@
+# Premier Lighting - XO Cutover (LightsAmerica → XoLogic)
+
+Single source of truth for the NetSuite side of the LA→XO catalog transition: the field-disposition
+evidence, the reference sweep, the deployable SDF customization, and the retirement plan.
+**Go-live: September 1, 2026.**
+
+If a file about this project exists anywhere else (OneDrive, a local `dev\` folder, a chat transcript),
+this repo wins. Copies elsewhere are stale by definition.
+
+## Status
+
+<!-- STATUS:START -->
+_(populated by `scripts/build_status.py` on first CI run)_
+<!-- STATUS:END -->
+
+Live checklist by phase: [`docs/XO_Cutover_Tracker.html`](docs/XO_Cutover_Tracker.html) (open locally; checkbox state is per-browser).
+
+## Start here
+
+| Read this | To get |
+|---|---|
+| [`docs/XO_Sweep_Findings.md`](docs/XO_Sweep_Findings.md) | **The current state.** What the sweep found, what changed in the plan, what is approved, what is next. §4a = entry-form UI steps. |
+| [`docs/XO_Field_Scoping_Handoff.md`](docs/XO_Field_Scoping_Handoff.md) | The locked decisions and their evidence. Primary guide; do not relitigate. |
+| [`data/XO_Reference_Matrix.csv`](data/XO_Reference_Matrix.csv) | Every field/record/list/workflow in scope: populated count, disposition, XO source, live references. |
+| [`data/XO_Search_Cleanup_List.csv`](data/XO_Search_Cleanup_List.csv) | Saved searches to fix before anything is inactivated. |
+| [`docs/XO_Cutover_NetSuite_Transition_Plan.md`](docs/XO_Cutover_NetSuite_Transition_Plan.md) | Phased retirement plan (Sep 1 freeze → Dec 1 delete). Where it conflicts with the handoff, the handoff wins. |
+| [`docs/LA_to_XO_Field_Mapping.csv`](docs/LA_to_XO_Field_Mapping.csv) | All 68 LA feed fields → XO backend columns, with transform notes. |
+
+## Layout
+
+```
+docs/      source documents + the findings report (human-authored, reviewed)
+data/      generated evidence - REGENERATE, never hand-edit (CI fails on drift)
+corpus/    read-only snapshots of production customizations (objects + /SuiteScripts), by date
+sdf/       the deployable Account Customization Project (fields only)
+scripts/   the pipeline that turns corpus + inputs into data/ and sdf/
+```
+
+Pipeline (all paths repo-relative; runs identically on Windows, macOS, Linux, CI):
+
+```
+python scripts/grep_matrix.py      # corpus × data/sweep_targets.csv → data/reference_matrix_raw|summary.csv
+python scripts/build_matrix.py     # + populated counts + dispositions → data/XO_Reference_Matrix.csv
+python scripts/search_cleanup.py   # → data/XO_Search_Cleanup_List.csv
+python scripts/gen_acp.py          # corpus field XML + decisions → sdf/xo-cutover-acp/src/Objects
+python scripts/build_status.py     # refreshes the Status block above and docs/STATUS.md
+```
+
+`data/populated_counts.csv`, `data/sweep_targets.csv`, `data/script_inventory.csv`, `data/deployment_inventory.csv`
+are **inputs** captured from production SuiteQL on 2026-08-25 (queries documented in the findings). Refresh them
+deliberately, in their own commit.
+
+## Deploying the SDF project
+
+Use SuiteCloud CLI **4.0.0 or newer** - older CLIs (3.2.x) throw schema errors on current NetSuite exports.
+No global install needed:
+
+```powershell
+cd sdf/xo-cutover-acp
+copy project.json.example project.json        # then set defaultAuthId: 7513000-sb1 (sandbox) or premier (prod)
+npx --yes @oracle/suitecloud-cli@latest project:validate --server
+npx --yes @oracle/suitecloud-cli@latest project:deploy
+```
+
+`project.json` is git-ignored on purpose: it binds the project to a machine-local auth token
+(`suitecloud account:manageauth --list`). Status of each environment lives in the findings report, not here.
+**Production deploys require explicit sign-off recorded in the findings report.**
+
+## Re-snapshotting production
+
+```powershell
+scripts/import_corpus.ps1 -AuthId premier          # → corpus/prod-YYYY-MM-DD/ (objects + filecabinet)
+python scripts/grep_matrix.py && python scripts/build_matrix.py && python scripts/search_cleanup.py
+```
+
+Commit the new snapshot and the regenerated `data/` together; the diff *is* the drift report.
+
+## Guardrails (also in `CLAUDE.md` for AI sessions)
+
+- **Solupay / Versapay is out of scope** - different vendor, different business area, handled separately. Nothing here touches it.
+- **Zastro is not one thing.** The LA catalog pipeline retires; the Zastro-built PO-consolidation estate
+  (`customrecord_zastro_po_consolid`, `customrecord_zastro_unconsolidated_items`, the two `custcol_zastro_*` columns,
+  `customlist_zas_tracking_carrier`, `custitem_zastro_special_order`) is live operations and stays.
+- **Relabel, never re-scriptid** a surviving field. Labels preserve internal id, history, sourcing, searches.
+- **Entry forms are edited in the UI**, not SDF (this account's inventory-item form cannot be SDF-deployed; proven).
+- **Bulk item operations**: disable `FA | UE Sync - Update FA` + the two FA Map/Reduce scripts first.
+
+## CI
+
+`.github/workflows/ci.yml` runs on every push and PR:
+
+1. **verify** - re-runs the whole pipeline and fails if `data/`, `sdf/`, or the status blocks differ from what is committed (drift guard).
+2. **sdf-validate** - `project:validate` (local, no credentials) on the ACP with SuiteCloud CLI 4.x.
+3. **refresh-status** (main only) - regenerates the status blocks and auto-commits if they changed.
+4. **wiki-sync** (main only, opt-in via repo variable `WIKI_SYNC=true`) - mirrors `docs/*.md` + `STATUS.md` into the GitHub Wiki.
+
+Server-side validation against NetSuite in CI needs token-based auth secrets (`suitecloud account:setup:ci`); the
+workflow has a commented stub for it.

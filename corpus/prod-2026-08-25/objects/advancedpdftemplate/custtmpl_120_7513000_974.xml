@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_120_7513000_974" standard="STDTMPLCUSTPYMT">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Custom Customer Payment PDF/HTML Template</title>
+  <trantype>CUSTPYMT</trantype>
+</advancedpdftemplate>

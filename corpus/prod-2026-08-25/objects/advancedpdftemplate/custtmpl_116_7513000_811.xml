@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_116_7513000_811" standard="STDTMPLQUOTE">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Deposit Receipt Quote PDF/HTML Template 2</title>
+  <trantype>ESTIMATE</trantype>
+</advancedpdftemplate>

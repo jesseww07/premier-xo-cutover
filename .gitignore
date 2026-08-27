@@ -1,0 +1,13 @@
+# SuiteCloud: per-machine auth binding (copy project.json.example -> project.json)
+sdf/**/project.json
+# tooling / scratch
+node_modules/
+__pycache__/
+*.pyc
+*.log
+logs/
+.suitecloud-sdk/
+validate_out*.txt
+# OS
+Thumbs.db
+.DS_Store

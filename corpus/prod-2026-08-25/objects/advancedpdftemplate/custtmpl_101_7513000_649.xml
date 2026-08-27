@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_101_7513000_649" standard="STDTMPLPICKINGTICKET">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>PICKINGTICKET</printtype>
+  <title>Custom Picking Ticket PDF/HTML Template</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

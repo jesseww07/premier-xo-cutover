@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+    <head>
+        <style type="text/css">
+            * { 
+                font-family: Arial, sans-serif; 
+            }
+            table { 
+                width: 100%; 
+                table-layout: auto; /* Fixed layout helps with column sizing reliability */
+                border-collapse: collapse; 
+                page-break-inside: avoid; /* Prevents label from splitting across pages */
+            }
+            td {               
+                padding-top: 2px;
+                padding-bottom: 2px;
+                vertical-align: top; /* Changed from bottom to top to prevent overlap */
+            }
+            /* Header Style */
+            .header-rule { 
+                border-bottom: 1px solid #000; 
+                font-weight: bold; 
+                font-size: 14pt; 
+                text-align: center;
+                padding-bottom: 4px;
+                margin-bottom: 4px;
+            }
+            /* Label Column Style (Left Aligned) */
+            .label { 
+                text-align: left; 
+                font-size: 10pt; /* Slightly reduced to make data pop */              
+                color: #444; 
+                vertical-align: top; 
+                padding-top: 3px; /* visual alignment with larger values */
+            }
+            /* Value Column Style */
+            .value { 
+                text-align: left; 
+                font-size: 11pt; 
+                font-weight: bold;
+            }
+            /* Item Name */
+            .item-text {
+                font-size: 11pt;
+                font-weight: bold;
+                /* Removing fixed line-height to allow natural wrapping */
+            }
+            /* Job Name */
+            .job-text { 
+                font-size: 11pt; 
+                font-weight: bold; 
+            }
+            /* Mark/Description */
+            .small-text { 
+                font-size: 11pt; 
+                font-weight: bold; 
+            }
+            /* Bin - Large and clear */
+            .bin-text {
+                font-size: 14pt;
+                font-weight: bold;
+            }
+        </style>
+    </head>
+    <#if results.results?has_content>
+        <#list results.results as tranline>
+            <body padding="0.1in 0.1in 0.1in 0.1in" size="4in 2in">
+                <table>
+                    <col width="19%" />
+                    <col width="23%" />
+                    <col width="14%" />
+                    <col width="14%" />
+                    <col width="15%" />
+                    <col width="15%" />
+                    
+                    <tr>
+                        <td align="center" colspan="6" class="header-rule">Premier Lighting, LLC</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="label">Item:</td>
+                        <td class="item-text" colspan="5">${tranline.item}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td align="left" class="label">Code:</td>
+                        <td class="value"><#if tranline.upcCode?has_content && tranline.upcCode != " ">${tranline.upcCode}</#if></td>
+                        
+                        <td align="left" class="label">SO:</td>
+                        <td class="value">${tranline.so?replace("Sales Order #", "")}</td>
+                        
+                        <td align="left" class="label">PO:</td>
+                        <td class="value">${tranline.po}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="label">Job:</td>
+                        <td class="job-text" colspan="5">${tranline.custCompanyName}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="label">Mark:</td>
+                        <td class="small-text" colspan="5">${tranline.room}</td>
+                    </tr>
+                    
+                    <tr>
+                        <td class="label">Bin:</td>
+                        <td class="bin-text" colspan="5">${tranline.prefBin}</td>
+                    </tr>
+                </table>
+            </body>
+        </#list>
+    </#if>
+</pdf>

@@ -1,0 +1,32 @@
+/**
+ * @NApiVersion 2.x
+ * @NScriptType ClientScript
+ */
+define(['N/log'], function(log) {
+    function pageInit(context) {
+        try {
+            // Wait a bit to ensure the page is fully loaded
+            setTimeout(function() {
+                moveBillingBox();
+            }, 500); // Adjust delay if needed
+        } catch (e) {
+            log.error({ title: 'Error in pageInit', details: e });
+        }
+    }
+
+    function moveBillingBox() {
+        var billingBox = document.querySelector('[id="custpage_billing_summary_fs_lbl"]'); // Adjust if needed
+        var summaryBox = document.querySelector('[id="totalsummary_fs_lbl"]'); // Existing summary box
+
+        if (billingBox && summaryBox) {
+            var summaryParent = summaryBox.closest('tr'); // Find the row for placement
+            summaryParent.parentNode.insertBefore(billingBox.closest('tr'), summaryParent.nextSibling);
+        } else {
+            log.error({ title: 'Move Billing Box Error', details: 'Elements not found' });
+        }
+    }
+
+    return {
+        pageInit: pageInit
+    };
+});

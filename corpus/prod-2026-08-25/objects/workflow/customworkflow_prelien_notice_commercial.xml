@@ -1,0 +1,178 @@
+<workflow scriptid="customworkflow_prelien_notice_commercial">
+  <description></description>
+  <initcontexts>ACTION|BANKCONNECTIVITY|BANKSTATEMENTPARSER|BUNDLEINSTALLATION|CLIENT|CSVIMPORT|CUSTOMGLLINES|CUSTOMMASSUPDATE|RECORDACTION|CUSTOMTOOL|DATASETBUILDER|DEBUGGER|EMAILCAPTURE|FICONNECTIVITY|FIPARSER|MAPREDUCE|OCRPLUGIN|OFFLINECLIENT|OTHER|PAYMENTPOSTBACK|PAYMENTGATEWAY|PLATFORMEXTENSION|PORTLET|PROMOTIONS|CONSOLRATEADJUSTOR|RESTWEBSERVICES|RESTLET|ADVANCEDREVREC|SCHEDULED|SDFINSTALLATION|SHIPPINGPARTNERS|WEBSERVICES|SUITELET|TAXCALCULATION|USEREVENT|USERINTERFACE|WEBAPPLICATION|WEBSTORE|WORKBOOKBUILDER|WORKFLOW</initcontexts>
+  <initeventtypes></initeventtypes>
+  <initlocalizationcontext></initlocalizationcontext>
+  <initoncreate>T</initoncreate>
+  <initonvieworupdate>F</initonvieworupdate>
+  <initsavedsearchcondition></initsavedsearchcondition>
+  <inittriggertype></inittriggertype>
+  <isinactive>F</isinactive>
+  <islogenabled>F</islogenabled>
+  <keephistory>ALWAYS</keephistory>
+  <name>Prelien Notice - Commercial Invoice</name>
+  <recordtypes>INVOICE</recordtypes>
+  <releasestatus>RELEASED</releasestatus>
+  <runasadmin>T</runasadmin>
+  <initcondition>
+    <formula><![CDATA["Customer:Class" IN ("{#Class#}1","{#Class#}2") AND isChecked("Customer:Prelien Sent") = 'F']]></formula>
+    <type>VISUAL_BUILDER</type>
+    <parameters>
+      <parameter>
+        <name>Customer:Class</name>
+        <value>STDBODYCUSTOMER:[scriptid=custentity_pr_customer_class]</value>
+      </parameter>
+      <parameter>
+        <name>{#Class#}1</name>
+        <selectrecordtype>-101</selectrecordtype>
+        <value>[ACCOUNT_SPECIFIC_VALUE]</value>
+      </parameter>
+      <parameter>
+        <name>{#Class#}2</name>
+        <selectrecordtype>-101</selectrecordtype>
+        <value>[ACCOUNT_SPECIFIC_VALUE]</value>
+      </parameter>
+      <parameter>
+        <name>Customer:Prelien Sent</name>
+        <value>STDBODYCUSTOMER:[scriptid=custentity_prelien_sent]</value>
+      </parameter>
+    </parameters>
+  </initcondition>
+  <workflowstates>
+    <workflowstate scriptid="workflowstate366">
+      <description></description>
+      <donotexitworkflow>F</donotexitworkflow>
+      <name>State 1</name>
+      <positionx>243</positionx>
+      <positiony>133</positiony>
+      <workflowactions triggertype="BEFOREUSERSUBMIT">
+        <showmessageaction scriptid="workflowaction1795">
+          <clienttriggerfields></clienttriggerfields>
+          <conditionsavedsearch></conditionsavedsearch>
+          <contexttypes>ACTION|BANKCONNECTIVITY|BANKSTATEMENTPARSER|BUNDLEINSTALLATION|CLIENT|CSVIMPORT|CUSTOMGLLINES|CUSTOMMASSUPDATE|RECORDACTION|CUSTOMTOOL|DATASETBUILDER|DEBUGGER|EMAILCAPTURE|FICONNECTIVITY|FIPARSER|MAPREDUCE|OCRPLUGIN|OFFLINECLIENT|OTHER|PAYMENTPOSTBACK|PAYMENTGATEWAY|PLATFORMEXTENSION|PORTLET|PROMOTIONS|CONSOLRATEADJUSTOR|RESTWEBSERVICES|RESTLET|ADVANCEDREVREC|SCHEDULED|SDFINSTALLATION|SHIPPINGPARTNERS|WEBSERVICES|SUITELET|TAXCALCULATION|USEREVENT|USERINTERFACE|WORKBOOKBUILDER|WORKFLOW</contexttypes>
+          <isinactive>F</isinactive>
+          <messagetext>This is the first invoice for this jobsite. A preliminary lien notice must be filed within 20 days</messagetext>
+          <initcondition>
+            <formula><![CDATA["Class (Main)" IN ("{#Class#}1","{#Class#}2") AND isChecked("Customer:Prelien Sent") = 'F']]></formula>
+            <type>VISUAL_BUILDER</type>
+            <parameters>
+              <parameter>
+                <name>Class (Main)</name>
+                <value>STDBODYCLASS</value>
+              </parameter>
+              <parameter>
+                <name>{#Class#}1</name>
+                <selectrecordtype>-101</selectrecordtype>
+                <value>[ACCOUNT_SPECIFIC_VALUE]</value>
+              </parameter>
+              <parameter>
+                <name>{#Class#}2</name>
+                <selectrecordtype>-101</selectrecordtype>
+                <value>[ACCOUNT_SPECIFIC_VALUE]</value>
+              </parameter>
+              <parameter>
+                <name>Customer:Prelien Sent</name>
+                <value>STDBODYCUSTOMER:[scriptid=custentity_prelien_sent]</value>
+              </parameter>
+            </parameters>
+          </initcondition>
+        </showmessageaction>
+      </workflowactions>
+      <workflowactions triggertype="AFTERSUBMIT">
+        <sendemailaction scriptid="workflowaction1796">
+          <attachmentfield></attachmentfield>
+          <attachmentfile></attachmentfile>
+          <attachmentjoinfield></attachmentjoinfield>
+          <attachmenttype>SPECIFIC</attachmenttype>
+          <body>&lt;p&gt;&lt;span style=&quot;font-family:Tahoma;font-size:24px;&quot;&gt;An Invoice&lt;strong&gt; {tranid}&lt;/strong&gt; has been created for the first time for&lt;strong&gt; {entity}&lt;/strong&gt;. Prelien Paperwork needs to be filed &lt;strong&gt;&lt;u&gt;within 20 days&lt;/u&gt;&lt;/strong&gt; of this notice.&lt;/span&gt;&lt;/p&gt;</body>
+          <conditionsavedsearch></conditionsavedsearch>
+          <contexttypes>ACTION|BANKCONNECTIVITY|BANKSTATEMENTPARSER|BUNDLEINSTALLATION|CLIENT|CSVIMPORT|CUSTOMGLLINES|CUSTOMMASSUPDATE|RECORDACTION|CUSTOMTOOL|DATASETBUILDER|DEBUGGER|EMAILCAPTURE|FICONNECTIVITY|FIPARSER|MAPREDUCE|OCRPLUGIN|OFFLINECLIENT|OTHER|PAYMENTPOSTBACK|PAYMENTGATEWAY|PLATFORMEXTENSION|PORTLET|PROMOTIONS|CONSOLRATEADJUSTOR|RESTWEBSERVICES|RESTLET|ADVANCEDREVREC|SCHEDULED|SDFINSTALLATION|SHIPPINGPARTNERS|WEBSERVICES|SUITELET|TAXCALCULATION|USEREVENT|USERINTERFACE|WORKBOOKBUILDER|WORKFLOW</contexttypes>
+          <eventtypes></eventtypes>
+          <includeformat>PDF</includeformat>
+          <includerecordlink>T</includerecordlink>
+          <includetransaction>T</includetransaction>
+          <isinactive>F</isinactive>
+          <recipientbccemail>jessew@shoppremier.com</recipientbccemail>
+          <recipientccemail>donhoffman@shoppremier.com,shawn@shoppremier.com</recipientccemail>
+          <recipientemail>ar@shoppremier.com,mandy@shoppremier.com,kandices@shoppremier.com</recipientemail>
+          <recipientfield></recipientfield>
+          <recipientjoinfield></recipientjoinfield>
+          <recipienttype>ADDRESS</recipienttype>
+          <scheduledelay></scheduledelay>
+          <schedulemode>DELAY</schedulemode>
+          <schedulerecurrence></schedulerecurrence>
+          <scheduletimeofday></scheduletimeofday>
+          <scheduletimeunit></scheduletimeunit>
+          <sender>[ACCOUNT_SPECIFIC_VALUE]</sender>
+          <senderfield></senderfield>
+          <senderjoinfield></senderjoinfield>
+          <sendertype>SPECIFIC</sendertype>
+          <subject>First Invoice For Commercial Customer - Prelien Notice</subject>
+          <template></template>
+          <usetemplate>F</usetemplate>
+          <initcondition>
+            <formula><![CDATA["Class (Main)" IN ("{#Class#}1","{#Class#}2") AND isChecked("Customer:Prelien Sent") = 'F']]></formula>
+            <type>VISUAL_BUILDER</type>
+            <parameters>
+              <parameter>
+                <name>Class (Main)</name>
+                <value>STDBODYCLASS</value>
+              </parameter>
+              <parameter>
+                <name>{#Class#}1</name>
+                <selectrecordtype>-101</selectrecordtype>
+                <value>[ACCOUNT_SPECIFIC_VALUE]</value>
+              </parameter>
+              <parameter>
+                <name>{#Class#}2</name>
+                <selectrecordtype>-101</selectrecordtype>
+                <value>[ACCOUNT_SPECIFIC_VALUE]</value>
+              </parameter>
+              <parameter>
+                <name>Customer:Prelien Sent</name>
+                <value>STDBODYCUSTOMER:[scriptid=custentity_prelien_sent]</value>
+              </parameter>
+            </parameters>
+          </initcondition>
+        </sendemailaction>
+        <customaction scriptid="workflowaction1797">
+          <conditionsavedsearch></conditionsavedsearch>
+          <contexttypes>ACTION|BANKCONNECTIVITY|BANKSTATEMENTPARSER|BUNDLEINSTALLATION|CLIENT|CSVIMPORT|CUSTOMGLLINES|CUSTOMMASSUPDATE|RECORDACTION|CUSTOMTOOL|DATASETBUILDER|DEBUGGER|EMAILCAPTURE|FICONNECTIVITY|FIPARSER|MAPREDUCE|OCRPLUGIN|OFFLINECLIENT|OTHER|PAYMENTPOSTBACK|PAYMENTGATEWAY|PLATFORMEXTENSION|PORTLET|PROMOTIONS|CONSOLRATEADJUSTOR|RESTWEBSERVICES|RESTLET|ADVANCEDREVREC|SCHEDULED|SDFINSTALLATION|SHIPPINGPARTNERS|WEBSERVICES|SUITELET|TAXCALCULATION|USEREVENT|USERINTERFACE|WORKBOOKBUILDER|WORKFLOW</contexttypes>
+          <eventtypes></eventtypes>
+          <isinactive>F</isinactive>
+          <resultfield></resultfield>
+          <scheduledelay></scheduledelay>
+          <schedulemode>DELAY</schedulemode>
+          <schedulerecurrence></schedulerecurrence>
+          <scheduletimeofday></scheduletimeofday>
+          <scheduletimeunit></scheduletimeunit>
+          <scripttype>[scriptid=customscript_prelin_sent]</scripttype>
+          <initcondition>
+            <formula><![CDATA["Class (Main)" IN ("{#Class#}1","{#Class#}2") AND isChecked("Customer:Prelien Sent") = 'F']]></formula>
+            <type>VISUAL_BUILDER</type>
+            <parameters>
+              <parameter>
+                <name>Class (Main)</name>
+                <value>STDBODYCLASS</value>
+              </parameter>
+              <parameter>
+                <name>{#Class#}1</name>
+                <selectrecordtype>-101</selectrecordtype>
+                <value>[ACCOUNT_SPECIFIC_VALUE]</value>
+              </parameter>
+              <parameter>
+                <name>{#Class#}2</name>
+                <selectrecordtype>-101</selectrecordtype>
+                <value>[ACCOUNT_SPECIFIC_VALUE]</value>
+              </parameter>
+              <parameter>
+                <name>Customer:Prelien Sent</name>
+                <value>STDBODYCUSTOMER:[scriptid=custentity_prelien_sent]</value>
+              </parameter>
+            </parameters>
+          </initcondition>
+        </customaction>
+      </workflowactions>
+    </workflowstate>
+  </workflowstates>
+</workflow>

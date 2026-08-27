@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_stored_backorder_report">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>SEARCH</printtype>
+  <savedsearch>[scriptid=customsearch_stored_backorder]</savedsearch>
+  <title>Stored Backorder Report</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

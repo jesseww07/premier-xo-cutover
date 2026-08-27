@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <style>table { font-size: 9pt; table-layout: fixed; width: 100%; }
+th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; padding-bottom: 10px; padding-top: 10px; }
+td { padding: 4px 6px; }
+b { font-weight: bold; color: #333333; }
+</style>
+</head>
+<body padding="0.5in 0.5in 0.5in 0.5in" size="Letter-LANDSCAPE">
+    <table style="border-collapse: collapse; width: 100%; background-color: rgb(236, 202, 250); margin-left: auto; margin-right: auto; border: 1px inset rgb(0, 0, 0);" border="1"><colgroup><col style="width: 99.9053%;" /></colgroup><tr>
+<td style="border-color: rgb(0, 0, 0); text-align: center;"><span style="text-decoration: underline;"><strong><span style="font-size: 18pt;">Premier Lighting Inbound Shipment Items - to be Received</span></strong></span></td>
+</tr></table>
+<table style="width: 100%; height: 80.2361px;"><#list results as result> <#if result_index == 0>
+<thead>
+<tr style="height: 29.8611px;">
+<th style="text-align: left; width: 10.0463%; height: 29.8611px;">${result.createddate@label}</th>
+<th style="width: 10.0463%; height: 29.8611px;">${result.createdfrom@label}</th>
+<th style="width: 10.0463%; height: 29.8611px;">${result.vendor@label}</th>
+<th style="width: 10.0463%; height: 29.8611px;">${result.purchaseorder@label}</th>
+<th style="width: 10.0463%; height: 29.8611px;">${result.custrecord_mli_redirect_record@label}</th>
+<th style="width: 10.0463%; height: 29.8611px;">${result.item@label}</th>
+<th style="width: 10.0463%; height: 29.8611px;">${result.quantityremaining@label}</th>
+<th style="width: 10.0463%; height: 29.8611px;">${result.receivinglocation@label}</th>
+<th style="width: 10.0463%; height: 29.8611px;">${result.shipmentnumber@label}</th>
+<th style="width: 10.0463%; height: 29.8611px;">&nbsp;</th>
+</tr>
+</thead>
+</#if><tr style="height: 50.375px;">
+<td style="text-align: left; width: 10.0463%; height: 50.375px;">${result.createddate}</td>
+<td style="width: 10.0463%; height: 50.375px;">${result.createdfrom}</td>
+<td style="width: 10.0463%; height: 50.375px;">${result.vendor}</td>
+<td style="width: 10.0463%; height: 50.375px;">${result.purchaseorder}</td>
+<td style="width: 10.0463%; height: 50.375px;">${result.custrecord_mli_redirect_record}</td>
+<td style="width: 10.0463%; height: 50.375px;">${result.item}</td>
+<td style="width: 10.0463%; height: 50.375px;">${result.quantityremaining}</td>
+<td style="width: 10.0463%; height: 50.375px;">${result.receivinglocation}</td>
+<td style="width: 10.0463%; height: 50.375px;">${result.shipmentnumber}</td>
+<td style="width: 10.0463%; height: 50.375px;">&nbsp;</td>
+</tr></#list></table>
+</body>
+</pdf>

@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+
+    <head>
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+            src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+            src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <#if .locale=="zh_CN">
+            <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}"
+                src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+            <#elseif .locale=="zh_TW">
+                <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}"
+                    src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+                <#elseif .locale=="ja_JP">
+                    <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}"
+                        src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+                    <#elseif .locale=="ko_KR">
+                        <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}"
+                            src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+                        <#elseif .locale=="th_TH">
+                            <link name="NotoSansThai" type="font" subtype="opentype"
+                                src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+        </#if>
+        <style type="text/css">
+            table {
+                font-size: 9pt;
+                table-layout: fixed;
+                width: 100%;
+            }
+
+            th {
+                font-weight: bold;
+                font-size: 8pt;
+                vertical-align: middle;
+                padding: 5px 6px 3px;
+                background-color: #e3e3e3;
+                color: #333333;
+                padding-bottom: 10px;
+                padding-top: 10px;
+            }
+
+            td {
+                padding: 4px 6px;
+                font-size: 23px;
+            }
+
+            b {
+                font-weight: bold;
+                color: #333333;
+            }
+        </style>
+    </head>
+
+    <body padding="0.15in 0.0015in 0.0015in 0.0015in" size="Letter">
+        <table>
+            <#list results as taco>
+                <#assign ind=taco?index>
+                    <#assign nex=taco?index + 1>
+                         <#assign fut=taco?index + 2>
+                        	<#assign len=results?size>
+
+
+                            <#if len % 2==0>
+                                <#if ind % 2==0>
+                                    <tr>
+
+                                        <td padding="0.15in 0.15in 0.0015in 0.15in" align="center" valign="middle"
+                                            style="max-width:408px; min-width:408px; width: 408px; max-height:320px; min-height:320px; height: 320px;">
+                                            Item:
+                                            ${taco.itemid}<br /><br />${taco.salesdescription}<br /><br />Price:
+                                            $${taco.baseprice}<br />Vendor: ${taco.vendor}</td>
+
+                                        <td padding="0.15in 0.15in 0.0015in 0.15in" align="center" valign="middle"
+                                            style="max-width:408px; min-width:408px; width: 408px; max-height:320px; min-height:320px; height: 320px;">
+                                            Item:
+                                            ${results[nex].itemid}<br /><br />${results[nex].salesdescription}<br /><br />Price:
+                                            $${results[nex].baseprice}<br />Vendor: ${results[nex].vendor}</td>
+
+                                    </tr>
+                                </#if>
+                          </#if>
+
+                            <#if len % 2 != 0>
+                                <#if ind % 2==0 && ind+1 != len >
+                                    <tr>
+                                        <td padding="0.15in 0.15in 0.0015in 0.15in" align="center" valign="middle"
+                                            style="max-width:408px; min-width:408px; width: 408px; max-height:320px; min-height:320px; height: 320px;">
+                                            Item:
+                                            ${taco.itemid}<br /><br />${taco.salesdescription}<br /><br />Price:
+                                            $${taco.baseprice}<br />Vendor: ${taco.vendor}</td>
+
+                                        <td padding="0.15in 0.15in 0.0015in 0.15in" align="center" valign="middle"
+                                            style="max-width:408px; min-width:408px; width: 408px; max-height:320px; min-height:320px; height: 320px;">
+                                            Item:
+                                            ${results[nex].itemid}<br /><br />${results[nex].salesdescription}<br /><br />Price:
+                                            $${results[nex].baseprice}<br />Vendor: ${results[nex].vendor}</td>
+
+                                    </tr>
+                                    <#else>
+                                      <tr>
+                                        <td padding="0.15in 0.15in 0.0015in 0.15in" align="center" valign="middle"
+                                            style="max-width:408px; min-width:408px; width: 408px; max-height:320px; min-height:320px; height: 320px;">
+                                            Item:
+                                            ${taco.itemid}<br /><br />${taco.salesdescription}<br /><br />Price:
+                                            $${taco.baseprice}<br />Vendor: ${taco.vendor}</td>
+
+                                    <!--   <td padding="0.15in 0.15in 0.0015in 0.15in" align="center" valign="middle"
+                                            style="max-width:408px; min-width:408px; width: 408px; max-height:320px; min-height:320px; height: 320px;"> 
+                                        </td> -->
+                                        </tr>
+                                </#if>
+                            </#if>
+            </#list>
+        </table>
+    </body>
+</pdf>

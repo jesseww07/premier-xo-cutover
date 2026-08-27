@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_114_7513000_257" standard="STDTMPLGLIMPACT">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>GLIMPACT</printtype>
+  <title>Custom GL Impact PDF/HTML Template</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

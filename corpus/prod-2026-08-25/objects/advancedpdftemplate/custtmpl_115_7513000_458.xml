@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_115_7513000_458" standard="STDTMPLQUOTE">
+  <description>Form for creating Change Orders to send to Customer.</description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>CHANGE ORDER REQUEST PDF/HTML Template</title>
+  <trantype>ESTIMATE</trantype>
+</advancedpdftemplate>

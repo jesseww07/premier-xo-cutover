@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+        <macro id="nlheader">
+            
+<p style="text-align: center; margin-bottom: 5px;"><span style="font-size: 24pt; font-family: arial, helvetica, sans-serif;"> <strong><span style="text-decoration: underline;">Cycle Count</span></strong> </span>&nbsp; &nbsp;</p>
+
+        </macro>
+    </macrolist>
+    <style>table { font-size: 9pt; table-layout: fixed; width: 100%; }
+th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; padding-bottom: 10px; padding-top: 10px; }
+td { padding: 4px 6px; }
+b { font-weight: bold; color: #333333; }
+</style>
+</head>
+<body header="nlheader" header-height="10%" padding="0.25in 0.25in .25in .25in" size="Letter-LANDSCAPE">
+    <table style="width: 100.001%; height: 39.184px; border-collapse: collapse; border-color: rgb(0, 0, 0); border-style: solid;" border="1"><#list results as result> <#if result_index == 0>
+<thead>
+<tr style="height: 22.3958px;">
+<th style="width: 15.0298%; height: 22.3958px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">${result.formulatext@label}</span></th>
+<th style="width: 15.0298%; height: 22.3958px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">${result.binnumber@label}</span></th>
+<th style="width: 15.0298%; height: 22.3958px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">${result.displayname@label}</span></th>
+<th style="width: 15.0298%; height: 22.3958px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">${result.item@label}</span></th>
+<th style="width: 15.0298%; height: 22.3958px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">${result.formulanumeric@label}</span></th>
+<th style="width: 15.0381%; height: 22.3958px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">Physical</span></th>
+</tr>
+</thead>
+</#if><tr style="height: 16.7882px;">
+<td style="width: 15.0298%; height: 16.7882px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">${result.formulatext}</span></td>
+<td style="width: 15.0298%; height: 16.7882px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">${result.binnumber}</span></td>
+<td style="width: 15.0298%; height: 16.7882px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">${result.displayname}</span></td>
+<td style="width: 15.0298%; height: 16.7882px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">${result.item}</span></td>
+<td style="width: 15.0298%; height: 16.7882px; border: 1px solid rgb(0, 0, 0);"><span style="font-size: 12pt;">${result.formulanumeric}</span></td>
+<td style="width: 15.0381%; height: 16.7882px; border: 1px solid rgb(0, 0, 0);">&nbsp;</td>
+</tr>
+</#list></table>
+</body>
+</pdf>

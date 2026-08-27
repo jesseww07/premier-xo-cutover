@@ -1,0 +1,31 @@
+<itemcustomfield scriptid="custitem_xo_in_stock">
+  <accesslevel>2</accesslevel>
+  <appliestogroup>F</appliestogroup>
+  <appliestoinventory>T</appliestoinventory>
+  <appliestokit>F</appliestokit>
+  <appliestononinventory>F</appliestononinventory>
+  <appliestoothercharge>F</appliestoothercharge>
+  <appliestopricelist>F</appliestopricelist>
+  <appliestoservice>F</appliestoservice>
+  <appliestospecificitems>F</appliestospecificitems>
+  <appliestosubplan>F</appliestosubplan>
+  <applyformatting>F</applyformatting>
+  <checkspelling>F</checkspelling>
+  <defaultchecked>F</defaultchecked>
+  <displaytype>NORMAL</displaytype>
+  <encryptatrest>F</encryptatrest>
+  <fieldtype>INTEGER</fieldtype>
+  <globalsearch>F</globalsearch>
+  <help>Manufacturer stock from XO. Informational only; inventory intentionally does not sync.</help>
+  <includechilditems>F</includechilditems>
+  <isformula>F</isformula>
+  <ismandatory>F</ismandatory>
+  <isparent>F</isparent>
+  <itemsubtype>BOTH</itemsubtype>
+  <label>XO In Stock</label>
+  <searchlevel>2</searchlevel>
+  <showhierarchy>F</showhierarchy>
+  <showinlist>F</showinlist>
+  <storevalue>T</storevalue>
+  <subtab>[scriptid=custtab_25_t2379072_560]</subtab>
+</itemcustomfield>

@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_204_11168007_133" standard="STDTMPLEMPTY">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>DNU - Inbound Labels</title>
+  <trantype>PURCHORD</trantype>
+</advancedpdftemplate>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+  <head>
+    <style>table { font-size: 9pt; table-layout: fixed; width: 100%; }
+th { font-weight: bold; font-size: 8pt; vertical-align: middle; padding: 5px 6px 3px; background-color: #e3e3e3; color: #333333; padding-bottom: 10px; padding-top: 10px; }
+td { padding: 4px 6px; }
+b { font-weight: bold; color: #333333; }
+</style>
+  </head>
+  <body size="Letter">
+    <table>
+      <#list results as result>
+        <#if result_index == 0>
+          <thead>
+            <tr>
+              <th>${result.internalId@label}</th>
+              <th>${result.tranid@label}</th>
+              <th>${result.item@label}</th>
+              <th>${result.custcol_pr_room_location@label}</th>
+              <th>${result.quantity@label}</th>
+              <th>${result.quantitycommitted@label}</th>
+              <th>${result.quantityshiprecv@label}</th>
+              <th>${result.formulanumeric@label}</th>
+              <th>${result.closed@label}</th>
+              <th>${result.shipmethod@label}</th>
+              <th>${result.expectedreceiptdate@label}</th>
+              <th>${result.actualshipdate@label}</th>
+              <th>${result.quantitybilled@label}</th>
+              <th>${result.trandate@label}</th>
+            </tr>
+          </thead>
+        </#if>
+        <tr>
+          <td>${result.internalId}</td>
+          <td>${result.tranid}</td>
+          <td>${result.item}</td>
+          <td>${result.custcol_pr_room_location}</td>
+          <td>${result.quantity}</td>
+          <td>${result.quantitycommitted}</td>
+          <td>${result.quantityshiprecv}</td>
+          <td>${result.formulanumeric}</td>
+          <td>${result.closed}</td>
+          <td>${result.shipmethod}</td>
+          <td>${result.expectedreceiptdate}</td>
+          <td>${result.actualshipdate}</td>
+          <td>${result.quantitybilled}</td>
+          <td>${result.trandate}</td>
+        </tr>
+      </#list>
+    </table>
+  </body>
+</pdf>

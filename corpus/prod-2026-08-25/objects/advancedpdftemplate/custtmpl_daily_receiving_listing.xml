@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_daily_receiving_listing">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>SEARCH</printtype>
+  <savedsearch>[scriptid=customsearch1153]</savedsearch>
+  <title>Daily Receiving Listing</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

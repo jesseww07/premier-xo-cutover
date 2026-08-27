@@ -1,0 +1,244 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+	<macrolist>
+		<macro id="nlheader">
+			<table style="width: 100%; font-size: 10pt;"><tr>
+	<td rowspan="1" style="padding-top: 0px; padding-left: -10px;"><#if companyInformation.logoUrl?length != 0><img src="${companyInformation.logoUrl}" style="float: left; margin: 1px; width: 209px; height: 101px" /> </#if></td>
+	<td align="right" style="padding-top: 0px;">
+		<span style="font-size: 20pt; font-weight: bold;">Purchase Order ${record.tranid}</span><br/>
+		<span style="font-size: 14pt;">${record.entity}</span>
+	</td>
+	</tr></table>
+		</macro>
+		<macro id="nlfooter">
+			<table class="footer" style="width: 100%;"><tr>
+	<td><barcode codetype="code128" showtext="true" value="${record.tranid}"/></td>
+	<#assign aDateTime = .now>
+	<td colspan="2" align="right"><pagenumber/> of <totalpages/><br/>
+         ${aDateTime?string.short} </td>
+	</tr></table>
+		</macro>
+	</macrolist>
+	<style type="text/css">
+	* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+	}
+	body { font-size: 9pt; }
+	table { width: 100%; border-collapse: collapse; }
+	td { padding: 4px 6px; }
+	th {
+		background-color: #e3e3e3;
+		color: #333333;
+		font-weight: bold;
+		font-size: 8pt;
+		padding: 6px;
+	}
+	b { font-weight: bold; color: #333333; }
+	table.footer td { padding: 0; font-size: 8pt; }
+	.address-table td { vertical-align: top; }
+	.address-box { vertical-align: top; padding-right: 10px; }
+	.details-table { table-layout: fixed; }
+	.details-table td { padding: 2px 4px; vertical-align: top; }
+	.details-label { width: 38%; font-weight: bold; white-space: nowrap; }
+	.details-value { width: 62%; }
+	.shipnotes-box { margin-top: 15px; border: 1px solid #d3d3d3; background-color: #f9f9f9; }
+	.shipnotes-box td { padding: 8px; }
+	.itemtable { margin-top: 18px; table-layout: fixed; }
+	.itemtable td { padding: 6px; vertical-align: top; }
+	.itemtable .itemcol { width: 22%; font-size: 8pt; line-height: 110%; word-break: normal; }
+	.itemtable .desccol { width: 38%; line-height: 115%; }
+	.itemtable .qtycol { width: 10%; }
+	.itemtable .ratecol { width: 15%; }
+	.itemtable .amtcol { width: 15%; }
+	span.itemname { font-weight: bold; line-height: 150%; }
+	.totals { margin-top: 20px; }
+	.totals td { padding: 6px; }
+	.total-row { background-color: #e3e3e3; font-weight: bold; }
+	hr { width: 100%; color: #d3d3d3; background-color: #d3d3d3; height: 1px; }
+	</style>
+</head>
+<body header="nlheader" header-height="90pt" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+
+<!-- ================================================================== -->
+<!-- ADDRESS / DETAILS SECTION                                          -->
+<!-- Ship-To resolution order — DO NOT REORDER these branches:          -->
+<!--   1. Drop-ship SO override  -> always the real customer/job        -->
+<!--      shipaddress, regardless of location. (Template 2 had lost     -->
+<!--      this check entirely — that was the drop-ship bug.)            -->
+<!--   2. Location contains-match -> hardcoded warehouse address.       -->
+<!--      Uses ?contains() rather than exact = match, so location       -->
+<!--      strings like "Phoenix Retail" or "Broadway : Phoenix Retail"  -->
+<!--      both resolve correctly regardless of exact formatting.        -->
+<!--   3. Fallback -> real record.shipaddress.                          -->
+<!-- ================================================================== -->
+
+<table class="address-table" style="margin-bottom: 15px;">
+	<tr>
+		<td class="address-box" style="width: 30%;">
+			<strong>${record.billaddress@label}:</strong><br/><br/>
+			${record.billaddress}
+		</td>
+
+		<td class="address-box" style="width: 35%;">
+			<strong>Ship To:</strong><br/><br/>
+			<#if record.dropshipso?has_content>
+				${record.shipaddress}
+			<#elseif record.location?contains("Broadway") || record.location?contains("Phoenix Retail")>
+				Premier Lighting, LLC<br/>
+				4024 E Broadway Rd, Ste 1001<br/>
+				Phoenix, AZ 85040<br/>
+				Ph: (866) 907-2669
+			<#elseif record.location?contains("TUC-WH")>
+				Northside Warehouse<br/>
+				630 E. Ft. Lowell Road<br/>
+				Receiving Hours: 9:30am-3:00pm M-F<br/>
+				Tucson, AZ 85705<br/>
+				Ph: (866) 907-2669
+			<#else>
+				${record.shipaddress}
+			</#if>
+		</td>
+
+		<td class="address-box" style="width: 35%;">
+			<table class="details-table">
+				<tr>
+					<td class="details-label" align="right">Due Date:</td>
+					<td class="details-value">${record.duedate}</td>
+				</tr>
+				<tr>
+					<td class="details-label" align="right">Vendor #:</td>
+					<td class="details-value">${record.otherrefnum}</td>
+				</tr>
+				<tr>
+					<td class="details-label" align="right">PO #:</td>
+					<td class="details-value">${record.tranid}</td>
+				</tr>
+				<tr>
+					<td class="details-label" align="right">Date Created:</td>
+					<td class="details-value">${record.trandate}</td>
+				</tr>
+				<tr>
+					<td class="details-label" align="right">Terms:</td>
+					<td class="details-value">${record.terms}</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
+
+<hr/>
+
+<#if record.custbody_vendor_ship_notes?has_content>
+<table class="shipnotes-box">
+	<tr>
+		<td style="font-weight: bold;">Vendor Shipping Instructions:</td>
+	</tr>
+	<tr>
+		<td>${record.custbody_vendor_ship_notes}</td>
+	</tr>
+</table>
+</#if>
+
+<!-- ================================================================== -->
+<!-- ITEM TABLE                                                          -->
+<!-- Uses item.vendorname (not item.item) so vendors see their own item -->
+<!-- name/number rather than our internal item ID.                      -->
+<!-- ================================================================== -->
+
+<#if record.item?has_content>
+<table class="itemtable">
+<#list record.item as item>
+<#if item_index==0>
+	<thead>
+		<tr>
+			<th class="itemcol" align="left">Item</th>
+			<th class="desccol" align="left">${item.description@label}</th>
+			<th class="qtycol" align="center">${item.quantity@label}</th>
+			<th class="ratecol" align="right">${item.rate@label}</th>
+			<th class="amtcol" align="right">Amount</th>
+		</tr>
+	</thead>
+	<tbody>
+</#if>
+	<tr style="background-color: <#if (item_index % 2)==0>white<#else>#ededed</#if>;">
+		<td class="itemcol" align="left">${item.vendorname}</td>
+		<td class="desccol" align="left">${item.description}</td>
+		<td class="qtycol" align="center">${item.quantity}</td>
+		<td class="ratecol" align="right">${item.rate}</td>
+		<td class="amtcol" align="right">${item.amount}</td>
+	</tr>
+</#list>
+	</tbody>
+</table>
+</#if>
+
+<#if record.expense?has_content>
+<table class="itemtable" style="margin-top: 10px;">
+<#list record.expense as expense>
+<#if expense_index==0>
+	<thead>
+		<tr>
+			<th colspan="2" align="left">${expense.category@label}</th>
+			<th colspan="2" align="left">${expense.account@label}</th>
+			<th align="right">${expense.amount@label}</th>
+		</tr>
+	</thead>
+	<tbody>
+</#if>
+	<tr style="background-color: <#if (expense_index % 2)==0>white<#else>#ededed</#if>;">
+		<td colspan="2">${expense.category}</td>
+		<td colspan="2"><span class="itemname">${expense.account}</span></td>
+		<td align="right">${expense.amount}</td>
+	</tr>
+</#list>
+	</tbody>
+</table>
+</#if>
+
+<hr/>
+
+<!-- ================================================================== -->
+<!-- TOTALS                                                              -->
+<!-- ================================================================== -->
+
+<table class="totals" style="page-break-inside: avoid;">
+	<tr>
+		<td style="width: 70%;">&nbsp;</td>
+		<td align="right" style="width: 15%; font-weight: bold;">${record.subtotal@label}</td>
+		<td align="right" style="width: 15%;">${record.subtotal}</td>
+	</tr>
+	<tr class="total-row">
+		<td>&nbsp;</td>
+		<td align="right">${record.total@label}</td>
+		<td align="right">${record.total}</td>
+	</tr>
+</table>
+
+</body>
+</pdf>

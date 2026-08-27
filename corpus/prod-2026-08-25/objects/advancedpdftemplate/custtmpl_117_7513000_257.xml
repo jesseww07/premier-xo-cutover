@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_117_7513000_257" standard="STDTMPLSVPREP">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Custom Vendor Prepayment PDF/HTML Template</title>
+  <trantype>VPREP</trantype>
+</advancedpdftemplate>

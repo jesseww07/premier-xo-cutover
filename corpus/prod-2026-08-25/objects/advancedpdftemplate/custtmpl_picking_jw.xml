@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_picking_jw" standard="STDTMPLPICKINGTICKET">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>PICKINGTICKET</printtype>
+  <title>Premier Picking Ticket 81924</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

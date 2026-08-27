@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+
+    <head>
+        <link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}"
+            src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}"
+            src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+        <#if .locale=="zh_CN">
+            <link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}"
+                src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+            <#elseif .locale=="zh_TW">
+                <link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}"
+                    src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+                <#elseif .locale=="ja_JP">
+                    <link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}"
+                        src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+                    <#elseif .locale=="ko_KR">
+                        <link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}"
+                            src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+                        <#elseif .locale=="th_TH">
+                            <link name="NotoSansThai" type="font" subtype="opentype"
+                                src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+        </#if>
+        <style type="text/css">
+            * {
+                <#if .locale=="zh_CN">font-family: NotoSans, NotoSansCJKsc, sans-serif;
+                <#elseif .locale=="zh_TW">font-family: NotoSans, NotoSansCJKtc, sans-serif;
+                <#elseif .locale=="ja_JP">font-family: NotoSans, NotoSansCJKjp, sans-serif;
+                <#elseif .locale=="ko_KR">font-family: NotoSans, NotoSansCJKkr, sans-serif;
+                <#elseif .locale=="th_TH">font-family: NotoSans, NotoSansThai, sans-serif;
+                <#else>font-family: NotoSans, sans-serif;
+                </#if>
+            }
+
+            * {
+                font-family: "Times New Roman", serif;
+            }
+
+            table {
+                font-size: 15pt;
+                table-layout: fixed;
+                page-break-inside: avoid;
+            }
+
+            td p {
+                align: left
+            }
+        </style>
+    </head>
+
+    <#if results.results?has_content>
+
+        <#list results.results as tranline>
+
+            <body padding="0.5in 0.5in 0.5in 0.5in" size="5in x 3in" margin-top="-30px" >
+                <table class="itemtable" style="width: 100%; margin-right:-30px; margin-left:-30px" >
+                    <tr>
+                        <td align="center" colspan="6" font-size= "22pt" margin-bottom="10px">Magnolia Lighting, Inc.<br/></td>
+                    </tr>
+                   <tr>
+                      <td align="center" colspan="6">
+                           <barcode codetype="code128" value="${tranline.item}" height="10mm" width="50mm"  showtext="false"/>
+                      </td>
+
+                    </tr>
+                    <tr>
+                      <td align="right" colspan="2">Item Number: </td>
+                        <td align="left" colspan="4"><span class="itemname">${tranline.item}</span></td>
+                    </tr>
+             
+                    <tr>
+                      <td align="right" colspan="2">Location: </td>
+                        <td align="left" colspan="4">${tranline.room}</td>
+                    </tr>
+                  <tr>
+                    <td align="right" colspan="3" ></td>
+                      <td align="left" colspan="3" font-size="15px" ></td>
+                        
+                    </tr>
+                  <tr>
+                    <td align="right" colspan="3" ></td>
+                      <td align="left" colspan="3" font-size="15px" ></td>
+                        
+                    </tr>
+                  <tr>
+                    <td align="right" colspan="3" ></td>
+                      <td align="left" colspan="3" font-size="15px" ></td>
+                        
+                    </tr>
+                  <tr>
+                    <td align="right" colspan="3" ></td>
+                      <td align="left" colspan="3" font-size="15px" ></td>
+                        
+                    </tr>
+                  <tr>
+                    <td align="right" colspan="3" ></td>
+                      <td align="left" colspan="3" font-size="15px" >P.O. Number: ${tranline.po}</td>
+                        
+                    </tr>
+                    
+                </table>
+            </body>
+        </#list>
+
+    </#if>
+
+</pdf>

@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_if_with_iinternalid" standard="STDTMPLPACKINGSLIP">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>PACKINGSLIP</printtype>
+  <title>Packing Slip PDF/HTML Template with internalID</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

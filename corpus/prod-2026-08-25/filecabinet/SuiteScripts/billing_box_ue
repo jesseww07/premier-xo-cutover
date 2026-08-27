@@ -1,0 +1,128 @@
+/**
+ * @NApiVersion 2.1
+ * @NScriptType UserEventScript
+ */
+define(['N/record', 'N/search', 'N/ui/serverWidget', 'N/log'], function (record, search, serverWidget, log) {
+
+
+function beforeLoad(context) {
+    log.debug('beforeLoad triggered', 'Context type: ' + context.type);
+
+    if (context.type !== context.UserEventType.VIEW) {
+        log.debug('Exiting early', 'Not a VIEW operation');
+        return;
+    }
+
+    try {
+        var form = context.form;
+        var salesOrder = context.newRecord;
+        var salesOrderId = salesOrder.id;
+
+        log.debug('Sales Order ID', salesOrderId);
+
+        if (!salesOrderId) {
+            log.debug('No Sales Order ID found — skipping billing summary box.');
+            return;
+        }
+
+        var totalAmount = parseFloat(salesOrder.getValue({ fieldId: 'total' })) || 0;
+        log.debug('Total Amount', totalAmount);
+
+        var invoicedAmount = getInvoicedAmount(salesOrderId);
+        log.debug('Invoiced Amount', invoicedAmount);
+
+        var fulfilledAmount = getFulfilledAmount(salesOrderId);
+        log.debug('Fulfilled Amount', fulfilledAmount);
+
+        var amountYetToBeInvoiced = totalAmount - invoicedAmount;
+        var amountNotYetFulfilled = totalAmount - fulfilledAmount;
+
+        function safeToFixed(value) {
+            return (typeof value === 'number' && !isNaN(value)) ? value.toFixed(2) : '0.00';
+        }
+
+        var billingSummary = '<div style="padding: 10px; border: 1px solid #ccc; background-color: #f9f9f9;">' +
+            '<h3 style="margin: 0 0 10px;">Billing Information</h3>' +
+            '<p><strong>Order Total:</strong> $' + safeToFixed(totalAmount) + '</p>' +
+            '<p><strong>Current Invoiced:</strong> $' + safeToFixed(invoicedAmount) + '</p>' +
+            '<p><strong>Yet to be Invoiced:</strong> $' + safeToFixed(amountYetToBeInvoiced) + '</p>' +
+            '<p><strong>Fulfilled:</strong> $' + safeToFixed(fulfilledAmount) + '</p>' +
+            '<p><strong>Not Yet Fulfilled:</strong> $' + safeToFixed(amountNotYetFulfilled) + '</p>' +
+            '</div>';
+
+        var field = form.addField({
+            id: 'custpage_billing_summary',
+            type: serverWidget.FieldType.INLINEHTML,
+            label: 'Billing Summary',
+        });
+
+        field.updateDisplayType({ displayType: serverWidget.FieldDisplayType.INLINE });
+        field.defaultValue = billingSummary;
+
+        log.debug('Billing summary box added successfully', '');
+    } catch (e) {
+        log.error('Error in beforeLoad', e.toString());
+    }
+}
+
+
+    /**
+     * Retrieves the total invoiced amount for a given Sales Order.
+     */
+function getInvoicedAmount(salesOrderId) {
+    try {
+        var invoiceSearch = search.create({
+            type: "invoice",
+            filters: [
+                ["createdfrom", "anyof", salesOrderId],
+                "AND",
+                ["mainline", "is", "T"]
+            ],
+            columns: [search.createColumn({ name: "total", summary: "SUM" })]
+        });
+
+        var result = invoiceSearch.run().getRange({ start: 0, end: 1 });
+        var amount = result.length > 0 ? parseFloat(result[0].getValue({ name: "total", summary: "SUM" })) || 0 : 0;
+        log.debug('getInvoicedAmount result', amount);
+        return amount;
+    } catch (e) {
+        log.error('Error in getInvoicedAmount', e.toString());
+        return 0;
+    }
+}
+
+
+    /**
+     * Retrieves the total fulfilled amount for a given Sales Order.
+     */
+function getFulfilledAmount(salesOrderId) {
+    try {
+        var fulfillmentSearch = search.create({
+            type: "transaction",
+            filters: [
+                ["type", "anyof", "ItemShip"],
+                "AND",
+                ["createdfrom", "anyof", salesOrderId],
+                "AND",
+                ["mainline", "is", "F"]
+            ],
+            columns: [
+                search.createColumn({ name: "fxamount", summary: "SUM" })
+            ]
+        });
+
+        var result = fulfillmentSearch.run().getRange({ start: 0, end: 1 });
+        var amount = result.length > 0 ? parseFloat(result[0].getValue({ name: "fxamount", summary: "SUM" })) || 0 : 0;
+        log.debug('getFulfilledAmount result', amount);
+        return amount;
+    } catch (e) {
+        log.error('Error in getFulfilledAmount', e.toString());
+        return 0;
+    }
+}
+
+
+    return {
+        beforeLoad: beforeLoad
+    };
+});

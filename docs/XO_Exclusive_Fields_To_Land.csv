@@ -1,0 +1,19 @@
+XO Field / Group,Purpose
+ItemID,"XO permanent numeric item ID — clean, 100% unique. Use THIS for custitem7 'XO Item ID', not the XOItemID column (see corruption note)."
+VendorID + VItemID,Composite vendor identity; XOItemID = '{VendorID}-{VItemID}' string.
+IMAP / UMAP,MAP pricing tiers (custitem5 = IMAP per locked plan; UMAP new).
+Web Price / Precise Price / Full Price,Selling-price family.
+Vendor Discounted Cost / Cost With Shipping / Base Cost / Precise COGS,Cost family.
+In Stock / Back Order Date,Manufacturer availability (informational in NS — inventory intentionally does not sync).
+Order Multiple / Order Minimum,Purchasing constraints.
+Last Changed / Availability Changed / Catalog Changed / Price Changed Date,Change-date quartet — enables NS-side delta processing and staleness auditing.
+Standard-Category / Subcategory / Style / Finish / Kelvin / Lumens / Wattage / Voltage / Location Rating,Normalized facet set (feeds facet bucket-pair plan).
+Keywords,Search keywords.
+Prop 65 / Prop 65 Description / Title 20 / Title 24 / PFAS / CEC,Compliance set LA never provided.
+Ship Carton L/W/H + Ship Weight + Cartons Per Unit,Freight dims (94-99% fill).
+Identifier-Shopify Handle,XO's stored Shopify handle (7% fill — XO-activated items).
+Extra-Motor Type / Motor Size / RPM High-Low,"Fan motor specs (AC/DC, dims, RPM) — LA never provided."
+Extra-Blade To Ceiling / Blade Length / Blade Width,Fan physical dims beyond span.
+Extra-Slope (86% fill) / Sloped Ceiling Compatible,Sloped-ceiling compatibility.
+Extra-Integrated Smart Control / Compatible Smart Control,Smart-home control data.
+Extra-Reversible Blades / Reverse Switch Location,Two-sided blade finishes + reverse switch placement (distinct from motor reverse).

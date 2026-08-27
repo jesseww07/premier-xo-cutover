@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_241_7513000_296" standard="STDTMPLCUSTINVC">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Custom Invoice PDF/HTML Template w/link</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

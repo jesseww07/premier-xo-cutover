@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_113_7513000_937" standard="STDTMPLCUSTCRED">
+  <description></description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Custom Credit Memo PDF/HTML Template</title>
+  <trantype>CUSTCRED</trantype>
+</advancedpdftemplate>

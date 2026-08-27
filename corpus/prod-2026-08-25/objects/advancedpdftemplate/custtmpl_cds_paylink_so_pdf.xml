@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_cds_paylink_so_pdf" standard="STDTMPLEMPTY">
+  <description>customer pdf template to be used whenever user wants to pay for the sales order.</description>
+  <displaysourcecode>T</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>CDS Sales Order PDF/HTML Template</title>
+  <trantype>SALESORD</trantype>
+</advancedpdftemplate>

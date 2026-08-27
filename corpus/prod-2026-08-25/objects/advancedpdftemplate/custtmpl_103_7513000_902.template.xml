@@ -1,0 +1,247 @@
+<?xml version="1.0"?><!DOCTYPE pdf PUBLIC "-//big.faceless.org//report" "report-1.1.dtd">
+<pdf>
+<head>
+	<link name="NotoSans" type="font" subtype="truetype" src="${nsfont.NotoSans_Regular}" src-bold="${nsfont.NotoSans_Bold}" src-italic="${nsfont.NotoSans_Italic}" src-bolditalic="${nsfont.NotoSans_BoldItalic}" bytes="2" />
+	<#if .locale == "zh_CN">
+		<link name="NotoSansCJKsc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKsc_Regular}" src-bold="${nsfont.NotoSansCJKsc_Bold}" bytes="2" />
+	<#elseif .locale == "zh_TW">
+		<link name="NotoSansCJKtc" type="font" subtype="opentype" src="${nsfont.NotoSansCJKtc_Regular}" src-bold="${nsfont.NotoSansCJKtc_Bold}" bytes="2" />
+	<#elseif .locale == "ja_JP">
+		<link name="NotoSansCJKjp" type="font" subtype="opentype" src="${nsfont.NotoSansCJKjp_Regular}" src-bold="${nsfont.NotoSansCJKjp_Bold}" bytes="2" />
+	<#elseif .locale == "ko_KR">
+		<link name="NotoSansCJKkr" type="font" subtype="opentype" src="${nsfont.NotoSansCJKkr_Regular}" src-bold="${nsfont.NotoSansCJKkr_Bold}" bytes="2" />
+	<#elseif .locale == "th_TH">
+		<link name="NotoSansThai" type="font" subtype="opentype" src="${nsfont.NotoSansThai_Regular}" src-bold="${nsfont.NotoSansThai_Bold}" bytes="2" />
+	</#if>
+    <macrolist>
+         <macro id="nlheader">
+            <table style="width: 100%; font-size: 10pt;"><tr>
+	<td rowspan="1" style="padding-top: -25px; padding-left: -10px;"><#if companyInformation.logoUrl?length != 0><img src="${companyInformation.logoUrl}" style="float: left; margin: 1px; width: 209px; height: 101px" /> </#if></td>
+	<td align="right" style="padding-top: 0px;"><span style="font-size: 20pt;">Cash Sale <br/> ${record.tranid}</span></td>
+    <!-- <td align="right" style="padding-top: 0px;"><span style="font-size: 24pt;">${record.tranid}</span></td>  -->       
+	</tr></table>
+        </macro>
+        <macro id="nlfooter">
+            <table class="footer" style="width: 100%;">
+              
+              <tr>
+	<td><barcode codetype="code128" showtext="true" value="${record.tranid}"/></td>
+	<#assign aDateTime = .now>
+<#assign aDate = aDateTime?date>
+<#assign aTime = aDateTime?time>
+	<td colspan="2" align="right"><pagenumber/> of <totalpages/><br/>
+         ${aDateTime?string.short} </td>
+	</tr></table>
+        </macro>
+    </macrolist>
+    <style type="text/css">* {
+		<#if .locale == "zh_CN">
+			font-family: NotoSans, NotoSansCJKsc, sans-serif;
+		<#elseif .locale == "zh_TW">
+			font-family: NotoSans, NotoSansCJKtc, sans-serif;
+		<#elseif .locale == "ja_JP">
+			font-family: NotoSans, NotoSansCJKjp, sans-serif;
+		<#elseif .locale == "ko_KR">
+			font-family: NotoSans, NotoSansCJKkr, sans-serif;
+		<#elseif .locale == "th_TH">
+			font-family: NotoSans, NotoSansThai, sans-serif;
+		<#else>
+			font-family: NotoSans, sans-serif;
+		</#if>
+		}
+		table {
+			font-size: 9pt;
+			table-layout: fixed;
+		}
+        th {
+            font-weight: bold;
+            font-size: 8pt;
+            vertical-align: middle;
+            padding: 5px 6px 3px;
+            background-color: #e3e3e3;
+            color: #333333;
+        }
+        td {
+            padding: 4px 6px;
+        }
+		td p { align:left }
+        b {
+            font-weight: bold;
+            color: #333333;
+        }
+        table.header td {
+            padding: 0;
+            font-size: 10pt;
+        }
+        table.footer td {
+            padding: 0;
+            font-size: 8pt;
+        }
+        table.itemtable th {
+            padding-bottom: 10px;
+            padding-top: 10px;
+        }
+        table.body td {
+            padding-top: 2px;
+        }
+        table.total {
+            page-break-inside: avoid;
+        }
+        tr.totalrow {
+            background-color: #e3e3e3;
+            line-height: 200%;
+        }
+        td.totalboxtop {
+            font-size: 12pt;
+            background-color: #e3e3e3;
+        }
+        td.addressheader {
+            font-size: 8pt;
+            padding-top: 6px;
+            padding-bottom: 2px;
+        }
+        td.address {
+            padding-top: 0;
+        }
+        td.totalboxmid {
+            font-size: 28pt;
+            padding-top: 20px;
+            background-color: #e3e3e3;
+        }
+        td.totalboxbot {
+            background-color: #e3e3e3;
+            font-weight: bold;
+        }
+        span.title {
+            font-size: 28pt;
+        }
+        span.number {
+            font-size: 16pt;
+        }
+        span.itemname {
+            font-weight: bold;
+            line-height: 150%;
+        }
+        hr {
+            width: 100%;
+            color: #d3d3d3;
+            background-color: #d3d3d3;
+            height: 1px;
+        }
+</style>
+</head>
+<body header="nlheader" header-height="8%" footer="nlfooter" footer-height="20pt" padding="0.5in 0.5in 0.5in 0.5in" size="Letter">
+    <table style="width: 100%;"><tr>
+<#if record.billaddress?has_content>
+  	<td class="addressheader" colspan="5"><b>${record.billaddress@label}</b></td>
+  <#else>
+    	<td class="addressheader" colspan="5"><b></b></td>
+  </#if>
+  <#if record.shipaddress?has_content>
+  	<td class="addressheader" colspan="5"><b>${record.shipaddress@label}</b></td>
+  <#else>
+    	<td class="addressheader" colspan="5"><b></b></td>
+  </#if>
+            	<td class="addressheader" colspan="6"><b></b></td>
+
+	</tr>
+	<tr>
+	<td class="address" colspan="5" rowspan="2">${record.billaddress}</td>
+
+                  <#if record.location = 'Phoenix : PHX-DC'>
+              <td class="address" colspan="8" rowspan="2">Premier Lighting<br/>2050 South 16th Street, Suite 111<br/>Receiving Hours: 7:00am-3:00pm M-F<br/>Phoenix, AZ 85034<br/>Ph: 623-907-2669</td>
+        <#elseif record.location = 'Tucson : TUC-WH'>
+                <td class="address" colspan="8" rowspan="2">Northside Warehouse<br/>630 E. Ft. Lowell Road<br/>Receiving Hours: 9:30am-3:00pm M-F<br/>Tucson, AZ 85705<br/>Ph: 520-293-6111</td>
+          <#else>
+                  <td class="address" colspan="8" rowspan="2">${record.shipaddress}</td>
+        </#if>
+
+        	<td class="address" colspan="6" rowspan="2" align="left">
+                  <b>Customer: </b>${record.entity}<br/>
+              <b>Lighting Specialist: </b>${record.salesrep}<br/>
+              <b>Document #: </b>${record.tranid}<br/>
+              <!-- <b>PO #: </b>${record.otherrefnum}<br/> -->
+              <b>Date: </b>${record.trandate}<br/>
+              <b>Payment Method: </b>${record.paymentmethod}</td>
+
+	</tr>
+	</table>
+  
+<hr />
+
+<#if record.item?has_content>
+
+<table class="itemtable" style="width: 100%;"><!-- start items --><#list record.item as item><#if item_index==0><#assign row=0>
+<thead>
+	<tr>
+
+	<th colspan="4">Item</th>
+      
+        	 <th align="center" colspan="10">${item.custcol_pr_room_location@label}</th> 
+	<th align="center" colspan="3">${item.quantity@label}</th>
+	<th align="right" colspan="4">${item.rate@label}</th>
+	<th align="right" colspan="4">Amount</th>
+ 
+	</tr>
+</thead>
+</#if><tr style="background-color: <#if (row % 2) == 0>white<#else>#ededed</#if>">
+    <td colspan="4">
+        <b>  ${item.custcol_pl_item_name}</b> <br/>
+
+     ${item.description}</td>
+  <td align="center" colspan="10">${item.custcol_pr_room_location}</td> 
+  <td align="center" colspan="3" line-height="150%">${item.quantity}</td>
+	<td align="right" colspan="4">${item.rate}</td>
+	<td align="right" colspan="4">${item.amount}</td>
+         <#assign row = row + 1>
+	</tr>
+	</#list><!-- end items --></table>
+</#if>
+
+<hr />
+<table style="page-break-inside: avoid; width: 100%; margin-top: 10px;"><tr>
+	<td colspan="4">&nbsp;</td>
+	<td align="right" style="font-weight: bold; color: #333333;">${record.subtotal@label}</td>
+	<td align="right">${record.subtotal}</td>
+	</tr>
+	<tr>
+	<td colspan="4">&nbsp;</td>
+	<td align="right" style="font-weight: bold; color: #333333;">${record.taxtotal@label} (${record.taxrate}%)</td>
+	<td align="right">${record.taxtotal}</td>
+	</tr>
+  <tr>
+	<td colspan="4">&nbsp;</td>
+	<td align="right" style="font-weight: bold; color: #333333;">${record.shippingcost@label}</td>
+	<td align="right">${record.shippingcost}</td>
+	</tr>
+	<tr style="background-color: #e3e3e3; line-height: 200%;">
+	<td background-color="#ffffff" colspan="4">&nbsp;</td>
+	<td align="right" style="font-weight: bold; color: #333333;">${record.total@label}</td>
+	<td align="right">${record.total}</td>
+	</tr></table>
+  
+  <span>&nbsp;</span>
+<table>
+ 
+  
+  <tr style="width: 100%;">
+              <td style="border-left: thin solid; border-top: thin solid; border-bottom: thin solid; border-right: thin solid;">
+<b>RETURN POLICY</b>
+
+Installed items are NOT refundable.
+All returns must have original packaging.
+
+Upon receipt of package, it is your responsibility to thoroughly inspect the merchandise within. If there is any damage or missing parts, you have 5 days from receiving date to contact Premier Lighting. Failure to do so could result in the denial of a possible claim. Stock orders mav be returned within 15 days of purchase. Items must be un-installed (no wires or chain cut)
+and in original packaging. Displays can be returned within 15 days in original sold condition. Invoices marked
+FINAL SALE are non-refundable. Special Orders from PL Partners can be returned within 15 days with no
+penalty, all other vendors will incur a 25% restock fee for return within 15 days. Special orders are non-
+returnable/non-refundable 15 days from delivery. Full payment is due at time of Special Order. A $15 handling
+fee will be assessed for any special order under $100. PL is not liable for delayed shipments &amp; any costs
+incurred by those delays. INSTALLS must be paid in full prior being scheduled. Store Credits Expire in 1 year
+from the invoice date. Product Damaged/Missing parts must be reported to PL within 7 days. See Sales
+Person for further details.</td>
+              </tr>
+
+  </table>
+</body>
+</pdf>

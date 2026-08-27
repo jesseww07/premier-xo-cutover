@@ -1,0 +1,12 @@
+<manifest projecttype="ACCOUNTCUSTOMIZATION">
+  <projectname>xo-cutover-acp</projectname>
+  <frameworkversion>1.0</frameworkversion>
+  <dependencies>
+    <features>
+      <feature required="true">INVENTORY</feature>
+    </features>
+    <objects>
+      <object>custtab_25_t2379072_560</object>
+    </objects>
+  </dependencies>
+</manifest>

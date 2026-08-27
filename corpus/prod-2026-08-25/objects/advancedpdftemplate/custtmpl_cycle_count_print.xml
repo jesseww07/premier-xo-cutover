@@ -1,0 +1,10 @@
+<advancedpdftemplate scriptid="custtmpl_cycle_count_print">
+  <description></description>
+  <displaysourcecode>F</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>T</preferred>
+  <printtype>SEARCH</printtype>
+  <savedsearch>[scriptid=customsearch1993]</savedsearch>
+  <title>Cycle Count Template</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>

@@ -1,0 +1,100 @@
+/**
+ * @NApiVersion 2.1
+ * @NScriptType Restlet
+ */
+define(['N/record', 'N/search', 'N/log', 'N/format'], (record, search, log, format) => {
+
+    const post = (context) => {
+        try {
+            log.debug('Incoming Payload', context);
+            
+            const { 
+                projectName, // This is the "Name" from Monday
+                visitDate, 
+                status, 
+                address, 
+                issue, 
+                duration, 
+                etaDate, 
+                ceiling, 
+                schedNotes, 
+                mondayPulseId 
+            } = context;
+
+            // 1. FIND THE PARENT CUSTOMER
+            // We search for an exact match on Company Name
+            const customerId = findCustomerByName(projectName);
+
+            if (!customerId) {
+                return { 
+                    status: 'error', 
+                    message: `Could not find NetSuite Customer with name: "${projectName}". Check spelling.` 
+                };
+            }
+
+            // 2. CREATE THE SITE VISIT RECORD
+            // Replace 'customrecord_site_visit_log' with your actual Record ID
+            const visitRec = record.create({ type: 'customrecord_site_visit_log' });
+
+            // Link to Parent Customer
+            visitRec.setValue({ fieldId: 'custrecord_sv_customer', value: customerId });
+            
+            // Set Standard Fields
+            visitRec.setValue({ fieldId: 'custrecord_sv_project_name', value: projectName });
+            visitRec.setValue({ fieldId: 'custrecord_sv_address', value: address });
+            visitRec.setValue({ fieldId: 'custrecord_sv_duration', value: duration });
+            visitRec.setValue({ fieldId: 'custrecord_sv_ceiling', value: ceiling });
+            visitRec.setValue({ fieldId: 'custrecord_sv_sched_notes', value: schedNotes });
+            visitRec.setValue({ fieldId: 'custrecord_sv_monday_id', value: String(mondayPulseId) });
+
+            // Set Dates (NetSuite is picky about Date objects)
+            if (visitDate) {
+                visitRec.setValue({ fieldId: 'custrecord_sv_date', value: new Date(visitDate) });
+            }
+            if (etaDate) {
+                visitRec.setValue({ fieldId: 'custrecord_sv_eta_date', value: new Date(etaDate) });
+            }
+
+            // Set Status/Issue (These are Lists, so we pass the string and hope for a match, 
+            // or you might need to map Monday Text to NetSuite List IDs)
+            // For now, we assume you are passing the Text and your script handles text-to-ID mapping
+            // or these are Free-Form Text fields. If they are Dropdowns, let me know.
+            if (status) visitRec.setText({ fieldId: 'custrecord_sv_status', text: status });
+            if (issue) visitRec.setText({ fieldId: 'custrecord_sv_issue', text: issue });
+
+            const recordId = visitRec.save();
+
+            return {
+                status: 'success',
+                recordId: recordId,
+                linkedCustomer: projectName
+            };
+
+        } catch (e) {
+            log.error('RESTLET_ERROR', e);
+            return { status: 'error', message: e.message };
+        }
+    }
+
+    // --- HELPER: Find Customer ID by Name ---
+    function findCustomerByName(name) {
+        if (!name) return null;
+        
+        // Clean the string (remove extra spaces) just in case
+        const cleanName = name.trim();
+
+        const s = search.create({
+            type: search.Type.CUSTOMER,
+            filters: [
+                ['companyname', 'is', cleanName],
+                'AND',
+                ['isinactive', 'is', 'F'] 
+            ],
+            columns: ['internalid']
+        });
+        const res = s.run().getRange({ start: 0, end: 1 });
+        return res.length > 0 ? res[0].id : null;
+    }
+
+    return { post }
+});

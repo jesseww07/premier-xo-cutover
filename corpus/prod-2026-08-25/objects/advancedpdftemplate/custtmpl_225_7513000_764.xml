@@ -1,0 +1,9 @@
+<advancedpdftemplate scriptid="custtmpl_225_7513000_764" standard="STDTMPLCUSTINVCST">
+  <description></description>
+  <displaysourcecode>F</displaysourcecode>
+  <isinactive>F</isinactive>
+  <preferred>F</preferred>
+  <printtype>TRANSACTION</printtype>
+  <title>Custom Invoice PDF/HTML Template (SuiteTax)</title>
+  <trantype>CUSTINVC</trantype>
+</advancedpdftemplate>
