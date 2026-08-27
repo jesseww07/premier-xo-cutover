@@ -30,6 +30,7 @@ Live checklist by phase: [`docs/XO_Cutover_Tracker.html`](docs/XO_Cutover_Tracke
 | Read this | To get |
 |---|---|
 | [`docs/XO_Sweep_Findings.md`](docs/XO_Sweep_Findings.md) | **The current state.** What the sweep found, what changed in the plan, what is approved, what is next. §4a = entry-form UI steps. |
+| [`docs/Item_Form_Redesign.md`](docs/Item_Form_Redesign.md) | **Proposal (2026-08-27):** the item entry form rebuilt around how people look for facts - 19 subtabs to 9, native-first consolidation, field-by-field placement in [`item_form_layout_proposal.csv`](docs/item_form_layout_proposal.csv). Awaiting Jesse's decisions (doc section 8). |
 | [`docs/XO_Field_Scoping_Handoff.md`](docs/XO_Field_Scoping_Handoff.md) | The locked decisions and their evidence. Primary guide; do not relitigate. |
 | [`data/XO_Reference_Matrix.csv`](data/XO_Reference_Matrix.csv) | Every field/record/list/workflow in scope: populated count, disposition, XO source, live references. |
 | [`data/XO_Search_Cleanup_List.csv`](data/XO_Search_Cleanup_List.csv) | Saved searches to fix before anything is inactivated. |
