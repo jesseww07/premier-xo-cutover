@@ -54,6 +54,7 @@ python scripts/build_matrix.py     # + populated counts + dispositions → data/
 python scripts/search_cleanup.py   # → data/XO_Search_Cleanup_List.csv
 python scripts/gen_acp.py          # corpus field XML + decisions → sdf/xo-cutover-acp/src/Objects
 python scripts/build_status.py     # refreshes the Status block above and docs/STATUS.md
+python scripts/check_acp.py        # structural validation of the ACP (no credentials needed)
 ```
 
 `data/populated_counts.csv`, `data/sweep_targets.csv`, `data/script_inventory.csv`, `data/deployment_inventory.csv`
@@ -100,9 +101,11 @@ Commit the new snapshot and the regenerated `data/` together; the diff *is* the 
 `.github/workflows/ci.yml` runs on every push and PR:
 
 1. **verify** - re-runs the whole pipeline and fails if `data/`, `sdf/`, or the status blocks differ from what is committed (drift guard).
-2. **sdf-validate** - `project:validate` (local, no credentials) on the ACP with SuiteCloud CLI 4.x.
+2. **acp-check** - `scripts/check_acp.py`: XML well-formedness, scriptid/filename match, no elements tied to features Premier lacks (MATRIXITEMS / MERCHANDISEHIERARCHY) or rejected by the SDF schema, all `[scriptid=...]` references resolvable, no entry forms, no duplicate labels.
 3. **refresh-status** (main only) - regenerates the status blocks and auto-commits if they changed.
 4. **wiki-sync** (main only, opt-in via repo variable `WIKI_SYNC=true`) - mirrors `docs/*.md` + `STATUS.md` into the GitHub Wiki.
 
-Server-side validation against NetSuite in CI needs token-based auth secrets (`suitecloud account:setup:ci`); the
-workflow has a commented stub for it.
+SuiteCloud's own `project:validate` **cannot** run in CI: it aborts unless the authid in `project.json` resolves to
+credentials stored on that machine, and CLI 4.x needs Node >= 22.12. `acp-check` covers what is verifiable without an
+account; `ci.yml` carries a commented stub for real server-side validation once token-based auth secrets exist.
+Run `project:validate --server` by hand before any deployment.

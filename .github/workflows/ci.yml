@@ -18,7 +18,7 @@ jobs:
     name: Regenerate pipeline and check for drift
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v5
@@ -39,29 +39,40 @@ jobs:
         if: github.event_name == 'pull_request'
         run: python scripts/build_status.py --check
 
-  sdf-validate:
-    name: SDF project:validate (local schema + dependency check)
+  acp-check:
+    name: SDF ACP structural check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v5
         with:
-          distribution: temurin
-          java-version: '17'
-      - uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-      - name: Validate ACP
-        working-directory: sdf/xo-cutover-acp
-        run: |
-          cp project.json.example project.json
-          npx --yes @oracle/suitecloud-cli@latest project:validate
-      # Server-side validation against NetSuite. Enable by creating an auth in CI:
-      #   npx --yes @oracle/suitecloud-cli@latest account:setup:ci --authid ci \
-      #     --account ${{ secrets.NS_ACCOUNT }} --tokenid ${{ secrets.NS_TOKEN_ID }} \
-      #     --tokensecret ${{ secrets.NS_TOKEN_SECRET }} --savetoken
-      #   (needs SUITECLOUD_CI=1 and SUITECLOUD_CI_PASSKEY set) then:
-      #   npx --yes @oracle/suitecloud-cli@latest project:validate --server
+          python-version: '3.12'
+      - name: Validate ACP structure (no NetSuite credentials required)
+        run: python scripts/check_acp.py
+
+  # SuiteCloud's own project:validate cannot run here: it aborts unless the authid in
+  # project.json resolves to stored credentials on the runner (verified 2026-08-27), and
+  # CLI 4.x additionally requires Node >= 22.12. To enable real server-side validation,
+  # create token-based auth in NetSuite, add NS_ACCOUNT / NS_TOKEN_ID / NS_TOKEN_SECRET
+  # secrets, then add a job like:
+  #
+  #   sdf-validate-server:
+  #     runs-on: ubuntu-latest
+  #     env:
+  #       SUITECLOUD_CI: '1'
+  #       SUITECLOUD_CI_PASSKEY: ${{ secrets.SUITECLOUD_CI_PASSKEY }}
+  #     steps:
+  #       - uses: actions/checkout@v5
+  #       - uses: actions/setup-java@v5
+  #         with: { distribution: temurin, java-version: '17' }
+  #       - uses: actions/setup-node@v5
+  #         with: { node-version: '22' }          # CLI 4.x requires >= 22.12
+  #       - working-directory: sdf/xo-cutover-acp
+  #         run: |
+  #           npx --yes @oracle/suitecloud-cli@latest account:setup:ci --authid ci \
+  #             --account "$NS_ACCOUNT" --tokenid "$NS_TOKEN_ID" --tokensecret "$NS_TOKEN_SECRET"
+  #           printf '{"defaultAuthId":"ci"}' > project.json
+  #           npx --yes @oracle/suitecloud-cli@latest project:validate --server
 
   refresh-status:
     name: Refresh README / STATUS blocks (main)
@@ -69,7 +80,7 @@ jobs:
     needs: [verify]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - uses: actions/setup-python@v5
@@ -94,7 +105,7 @@ jobs:
     needs: [refresh-status]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           ref: main
       - name: Push docs into the wiki repository
