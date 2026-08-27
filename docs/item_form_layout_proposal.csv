@@ -1,19 +1,19 @@
 field,scriptid_or_native,current_tab,current_group,proposed_tab,proposed_group,action,rationale
-Item Name/Number,itemid,Main,Primary Information,Main,Primary Information,KEEP,identity; equals vendor SKU at Premier; the fast-entry key going forward
-Display Name/Code,displayname,Main,Primary Information,Main,Primary Information,TRACK B,"532,040 = internal ID by convention (workflow31); becomes the product name (XO Item Name); backfill from custitem_la_product_name"
-Product Name,custitem_la_product_name,Item Details/XO,-,Main,Primary Information,MOVE -> RETIRE (Track B),"604k; interim: sits beside Display Name; retires once Display Name holds it"
-UPC Code,upccode,Main,Primary Information,Main,Primary Information,TRACK B,"327,951 = internal ID by convention (workflow35 + pl_displayname.js); becomes the real GTIN (XO GTIN); backfill from custitem_la_upc, blank where none"
-UPC / GTIN,custitem_la_upc,Item Details/XO,-,Main,Primary Information,MOVE -> RETIRE (Track B),"276,929; interim: sits beside UPC Code; FarApp barcode mapping repoints to upccode"
-Vendor Name/Code,vendorname,Main,Primary Information,Main,Primary Information,RELABEL,"'Vendor Code' - 398,951 are a workflow35 copy of Item Name; decision C: keep or drop the default"
+Item Name/Number,itemid,Main,Primary Information,Main,Primary Information,KEEP,identity; equals vendor SKU at Premier
+Display Name/Code,displayname,Main,Primary Information,Main,Primary Information,KEEP,"as-is; the internal-ID convention is a separate later process (docs/Adjacent_Item_Data_Notes.md)"
+Product Name,custitem_la_product_name,Item Details/XO,-,Main,Primary Information,MOVE,"604k; the only human-readable name; sits beside Display Name"
+UPC Code,upccode,Main,Primary Information,Main,Primary Information,KEEP,"as-is; the internal-ID convention is a separate later process (docs/Adjacent_Item_Data_Notes.md)"
+UPC / GTIN,custitem_la_upc,Item Details/XO,-,Main,Primary Information,MOVE,"276,929; the real barcode; sits beside UPC Code"
+Vendor Name/Code,vendorname,Main,Primary Information,Main,Primary Information,RELABEL,"form label 'Vendor Code' - 398,951 are a workflow copy of Item Name"
 Subitem Of,parent,Main,Primary Information,Main,Primary Information,KEEP,
-Internal ID,internalid,Main,Primary Information,Main,Primary Information,KEEP,hidden inline as today; the honest source for anything that needs the key
+Internal ID,internalid,Main,Primary Information,Main,Primary Information,KEEP,hidden inline as today
 Primary Units Type,unitstype,Main,Primary Information,Purchasing/Inventory,Units,MOVE,decision 5
 Primary Base Unit,baseunit,Main,Primary Information,Purchasing/Inventory,Units,MOVE,decision 5
 Primary Stock Unit,stockunit,Main,Primary Information,Purchasing/Inventory,Units,MOVE,decision 5
 Primary Sale Unit,saleunit,Main,Primary Information,Purchasing/Inventory,Units,MOVE,decision 5
 Primary Purchase Unit,purchaseunit,Main,Primary Information,Purchasing/Inventory,Units,MOVE,decision 5
 Primary Consumption Unit,consumptionunit,Main,Primary Information,-,-,HIDE,unused
-Manufacturer,manufacturer,Purchasing/Inventory,Manufacturing,Main,Catalog,MOVE+FEED,native; feed from XO Vendor Name (today 1,649); replaces retired la_manufacturer_name
+Manufacturer,manufacturer,Purchasing/Inventory,Manufacturing,Main,Catalog,MOVE,native (1,649 today); XO feed is an ingest-spec item
 Collection,custitem_la_collection,Item Details/XO,-,Main,Catalog,MOVE,557k
 Finish,custitem_la_finish,Item Details/XO,-,Main,Catalog,MOVE,"328k (+204,504 backfill from manufacturer_finish)"
 Style,custitem_atlas_style,Main,ungrouped,Main,Catalog,MOVE+RELABEL,XO Style; 66 values over 168k items; bundle-owned so relabel via UI
@@ -32,7 +32,7 @@ Item Category (USR),custitem_usr_item_category,Main,ungrouped,-,-,HIDE,1 populat
 BlueCollar File Attachment,custitem_bc_item_file_attachment,Main,ungrouped,Communication,-,MOVE,PM add-on file; lives with Files
 Item/Cost Detail group (native),-,Purchasing/Inventory,Item/Cost Detail,Purchasing/Inventory,Item/Cost Detail,KEEP,as-is
 Special Order Item,isspecialorderitem,Purchasing/Inventory,Item/Cost Detail,Purchasing/Inventory,Item/Cost Detail,KEEP,9 TRUE; native meaning
-Special Order Product,custitem_zastro_special_order,Custom,-,Purchasing/Inventory,Item/Cost Detail,MOVE+RENAME,"683,902 TRUE; purchasing-workflow eligibility gate, not a native twin; decision A: new name; workflow35 default stays"
+Special Order Product,custitem_zastro_special_order,Custom,-,Purchasing/Inventory,Item/Cost Detail,MOVE,"683,902 TRUE; purchasing-workflow eligibility gate, not a native twin; rename is a later field change"
 Drop Ship Item,isdropshipitem,Purchasing/Inventory,Item/Cost Detail,Purchasing/Inventory,Item/Cost Detail,KEEP,native; LA Drop_Ship retires
 XO In Stock,custitem_xo_in_stock,Item Details/XO,-,Purchasing/Inventory,XO Availability & Ordering,MOVE,manufacturer stock - informational
 Back Order Date,custitem_xo_backorder_date,Item Details/XO,-,Purchasing/Inventory,XO Availability & Ordering,MOVE,
@@ -40,7 +40,7 @@ Order Minimum,custitem_xo_order_minimum,Item Details/XO,-,Purchasing/Inventory,X
 Order Multiple,custitem_xo_order_multiple,Item Details/XO,-,Purchasing/Inventory,XO Availability & Ordering,MOVE,
 Vendor Discounted Cost,custitem_xo_vendor_disc_cost,Item Details/XO,-,Purchasing/Inventory,XO Availability & Ordering,MOVE,
 Cost With Shipping,custitem_xo_cost_w_shipping,Item Details/XO,-,Purchasing/Inventory,XO Availability & Ordering,MOVE,
-MPN,mpn,Purchasing/Inventory,Manufacturing,Purchasing/Inventory,Manufacturing,KEEP (optional feed),native (20); XO Item Number; low value since itemid is the vendor SKU
+MPN,mpn,Purchasing/Inventory,Manufacturing,Purchasing/Inventory,Manufacturing,KEEP,native (20)
 Manufacturer Country,countryofmanufacture,Purchasing/Inventory,Manufacturing,-,-,HIDE,decision 7: COO not transactionally needed in NetSuite; Shopify + XO carry it
 Inventory Management group,-,Purchasing/Inventory,Inventory Management,Purchasing/Inventory,Inventory Management,KEEP,as-is
 Vendor Bill Matching group,-,Purchasing/Inventory,Vendor Bill Matching,Purchasing/Inventory,Vendor Bill Matching,KEEP,as-is
@@ -51,7 +51,7 @@ Sales group,-,Sales/Pricing,Sales,Sales/Pricing,Sales,KEEP,as-is
 IMAP,custitem5,Custom,-,Sales/Pricing,MAP Pricing,MOVE,XO IMAP lands here
 XO UMAP,custitem_xo_umap,Item Details/XO,-,Sales/Pricing,MAP Pricing,MOVE,
 Pricing group / Price Levels,-,Sales/Pricing,Pricing,Sales/Pricing,Pricing,KEEP,MSRP is the record; Premier Sample Item internal
-Item Weight,weight,Sales/Pricing,Shipping,Sales/Pricing,Shipping,KEEP+FEED,"decision 6: THE weight field; XO Ship Weight (99%); all custom weight fields retire; confirm unit"
+Item Weight,weight,Sales/Pricing,Shipping,Sales/Pricing,Shipping,KEEP,"the only weight field on the form; custom weight fields hidden; XO feed is an ingest-spec item"
 Shipping group (rest),-,Sales/Pricing,Shipping,Sales/Pricing,Shipping,KEEP,
 Width,custitem_la_width,Item Details/XO,-,Specifications,Dimensions,MOVE,"316k (+45,816 backfill)"
 Height,custitem_la_height,Item Details/XO,-,Specifications,Dimensions,MOVE,625k
