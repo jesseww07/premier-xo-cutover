@@ -1,28 +1,30 @@
 # Item Form Redesign — Proposal
 
-**Status:** proposal for Jesse's review · drafted 2026-08-27 · evidence from production SuiteQL (705,357 items), the SB1 form export, and `data/XO_Reference_Matrix.csv`
-**Scope:** the inventory-item entry form (`custform_217_7513000_136`, "New Inventory Item Form - Xo Fields", the working copy in SB1). Field *placement*, *visibility*, and *consolidation* — not the LA retirement schedule, which stands.
+**Status:** decisions taken 2026-08-27 (see §8) · drafting toward execution · evidence from production SuiteQL (705,357 items), the SB1 form export, and `data/XO_Reference_Matrix.csv`
+**Scope:** the inventory-item entry form (`custform_217_7513000_136`, working copy in SB1) — field *placement*, *visibility*, and *consolidation* — plus the retirement of the internal-ID conventions on Display Name and UPC Code. The LA retirement schedule stands unchanged.
 
 ---
 
 ## 1. The principle
 
-The form should let anyone — sales, PC, purchasing, accounting, a new hire — find an item fact in the place they would naturally look, without a map:
+The form should let anyone — sales, PC, purchasing, accounting, a new hire — find an item fact where they would naturally look, without a map:
 
 | If you want… | You look on… |
 |---|---|
-| what it is — name, number, brand, collection, finish, category, picture | **the top of the form** |
+| what it is — name, number, brand, collection, finish, picture | **the top of the form** |
 | what we sell it for | **Sales / Pricing** |
-| what we buy it for, from whom, how it ships, whether it's in stock | **Purchasing / Inventory** |
-| how it books | **Accounting** (tax included) |
+| what we buy it for, from whom, how it ships, whether the vendor has it | **Purchasing / Inventory** |
+| how it books and how it's taxed | **Accounting** |
 | how big / bright / rated it is | **Specifications** |
 | what the integrations know about it | **Integrations** |
+| what's happened with it | **Related Records & Analytics** |
 
-And three rules that follow from it:
+Four rules follow:
 
-1. **One home per fact.** A fact lives in one field, in one place. No `Manufacturer` *and* `Manufacturer Name` *and* `Vendor Name`.
-2. **Native first.** If NetSuite has a field for it, use that field. A custom duplicate of a native field is a defect, even if it has 600,000 values.
-3. **Populated ≠ needed.** A field earns its place by being *used* — read by a person, a script, a connected record. Bad data, convention-copies, and integration side-effects do not count.
+1. **One home per fact.** No `Manufacturer` *and* `Manufacturer Name` *and* `Vendor Name`.
+2. **Native first.** If NetSuite has a field for it, that field is the home. A custom duplicate of a native field is a defect, whatever its row count.
+3. **Populated ≠ needed.** A field earns its place by being *used* — by a person, a script, or a connected record. Convention-copies and integration side-effects don't count.
+4. **NetSuite has no external visibility.** Customers see Shopify; walk-ins see the XO platform. The item record exists to *transact and account*. Anything that isn't needed to identify, buy, sell, or book an item is a candidate to leave — keeping it to keep it means its days are numbered.
 
 ---
 
@@ -32,42 +34,44 @@ And three rules that follow from it:
 
 | Symptom | Evidence |
 |---|---|
-| **The "Custom" subtab is a 114-field dump** | 114 fields, no field groups, in the order integrations created them. It holds 6 fields people actually need (Material, IMAP, Special Order Product, Is Light Bulb, XO Item ID, Non-Taxable) buried among ~100 retiring LA fields. |
-| **The "Item Details / XO" subtab is a second dump** | 51 fields, no groups. Identity (Product Name, UPC, Collection, Finish, Image) sits next to sync timestamps and search-facet buckets. |
-| **Zastro duplicated the native fields and left the natives bare** | native `manufacturer` **1,649** vs `custitem_la_manufacturer_name` 609,162 · native `mpn` **20** · native `countryofmanufacture` **3** vs LA COO 257,001 · native Item Weight **452** vs LA weight fields 49,648 · native **Special Order Item 9** vs `custitem_zastro_special_order` **683,902** TRUE · native Drop Ship Item 2 vs LA Drop_Ship 498,489 |
-| **The native "name" fields are key-copies, not names** | Display Name = internal ID on **532,040** items (workflow `Internal ID as Display Name`); Vendor Name/Code = Item Name on **398,951** (workflow `Set Item Defaults`). The only human-readable product name in the system is the custom `Product Name` field — and it's on the second dump subtab. |
-| **UPC Code holds the internal ID — on purpose** | 327,951 of 395,616 values are the item's own internal ID; only 3,232 look like UPCs. `Set Item Defaults` writes `TO_CHAR({internalid})`, `pl_displayname.js` enforces it, `_jww_upc_fill` backfilled it. **It is the warehouse barcode key** — `mag_sl_print_label_form.js` prints it. The LA pipeline (`update_price_only.js`) fought it by writing real UPCs into the same field → 192,743 conflicting values. |
-| **Six subtabs carry nothing** | Web Store: store description 0, search keywords 0, online 0, display name 218 — Premier has no NetSuite web store. Preferences: `Offer Support` is set TRUE by workflow on every item, meaningless. Merchandise Hierarchy: feature not enabled. Hazmat: lighting. Customer Part Number / Item Substitution: SCM bundle sublists (usage not SuiteQL-visible — verify in UI, expected empty). |
-| **Three overlapping "Item URL" labels on one form** | `custitem_zastro_image_url` "Item URL" (1 value), `custitem_la_product_url` shown as "Item URL (2)", `custitem_webstore_link` "Webstore Link" (0 values). Users see three URL fields; one has data. |
-| **Classification is unused natively** | Class 3,896 · Department 1,330 · Location 2,502 — while the Atlas `Style` field (66 values, 168,004 items) is a real taxonomy and floats in the main area with no field group, next to `Close-Out` (3 TRUE), `Season` (33), a duplicate Atlas `Department` (0), and a tax-bundle `Item Category` (1). |
-| Horizontal scrolling | comes from tabs with 50–114 ungrouped fields and 6+ column sublists; fixed by the consolidation below, not by widening anything. |
+| **"Custom" is a 114-field dump** | No field groups; integration creation order. It hides the 6 fields people need (Material, IMAP, Special Order Product, Is Light Bulb, XO Item ID, Non-Taxable) among ~100 retiring LA fields. |
+| **"Item Details / XO" is a second dump** | 51 ungrouped fields. Identity (Product Name, UPC, Collection, Finish, Image) sits beside sync timestamps and search-facet buckets. |
+| **Zastro duplicated native fields and left the natives bare** | native `manufacturer` **1,649** vs `la_manufacturer_name` 609,162 · native `mpn` **20** · native `countryofmanufacture` **3** · native Item Weight **452** vs LA weight fields 49,648 · native Drop Ship Item 2 vs LA Drop_Ship 498,489 |
+| **The two native "name/code" fields hold internal IDs by convention** | Display Name = internal ID on **532,040** items (`customworkflow31` → `customscript_internal_as_code`); UPC Code = internal ID on **327,951** of 395,616 (`customworkflow35` formula + `pl_displayname.js` + `_jww_upc_fill`). Only 3,232 UPC Codes look like UPCs. The LA pipeline fought the convention by writing real UPCs into the same field → 192,743 conflicting values. **The only human-readable product name in the system is the custom `Product Name` field, and it's on the second dump subtab.** |
+| **Vendor Name/Code = Item Name on 398,951** | `customworkflow35` copies Item Name into it. Harmless (Item Name *is* the vendor SKU at Premier) but it is not the vendor's name. |
+| **Six subtabs carry nothing** | Web Store: 0 online, 0 store descriptions, 0 keywords, 218 display names — Premier has no NetSuite web store. Preferences: `Offer Support` is workflow-forced TRUE. Merchandise Hierarchy: feature off, 0 versions. Hazmat: lighting. Customer Part Number / Item Substitution: SCM sublists, expected empty (verify in UI). |
+| **Three "Item URL" fields on one form** | `custitem_zastro_image_url` "Item URL" (1 value) · `custitem_la_product_url` shown as "Item URL (2)" (519k) · `custitem_webstore_link` (0). |
+| **Classification is unused natively; the real taxonomy floats** | Class 3,896 · Department 1,330 · Location 2,502 — while Atlas `Style` (66 values, 168,004 items) sits ungrouped in the main area beside `Close-Out` (3 TRUE), `Season` (33), a duplicate Atlas `Department` (0), and a tax-bundle `Item Category` (1). |
+| Horizontal scrolling | tabs with 50–114 ungrouped fields and 6-column sublists. Fixed by consolidation, not by widening. |
+
+### What the internal-ID convention was for
+
+Display Name = internal ID exists so a short code could be typed on transaction lines instead of long vendor SKUs; UPC Code = internal ID exists so warehouse labels (`mag_sl_print_label_form.js`) could barcode that same short key. It was built to avoid learning the item record. The cost: the field literally named *Universal Product Code* holds nothing universal, the field named *Display Name* displays nothing, the warehouse can't scan a real product barcode, and every printed document shows a number instead of a name. **This rollout retires the convention** (§5, Track B) and replaces it with data that is searchable, reportable, and still fast to key — the vendor SKU that *is* the Item Name.
 
 ---
 
-## 3. Proposed structure
-
-**19 subtabs → 9.** Main area gets a third group. Two custom subtabs are renamed/repurposed, one is retired, and every other tab is native.
+## 3. Proposed structure — 19 subtabs → 8
 
 ### Main area
 
 | Group | Fields (in order) | Notes |
 |---|---|---|
-| **Primary Information** (native) | Item Name/Number · **Product Name** · Display Name/Code · UPC Code → *label "Barcode (Internal ID)"* · **UPC / GTIN** · Vendor Name/Code · Subitem Of · Primary Units Type · Base / Stock / Sale / Purchase Unit · Internal ID | `Product Name` (`custitem_la_product_name`, 604k) moves up from the XO tab — it is *the* name. Relabel native UPC Code honestly so nobody "fixes" it; `UPC / GTIN` (`custitem_la_upc`) is the real barcode. Consider hiding the 5 UOM fields into Purchasing if UOM is always Each. |
-| **Catalog** (new) | **Manufacturer** (native, ← XO Vendor Name) · **Collection** · **Finish** · **Style** (XO Style, Atlas field) · **Primary Image** · **Item URL** | The "what does it look like / which line is it" group. Native `manufacturer` replaces the retired `la_manufacturer_name` for display — it's a native text field, costs nothing, and the ingest already has the value. |
-| **Classification** (native) | Subsidiary · Class · Department · Location · **Is Light Bulb** · Inactive | `Is Light Bulb` (`custitem6`) is a category flag that drives a transaction column — it belongs with classification. Remove Close-Out, Season, Atlas Department, Item Category, BlueCollar File Attachment from this group (see §5). **Option:** feed XO `Standard-Category` / `Subcategory` into native `Class` (hierarchical) — that would give Premier a real product taxonomy in the field every NetSuite report already understands. |
+| **Primary Information** (native) | Item Name/Number · **Display Name** *(Track B target: the product name)* · **UPC Code** *(Track B target: the real GTIN)* · Vendor Name/Code → label **"Vendor Code"** · Subitem Of · Internal ID | Until Track B lands, `Product Name` (`custitem_la_product_name`) and `UPC / GTIN` (`custitem_la_upc`) sit here **directly beside their native targets** so the redundancy is visible and the cutover is a one-field move. The five UOM fields leave the main area (→ Purchasing). |
+| **Catalog** (new) | **Manufacturer** (native, ← XO Vendor Name) · **Collection** · **Finish** · **Style** (XO Style) · **Primary Image** · **Item URL** | The "which line, what does it look like" group. Native `manufacturer` takes over from the retired `la_manufacturer_name` at no cost. |
+| **Classification** (native) | Subsidiary · Class · Department · Location · **Is Light Bulb** · Inactive | `Is Light Bulb` (`custitem6`) is a category flag feeding `custcol_premier_is_bulb`. Close-Out, Season, Atlas Department, Item Category, BlueCollar File Attachment leave this group (§4). Class keeps its current meaning (customer category) — see §8. |
 
-### Subtabs (in tab order)
+### Subtabs
 
 **1. Purchasing / Inventory** — *what we buy, from whom, and where it is*
 
 | Group | Fields |
 |---|---|
-| Item / Cost Detail (native) | Purchase Price · Last Purchase Price · Purchase Description · Costing Method · Average Cost · Total Value · Track Landed Cost · Stock Description · Drop Ship Item · Special Order Item · **Special Order Product** (Zastro flag — keep next to its native twin; see §6) · Match Bill To Receipt · Copy Description |
+| Item / Cost Detail (native) | Purchase Price · Last Purchase Price · Purchase Description · Costing Method · Average Cost · Total Value · Track Landed Cost · Stock Description · Drop Ship Item · Special Order Item · **[Special Order Product → renamed, §6]** · Match Bill To Receipt |
 | **XO Availability & Ordering** (new) | **XO In Stock** · **Back Order Date** · **Order Minimum** · **Order Multiple** · **Vendor Discounted Cost** · **Cost With Shipping** |
-| Manufacturing (native) | Manufacturer (mirrors Catalog) · **MPN** (← XO Item Number) · **Manufacturer Country** (← XO Country of Origin, 99% fill) |
-| Inventory Management (native) | Use Bins · Preferred Stock Level · Reorder Multiple · Purchase Lead Time · Safety Stock · Transfer Price · Supply Chain Horizon |
-| Vendor Bill Matching (native) | as-is |
-| Sublists | Vendors · Locations · Bin Numbers · **Inventory Detail / Inventory Numbers / Inventory Statuses** (absorbed from the Inventory Detail tab) · **Landed Cost Template Mapping** (absorbed) |
+| **Units** (new, from main area) | Primary Units Type · Base Unit · Stock Unit · Sale Unit · Purchase Unit |
+| Manufacturing (native) | Manufacturer (mirror) · MPN (optional feed from XO Item Number) · ~~Manufacturer Country~~ *hidden — COO is not transactionally needed in NetSuite; it lives on Shopify and the XO platform* |
+| Inventory Management · Vendor Bill Matching (native) | as-is |
+| Sublists | Vendors · Locations · Bin Numbers · **Inventory Detail / Numbers / Statuses** (absorbed) · **Landed Cost Template Mapping** (absorbed) |
 
 **2. Sales / Pricing** — *what we sell it for and how it ships*
 
@@ -75,129 +79,171 @@ And three rules that follow from it:
 |---|---|
 | Sales (native) | Sales Description · Cost Estimate Type · Item Defined Cost · Soft Descriptor · Min / Max Quantity |
 | **MAP Pricing** (new) | **IMAP** (`custitem5`) · **XO UMAP** |
-| Pricing (native) | price-level matrix (MSRP is the record; Premier Sample Item is internal) · Quantity Pricing Schedule · Use Marginal Rates |
-| Shipping (native) | **Item Weight** (← XO Ship Weight, 99% fill; today 452 populated) · Package · Ships Individually · Shipping / Handling Cost · Schedule B |
-| Sublists | Price Levels |
+| Pricing (native) | price-level matrix (MSRP is the record) · Quantity Pricing Schedule |
+| Shipping (native) | **Item Weight** — *the one and only weight field*, fed from XO Ship Weight (99% fill); all custom weight fields retire. This is what lets a warehouse scale and ship-from-NetSuite happen later. · Package · Ships Individually · Shipping / Handling Cost · Schedule B |
 
-**3. Specifications** — *the rename of "Item Details / XO Logic Data"* (custom subtab `custtab_25_t2379072_560`)
+**3. Specifications** — *descriptive knowledge* (rename of "Item Details / XO Logic Data", custom subtab `custtab_25_t2379072_560`)
 
 | Group | Fields |
 |---|---|
 | Dimensions | **Width** · **Height** · **Length** |
 | Lighting | **Bulb Type** · **Bulb Base** · **Number of Bulbs** · **Wattage** · **Kelvin** · **Lumens** · **CRI** · **Voltage** · **Dimmable** |
-| Materials | **Material** (up from Custom) |
+| Materials | **Material** |
 | Ratings & Compliance | **Safety Rating** (ETL/UL) · **Location Rating** (Damp/Wet) · **Prop 65** · **Prop 65 Description** · **Title 20** · **Title 24** |
 | Documents | **Spec Sheet Hyperlink** |
 
-The four facet **buckets** (Kelvin / Lumens / Wattage / Voltage Bucket) are search facets, not reading material — keep the fields, **hide them from the form**.
+The four facet buckets (Kelvin / Lumens / Wattage / Voltage Bucket) are search facets, not reading material — fields stay, **hidden from the form**.
 
 **4. Accounting** — *how it books* (+ Tax absorbed)
 
 | Group | Fields |
 |---|---|
-| Accounts (native) | as-is (COGS, Asset, Income, Gain/Loss, variances, Dropship Expense) |
-| **Tax** (absorbed from the Tax tab) | Tax Schedule · Tax Item Type · OSS Tax Schedule · Tax Schedule Coaching Text · **Non-Taxable** (TSS, up from Custom) |
+| Accounts (native) | as-is |
+| **Tax** (from the Tax tab) | Tax Schedule · Tax Item Type · OSS Tax Schedule · Tax Schedule Coaching Text · **Non-Taxable** |
 | Currency | as-is |
 
-**5. Integrations** — *new custom subtab; replaces the Shopify tab and collects every sync artifact*
+**5. Integrations** — *technical information* (new custom subtab; replaces the Shopify tab)
 
 | Group | Fields |
 |---|---|
-| Shopify | Shopify Flag · Shopify Store · Sync Shopify · Shopify Handle · Meta Title · Meta Description · Metafield 1 · Product Type · Requires Shipping · Tags · Allow Backorders · Published At · Published Scope · isonline · List On Shopify Temporary Field |
-| XO Sync | **XO Item ID** · **XO Last Changed** · **XO Availability Changed** · **XO Catalog Changed** · **XO Price Changed** · **XO Keywords** |
+| Shopify | Shopify Flag · Shopify Store · Sync Shopify · Handle · Meta Title · Meta Description · Metafield 1 · Product Type · Requires Shipping · Tags · Allow Backorders · Published At · Published Scope · isonline · List On Shopify Temporary Field · Leaves Shopify Inventory |
+| XO Sync | **XO Item ID** · **XO Last / Availability / Catalog / Price Changed** · **XO Keywords** |
 | NetSuite Connector | Last Posted to NetSuite Connector · *sublist:* NetSuite Connector Synced Items |
 
-**6. Item360** — Atlas analytics sublists (Sales & Margin, 3-Way Match, Historical Sales, Open SO/PO, Monthly Qty). Read-only reports; keep as a tab of reports. *(Confirm sales/purchasing still open it; if not, hide.)*
+**6. Related Records & Analytics** — Transactions sublist **+ the six Item360 sublists** (Sales & Margin, 3-Way Match, Historical Item Sales, Open SOs, Open POs, Monthly Qty Sold). Item360 has real value and is currently lost in the tab strip; beside Transactions it becomes the natural "what has this item done" tab — and a place to give Cash360 some oxygen. The Atlas sublists are custom sublists, so they move with Move Elements like any other.
 
-**7. Related Records** — Transactions sublist. Native, keep. (Consider folding Item360 here later.)
+**7. Communication** — Events · Tasks · Phone Calls · **Files** · User Notes. `BlueCollar File Attachment` (PM add-on) joins Files here.
 
-**8. Communication** — Events · Tasks · Phone Calls · **Files** · User Notes. Native, keep. `BlueCollar File Attachment` (PM add-on) moves here from the main area.
+**8. System Information** — as-is.
 
-**9. System Information** — Inactive · Date Converted · Original Type/Subtype · System Notes · Active Workflows · Workflow History. Native, keep.
-
-### Hidden (uncheck *Show* on the form)
+### Hidden
 
 | Subtab | Why |
 |---|---|
-| **Custom** | empty once the 6 keepers move and the ~100 retiring fields are hidden |
-| **Web Store** | no NetSuite web store; 0 online items, 0 store descriptions, 0 keywords |
-| **Preferences** | `Offer Support` is workflow-forced TRUE on every item; `Available to Adv. Partners` unused |
-| **Merchandise Hierarchy** | feature not enabled; 0 versions |
-| **Hazmat / Dangerous Goods** | not applicable to lighting (verify: 0 hazmat IDs expected) |
-| **Inventory Detail**, **Tax**, **Landed Cost Templates**, **Shopify** | absorbed above |
-| **Customer Part Number**, **Item Substitution** | SCM bundle sublists; verify empty in UI, then hide |
+| **Custom** | empty once 6 keepers move and ~100 retiring fields are hidden |
+| **Web Store** | no NetSuite web store — 0 / 0 / 0 |
+| **Preferences** | `Offer Support` workflow-forced; `Adv. Partners` unused |
+| **Merchandise Hierarchy** | feature off |
+| **Hazmat / Dangerous Goods** | lighting |
+| **Item360** | folded into Related Records & Analytics |
+| **Inventory Detail · Tax · Landed Cost Templates · Shopify** | absorbed |
+| **Customer Part Number · Item Substitution** | SCM sublists — verify empty in UI, then hide |
 
 ---
 
-## 4. Field-by-field: every field that survives, and where it goes
+## 4. Field-by-field moves
 
-The companion CSV `docs/item_form_layout_proposal.csv` is the executable version (one row per field: current tab → proposed tab → group → action). Summary of moves that are not obvious from §3:
+Executable version: `docs/item_form_layout_proposal.csv` (one row per field: current tab → proposed tab → group → action). The non-obvious ones:
 
 | Field | Today | Proposed | Why |
 |---|---|---|---|
-| Product Name (`custitem_la_product_name`) | Item Details/XO | **Main › Primary Information** | the only human-readable name; 604k |
-| UPC / GTIN (`custitem_la_upc`) | Item Details/XO | Main › Primary Information | identity |
+| Product Name (`custitem_la_product_name`) | Item Details/XO | Main › Primary Information, beside Display Name | the only real name; **Track B target = native Display Name** |
+| UPC / GTIN (`custitem_la_upc`) | Item Details/XO | Main › Primary Information, beside UPC Code | **Track B target = native UPC Code** |
 | Collection · Finish · Primary Image · Item URL | Item Details/XO | Main › Catalog | how staff recognise a fixture |
-| Style (`custitem_atlas_style`) | Main, ungrouped | Main › Catalog | 66-value taxonomy, 168k items |
-| Material | **Custom** | Specifications › Materials | spec, not identity |
-| IMAP (`custitem5`) | **Custom** | Sales / Pricing › MAP Pricing | customer-facing price floor |
-| XO UMAP | Item Details/XO | Sales / Pricing › MAP Pricing | same |
-| Special Order Product | **Custom** | Purchasing › Item/Cost Detail | ops flag; sits beside native Special Order Item |
-| Is Light Bulb (`custitem6`) | **Custom** | Main › Classification | category flag feeding `custcol_premier_is_bulb` |
-| Non-Taxable (TSS) | **Custom** | Accounting › Tax | tax |
-| XO Item ID · Last Posted to NetSuite Connector | **Custom** | Integrations | sync keys |
-| XO In Stock · Back Order Date · Order Min/Multiple · Vendor Disc. Cost · Cost w/ Shipping | Item Details/XO | Purchasing › XO Availability & Ordering | procurement facts |
-| XO change-date quartet · XO Keywords | Item Details/XO | Integrations › XO Sync | sync metadata |
-| Facet buckets ×4 | Item Details/XO | *hidden* (field kept) | search facets |
-| Spec Sheet Hyperlink | Item Details/XO | Specifications › Documents | doc |
+| Style (`custitem_atlas_style`) | Main, ungrouped | Main › Catalog | 66-value taxonomy |
+| Five UOM fields | Main › Primary Information | Purchasing › Units | frees the top for primary facts |
+| Material | Custom | Specifications › Materials | spec |
+| IMAP (`custitem5`) · XO UMAP | Custom / XO | Sales › MAP Pricing | price floors |
+| Special Order Product | Custom | Purchasing › Item/Cost Detail (renamed, §6) | workflow gate |
+| Is Light Bulb (`custitem6`) | Custom | Main › Classification | category flag |
+| Non-Taxable | Custom | Accounting › Tax | tax |
+| XO Item ID · Last Posted to Connector | Custom | Integrations | sync keys |
+| XO availability/order/cost ×6 | Item Details/XO | Purchasing › XO Availability & Ordering | procurement |
+| XO change dates ×4 · XO Keywords | Item Details/XO | Integrations › XO Sync | sync metadata |
+| Facet buckets ×4 | Item Details/XO | *hidden* (fields kept) | search facets |
+| Item360 sublists ×6 | Item360 tab | Related Records & Analytics | see §3.6 |
+| Manufacturer Country (native) | Purchasing › Manufacturing | *hidden* | COO not needed in NetSuite |
 | BlueCollar File Attachment | Main › Classification | Communication | it's a file |
-| Close-Out · Season · Atlas Department · Item Category (USR) · Item Image (Atlas) · Publish Item · EM Product · Item Options | Main / Custom | *hidden* | 3 / 33 / 0 / 1 / 3 / 0 / 1 / unused |
-| `custitem_zastro_image_url` "Item URL" · `custitem_webstore_link` · `custitem_no_of_bulbs` (135) · `custitem_zastro_warranty` (0) · `custitem_la_umap` (0) | Custom / XO | *hidden now → retire* | duplicates with no data; hiding `zastro_image_url` fixes the "Item URL (2)" label |
-| every other LA field on Custom / XO | Custom / XO | *hidden now → inactivate Phase 5* | per `XO_Reference_Matrix.csv` |
+| Close-Out · Season · Atlas Department · Item Category · Item Image (Atlas) · Publish Item · EM Product · Item Options | Main / Custom | *hidden* | 3 / 33 / 0 / 1 / 3 / 0 / 1 / unused |
+| `zastro_image_url` · `webstore_link` · `no_of_bulbs` (135) · `zastro_warranty` · `la_umap` · all custom weight fields | Custom / XO | *hidden → retire* | duplicates with no or worse data |
+| every other LA field on Custom / XO | Custom / XO | *hidden → inactivate Phase 5* | per `XO_Reference_Matrix.csv` |
 
 ---
 
-## 5. Native-field consolidation (the Zastro fix)
+## 5. Native-first consolidation
 
-These are the places where the fix is "stop using the custom field, feed the native one." Each is an ingest-mapping change plus, where noted, a one-time backfill. None changes a scriptid.
+### Track A — with the form redesign (ingest mapping only; no scriptid changes)
 
-| Native field | Feed from XO | Today | Replaces | Caveat |
-|---|---|---|---|---|
-| `manufacturer` | Vendor Name | 1,649 | `la_manufacturer_name` (retiring anyway) | free text — direct |
-| `mpn` | Item Number | 20 | `la_manufacturer_number` (244, retiring) | Item Name/Number already *is* the vendor SKU at Premier; MPN duplicates it. Low value — populate for completeness or skip. |
-| `countryofmanufacture` | Extra-Country of Origin | 3 | `la_country_of_origin` (retiring) | **list field** — needs text→country mapping ("China" → CN). Worth it: XO fill is 99%, and country of origin matters for tariffs. |
-| `weight` (Item Weight) | Extra-Ship Weight | 452 | `la_weight_grams`, `custitemcustitem_la_weight` (retiring) | drives shipping calculations; unit = lb in NetSuite, check XO unit |
-| `isspecialorderitem` | — | 9 TRUE | `custitem_zastro_special_order` (683,902 TRUE) | **not yet** — see §6 |
-| `isdropshipitem` | — | 2 TRUE | `la_drop_ship` (retiring) | handoff already decided: retire the LA field, keep native (rarely usable — items are both) |
-| `class` (hierarchical) | Standard-Category / Subcategory | 3,896 | `custitem_category` (30 values, 5,852) · `la_manufacturer_category` (42, 5,521) · `la_la_category` (85) | **optional, biggest upside**: gives every native report a product taxonomy. Decide whether Class is free for this (it is barely used today). |
-| `displayname` | — | 532,040 = internal ID | — | **leave the convention alone** — it prints on transaction lines by design (workflow31). Just don't call it a name. |
-| `upccode` | — | 327,951 = internal ID | — | **leave the convention alone** — it's the warehouse barcode key (`mag_sl_print_label_form.js`). Relabel on the form to "Barcode (Internal ID)". The LA pipeline that overwrote it with real UPCs retires Sep 1, ending the 192,743-row conflict. |
-| `vendorname` | — | 398,951 = Item Name | — | leave; workflow35 default. Hide or relabel "Vendor Code" — it is not the vendor's *name*. |
+| Native field | Feed from XO | Today | Replaces |
+|---|---|---|---|
+| `manufacturer` | Vendor Name | 1,649 | `la_manufacturer_name` (retiring) |
+| `weight` (Item Weight) | Extra-Ship Weight | 452 | `la_weight_grams`, `custitemcustitem_la_weight` (retiring). **The single weight field.** Confirm XO unit (lb vs kg) against NetSuite's weight unit. |
+| `mpn` | Item Number | 20 | optional — Item Name/Number already *is* the vendor SKU |
+
+Not doing: `countryofmanufacture` (COO stays on Shopify/XO; hide the native field) · `class` as product taxonomy (tabled — see §8).
+
+### Track B — retire the internal-ID convention (Display Name & UPC Code)
+
+**Target state:** Display Name = the product name (from XO `Item Name`); UPC Code = the real GTIN (from XO `GTIN`); the internal ID is looked up as what it is — `internalid` — wherever a system needs it. `custitem_la_product_name` and `custitem_la_upc` then become redundant and retire, taking the survivor list from 21 to 19. Fast entry on transactions is preserved by the Item Name/Number (the vendor SKU) and, for the warehouse, by scanning a barcode that is finally a real barcode.
+
+**Everything wired to the convention (from the corpus + workflow XML):**
+
+| Dependency | Kind | Change |
+|---|---|---|
+| `customworkflow31` "Internal ID as Display Name" → `customscript_internal_as_code` (WFA; script 581, file id 5319 - **not under /SuiteScripts**, locate in the File Cabinet before switch-off) | writer | inactivate both |
+| `customworkflow35` "Set Item Defaults" — action `UPC Code = TO_CHAR({internalid})` | writer | delete the action (keep Use Bins; review Offer Support; keep the Special Order Product default — §6) |
+| `customworkflow35` — action `Vendor Name = Item Name` | writer | keep (harmless, useful as Vendor Code) or delete — Jesse's call |
+| `pl_displayname.js` (WFA) — forces UPC Code = internal ID via `submitFields` | writer | inactivate |
+| `_jww_upc_fill` (MR) — backfilled UPC Code = internal ID | writer | delete |
+| `update_price_only.js` (LA pipeline) — wrote real UPCs into UPC Code | writer | retires Sep 1 anyway |
+| `mag_sl_print_label_form.js` — barcodes `upccode` on warehouse labels | reader | switch the barcode source to `internalid` explicitly **or** to the real UPC — a warehouse decision (see §8) |
+| `pl_salesOrdItemLabel_sl.js` — prints `displayname` on SO item labels | reader | will print the product name; add `internalid`/Item Name if the label needs the key |
+| 6 advanced PDF templates print `displayname` (`custtmpl_cycle_count_print`, `custtmpl_if_with_iinternalid`, `custtmpl_suitetax_invoice_1106`, `custtmpl_113`, `_225`, `_241`) | readers | invoices/IFs *want* a name — improvement. Cycle-count sheets may want the key: use `{item.internalid}` or Item Name there. |
+| `inventory_portlet.js`, `suitelet_generate_code.js`, `item record report.js`, `Unified Catalog Analysis.js` | readers | display-only; will show names |
+| FarApp connector barcode mapping → `custitem_la_upc` | mapping | repoint to native `upccode` (Jesse-owned, a few clicks) |
+| Saved searches: 3 on `la_product_name`, 3 on `la_upc`, **0** on `displayname`/`upccode` by ID | searches | repoint the 6 at cutover |
+| XO ingest | mapping | `Item Name` → `displayname`; `GTIN` → `upccode` (store the 14-digit GTIN as-is) |
+| Transaction-line entry habit (typing the internal ID) | people | replaced by typing the Item Name / vendor SKU, which auto-completes; communicate before flipping |
+
+**Backfill (one bulk pass, FA UE sync scripts disabled):** `displayname` ← `custitem_la_product_name` where present (604k); `upccode` ← `custitem_la_upc` where present (276,929), **blank** where no GTIN exists — an honest empty beats a fake code. Then the item-level defaults stop re-polluting.
+
+**Sequencing:** the writers must be switched off *before* the backfill or the workflows undo it on the next save. Recommended window: immediately after the Sep 1 LA freeze (the LA writer is gone, the XO feed is live to keep the natives fed).
 
 ---
 
-## 6. Special Order Product — the one deliberate deferral
+## 6. Special Order Product — rename, don't migrate
 
-`custitem_zastro_special_order` is TRUE on 683,902 items (97%), written by workflow35 on every create/update, read by 11 saved searches, and native `isspecialorderitem` is TRUE on 9. The *right* end state is obvious: the native checkbox. But it is a semantic change to a flag that 97% of the catalog carries and that the PO-consolidation flow may key on (the flow references the Zastro record types; whether any of it reads this item flag is a saved-search question). **Recommendation:** keep the custom flag on the form beside the native one for now; after Sep 1, audit the 11 searches, decide if "special order" at Premier even means what NetSuite means, then either migrate to native or rename the custom one honestly ("Non-Stock / Order-In").
+`custitem_zastro_special_order` (683,902 TRUE) is **not** a copy of native Special Order Item. It is the eligibility gate for Premier's purchasing/consolidation workflow: without it an item cannot enter the flow that creates the consolidation custom records and routes received goods to the right order. `customworkflow35` defaults it TRUE for exactly that reason. Zastro just named it lazily. It stays, stays TRUE-by-default, and stays in Purchasing › Item/Cost Detail — under a name that says what it does. Candidates: **"Purchasing Workflow Eligible"**, **"Consolidation Eligible"**, **"Order-In Item"**. Native Special Order Item (9 TRUE) keeps its NetSuite meaning.
 
 ---
 
 ## 7. How to execute
 
-1. **Subtabs (SDF, once, deploys to all accounts):** relabel `custtab_25_t2379072_560` → "Specifications"; add custom subtab `custtab_xo_integrations` "Integrations". Both are `subtab` objects — deployable in the ACP, unlike forms.
-2. **Field default placement (SDF):** set `<subtab>` on the surviving custom fields to their new home (Specifications / Integrations / Purchasing etc. — natives tabs are addressable by their standard IDs). Ship in the ACP with the relabels. This makes the *default* placement portable across SB1 / RP2 / prod; the form then only needs ordering and hides.
-3. **Form (UI, per account):** Customize → **Move Elements** to place fields into groups and create the three new field groups (Catalog; XO Availability & Ordering; MAP Pricing; Tax; XO Sync); uncheck *Show* on the 11 hidden subtabs; relabel UPC Code. Do it once in SB1, screenshot the result for the record, repeat in prod after the ACP deploy. This is a one-hour job once §3 is approved.
-4. **Ingest mapping:** add the native targets from §5 (manufacturer, mpn, countryofmanufacture with country mapping, weight) to the XO pipeline spec.
-5. **Backfills (with the FA UE sync scripts disabled):** finish 204,504 · width 45,816 · optional: native weight / manufacturer / country from the current LA fields before those retire.
-6. **Retirement** proceeds per the transition plan — hiding fields on the form is step zero of inactivating them, and costs nothing to reverse.
+1. **Subtabs & field defaults (SDF — deploys to every account):** relabel `custtab_25_t2379072_560` → "Specifications"; add subtab `custtab_xo_integrations` "Integrations"; set `<subtab>` on every surviving custom field to its §3 home. `subtab` objects and field placement *are* SDF-deployable (forms are not). Ship with the next ACP deploy.
+2. **Form (UI, once):** Customize → **Move Elements** to build the groups (Catalog · Units · XO Availability & Ordering · MAP Pricing · Tax · XO Sync · Shopify · NetSuite Connector), fold Item360 into Related Records & Analytics, uncheck *Show* on the hidden subtabs, relabel Vendor Name/Code. Then **Copy to Account** → RP2, prod. One session, not three.
+3. **Ingest spec (Tyler):** add `manufacturer`, `weight`, and — for Track B — `displayname`, `upccode` as native targets.
+4. **Track B switch-off + backfill** in the post-Sep-1 window (§5), after the label/template decision in §8.
+5. **Retirement** continues per the transition plan; hiding on the form is step zero of inactivation and free to reverse.
 
 ---
 
-## 8. Decisions needed from Jesse
+## 8. Decisions
 
-1. **Tab names:** "Specifications" + "Integrations" (this proposal) vs a single "Supplemental Information" tab holding both. My recommendation is two — specs are read by salespeople answering customers; sync data is read by you. Different audiences, different tabs.
-2. **Class as product taxonomy** (§5): yes / no / later.
-3. **UOM fields on the main area:** keep the five, or push to Purchasing (are items ever anything but Each?).
-4. **Item360:** keep as its own tab, fold into Related Records, or hide (who opens it?).
-5. **Native Item Weight / Manufacturer Country ingest:** approve the two extra mappings for Tyler's feed spec.
-6. **Special Order Product** (§6): agree to defer to post-Sep-1 audit.
+**Resolved 2026-08-27 (Jesse):**
+
+| # | Decision |
+|---|---|
+| 1 | **Two tabs**: Specifications (descriptive knowledge) + Integrations (technical information) — mirrors Purchasing (in) / Sales (out). |
+| 2 | **Class stays as-is.** It means customer category (Commercial / Retail / E-Commerce) and is baked into scripts, workflows, and people. Right idea, wrong moment — tabled, not rejected. |
+| 3 | **Special Order Product does not migrate** — it's a misnamed workflow gate (§6). Rename only. |
+| 4 | **Item360 folds into Related Records** (& Analytics). Used, valuable, currently lost. |
+| 5 | **UOM fields → Purchasing.** |
+| 6 | **Item Weight is the single weight field**, XO-fed — for a future warehouse scale / ship-from-NetSuite. |
+| 7 | **COO does not live in NetSuite** — Shopify and XO carry it for anyone who needs it. Hide the native field, drop the ingest. |
+| 8 | **Display Name / UPC Code convention retires** (Track B) — a multi-department decision already in motion; this rollout is the vehicle. |
+| 9 | Form built once via Move Elements, distributed with **Copy to Account**. |
+
+**Still open:**
+
+| # | Question | Needed by |
+|---|---|---|
+| A | New name for `custitem_zastro_special_order` | before the relabel ACP |
+| B | Warehouse labels: barcode the **internal ID** (as today, but sourced honestly from `internalid`) or the **real UPC**? Affects `mag_sl_print_label_form.js` and the cycle-count template. | before Track B backfill |
+| C | Keep the `Vendor Name = Item Name` default in workflow35? | before Track B |
+| D | Track B timing: the week after Sep 1 (recommended — LA writers gone, XO feed live) or later in September | scheduling |
+
+---
+
+## 9. Why now
+
+NetSuite at Premier has no customer-facing surface. The item record's job is to let people transact and account accurately and let automation run on data that means what it says. Every field that exists because an integration put it there, every native field hollowed out by a custom twin, every "name" that is really a number, is friction on that job — and it is friction that XO, the PM SuiteApp, a Collections department, and NetSuite Next will all inherit if it isn't cleared now. This is equal parts a visual transformation and a deliberate slimming of the data the form carries, done while the catalog is being re-sourced anyway. The test for every field is the same: *is it needed to identify, buy, sell, or book this item, or by a script or record that does?* If not, its days are numbered.

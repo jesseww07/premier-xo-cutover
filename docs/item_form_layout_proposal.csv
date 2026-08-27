@@ -1,37 +1,38 @@
 field,scriptid_or_native,current_tab,current_group,proposed_tab,proposed_group,action,rationale
-Item Name/Number,itemid,Main,Primary Information,Main,Primary Information,KEEP,identity; equals vendor SKU at Premier
-Product Name,custitem_la_product_name,Item Details/XO,-,Main,Primary Information,MOVE,the only human-readable name (604k); Display Name is the internal ID by convention
-Display Name/Code,displayname,Main,Primary Information,Main,Primary Information,KEEP,internal-ID convention (workflow31) - prints on transaction lines; do not repurpose
-UPC Code,upccode,Main,Primary Information,Main,Primary Information,RELABEL,"label 'Barcode (Internal ID)' - warehouse barcode key (mag_sl_print_label_form.js); 327,951 = internal id"
-UPC / GTIN,custitem_la_upc,Item Details/XO,-,Main,Primary Information,MOVE,the real GTIN (276,929); FarApp barcode mapping
-Vendor Name/Code,vendorname,Main,Primary Information,Main,Primary Information,RELABEL,"'Vendor Code' - 398,951 of 399,920 are a workflow copy of Item Name"
+Item Name/Number,itemid,Main,Primary Information,Main,Primary Information,KEEP,identity; equals vendor SKU at Premier; the fast-entry key going forward
+Display Name/Code,displayname,Main,Primary Information,Main,Primary Information,TRACK B,"532,040 = internal ID by convention (workflow31); becomes the product name (XO Item Name); backfill from custitem_la_product_name"
+Product Name,custitem_la_product_name,Item Details/XO,-,Main,Primary Information,MOVE -> RETIRE (Track B),"604k; interim: sits beside Display Name; retires once Display Name holds it"
+UPC Code,upccode,Main,Primary Information,Main,Primary Information,TRACK B,"327,951 = internal ID by convention (workflow35 + pl_displayname.js); becomes the real GTIN (XO GTIN); backfill from custitem_la_upc, blank where none"
+UPC / GTIN,custitem_la_upc,Item Details/XO,-,Main,Primary Information,MOVE -> RETIRE (Track B),"276,929; interim: sits beside UPC Code; FarApp barcode mapping repoints to upccode"
+Vendor Name/Code,vendorname,Main,Primary Information,Main,Primary Information,RELABEL,"'Vendor Code' - 398,951 are a workflow35 copy of Item Name; decision C: keep or drop the default"
 Subitem Of,parent,Main,Primary Information,Main,Primary Information,KEEP,
-Primary Units Type,unitstype,Main,Primary Information,Main,Primary Information,KEEP,decision 3: push to Purchasing if always Each
-Primary Base Unit,baseunit,Main,Primary Information,Main,Primary Information,KEEP,decision 3
-Primary Stock Unit,stockunit,Main,Primary Information,Main,Primary Information,KEEP,decision 3
-Primary Sale Unit,saleunit,Main,Primary Information,Main,Primary Information,KEEP,decision 3
-Primary Purchase Unit,purchaseunit,Main,Primary Information,Main,Primary Information,KEEP,decision 3
-Primary Consumption Unit,consumptionunit,Main,Primary Information,Main,Primary Information,HIDE,unused
-Internal ID,internalid,Main,Primary Information,Main,Primary Information,KEEP,hidden inline as today
-Manufacturer,manufacturer,Purchasing/Inventory,Manufacturing,Main,Catalog,MOVE+FEED,native; feed from XO Vendor Name (today 1,649)
-Collection,custitem_la_collection,Item Details/XO,-,Main,Catalog,MOVE,557k; how staff identify a line
-Finish,custitem_la_finish,Item Details/XO,-,Main,Catalog,MOVE,328k (+204,504 backfill from manufacturer_finish)
-Style,custitem_atlas_style,Main,ungrouped,Main,Catalog,MOVE+RELABEL,XO Style; 66 values over 168k items - a real taxonomy; bundle-owned so relabel via UI
+Internal ID,internalid,Main,Primary Information,Main,Primary Information,KEEP,hidden inline as today; the honest source for anything that needs the key
+Primary Units Type,unitstype,Main,Primary Information,Purchasing/Inventory,Units,MOVE,decision 5
+Primary Base Unit,baseunit,Main,Primary Information,Purchasing/Inventory,Units,MOVE,decision 5
+Primary Stock Unit,stockunit,Main,Primary Information,Purchasing/Inventory,Units,MOVE,decision 5
+Primary Sale Unit,saleunit,Main,Primary Information,Purchasing/Inventory,Units,MOVE,decision 5
+Primary Purchase Unit,purchaseunit,Main,Primary Information,Purchasing/Inventory,Units,MOVE,decision 5
+Primary Consumption Unit,consumptionunit,Main,Primary Information,-,-,HIDE,unused
+Manufacturer,manufacturer,Purchasing/Inventory,Manufacturing,Main,Catalog,MOVE+FEED,native; feed from XO Vendor Name (today 1,649); replaces retired la_manufacturer_name
+Collection,custitem_la_collection,Item Details/XO,-,Main,Catalog,MOVE,557k
+Finish,custitem_la_finish,Item Details/XO,-,Main,Catalog,MOVE,"328k (+204,504 backfill from manufacturer_finish)"
+Style,custitem_atlas_style,Main,ungrouped,Main,Catalog,MOVE+RELABEL,XO Style; 66 values over 168k items; bundle-owned so relabel via UI
 Primary Image,custitem_la_image,Item Details/XO,-,Main,Catalog,MOVE,532k; sourced by custcol_pr_prod_url
-Item URL,custitem_la_product_url,Item Details/XO,-,Main,Catalog,MOVE,519k; XO item URL for staff lookup; sourced by custcol_webstore_link
+Item URL,custitem_la_product_url,Item Details/XO,-,Main,Catalog,MOVE,519k; sourced by custcol_webstore_link; label collision clears when zastro_image_url is hidden
 Subsidiary,subsidiary,Main,Classification,Main,Classification,KEEP,
-Class,class,Main,Classification,Main,Classification,KEEP+OPTION,decision 2: feed XO Standard-Category/Subcategory as hierarchical Class
-Department,department,Main,Classification,Main,Classification,KEEP,1,330 populated
-Location,location,Main,Classification,Main,Classification,KEEP,2,502 populated
+Class,class,Main,Classification,Main,Classification,KEEP,decision 2: keeps its customer-category meaning; taxonomy idea tabled
+Department,department,Main,Classification,Main,Classification,KEEP,
+Location,location,Main,Classification,Main,Classification,KEEP,
 Is Light Bulb,custitem6,Custom,-,Main,Classification,MOVE,category flag; feeds custcol_premier_is_bulb; never rename
+Inactive,isinactive,System Information,-,Main,Classification,KEEP (also on System Info),
 Close-Out,custitem_atlas_closeout,Main,ungrouped,-,-,HIDE,3 TRUE
 Season,custitem_atlas_season,Main,ungrouped,-,-,HIDE,33 populated
 Department (Atlas),custitem_atlas_department,Main,ungrouped,-,-,HIDE,0 populated; duplicate of native Department
 Item Category (USR),custitem_usr_item_category,Main,ungrouped,-,-,HIDE,1 populated; US sales-tax bundle field
 BlueCollar File Attachment,custitem_bc_item_file_attachment,Main,ungrouped,Communication,-,MOVE,PM add-on file; lives with Files
-Purchase Price,-,Purchasing/Inventory,Item/Cost Detail,Purchasing/Inventory,Item/Cost Detail,KEEP,native group as-is
-Special Order Item,isspecialorderitem,Purchasing/Inventory,Item/Cost Detail,Purchasing/Inventory,Item/Cost Detail,KEEP,9 TRUE; native twin of the Zastro flag
-Special Order Product,custitem_zastro_special_order,Custom,-,Purchasing/Inventory,Item/Cost Detail,MOVE,"683,902 TRUE; workflow35 writes it; 11 searches; defer native migration to post-Sep-1 audit"
+Item/Cost Detail group (native),-,Purchasing/Inventory,Item/Cost Detail,Purchasing/Inventory,Item/Cost Detail,KEEP,as-is
+Special Order Item,isspecialorderitem,Purchasing/Inventory,Item/Cost Detail,Purchasing/Inventory,Item/Cost Detail,KEEP,9 TRUE; native meaning
+Special Order Product,custitem_zastro_special_order,Custom,-,Purchasing/Inventory,Item/Cost Detail,MOVE+RENAME,"683,902 TRUE; purchasing-workflow eligibility gate, not a native twin; decision A: new name; workflow35 default stays"
 Drop Ship Item,isdropshipitem,Purchasing/Inventory,Item/Cost Detail,Purchasing/Inventory,Item/Cost Detail,KEEP,native; LA Drop_Ship retires
 XO In Stock,custitem_xo_in_stock,Item Details/XO,-,Purchasing/Inventory,XO Availability & Ordering,MOVE,manufacturer stock - informational
 Back Order Date,custitem_xo_backorder_date,Item Details/XO,-,Purchasing/Inventory,XO Availability & Ordering,MOVE,
@@ -39,22 +40,20 @@ Order Minimum,custitem_xo_order_minimum,Item Details/XO,-,Purchasing/Inventory,X
 Order Multiple,custitem_xo_order_multiple,Item Details/XO,-,Purchasing/Inventory,XO Availability & Ordering,MOVE,
 Vendor Discounted Cost,custitem_xo_vendor_disc_cost,Item Details/XO,-,Purchasing/Inventory,XO Availability & Ordering,MOVE,
 Cost With Shipping,custitem_xo_cost_w_shipping,Item Details/XO,-,Purchasing/Inventory,XO Availability & Ordering,MOVE,
-MPN,mpn,Purchasing/Inventory,Manufacturing,Purchasing/Inventory,Manufacturing,KEEP+FEED,native (20); feed from XO Item Number; low value since itemid is the vendor SKU
-Manufacturer Country,countryofmanufacture,Purchasing/Inventory,Manufacturing,Purchasing/Inventory,Manufacturing,KEEP+FEED,native list (3); feed from XO COO 99% fill - needs text->country map; tariffs
-Inventory Management group,-,Purchasing/Inventory,Inventory Management,Purchasing/Inventory,Inventory Management,KEEP,native as-is
-Vendor Bill Matching group,-,Purchasing/Inventory,Vendor Bill Matching,Purchasing/Inventory,Vendor Bill Matching,KEEP,native as-is
-Vendors sublist,-,Purchasing/Inventory,-,Purchasing/Inventory,-,KEEP,
-Locations sublist,-,Purchasing/Inventory,-,Purchasing/Inventory,-,KEEP,
-Bin Numbers sublist,-,Purchasing/Inventory,-,Purchasing/Inventory,-,KEEP,
+MPN,mpn,Purchasing/Inventory,Manufacturing,Purchasing/Inventory,Manufacturing,KEEP (optional feed),native (20); XO Item Number; low value since itemid is the vendor SKU
+Manufacturer Country,countryofmanufacture,Purchasing/Inventory,Manufacturing,-,-,HIDE,decision 7: COO not transactionally needed in NetSuite; Shopify + XO carry it
+Inventory Management group,-,Purchasing/Inventory,Inventory Management,Purchasing/Inventory,Inventory Management,KEEP,as-is
+Vendor Bill Matching group,-,Purchasing/Inventory,Vendor Bill Matching,Purchasing/Inventory,Vendor Bill Matching,KEEP,as-is
+Vendors / Locations / Bin Numbers sublists,-,Purchasing/Inventory,-,Purchasing/Inventory,-,KEEP,
 Inventory Detail / Numbers / Statuses sublists,-,Inventory Detail,-,Purchasing/Inventory,-,MOVE,absorb the Inventory Detail tab
 Landed Cost Template Mapping sublist,-,Landed Cost Templates,-,Purchasing/Inventory,-,MOVE,absorb; Track Landed Cost lives in Item/Cost Detail
-Sales group,-,Sales/Pricing,Sales,Sales/Pricing,Sales,KEEP,native as-is
-IMAP,custitem5,Custom,-,Sales/Pricing,MAP Pricing,MOVE,0 populated today; XO IMAP lands here
+Sales group,-,Sales/Pricing,Sales,Sales/Pricing,Sales,KEEP,as-is
+IMAP,custitem5,Custom,-,Sales/Pricing,MAP Pricing,MOVE,XO IMAP lands here
 XO UMAP,custitem_xo_umap,Item Details/XO,-,Sales/Pricing,MAP Pricing,MOVE,
 Pricing group / Price Levels,-,Sales/Pricing,Pricing,Sales/Pricing,Pricing,KEEP,MSRP is the record; Premier Sample Item internal
-Item Weight,weight,Sales/Pricing,Shipping,Sales/Pricing,Shipping,KEEP+FEED,native (452); feed XO Ship Weight (99%); replaces LA weight fields
+Item Weight,weight,Sales/Pricing,Shipping,Sales/Pricing,Shipping,KEEP+FEED,"decision 6: THE weight field; XO Ship Weight (99%); all custom weight fields retire; confirm unit"
 Shipping group (rest),-,Sales/Pricing,Shipping,Sales/Pricing,Shipping,KEEP,
-Width,custitem_la_width,Item Details/XO,-,Specifications,Dimensions,MOVE,316k (+45,816 backfill)
+Width,custitem_la_width,Item Details/XO,-,Specifications,Dimensions,MOVE,"316k (+45,816 backfill)"
 Height,custitem_la_height,Item Details/XO,-,Specifications,Dimensions,MOVE,625k
 Length,custitem_la_length,Item Details/XO,-,Specifications,Dimensions,MOVE,311k
 Bulb Type,custitem_la_bulb_type,Item Details/XO,-,Specifications,Lighting,MOVE,428k
@@ -67,18 +66,18 @@ CRI,custitem_la_cri,Item Details/XO,-,Specifications,Lighting,MOVE,197k
 Voltage,custitem_la_voltage,Item Details/XO,-,Specifications,Lighting,MOVE,405k
 Dimmable,custitem_la_dimmable,Custom,-,Specifications,Lighting,MOVE,183k
 Material,custitem_la_material,Custom,-,Specifications,Materials,MOVE,398k
-Safety Rating,custitem_la_safety_listing,Custom,-,Specifications,Ratings & Compliance,MOVE,ETL/UL; label fixed on form
-Location Rating,custitem_la_safety_rating,Custom,-,Specifications,Ratings & Compliance,MOVE,Damp/Wet; label fixed on form
+Safety Rating,custitem_la_safety_listing,Custom,-,Specifications,Ratings & Compliance,MOVE,ETL/UL
+Location Rating,custitem_la_safety_rating,Custom,-,Specifications,Ratings & Compliance,MOVE,Damp/Wet
 Prop 65,custitem_xo_prop65,Item Details/XO,-,Specifications,Ratings & Compliance,MOVE,
 Prop 65 Description,custitem_xo_prop65_desc,Item Details/XO,-,Specifications,Ratings & Compliance,MOVE,
 Title 20,custitem_xo_title20,Item Details/XO,-,Specifications,Ratings & Compliance,MOVE,
 Title 24,custitem_xo_title24,Item Details/XO,-,Specifications,Ratings & Compliance,MOVE,
-Spec Sheet Hyperlink,custitem_spec_sheet_link,Item Details/XO,-,Specifications,Documents,MOVE,214k; sourced by custcol_spec_sheet; XO-fed going forward
+Spec Sheet Hyperlink,custitem_spec_sheet_link,Item Details/XO,-,Specifications,Documents,MOVE,214k; sourced by custcol_spec_sheet; XO-fed
 Kelvin Bucket,custitem_xo_kelvin_bucket,Item Details/XO,-,-,-,HIDE (keep field),search facet
 Lumens Bucket,custitem_xo_lumens_bucket,Item Details/XO,-,-,-,HIDE (keep field),search facet
 Wattage Bucket,custitem_xo_wattage_bucket,Item Details/XO,-,-,-,HIDE (keep field),search facet
 Voltage Bucket,custitem_xo_voltage_bucket,Item Details/XO,-,-,-,HIDE (keep field),search facet
-Accounts group,-,Accounting,Accounts,Accounting,Accounts,KEEP,native as-is
+Accounts group,-,Accounting,Accounts,Accounting,Accounts,KEEP,as-is
 Tax Schedule,-,Tax,-,Accounting,Tax,MOVE,absorb the Tax tab
 Tax Item Type,custitem_ste_item_taxitem_type,Tax,-,Accounting,Tax,MOVE,
 OSS Tax Schedule,custitem_ste_oss_taxschedule,Tax,-,Accounting,Tax,MOVE,
@@ -93,7 +92,7 @@ Shopify Handle / Meta Title / Meta Description / Metafield 1 / Product Type / Re
 Allow Shopify Backorders,custitem_fa_shpfy_backords,Shopify:Optional,-,Integrations,Shopify,MOVE,
 Shopify Published At / Published Scope,custitem_fa_shpfy_pub_at / pubscope,Shopify:Not Common,-,Integrations,Shopify,MOVE,
 Leaves Shopify Inventory,custitem_leaves_shopify_inventory,Custom,-,Integrations,Shopify,MOVE,Leaves Lighting store
-XO Item ID,custitem7,Custom,-,Integrations,XO Sync,MOVE,label fixed on form
+XO Item ID,custitem7,Custom,-,Integrations,XO Sync,MOVE,
 XO Last Changed,custitem_xo_last_changed,Item Details/XO,-,Integrations,XO Sync,MOVE,
 XO Availability Changed,custitem_xo_availability_changed,Item Details/XO,-,Integrations,XO Sync,MOVE,
 XO Catalog Changed,custitem_xo_catalog_changed,Item Details/XO,-,Integrations,XO Sync,MOVE,
@@ -101,8 +100,8 @@ XO Price Changed,custitem_xo_price_changed,Item Details/XO,-,Integrations,XO Syn
 XO Keywords,custitem_xo_keywords,Item Details/XO,-,Integrations,XO Sync,MOVE,native Search Keywords is a web-store field - no web store
 Last Posted to NetSuite Connector,custitemlastpostedtofarapp,Custom,-,Integrations,NetSuite Connector,MOVE,
 NetSuite Connector Synced Items sublist,customrecord_fa_synced_items,Custom,-,Integrations,NetSuite Connector,MOVE,
-Item360 sublists (6),-,Item360,-,Item360,-,KEEP,decision 4
-Transactions sublist,-,Related Records,-,Related Records,-,KEEP,
+Transactions sublist,-,Related Records,-,Related Records & Analytics,-,KEEP,
+Item360 sublists (6),custsublist_atlas_core_*,Item360,-,Related Records & Analytics,-,MOVE,decision 4: valuable; lost in the tab strip; Item360 tab hidden
 Communication sublists (5),-,Communication,-,Communication,-,KEEP,
 System Information fields + sublists,-,System Information,-,System Information,-,KEEP,
 Item URL (Zastro),custitem_zastro_image_url,Custom,-,-,-,HIDE -> RETIRE,1 populated; causes the 'Item URL (2)' label collision
@@ -110,6 +109,7 @@ Webstore Link,custitem_webstore_link,Item Details/XO,-,-,-,HIDE -> RETIRE,0 popu
 # of Bulbs,custitem_no_of_bulbs,Custom,-,-,-,HIDE -> RETIRE,135 vs Number of Bulbs 482k
 Manufacturer Warranty (Zastro),custitem_zastro_warranty,Custom,-,-,-,HIDE -> RETIRE,0 populated
 UMAP (LA),custitem_la_umap,Custom,-,-,-,HIDE -> RETIRE,0 populated; XO UMAP replaces
+Weight (LA grams) / Weight (odd),custitem_la_weight_grams / custitemcustitem_la_weight,Custom / XO,-,-,-,HIDE -> RETIRE,decision 6: native Item Weight is the only weight field
 Item Image (Atlas),custitem_atlas_item_image,Custom,-,-,-,HIDE -> RETIRE,3 populated
 Publish Item,custitem_publish_item,Custom,-,-,-,HIDE -> RETIRE,0 populated
 EM Product,custitem_pr_em_product,Custom,-,-,-,HIDE,1 populated; read by pr_change_order_approve - confirm before retiring
@@ -119,7 +119,9 @@ All other LA fields on Custom / Item Details (approx 95),custitem_la_*,Custom / 
 Web Store tab (18 fields),-,Web Store,-,-,-,HIDE TAB,no NetSuite web store; 0 online / 0 descriptions / 0 keywords
 Preferences tab (2 fields),-,Preferences,-,-,-,HIDE TAB,Offer Support is workflow-forced TRUE
 Merchandise Hierarchy tab,-,Merchandise Hierarchy,-,-,-,HIDE TAB,feature not enabled
-Hazmat/Dangerous Goods tab,-,Hazmat,-,-,-,HIDE TAB,not applicable; verify empty
+Hazmat/Dangerous Goods tab,-,Hazmat,-,-,-,HIDE TAB,not applicable
+Item360 tab,-,Item360,-,-,-,HIDE TAB,sublists moved to Related Records & Analytics
 Customer Part Number tab,-,Customer Part Number,-,-,-,HIDE TAB (verify),SCM bundle sublist; usage not SuiteQL-visible
 Item Substitution tab,-,Item Substitution,-,-,-,HIDE TAB (verify),SCM bundle sublist; usage not SuiteQL-visible
+Inventory Detail / Tax / Landed Cost Templates / Shopify tabs,-,various,-,-,-,HIDE TAB,absorbed
 Custom tab,-,Custom,-,-,-,HIDE TAB,empty after moves + hides
