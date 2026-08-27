@@ -70,6 +70,28 @@ What the UI work actually is (SB1 export confirms the mechanics):
 
 Preview in SB1 now (fields are there); repeat in prod after the ACP deploy. Category-form variants stay deferred until real XO data shows what's worth surfacing per category.
 
+### 4b. Deployment verification log
+
+**2026-08-27 — verified by `object:import` from each account (authoritative; MCP connectors were token-expired).**
+
+| | SB1 (`7513000-sb1`) | RP2 (`7513000-rp`) | Production |
+|---|---|---|---|
+| 30 field objects | all present | all present | **not deployed** |
+| Field-level labels (10 relabels) | correct | correct | - |
+| 20 XO fields on the entry form | yes (NetSuite auto-added) | yes (auto-added) | - |
+| Entry-form tab renamed | yes - "Item Details/ XO Logic Data" | no - still "Item Details/ LightsAmerica" | - |
+| Form-level label overrides | 6 of 10 done | 0 of 10 done | - |
+
+**`project:deploy --validate` deploys - it is not a dry run.** In SuiteCloud CLI 3.2.0 the flag means
+"validates the project *before deploying*"; the deploy still happens. (It was removed in CLI 4.x.) The RP2 run on
+2026-08-27 therefore performed a real deploy, which the import above confirms. For a true preview use `--dryrun`.
+
+**Form-level labels are per-account UI state and do NOT travel with the SDF deploy** - entry forms store their own
+label overrides. The §4a UI steps must be repeated in every account that needs them (they were done in SB1, not RP2).
+Remaining in SB1: `custitem_la_product_url` -> Item URL, `custitem_la_safety_listing` -> **Safety Rating**,
+`custitem_la_safety_rating` -> **Location Rating**, `custitem7` -> XO Item ID. The two safety/location ones matter
+most - they are the naming inversion, and the form still shows the misleading originals.
+
 ## 5. Cleanup lists (pre-inactivation work, mapped to tracker Phase 5)
 
 - **64 saved searches** → `XO_Search_Cleanup_List.csv` (search scriptid + title + which retiring targets it uses). Solupay-related searches excluded per the scope note.
