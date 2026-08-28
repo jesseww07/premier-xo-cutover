@@ -58,17 +58,28 @@ Keeping the newer field alone **loses finish on 204,504 items**. → **Backfill 
 - **20 new `custitem_xo_*` fields:** XO UMAP (labeled "XO UMAP" — plain "UMAP" collided with legacy `custitem_la_umap` and NetSuite auto-suffixed it "(2)" on the first sandbox pass; fixed and re-deployed), Back Order Date, XO In Stock, Order Multiple/Minimum, change-date quartet, Vendor Discounted Cost, Cost With Shipping, 4 facet buckets (Kelvin/Lumens/Wattage/Voltage — exact values live in the relabeled LA fields), XO Keywords, Prop 65 + Description, Title 20, Title 24. Compliance flags stored as raw text (lossless, no transform risk) — say the word if you want checkboxes instead.
 - **SDF deploys are not atomic** — learned the useful way: when the form object failed, all 30 field objects still installed. The fields-only package has no failing member.
 
-### 4a. Entry form — SDF cannot deploy it in this account; finish in the UI (~5 min)
+### 4a. Entry form via SDF - SOLVED 2026-08-28 (supersedes the 08-25 conclusion)
 
-Attempted to extend your existing **"New Inventory Item Form - Xo Fields" (`custform_217_7513000_136`)** via SDF. **Every variant fails at the install step** with SDF's opaque "An error occurred during custom object update/creation": a control round-tripping SB1's *own unmodified export*, a create-as-new-form variant (`custform_xo_item_base`), and variants stripping SuiteApp-owned refs, Atlas-bundle refs, and each `recordType` value. Validation passes in all eight; only the server-side install fails. Conclusion: an SDF limitation for this inventory-item form here, not a content defect. Form removed from the ACP.
+The 08-25 finding "SDF cannot deploy this account's inventory-item entry form" was too broad. Prompted by the
+Help Center pages Jesse added to docs/ (Supported Custom Entry Forms lists STANDARDINVENTORYPARTFORM with no
+feature dependency), a 30-deploy bisection in SB1 found the actual cause:
 
-What the UI work actually is (SB1 export confirms the mechanics):
-1. **Nothing to do for the 20 new fields** — NetSuite auto-added them to the form when the fields were created (SB1 export shows all 20 at the end of the LA tab's field group).
-2. **Rename tab** "Item Details/ LightsAmerica" → "Item Details / XO".
-3. **Fix form-level label overrides** — forms store their own labels, so the field relabels do *not* show through on this form. Set on the form: Image→Primary Image · Product URL→Item URL · Safety_Listing→Safety Rating · Safety_Rating→Location Rating · Bulb_Type→Bulb Type · UPC→UPC / GTIN · Color Temperature→Kelvin · Light_Output→Lumens · Max Wattage→Wattage · VendorContactId→XO Item ID.
-4. Optional: move the 20 XO fields into their own field group "XO Data".
-
-Preview in SB1 now (fields are there); repeat in prod after the ACP deploy. Category-form variants stay deferred until real XO data shows what's worth surfacing per category.
+- **Root cause:** NetSuite's export of the form carries the Locations sublist twice under Purchasing/Inventory -
+  `<subList id="ITEMLOCATIONS">` and `<subTab id="ITEMLOCATIONS">`. The duplicate subList passes validation but
+  fails the server-side install with the opaque "An error occurred during custom object creation/update".
+  Every other tab, field group, sublist and the action bar is clean.
+- **Fix:** remove the stray subList - `python scripts/fix_form_export.py <export.xml> --scriptid <new_id>`.
+  The full form then deploys.
+- **Create, don't update:** the fixed form deploys as a NEW form (CREATE) and can then be UPDATED by SDF
+  repeatedly (rename + hide-tab test passed). Updating the ORIGINAL UI-created form (`custform_217_7513000_136`)
+  still fails even after the fix. So the redesigned form is born in SDF under its own scriptid, deployed to every
+  account, set preferred, and the UI-created form retires.
+- **Evidence trail:** variants A-J (08-25/08-28) all failed; K (minimal hand-built form) passed; phase-1 bisection
+  isolated tab ITEMINVENTORY; phase-2 isolated the ITEMLOCATIONS subList; CONFIRM1 (full fixed form, CREATE) passed;
+  CONFIRM2 (UPDATE of UI form) failed; CONFIRM3 (UPDATE of SDF-created form) passed.
+- **SB1 housekeeping:** the bisection left inactive test forms `custform_xo_bisect_01..07`, `custform_xo_b2_01..11`,
+  `custform_xo_min_test`, `custform_xo_confirm` - delete via Customization > Forms > Entry Forms.
+  `custform_xo_confirm` is a working SDF-owned copy of the current SB1 form and can seed the redesigned form.
 
 ### 4b. Deployment verification log
 

@@ -43,7 +43,7 @@ Live checklist by phase: [`docs/XO_Cutover_Tracker.html`](docs/XO_Cutover_Tracke
 docs/      source documents + the findings report (human-authored, reviewed)
 data/      generated evidence - REGENERATE, never hand-edit (CI fails on drift)
 corpus/    read-only snapshots of production customizations (objects + /SuiteScripts), by date
-sdf/       the deployable Account Customization Project (fields only)
+sdf/       the deployable Account Customization Project (fields, subtabs, and - once built - the item form)
 scripts/   the pipeline that turns corpus + inputs into data/ and sdf/
 ```
 
@@ -94,7 +94,7 @@ Commit the new snapshot and the regenerated `data/` together; the diff *is* the 
   (`customrecord_zastro_po_consolid`, `customrecord_zastro_unconsolidated_items`, the two `custcol_zastro_*` columns,
   `customlist_zas_tracking_carrier`, `custitem_zastro_special_order`) is live operations and stays.
 - **Relabel, never re-scriptid** a surviving field. Labels preserve internal id, history, sourcing, searches.
-- **Entry forms are edited in the UI**, not SDF (this account's inventory-item form cannot be SDF-deployed; proven).
+- **Entry forms deploy via SDF only when born in SDF.** Exports carry a duplicate `ITEMLOCATIONS` sublist that breaks install - run `scripts/fix_form_export.py` and deploy under a NEW scriptid; updating a UI-created form fails (findings 4a).
 - **Bulk item operations**: disable `FA | UE Sync - Update FA` + the two FA Map/Reduce scripts first.
 
 ## CI

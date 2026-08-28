@@ -14,7 +14,7 @@ account, and encodes the specific traps this project hit:
     be present
   * every [scriptid=...] reference must resolve inside the project or be
     declared in manifest.xml dependencies
-  * entry forms must not be in the ACP (this account cannot SDF-deploy them)
+  * entry forms: no subList duplicating a subTab id (breaks install); scriptid must not be UI-generated
   * field labels must be unique (NetSuite silently auto-suffixes "(2)")
 
 Exit code 1 on any finding. Real server-side validation still happens by hand
@@ -63,7 +63,19 @@ def main():
             continue
 
         if root.tag == 'entryForm':
-            problems.append(f'{p.name}: entry forms cannot be SDF-deployed in this account - edit in the UI')
+            # the one content defect that breaks install (findings 4a): a subList duplicating a subTab id in the same tab
+            tabs = root.find('tabs')
+            for tab in (tabs if tabs is not None else []):
+                si = tab.find('subItems')
+                if si is None:
+                    continue
+                subtab_ids = {x.findtext('id') for x in si if x.tag == 'subTab'}
+                for x in si:
+                    if x.tag == 'subList' and x.findtext('id') in subtab_ids:
+                        problems.append(f'{p.name}: tab {tab.findtext("id")} has <subList id={x.findtext("id")}> duplicating a subTab - '
+                                        'install will fail; run scripts/fix_form_export.py')
+            if re.fullmatch(r'custform_[0-9]+_[0-9]+_[0-9]+', root.get('scriptid') or ''):
+                problems.append(f'{p.name}: scriptid looks UI-created - SDF cannot UPDATE UI-born forms here; deploy under a new scriptid')
 
         sid = root.get('scriptid')
         if sid != p.stem:

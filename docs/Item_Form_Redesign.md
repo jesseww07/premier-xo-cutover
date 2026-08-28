@@ -1,7 +1,7 @@
 # Inventory Part Form — Redesign
 
 **Scope:** the inventory item entry form (`custform_217_7513000_136`, working copy in SB1) — which subtabs exist, which fields show, and where. Nothing here changes data, scripts, or workflows; adjacent processes those changes touch are listed at the end as later work.
-**Status:** structure decided 2026-08-27 (§6) · ready to build in SB1 via Move Elements → Copy to Account.
+**Status:** structure decided 2026-08-27 (§6) · ready to build in SB1 via Move Elements → then exported into the ACP as an SDF-owned form (section 5).
 
 ---
 
@@ -140,11 +140,17 @@ Executable version: **`docs/item_form_layout_proposal.csv`** — one row per fie
 
 ## 5. How to build it
 
-1. **Subtabs & field defaults (SDF) - DONE in SB1 2026-08-28, pending RP2/prod:** relabel `custtab_25_t2379072_560` → "Specifications"; add subtab "Integrations"; set `<subtab>` on each surviving custom field to its §3 home so the default placement is identical in every account. (Exception: NetSuite allows no field default for Sales / Pricing - IMAP and XO UMAP are placed by the form only.)
-2. **Form (UI, once, in SB1):** Customize → **Move Elements** — build the new groups (Catalog · Units · XO Availability & Ordering · MAP Pricing · Tax · XO Sync · Shopify · NetSuite Connector), move the Item360 sublists under Related Records, uncheck *Show* on the hidden subtabs, relabel Vendor Name/Code. Then **Copy to Account** → RP2, production.
+1. **Subtabs & field defaults (SDF) - DONE in SB1 2026-08-28, pending RP2/prod:** `custtab_25_t2379072_560` retitled
+   "Specifications"; new subtab "Integrations"; `<subtab>` set on each surviving custom field to its section-3 home.
+   (No SDF default exists for Sales / Pricing - IMAP and XO UMAP are placed by the form only.)
+2. **Form (SDF, born fresh):** build the layout once in SB1 with Move Elements (groups: Catalog, Units,
+   XO Availability & Ordering, MAP Pricing, Tax, XO Sync, Shopify, NetSuite Connector; Item360 sublists under
+   Related Records; hidden subtabs unchecked). Then export it, run
+   `python scripts/fix_form_export.py <export.xml> --scriptid custform_xo_inventory_item --name "Inventory Item"`
+   and add it to the ACP. It deploys to every account and every later change is an XML edit + deploy.
+   Do NOT try to update the UI-created `custform_217_7513000_136` via SDF - that path fails; create the new form and
+   retire the old one. (Root cause and evidence: findings 4a.)
 3. Hiding a field on the form is step zero of inactivating it, and free to reverse.
-
----
 
 ## 6. Decisions (2026-08-27, Jesse)
 

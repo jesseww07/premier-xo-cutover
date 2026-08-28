@@ -14,7 +14,7 @@ Account 7513000 (prod) / 7513000-SB1 (sandbox). Owner: Jesse Wampole.
 - **Relabel, never change a scriptid** on a surviving field. 21 LA fields survive (the handoff's 20 + `custitem_la_max_wattage`); the rest retire after the cleanup lists are worked.
 - **Zastro carve-out:** `customrecord_zastro_po_consolid`, `customrecord_zastro_unconsolidated_items`, `custcolcustcol_zastro_vendor`, `custcol_zastro_purchase_price`, `customlist_zas_tracking_carrier`, `custitem_zastro_special_order` are live PO-consolidation operations - KEEP. Only the LA catalog machinery retires.
 - **Production deploys need Jesse's explicit sign-off in the conversation** and get recorded in the findings report. Sandbox deploys are fine.
-- **Entry forms: UI only.** SDF cannot deploy this account's inventory-item entry form (8 variants proven 2026-08-25). New custom fields auto-land on existing forms; form-level label overrides do not follow field relabels.
+- **Entry forms via SDF: create, never update a UI-born form.** Exports contain a duplicate `<subList id=ITEMLOCATIONS>` that fails install - strip it with `scripts/fix_form_export.py` and deploy under a new scriptid; SDF can then update that form freely. Updating `custform_217_7513000_136` (UI-created) fails regardless. New custom fields auto-land on existing forms; form-level label overrides do not follow field relabels.
 - **Bulk item writes** (backfills, mass updates): disable `FA | UE Sync - Update FA`, `Update FA Map/Reduce`, `Update NS Map/Reduce` first.
 
 ## Tooling facts
