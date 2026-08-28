@@ -6,7 +6,8 @@
       <feature required="true">INVENTORY</feature>
     </features>
     <objects>
-      <object>custtab_25_t2379072_560</object>
+      <object>customlist_shopify_store</object>
+      <object>customlist_flag_options</object>
     </objects>
   </dependencies>
 </manifest>

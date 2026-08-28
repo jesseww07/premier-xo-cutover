@@ -45,5 +45,5 @@
   <sourcefrom></sourcefrom>
   <sourcelist></sourcelist>
   <storevalue>T</storevalue>
-  <subtab></subtab>
+  <subtab>[scriptid=custtab_xo_integrations]</subtab>
 </itemcustomfield>

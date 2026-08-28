@@ -1,4 +1,4 @@
-<itemcustomfield scriptid="custitem_la_product_url">
+<itemcustomfield scriptid="custitem_la_finish">
   <accesslevel>2</accesslevel>
   <appliestogroup>F</appliestogroup>
   <appliestoinventory>T</appliestoinventory>
@@ -20,15 +20,15 @@
   <displaywidth></displaywidth>
   <dynamicdefault></dynamicdefault>
   <encryptatrest>F</encryptatrest>
-  <fieldtype>URL</fieldtype>
+  <fieldtype>TEXT</fieldtype>
   <globalsearch>F</globalsearch>
-  <help>XO item URL for internal staff lookup. XO source: Item URL (relative path - pipeline prepends XO domain).</help>
+  <help></help>
   <includechilditems>F</includechilditems>
   <isformula>F</isformula>
   <ismandatory>F</ismandatory>
   <isparent>F</isparent>
   <itemsubtype>BOTH</itemsubtype>
-  <label>Item URL</label>
+  <label>Finish</label>
   <linktext></linktext>
   <maxlength></maxlength>
   <maxvalue></maxvalue>

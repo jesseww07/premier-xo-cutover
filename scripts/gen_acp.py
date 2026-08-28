@@ -1,21 +1,31 @@
 """Generate the SDF ACP field objects under sdf/xo-cutover-acp/src/Objects.
 
-Relabels: copies the current prod XML from the corpus snapshot and patches only
-<label> (+ <help>). Fields whose label is already correct are NOT included
-(deploy replaces whole objects; minimal set minimizes drift risk).
+Three kinds of field objects:
+  * RELABELS       - copied from the corpus, <label>/<help> patched, placement applied
+  * PLACEMENT_ONLY - copied from the corpus unchanged except placement (labels already right)
+  * NEW_FIELDS     - authored from TEMPLATE
 
-New fields: authored from a template matching the prod field shape
-(inventory-only, itemsubtype BOTH, same spec subtab as the LA fields).
+Placement = the field's default <subtab>, per docs/Item_Form_Redesign.md. Valid standard
+values for itemcustomfield (SDF generic_item_tab): ITEMMAIN, ITEMINVENTORY,
+ITEMPURCHASINGINVENTORY, ITEMBASIC, ITEMCOMMUNICATION, ITEMLOCATIONS, ITEMVENDORS,
+ITEMSYSTEMINFORMATION, ITEMMATRIX. There is NO Sales/Pricing or Accounting default
+(NetSuite: "subtab must not be ITEMPRICING", SB1 2026-08-28), so those fields default
+blank and the form places them via Move Elements.
 
-Entry forms are NOT in the ACP: SDF cannot deploy this account's inventory-item
-entry form (proven 2026-08-25, 8 variants) - see docs/XO_Sweep_Findings.md 4a.
+Subtab objects live in src/Objects/subtab/ and are hand-managed (imported + relabeled).
+Entry forms are NOT in the ACP: SDF cannot deploy this account's inventory-item form.
 """
 import re
 
 from common import ACP_OBJECTS, CORPUS
 
 FIELD_CORPUS = CORPUS / 'objects' / 'itemcustomfield'
-SUBTAB = '[scriptid=custtab_25_t2379072_560]'
+
+SPECS = '[scriptid=custtab_25_t2379072_560]'      # relabeled "Specifications"
+INTEG = '[scriptid=custtab_xo_integrations]'      # new "Integrations"
+MAIN = 'ITEMMAIN'
+PURCH = 'ITEMINVENTORY'
+FORM_PLACED = ''   # no SDF default exists for Sales/Pricing; blank = Custom until the form moves it
 
 # scriptid -> (new label, help text)
 RELABELS = {
@@ -55,6 +65,30 @@ NEW_FIELDS = [
     ('custitem_xo_title24', 'Title 24', 'TEXT', 'CA Title 24 compliance, stored raw from XO.'),
 ]
 
+# Default subtab for every Premier-owned custom field that survives (docs/Item_Form_Redesign.md)
+PLACEMENT = {
+    'custitem_la_product_name': MAIN, 'custitem_la_upc': MAIN, 'custitem_la_collection': MAIN,
+    'custitem_la_finish': MAIN, 'custitem_la_image': MAIN, 'custitem_la_product_url': MAIN, 'custitem6': MAIN,
+    'custitem_xo_in_stock': PURCH, 'custitem_xo_backorder_date': PURCH, 'custitem_xo_order_minimum': PURCH,
+    'custitem_xo_order_multiple': PURCH, 'custitem_xo_vendor_disc_cost': PURCH, 'custitem_xo_cost_w_shipping': PURCH,
+    'custitem_zastro_special_order': PURCH,
+    'custitem5': FORM_PLACED, 'custitem_xo_umap': FORM_PLACED,
+    'custitem_la_width': SPECS, 'custitem_la_height': SPECS, 'custitem_la_length': SPECS,
+    'custitem_la_bulb_type': SPECS, 'custitem_la_bulb_base': SPECS, 'custitem_la_number_of_bulbs': SPECS,
+    'custitem_la_max_wattage': SPECS, 'custitem_la_color_temperature': SPECS, 'custitem_la_light_output': SPECS,
+    'custitem_la_cri': SPECS, 'custitem_la_voltage': SPECS, 'custitem_la_dimmable': SPECS,
+    'custitem_la_material': SPECS, 'custitem_la_safety_listing': SPECS, 'custitem_la_safety_rating': SPECS,
+    'custitem_xo_prop65': SPECS, 'custitem_xo_prop65_desc': SPECS, 'custitem_xo_title20': SPECS,
+    'custitem_xo_title24': SPECS, 'custitem_spec_sheet_link': SPECS,
+    'custitem_xo_kelvin_bucket': SPECS, 'custitem_xo_lumens_bucket': SPECS,
+    'custitem_xo_wattage_bucket': SPECS, 'custitem_xo_voltage_bucket': SPECS,
+    'custitem7': INTEG, 'custitem_xo_last_changed': INTEG, 'custitem_xo_availability_changed': INTEG,
+    'custitem_xo_catalog_changed': INTEG, 'custitem_xo_price_changed': INTEG, 'custitem_xo_keywords': INTEG,
+    'custitem_shopify_store': INTEG, 'custitem_sync_shopify': INTEG, 'custitem_isonline': INTEG,
+    'custitem_list_on_shopify_temporary_fie': INTEG, 'custitem_leaves_shopify_inventory': INTEG,
+}
+PLACEMENT_ONLY = [sid for sid in PLACEMENT if sid not in RELABELS and not sid.startswith('custitem_xo_')]
+
 TEMPLATE = '''<itemcustomfield scriptid="{scriptid}">
   <accesslevel>2</accesslevel>
   <appliestogroup>F</appliestogroup>
@@ -91,10 +125,33 @@ TEMPLATE = '''<itemcustomfield scriptid="{scriptid}">
 # elements the SDF validator rejects at Premier (features not enabled / newer UI-only fields)
 STRIP = ['ismatrixoption', 'aidescription', 'enabletextenhance', 'itemmatrix',
          'ismhitemattribute', 'appliestovendor', 'appliestopartner']
+SUBTAB_RE = re.compile(r'<subtab>.*?</subtab>', re.DOTALL)
+NL = '\n'
 
 
 def esc(s):
     return s.replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
+
+
+def strip_traps(xml):
+    for el in STRIP:
+        xml = re.sub(r'\s*<' + el + r'>.*?</' + el + '>', '', xml, flags=re.DOTALL)
+    return xml
+
+
+def set_subtab(xml, sid):
+    """Force <subtab> to the planned home; add the element if the export lacks it."""
+    if sid not in PLACEMENT:
+        return xml
+    tag = '<subtab>' + PLACEMENT[sid] + '</subtab>'
+    if SUBTAB_RE.search(xml):
+        return SUBTAB_RE.sub(tag, xml, count=1)
+    return xml.replace('</itemcustomfield>', '  ' + tag + NL + '</itemcustomfield>')
+
+
+def write(sid, xml, expected):
+    (ACP_OBJECTS / (sid + '.xml')).write_text(xml, encoding='utf-8', newline=NL)
+    expected.add(sid + '.xml')
 
 
 def main():
@@ -102,27 +159,32 @@ def main():
     expected = set()
 
     for sid, (label, help_text) in RELABELS.items():
-        xml = (FIELD_CORPUS / f'{sid}.xml').read_text(encoding='utf-8')
-        xml = re.sub(r'<label>.*?</label>', f'<label>{esc(label)}</label>', xml, count=1, flags=re.DOTALL)
-        xml = re.sub(r'<help>.*?</help>', f'<help>{esc(help_text)}</help>', xml, count=1, flags=re.DOTALL)
-        for el in STRIP:
-            xml = re.sub(rf'\s*<{el}>.*?</{el}>', '', xml, flags=re.DOTALL)
-        (ACP_OBJECTS / f'{sid}.xml').write_text(xml, encoding='utf-8', newline='\n')
-        expected.add(f'{sid}.xml')
-        print('relabel:', sid, '->', label)
+        xml = (FIELD_CORPUS / (sid + '.xml')).read_text(encoding='utf-8')
+        xml = re.sub(r'<label>.*?</label>', '<label>' + esc(label) + '</label>', xml, count=1, flags=re.DOTALL)
+        xml = re.sub(r'<help>.*?</help>', '<help>' + esc(help_text) + '</help>', xml, count=1, flags=re.DOTALL)
+        xml = set_subtab(strip_traps(xml), sid)
+        write(sid, xml, expected)
+        print('relabel:', sid, '->', label, '@', PLACEMENT.get(sid) or '(form-placed)')
+
+    for sid in PLACEMENT_ONLY:
+        xml = (FIELD_CORPUS / (sid + '.xml')).read_text(encoding='utf-8')
+        xml = set_subtab(strip_traps(xml), sid)
+        write(sid, xml, expected)
+        print('place:  ', sid, '@', PLACEMENT[sid] or '(form-placed)')
 
     for sid, label, ftype, help_text in NEW_FIELDS:
-        xml = TEMPLATE.format(scriptid=sid, label=esc(label), fieldtype=ftype, help=esc(help_text), subtab=SUBTAB)
-        (ACP_OBJECTS / f'{sid}.xml').write_text(xml, encoding='utf-8', newline='\n')
-        expected.add(f'{sid}.xml')
-        print('new:', sid, f'({ftype})')
+        xml = TEMPLATE.format(scriptid=sid, label=esc(label), fieldtype=ftype, help=esc(help_text),
+                              subtab=PLACEMENT.get(sid, SPECS))
+        write(sid, xml, expected)
+        print('new:    ', sid, '(' + ftype + ') @', PLACEMENT.get(sid, SPECS) or '(form-placed)')
 
-    # remove anything stale so the ACP is exactly what this script defines
+    # remove stale top-level field objects (src/Objects/subtab/ is hand-managed and untouched)
     for p in ACP_OBJECTS.glob('*.xml'):
         if p.name not in expected:
             p.unlink()
             print('removed stale object:', p.name)
-    print('ACP objects:', len(list(ACP_OBJECTS.glob('*.xml'))))
+    print('ACP field objects:', len(list(ACP_OBJECTS.glob('*.xml'))),
+          '| subtab objects:', len(list((ACP_OBJECTS / 'subtab').glob('*.xml'))))
 
 
 if __name__ == '__main__':

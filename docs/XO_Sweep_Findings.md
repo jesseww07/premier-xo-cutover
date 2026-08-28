@@ -92,6 +92,18 @@ Remaining in SB1: `custitem_la_product_url` -> Item URL, `custitem_la_safety_lis
 `custitem_la_safety_rating` -> **Location Rating**, `custitem7` -> XO Item ID. The two safety/location ones matter
 most - they are the naming inversion, and the form still shows the misleading originals.
 
+**2026-08-28 - placement ACP deployed to SB1 (53 objects: 51 fields + 2 subtabs), verified by re-import.**
+
+| What | Result |
+|---|---|
+| `custtab_25_t2379072_560` retitled **Specifications** | done (SB1) |
+| new subtab `custtab_xo_integrations` **Integrations** | created (SB1) |
+| default `<subtab>` set on 49 surviving Premier-owned fields per `docs/Item_Form_Redesign.md` | done (SB1): main-area fields -> `ITEMMAIN`, XO procurement fields + Special Order Product -> `ITEMINVENTORY`, specs -> Specifications, sync/Shopify -> Integrations |
+| IMAP (`custitem5`) and XO UMAP | **no SDF default possible** - NetSuite rejects `ITEMPRICING` as a field subtab ("must not be ITEMPRICING"); they default to Custom and the form places them on Sales / Pricing via Move Elements |
+| RP2 / production | not yet deployed - same project, same command, different `defaultAuthId` (`RP2` / `7513000`) |
+
+Deploy mechanics, for the record: the **same ACP** carries subtabs + field defaults; the **form** is never imported or deployed - it is built once in SB1 with Move Elements and distributed with Copy to Account.
+
 ## 5. Cleanup lists (pre-inactivation work, mapped to tracker Phase 5)
 
 - **64 saved searches** → `XO_Search_Cleanup_List.csv` (search scriptid + title + which retiring targets it uses). Solupay-related searches excluded per the scope note.
@@ -108,7 +120,7 @@ most - they are the naming inversion, and the form still shows the misleading or
 ## 7. Immediate next actions
 
 1. ~~Answer the two open design questions~~ — **decided 2026-08-25:** one base entry form now (category variants later); `la_max_wattage` kept and relabeled Wattage (21 survivors).
-2. **Jesse:** approve matrix dispositions → prod deploy of ACP: `cd C:\Users\JesseWampole\dev\xo-cutover-acp`, set `project.json` defaultAuthId to `premier`, then `npx --yes @oracle/suitecloud-cli@latest project:deploy`. Fields-only; the identical package already deployed clean to SB1.
+2. **Jesse:** approve matrix dispositions → prod deploy of ACP: `cd C:\Users\JesseWampole\dev\xo-cutover-acp`, set `project.json` defaultAuthId to `7513000`, then `npx --yes @oracle/suitecloud-cli@latest project:deploy`. Fields-only; the identical package already deployed clean to SB1.
 3. Entry form: UI steps in §4a — preview in SB1, repeat in prod after the field deploy.
 4. Run the two backfills (finish 204,504 rows, width 45,816) — before Sep 1; disable the FA UE sync scripts during the bulk run.
 5. UI relabel `custitem_atlas_style` → "XO Style" (bundle-owned, SDF can't).

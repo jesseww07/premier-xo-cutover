@@ -140,7 +140,7 @@ Executable version: **`docs/item_form_layout_proposal.csv`** — one row per fie
 
 ## 5. How to build it
 
-1. **Subtabs & field defaults (SDF, ships with the next ACP deploy):** relabel `custtab_25_t2379072_560` → "Specifications"; add subtab "Integrations"; set `<subtab>` on each surviving custom field to its §3 home so the default placement is identical in every account.
+1. **Subtabs & field defaults (SDF) - DONE in SB1 2026-08-28, pending RP2/prod:** relabel `custtab_25_t2379072_560` → "Specifications"; add subtab "Integrations"; set `<subtab>` on each surviving custom field to its §3 home so the default placement is identical in every account. (Exception: NetSuite allows no field default for Sales / Pricing - IMAP and XO UMAP are placed by the form only.)
 2. **Form (UI, once, in SB1):** Customize → **Move Elements** — build the new groups (Catalog · Units · XO Availability & Ordering · MAP Pricing · Tax · XO Sync · Shopify · NetSuite Connector), move the Item360 sublists under Related Records, uncheck *Show* on the hidden subtabs, relabel Vendor Name/Code. Then **Copy to Account** → RP2, production.
 3. Hiding a field on the form is step zero of inactivating it, and free to reverse.
 

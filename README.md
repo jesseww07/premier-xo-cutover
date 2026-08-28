@@ -69,7 +69,7 @@ No global install needed:
 
 ```powershell
 cd sdf/xo-cutover-acp
-copy project.json.example project.json        # then set defaultAuthId: 7513000-sb1 (sandbox) or premier (prod)
+copy project.json.example project.json        # then set defaultAuthId: 7513000-sb1 (sandbox) or 7513000 (prod)
 npx --yes @oracle/suitecloud-cli@latest project:validate --server
 npx --yes @oracle/suitecloud-cli@latest project:deploy
 ```
@@ -81,7 +81,7 @@ npx --yes @oracle/suitecloud-cli@latest project:deploy
 ## Re-snapshotting production
 
 ```powershell
-scripts/import_corpus.ps1 -AuthId premier          # → corpus/prod-YYYY-MM-DD/ (objects + filecabinet)
+scripts/import_corpus.ps1 -AuthId 7513000          # → corpus/prod-YYYY-MM-DD/ (objects + filecabinet)
 python scripts/grep_matrix.py && python scripts/build_matrix.py && python scripts/search_cleanup.py
 ```
 

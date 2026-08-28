@@ -1,15 +1,15 @@
-<itemcustomfield scriptid="custitem_la_product_url">
+<itemcustomfield scriptid="custitem_leaves_shopify_inventory">
   <accesslevel>2</accesslevel>
-  <appliestogroup>F</appliestogroup>
+  <appliestogroup>T</appliestogroup>
   <appliestoinventory>T</appliestoinventory>
-  <appliestokit>F</appliestokit>
-  <appliestononinventory>F</appliestononinventory>
-  <appliestoothercharge>F</appliestoothercharge>
+  <appliestokit>T</appliestokit>
+  <appliestononinventory>T</appliestononinventory>
+  <appliestoothercharge>T</appliestoothercharge>
   <appliestopricelist>F</appliestopricelist>
-  <appliestoservice>F</appliestoservice>
-  <appliestospecificitems>F</appliestospecificitems>
-  <appliestosubplan>F</appliestosubplan>
-  <applyformatting>F</applyformatting>
+  <appliestoservice>T</appliestoservice>
+  <appliestospecificitems>T</appliestospecificitems>
+  <appliestosubplan>T</appliestosubplan>
+  <applyformatting>T</applyformatting>
   <checkspelling>F</checkspelling>
   <defaultchecked>F</defaultchecked>
   <defaultselection></defaultselection>
@@ -20,15 +20,15 @@
   <displaywidth></displaywidth>
   <dynamicdefault></dynamicdefault>
   <encryptatrest>F</encryptatrest>
-  <fieldtype>URL</fieldtype>
+  <fieldtype>INTEGER</fieldtype>
   <globalsearch>F</globalsearch>
-  <help>XO item URL for internal staff lookup. XO source: Item URL (relative path - pipeline prepends XO domain).</help>
+  <help></help>
   <includechilditems>F</includechilditems>
   <isformula>F</isformula>
   <ismandatory>F</ismandatory>
   <isparent>F</isparent>
   <itemsubtype>BOTH</itemsubtype>
-  <label>Item URL</label>
+  <label>Leaves Shopify Inventory</label>
   <linktext></linktext>
   <maxlength></maxlength>
   <maxvalue></maxvalue>
@@ -45,5 +45,5 @@
   <sourcefrom></sourcefrom>
   <sourcelist></sourcelist>
   <storevalue>T</storevalue>
-  <subtab>ITEMMAIN</subtab>
+  <subtab>[scriptid=custtab_xo_integrations]</subtab>
 </itemcustomfield>

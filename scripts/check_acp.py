@@ -47,7 +47,7 @@ def main():
         return 1
     declared = {o.text.strip() for o in manifest.iter('object') if o.text}
 
-    files = sorted(ACP_OBJECTS.glob('*.xml'))
+    files = sorted(ACP_OBJECTS.rglob('*.xml'))
     if not files:
         print('FAIL no objects found in', ACP_OBJECTS)
         return 1
@@ -69,9 +69,10 @@ def main():
         if sid != p.stem:
             problems.append(f'{p.name}: root scriptid "{sid}" does not match filename')
 
-        for el, why in FORBIDDEN.items():
-            if root.find(el) is not None:
-                problems.append(f'{p.name}: contains <{el}> - {why}')
+        if root.tag == 'itemcustomfield':
+            for el, why in FORBIDDEN.items():
+                if root.find(el) is not None:
+                    problems.append(f'{p.name}: contains <{el}> - {why}')
 
         label = root.findtext('label')
         if label:

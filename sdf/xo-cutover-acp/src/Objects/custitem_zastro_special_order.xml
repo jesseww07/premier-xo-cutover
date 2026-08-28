@@ -1,4 +1,4 @@
-<itemcustomfield scriptid="custitem_la_product_url">
+<itemcustomfield scriptid="custitem_zastro_special_order">
   <accesslevel>2</accesslevel>
   <appliestogroup>F</appliestogroup>
   <appliestoinventory>T</appliestoinventory>
@@ -11,7 +11,7 @@
   <appliestosubplan>F</appliestosubplan>
   <applyformatting>F</applyformatting>
   <checkspelling>F</checkspelling>
-  <defaultchecked>F</defaultchecked>
+  <defaultchecked>T</defaultchecked>
   <defaultselection></defaultselection>
   <defaultvalue></defaultvalue>
   <description></description>
@@ -20,15 +20,15 @@
   <displaywidth></displaywidth>
   <dynamicdefault></dynamicdefault>
   <encryptatrest>F</encryptatrest>
-  <fieldtype>URL</fieldtype>
+  <fieldtype>CHECKBOX</fieldtype>
   <globalsearch>F</globalsearch>
-  <help>XO item URL for internal staff lookup. XO source: Item URL (relative path - pipeline prepends XO domain).</help>
+  <help></help>
   <includechilditems>F</includechilditems>
   <isformula>F</isformula>
   <ismandatory>F</ismandatory>
   <isparent>F</isparent>
   <itemsubtype>BOTH</itemsubtype>
-  <label>Item URL</label>
+  <label>Special Order Product</label>
   <linktext></linktext>
   <maxlength></maxlength>
   <maxvalue></maxvalue>
@@ -45,5 +45,5 @@
   <sourcefrom></sourcefrom>
   <sourcelist></sourcelist>
   <storevalue>T</storevalue>
-  <subtab>ITEMMAIN</subtab>
+  <subtab>ITEMINVENTORY</subtab>
 </itemcustomfield>

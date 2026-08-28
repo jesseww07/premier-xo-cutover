@@ -1,9 +1,9 @@
-<itemcustomfield scriptid="custitem_la_product_url">
+<itemcustomfield scriptid="custitem_shopify_store">
   <accesslevel>2</accesslevel>
-  <appliestogroup>F</appliestogroup>
+  <appliestogroup>T</appliestogroup>
   <appliestoinventory>T</appliestoinventory>
-  <appliestokit>F</appliestokit>
-  <appliestononinventory>F</appliestononinventory>
+  <appliestokit>T</appliestokit>
+  <appliestononinventory>T</appliestononinventory>
   <appliestoothercharge>F</appliestoothercharge>
   <appliestopricelist>F</appliestopricelist>
   <appliestoservice>F</appliestoservice>
@@ -20,30 +20,30 @@
   <displaywidth></displaywidth>
   <dynamicdefault></dynamicdefault>
   <encryptatrest>F</encryptatrest>
-  <fieldtype>URL</fieldtype>
+  <fieldtype>SELECT</fieldtype>
   <globalsearch>F</globalsearch>
-  <help>XO item URL for internal staff lookup. XO source: Item URL (relative path - pipeline prepends XO domain).</help>
+  <help></help>
   <includechilditems>F</includechilditems>
   <isformula>F</isformula>
   <ismandatory>F</ismandatory>
   <isparent>F</isparent>
   <itemsubtype>BOTH</itemsubtype>
-  <label>Item URL</label>
+  <label>Shopify Store</label>
   <linktext></linktext>
   <maxlength></maxlength>
   <maxvalue></maxvalue>
   <minvalue></minvalue>
-  <onparentdelete></onparentdelete>
+  <onparentdelete>NO_ACTION</onparentdelete>
   <parentsubtab></parentsubtab>
   <searchcomparefield></searchcomparefield>
   <searchdefault></searchdefault>
   <searchlevel>2</searchlevel>
-  <selectrecordtype></selectrecordtype>
+  <selectrecordtype>[scriptid=customlist_shopify_store]</selectrecordtype>
   <showhierarchy>F</showhierarchy>
   <showinlist>F</showinlist>
   <sourcefilterby></sourcefilterby>
   <sourcefrom></sourcefrom>
   <sourcelist></sourcelist>
   <storevalue>T</storevalue>
-  <subtab>ITEMMAIN</subtab>
+  <subtab>[scriptid=custtab_xo_integrations]</subtab>
 </itemcustomfield>
