@@ -31,9 +31,10 @@ def build():
     la_fields = [r for r in rows if r['category'] in ('keep20', 'la_field', 'la_gen2', 'la_identity', 'retire_resolved', 'la_adjacent')]
     la_keep = sum(1 for r in la_fields if r['disposition'].startswith('RELABEL'))
     searches = sum(1 for _ in csv.DictReader(open(DATA / 'XO_Search_Cleanup_List.csv', encoding='utf-8-sig')))
-    acp = sorted(p.stem for p in ACP_OBJECTS.glob('*.xml'))
+    acp = sorted(p.stem for p in ACP_OBJECTS.glob('*.xml') if not p.stem.startswith('custform_'))
     acp_new = sum(1 for a in acp if a.startswith('custitem_xo_'))
     acp_relabel = len(acp) - acp_new
+    forms = sorted(p.stem for p in ACP_OBJECTS.glob('custform_*.xml'))
 
     lines = [
         START,
@@ -46,7 +47,8 @@ def build():
         f'| LA fields surviving (relabel) / retiring | **{la_keep}** / {len(la_fields) - la_keep} |',
         f'| Targets KEEP-family / RETIRE-family | {keep} / {retire} |',
         f'| Saved searches needing cleanup before inactivation | **{searches}** (`data/XO_Search_Cleanup_List.csv`) |',
-        f'| SDF ACP objects | **{len(acp)}** ({acp_relabel} relabels + {acp_new} new `custitem_xo_*`) |',
+        f'| SDF ACP field objects | **{len(acp)}** ({acp_relabel} relabels + {acp_new} new `custitem_xo_*`) |',
+        f'| SDF-owned entry form | ' + (', '.join(f'`{f}`' for f in forms) if forms else 'none') + ' |',
         '',
         '**Disposition tally:** ' + ', '.join(f'{k} {v}' for k, v in sorted(disp.items())),
         END,

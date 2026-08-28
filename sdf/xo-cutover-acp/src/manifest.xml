@@ -4,10 +4,195 @@
   <dependencies>
     <features>
       <feature required="true">INVENTORY</feature>
-    </features>
+      <feature required="true">MATRIXITEMS</feature>
+      <feature required="true">MULTISHIPTO</feature>
+      <feature required="true">ACCOUNTING</feature>
+      <feature required="true">ADVINVENTORYMGMT</feature>
+      <feature required="true">INVENTORYSTATUS</feature>
+      <feature required="true">MERCHANDISEHIERARCHY</feature>
+      <feature required="true">ADVTAXENGINE</feature>
+      <feature required="true">SUPPLYCHAINCONTROLTOWER</feature>
+      <feature required="true">MULTILOCINVT</feature>
+      <feature required="true">SUBSIDIARIES</feature>
+      <feature required="true">ADVRECEIVING</feature>
+      <feature required="true">UNITSOFMEASURE</feature>
+      <feature required="true">PAYABLES</feature>
+      <feature required="true">DROPSHIPMENTS</feature>
+      </features>
     <objects>
-      <object>customlist_shopify_store</object>
+      <object>custitem_la_parts_diagram</object>
+      <object>custitem_no_of_bulbs</object>
+      <object>custitem_tss_non_taxable</object>
+      <object>custitem_la_has_imap</object>
+      <object>custitem_la_sku</object>
+      <object>custitem_fa_shpfy_metadesc</object>
+      <object>custitem_la_umap</object>
+      <object>custitem_fa_shpfy_metafld</object>
+      <object>custitem_fa_shpfy_metatitl</object>
+      <object>custitem_la_la_style_1</object>
+      <object>custitem_la_light_source</object>
+      <object>custitem_la_unit_of_measure</object>
+      <object>custitem_la_manufacturer_number</object>
+      <object>custitem_la_cost</object>
+      <object>custitem_la_thumbnail</object>
+      <object>custitem_fa_shpfy_pubscope</object>
+      <object>custitem_la_carton_volume</object>
+      <object>custitem_fa_shpfy_prodtype</object>
+      <object>custsublist_atlas_core_open_sales_orders</object>
+      <object>custitem_la_blade_finish</object>
+      <object>custsublist_atlas_core_hist_item_sales</object>
+      <object>custitem_la_weight_grams</object>
+      <object>custtab_not_common</object>
+      <object>custitem_la_fan_speeds</object>
+      <object>custitem_la_price_range</object>
+      <object>custtab_59_4452715_573</object>
+      <object>custitem_la_active</object>
+      <object>custitem_la_motor_size</object>
+      <object>custitem_la_la_mount</object>
+      <object>custitem_la_fan_airflow</object>
+      <object>custitem_la_multiplier_price</object>
+      <object>custitem_la_la_voltage_range</object>
+      <object>custitem_la_room_2</object>
+      <object>custitem_la_chain</object>
+      <object>custtab_optional</object>
+      <object>custitem_la_room_1</object>
+      <object>customrecord_scm_item_substitute.custrecord_scm_itemsub_parent</object>
+      <object>custitem_la_shipped_via</object>
+      <object>custitem_pr_em_product</object>
+      <object>custitem_atlas_season</object>
+      <object>custitem_la_wire</object>
       <object>customlist_flag_options</object>
+      <object>custsublist_atlas_core_po_3way_match</object>
+      <object>custitem_webstore_link</object>
+      <object>custitem_la_fan_control</object>
+      <object>custitem_la_multiplier</object>
+      <object>custitem_la_instructions</object>
+      <object>custitem_la_gas</object>
+      <object>custitem_la_manufacturer_name</object>
+      <object>custitem_la_cfm_range</object>
+      <object>custitem_la_width_diameter</object>
+      <object>custitem_la_unique_id</object>
+      <object>custitem_la_motor_mounting</object>
+      <object>custitem_la_price_no_sale</object>
+      <object>custitem_ste_taxschedule_coachingtext</object>
+      <object>custitem_la_status_date</object>
+      <object>custitem_la_top_to_outlet</object>
+      <object>custsublist_atlas_core_mth_item_qty_sold</object>
+      <object>custitem_ste_item_taxitem_type</object>
+      <object>custitem_la_fan_downrod</object>
+      <object>custitem_la_dark_sky</object>
+      <object>custitem_laitem_do_not_update</object>
+      <object>custitem_atlas_department</object>
+      <object>custitem_la_blade_type</object>
+      <object>custitem_atlas_closeout</object>
+      <object>custitem_la_order_minimum</object>
+      <object>custsublist_atlas_core_sales_and_margin</object>
+      <object>custitem_la_fan_electricity_use</object>
+      <object>custitem_la_la_width_range</object>
+      <object>custitem_la_manufacturer_glass</object>
+      <object>custitem_la_dimensional_weight</object>
+      <object>custitem_la_light_kit</object>
+      <object>custitem_la_price</object>
+      <object>custsublist_atlas_core_open_pur_by_item</object>
+      <object>custitem_la_led</object>
+      <object>custitem_la_effective_date</object>
+      <object>custitem_la_unit_increment</object>
+      <object>custitem_atlas_style</object>
+      <object>customrecord_scm_customerpartnumber.custrecord_scm_cpn_item</object>
+      <object>custitem_la_ada</object>
+      <object>custitem_la_la_category</object>
+      <object>custitem_la_switch</object>
+      <object>custitem_la_title_24</object>
+      <object>customlist_shopify_store</object>
+      <object>custitem_ste_taxschedule</object>
+      <object>custitem_la_notes</object>
+      <object>custitem_la_manufacturer_finish</object>
+      <object>custitemcustitem_la_weight</object>
+      <object>custitem_la_motor_housing</object>
+      <object>custitem_zastro_image_url</object>
+      <object>custitem_la_blade_span</object>
+      <object>custitem_la_connection</object>
+      <object>custitem_la_alt_small_thumb_1</object>
+      <object>custitem_la_title_20</object>
+      <object>custitem_la_drop_ship</object>
+      <object>custitem_la_bulbs_included</object>
+      <object>custitem_la_rated_average_life</object>
+      <object>custitem_la_base_item_number</object>
+      <object>custitem_ste_oss_taxschedule</object>
+      <object>custitem_fa_shpfy_tags</object>
+      <object>custitem_la_la_finish</object>
+      <object>custitem_la_special_feature</object>
+      <object>custitem_la_reverse_air</object>
+      <object>custitem_la_manufacturer_stock</object>
+      <object>custitem_la_blade_qty</object>
+      <object>custitem_la_energy_efficient</object>
+      <object>custitem_la_date_available</object>
+      <object>custitem_zastro_warranty</object>
+      <object>custitem_la_blade_pitch</object>
+      <object>custitem_la_la_glass</object>
+      <object>custitem_la_country_of_origin</object>
+      <object>custitem_la_sub_brand</object>
+      <object>custitem_category</object>
+      <object>custitem_la_rooms</object>
+      <object>custitem_la_manufacturer_warranty</object>
+      <object>custitem_la_inactivedate</object>
+      <object>custtab_atlas_core_item360</object>
+      <object>custitem_fa_shopify_handle</object>
+      <object>custitem_la_designer</object>
+      <object>custitem_lights_sku</object>
+      <object>custitem_la_fan_mounting_system</object>
+      <object>custitem_fa_shopify_flag</object>
+      <object>custitem_atlas_item_image</object>
+      <object>custitem_la_imap_multiplier</object>
+      <object>custitem_la_energy_star</object>
+      <object>custitem_la_small_thumbnail</object>
+      <object>custitem_zastro_la_updated_at</object>
+      <object>custitem_la_la_type</object>
+      <object>custitem_la_master_pack_barcode</object>
+      <object>custitem_la_list_price</object>
+      <object>custtab_833_7513000_609</object>
+      <object>custitem_la_spec_sheet</object>
+      <object>custitem_fa_shpfy_reqship</object>
+      <object>custitem_la_suffix</object>
+      <object>custtab_5_3761957_208</object>
+      <object>custitem_la_airflow_efficiency</object>
+      <object>custtab_6_3761957_208</object>
+      <object>custitem_la_extension</object>
+      <object>custitem_la_beam_spread</object>
+      <object>custitem_la_manufacturer_category</object>
+      <object>custitem_la_intro_date</object>
+      <object>custitem_la_la_mfg_id</object>
+      <object>custitem_la_mounting_height</object>
+      <object>custitem_la_la_height_range</object>
+      <object>custitem_publish_item</object>
+      <object>custtab_11_3761957_650</object>
+      <object>custitem_la_canopy</object>
+      <object>custitem_la_cartons_per_unit</object>
+      <object>custitem_la_crystal</object>
+      <object>custitem_fa_shpfy_backords</object>
+      <object>custitem_la_number_of_arms</object>
+      <object>custitem_la_price_before_sale</object>
+      <object>customrecord_scm_lc_mapping.custrecord_scm_lc_mapping_item</object>
+      <object>custitem_la_price_changed_date</object>
+      <object>custitem_fa_shpfy_pub_at</object>
     </objects>
+    <applications>
+      <application id="com.netsuite.ussalestaxreports">
+        <objects>
+          <object>custitem_usr_item_category</object>
+        </objects>
+      </application>
+      <application id="com.bluecollar.projects">
+        <objects>
+          <object>custitem_bc_item_file_attachment</object>
+        </objects>
+      </application>
+      <application id="com.netsuite.nsconnector">
+        <objects>
+          <object>customrecord_fa_synced_items.custrecord_fa_synced_item</object>
+          <object>custitemlastpostedtofarapp</object>
+        </objects>
+      </application>
+    </applications>
   </dependencies>
 </manifest>

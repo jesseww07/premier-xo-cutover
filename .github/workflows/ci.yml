@@ -30,6 +30,7 @@ jobs:
           python scripts/build_matrix.py
           python scripts/search_cleanup.py
           python scripts/gen_acp.py
+          python scripts/build_form.py
       - name: Fail on drift (data/ or sdf/ differ from what is committed)
         run: |
           git status --porcelain -- data sdf/xo-cutover-acp/src/Objects

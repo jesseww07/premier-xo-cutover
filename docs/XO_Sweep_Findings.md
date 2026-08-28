@@ -114,6 +114,80 @@ most - they are the naming inversion, and the form still shows the misleading or
 | RP2 / production | not yet deployed - same project, same command, different `defaultAuthId` (`RP2` / `7513000`) |
 
 Deploy mechanics, for the record: the **same ACP** carries subtabs + field defaults; the **form** is never imported or deployed - it is built once in SB1 with Move Elements and distributed with Copy to Account.
+*(Superseded by 4c: the form is now generated, versioned and deployed by SDF like everything else.)*
+
+### 4c. The redesigned form exists - built, deployed and verified in SB1, 2026-08-28
+
+`custform_xo_inventory_item` ("Inventory Item") is live in SB1. It is **generated, not hand-built**:
+`scripts/build_form.py` rewrites the immutable SB1 export in
+`corpus/sb1-2026-08-28/objects/entryform/custform_xo_confirm.xml` into the layout of
+`Item_Form_Redesign.md` section 3, and the result lands in the ACP next to the field objects.
+`project:deploy` now ships fields, subtabs and form in one command; every future layout change is an
+edit to `LAYOUT` in that script plus a deploy. **No Move Elements, no Copy to Account.**
+
+Verified by re-import from SB1 after the deploy (232/232 steps, 0 errors):
+
+| | Result |
+|---|---|
+| Tabs | **19 -> 8 visible** (Purchasing / Inventory · Sales / Pricing · Specifications · Accounting · Integrations · Related Records & Analytics · Communication · System Information), in that order; 12 hidden |
+| New field groups | Catalog · XO Availability & Ordering · Units · MAP Pricing · Dimensions · Lighting · Materials · Ratings & Compliance · Documents · XO Sync · Shopify · NetSuite Connector · Tax · Files - all survived the round trip |
+| Fields placed | 95 |
+| Custom fields hidden | 124 (every one RETIRE-family or out of scope - cross-checked against `XO_Reference_Matrix.csv`; 43 of them are visible on today's form, listed by `python scripts/build_form.py --report`) |
+| **The naming inversion** | fixed **on the form**: `custitem_la_safety_listing` -> **Safety Rating**, `custitem_la_safety_rating` -> **Location Rating**. Also `custitem7` -> XO Item ID, `custitem_la_product_url` -> Item URL, `custitem_xo_umap` -> XO UMAP (was showing "UMAP (2)"), `custitem_la_bulb_base` -> Bulb Base (was mislabelled "Bulb Type"), `VENDORNAME` -> Vendor Code, `custitem_atlas_style` -> **XO Style** |
+| Sublists moved | the six Item360 sublists -> Related Records & Analytics; NetSuite Connector Synced Items -> Integrations |
+
+**`custitem_atlas_style` no longer needs the UI relabel for the form.** Form-level labels are part of
+the form object, so the build sets "XO Style" there. The *field* is still bundle-owned and still
+carries the old label everywhere else (searches, reports, CSV import) - do that UI relabel separately.
+
+#### Two new SDF traps, both bisected in SB1
+
+Both fail the same way as the ITEMLOCATIONS defect did - opaquely, and *before* validation reports a
+single step. The CLI prints nothing but **`Internal Server Error`**. Treat that string as "the
+entryForm payload is unacceptable", not as a network blip.
+
+1. **Do not reorder fields inside a NetSuite-standard field group.** Moving `TOTALVALUE` up within
+   `itemcostdetail` - a group it was already in - is enough to kill the deploy. Fields *arriving*
+   from another group can be inserted anywhere. `build_form.py` therefore only positions incoming
+   fields; fields already in a standard group keep NetSuite's order (their label and visibility still
+   change). The groups this project creates are ours, so order there is fully under our control.
+2. **Do not set `<visible>F</visible>` on the `ITEMMATRIX` subtab.** Removing the element instead
+   deploys fine - and NetSuite re-adds it on install anyway, so **Matrix Items still appears as a
+   subtab under Accounting**. Cosmetic; hide it from the UI later if it annoys.
+
+#### Manifest
+
+`project:adddependencies` on the ACP now pulls in 159 objects, 3 SuiteApps and 17 features, because
+the form references nearly every item field in the account. Two of those features are **not enabled
+in SB1 and must be deleted from `manifest.xml` after every `adddependencies` run**:
+`CHARGEBASEDBILLING` and `SUBSCRIPTIONBILLING`. Everything else validates.
+`scripts/check_acp.py` now resolves dotted sublist references (`record.field`) against the manifest,
+so it catches a field added to `LAYOUT` whose dependency was never declared.
+
+#### SB1 housekeeping status
+
+Jesse cleared some of the bisection forms; **13 remain** and are all inactive:
+`custform_xo_bisect_01/02/06`, `custform_xo_b2_01/06/07/08/09/10/11`, `custform_xo_min_test`,
+`custform_xo_confirm`, plus the new `custform_xo_probe` (the mechanics probe from this session).
+Keep `custform_xo_confirm` until the redesign is signed off - it is the committed build input.
+
+#### Open questions for Jesse (the form is deployed but NOT preferred - nothing changed for users)
+
+1. **`MPN` is labelled "Part # from Bid"** and today sits ungrouped on Sales / Pricing. Section 3 homes
+   MPN under Purchasing › Manufacturing, so the build moved it there **keeping that label**. Is
+   "Part # from Bid" an estimating convention worth keeping, and does Manufacturing still read right?
+2. **Accounting now shows two tax groups.** Native "Tax /Tariff" holds the mandatory native Tax
+   Schedule; the new "Tax" group holds the four tax-bundle `custitem_ste_*` fields (one of which is
+   *also* called "Tax Schedule") plus Non-Taxable. Section 3 said "Tax (from the Tax tab)", which is
+   what got built. Which Tax Schedule is the one people fill in? The loser should be hidden.
+3. **`custitem_category` ("Category_ID", 5,852 items)** loses its form home when the Custom tab hides.
+   It is marked OUT OF SCOPE in the matrix, so it was never dispositioned. Does anything read it?
+4. `Subitem Of`, `Internal ID`, `Department`, `Location`, `Stock Description`, `Track Landed Cost`,
+   `Match Bill To Receipt` and the EU-only `OSS Tax Schedule` are **homed but left hidden**, exactly as
+   they are on today's form. Say the word on any that should show.
+5. **RP2 auth is dead** (`account:setup` needed for authid `RP2`) - so the RP2/production feature check
+   could not run. Do that before the production deploy: prod must have MATRIXITEMS and
+   MERCHANDISEHIERARCHY enabled, or `manifest.xml` needs those declarations dropped too.
 
 ## 5. Cleanup lists (pre-inactivation work, mapped to tracker Phase 5)
 
@@ -132,8 +206,11 @@ Deploy mechanics, for the record: the **same ACP** carries subtabs + field defau
 
 1. ~~Answer the two open design questions~~ — **decided 2026-08-25:** one base entry form now (category variants later); `la_max_wattage` kept and relabeled Wattage (21 survivors).
 2. **Jesse:** approve matrix dispositions → prod deploy of ACP: `cd C:\Users\JesseWampole\dev\xo-cutover-acp`, set `project.json` defaultAuthId to `7513000`, then `npx --yes @oracle/suitecloud-cli@latest project:deploy`. Fields-only; the identical package already deployed clean to SB1.
-3. Entry form: UI steps in §4a — preview in SB1, repeat in prod after the field deploy.
+3. **Entry form: open `custform_xo_inventory_item` on an item in SB1 and walk it** (§4c). It is
+   deployed but not preferred, so nothing changed for anyone until you set it. Answer the five open
+   questions in §4c; each is a one-line edit to `LAYOUT` in `scripts/build_form.py` + a redeploy.
 4. Run the two backfills (finish 204,504 rows, width 45,816) — before Sep 1; disable the FA UE sync scripts during the bulk run.
-5. UI relabel `custitem_atlas_style` → "XO Style" (bundle-owned, SDF can't).
+5. UI relabel `custitem_atlas_style` → "XO Style" at the **field** level (bundle-owned, SDF can't).
+   The new form already shows "XO Style"; this is for searches, reports and CSV import.
 6. Tyler escalation list unchanged (5 items, incl. XOItemID mangling + ship-method domains + full-catalog format confirmation).
 7. Sep 1 freeze steps per Part 3 (unchanged), with the **Zastro carve-out list from §3 excluded from retirement**.

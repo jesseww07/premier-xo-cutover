@@ -91,8 +91,9 @@ def main():
             labels[label.strip()].append(p.stem)
 
         for ref in REF_RE.findall(p.read_text(encoding='utf-8')):
+            # sublist refs are dotted (record.field); the manifest may declare either form
             base = ref.split('.')[0]
-            if base not in in_project and base not in declared:
+            if not ({ref, base} & (in_project | declared)):
                 problems.append(f'{p.name}: references [scriptid={ref}] which is neither in the project '
                                 f'nor declared in manifest.xml dependencies')
 
