@@ -76,7 +76,7 @@ jobs:
 
   refresh-status:
     name: Refresh README / STATUS blocks (main)
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main'
     needs: [verify]
     runs-on: ubuntu-latest
     steps:
@@ -101,7 +101,7 @@ jobs:
 
   wiki-sync:
     name: Mirror docs to GitHub Wiki (opt-in)
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && vars.WIKI_SYNC == 'true'
+    if: (github.event_name == 'push' || github.event_name == 'workflow_dispatch') && github.ref == 'refs/heads/main' && vars.WIKI_SYNC == 'true'
     needs: [refresh-status]
     runs-on: ubuntu-latest
     steps:
