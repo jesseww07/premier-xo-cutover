@@ -168,12 +168,23 @@ decision 5.) `check_acp.py` fails the build if any of the four is declared. Ever
 `scripts/check_acp.py` now resolves dotted sublist references (`record.field`) against the manifest,
 so it catches a field added to `LAYOUT` whose dependency was never declared.
 
-#### SB1 housekeeping status
+#### SB1 housekeeping status - which form to open
 
-Jesse cleared some of the bisection forms; **13 remain** and are all inactive:
-`custform_xo_bisect_01/02/06`, `custform_xo_b2_01/06/07/08/09/10/11`, `custform_xo_min_test`,
-`custform_xo_confirm`, plus the new `custform_xo_probe` (the mechanics probe from this session).
-Keep `custform_xo_confirm` until the redesign is signed off - it is the committed build input.
+Only **two** item entry forms are active in SB1:
+
+| Name in the UI | scriptid | What it is |
+|---|---|---|
+| **Inventory Item** | `custform_xo_inventory_item` | **the redesign** - this is the one to review |
+| New Inventory Item Form - Xo Fields | `custform_217_7513000_136` | today's form, for side-by-side comparison |
+
+Neither is the preferred form, so pick between them from the Custom Form dropdown on an item.
+
+`custform_xo_min_test` ("XO Minimal Test Form") was still **active** and cluttering that dropdown -
+a bisection leftover. Deactivated via SDF 2026-08-28 and verified by re-import. The other twelve
+(`custform_xo_bisect_01/02/06`, `custform_xo_b2_01/06/07/08/09/10/11`, `custform_xo_confirm`,
+`custform_xo_probe`) were already inactive. SDF cannot delete objects, so removing them for good is
+UI work: Customization > Forms > Entry Forms. **Keep `custform_xo_confirm`** until the redesign is
+signed off - it is the committed build input.
 
 #### Jesse's five decisions, 2026-08-28 - all applied and redeployed to SB1
 
