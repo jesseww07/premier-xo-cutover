@@ -702,7 +702,7 @@
           <fields position="MIDDLE">
             <field>
               <id>MPN</id>
-              <label>Part # from Bid</label>
+              <label>Manufacturer Part Number</label>
               <visible>T</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
@@ -932,12 +932,6 @@
         <subList>
           <id>[scriptid=customrecord_scm_item_substitute.custrecord_scm_itemsub_parent]</id>
           <label>Item Substitute</label>
-          <visible>F</visible>
-          <neverEmpty>F</neverEmpty>
-        </subList>
-        <subList>
-          <id>ITEMHIERARCHYVERSIONS</id>
-          <label>Hierarchy Versions</label>
           <visible>F</visible>
           <neverEmpty>F</neverEmpty>
         </subList>
@@ -2218,23 +2212,6 @@
             </field>
           </fields>
         </fieldGroup>
-        <fieldGroup scriptid="taxtariff">
-          <label>Tax /Tariff </label>
-          <visible>T</visible>
-          <showTitle>T</showTitle>
-          <singleColumn>F</singleColumn>
-          <fields position="MIDDLE">
-            <field>
-              <id>TAXSCHEDULE</id>
-              <label>Tax Schedule</label>
-              <visible>T</visible>
-              <mandatory>T</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-          </fields>
-        </fieldGroup>
         <fieldGroup scriptid="fieldgroup_xo_tax">
           <label>Tax</label>
           <visible>T</visible>
@@ -2242,44 +2219,8 @@
           <singleColumn>F</singleColumn>
           <fields position="MIDDLE">
             <field>
-              <id>[scriptid=custitem_ste_taxschedule]</id>
-              <label>Tax Schedule</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
               <id>[scriptid=custitem_ste_item_taxitem_type]</id>
               <label>Tax Item Type</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[scriptid=custitem_ste_taxschedule_coachingtext]</id>
-              <label>Tax Schedule Coaching Text</label>
-              <visible>T</visible>
-              <mandatory>F</mandatory>
-              <displayType>INLINETEXT</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[scriptid=custitem_ste_oss_taxschedule]</id>
-              <label>OSS Tax Schedule</label>
-              <visible>F</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
-              <id>[scriptid=custitem_tss_non_taxable]</id>
-              <label>Non-Taxable</label>
               <visible>T</visible>
               <mandatory>F</mandatory>
               <displayType>NORMAL</displayType>
@@ -2293,6 +2234,23 @@
           <visible>T</visible>
           <showTitle>T</showTitle>
           <singleColumn>F</singleColumn>
+        </fieldGroup>
+        <fieldGroup scriptid="taxtariff">
+          <label>Tax /Tariff </label>
+          <visible>T</visible>
+          <showTitle>T</showTitle>
+          <singleColumn>F</singleColumn>
+          <fields position="MIDDLE">
+            <field>
+              <id>TAXSCHEDULE</id>
+              <label>Tax Schedule</label>
+              <visible>F</visible>
+              <mandatory>T</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+          </fields>
         </fieldGroup>
         <defaultFieldGroup>
           <fields position="MIDDLE">
@@ -2573,6 +2531,15 @@
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
+            <field>
+              <id>[scriptid=custitem_category]</id>
+              <label>Category_ID</label>
+              <visible>T</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
           </fields>
         </fieldGroup>
         <fieldGroup scriptid="fieldgroup_xo_connector">
@@ -2755,15 +2722,6 @@
     <tab>
       <id>ITEMHAZMATDGOODS</id>
       <label>Hazmat/Dangerous Goods</label>
-      <visible>F</visible>
-      <fieldGroups>
-        <defaultFieldGroup />
-      </fieldGroups>
-      <subItems />
-    </tab>
-    <tab>
-      <id>ITEMMERCHANDISEHIERARCHY</id>
-      <label>Merchandise Hierarchy</label>
       <visible>F</visible>
       <fieldGroups>
         <defaultFieldGroup />
@@ -3159,15 +3117,6 @@
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
             <field>
-              <id>[scriptid=custitem_category]</id>
-              <label>Category_ID</label>
-              <visible>F</visible>
-              <mandatory>F</mandatory>
-              <displayType>NORMAL</displayType>
-              <columnBreak>F</columnBreak>
-              <sameRowAsPrevious>F</sameRowAsPrevious>
-            </field>
-            <field>
               <id>[scriptid=custitem_la_intro_date]</id>
               <label>Intro_Date</label>
               <visible>F</visible>
@@ -3257,6 +3206,15 @@
               <columnBreak>F</columnBreak>
               <sameRowAsPrevious>F</sameRowAsPrevious>
             </field>
+            <field>
+              <id>[scriptid=custitem_tss_non_taxable]</id>
+              <label>Non-Taxable</label>
+              <visible>F</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
           </fields>
         </defaultFieldGroup>
       </fieldGroups>
@@ -3328,7 +3286,34 @@
       <fieldGroups>
         <defaultFieldGroup>
           <fields position="MIDDLE">
-            </fields>
+            <field>
+              <id>[scriptid=custitem_ste_taxschedule]</id>
+              <label>Tax Schedule</label>
+              <visible>F</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[scriptid=custitem_ste_taxschedule_coachingtext]</id>
+              <label>Tax Schedule Coaching Text</label>
+              <visible>F</visible>
+              <mandatory>F</mandatory>
+              <displayType>INLINETEXT</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+            <field>
+              <id>[scriptid=custitem_ste_oss_taxschedule]</id>
+              <label>OSS Tax Schedule</label>
+              <visible>F</visible>
+              <mandatory>F</mandatory>
+              <displayType>NORMAL</displayType>
+              <columnBreak>F</columnBreak>
+              <sameRowAsPrevious>F</sameRowAsPrevious>
+            </field>
+          </fields>
         </defaultFieldGroup>
       </fieldGroups>
       <subItems />

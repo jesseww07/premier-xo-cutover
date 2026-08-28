@@ -123,7 +123,7 @@ LAYOUT = {
             'BASEUNIT',
         ]),
         ('manufacturing', None, [
-            'MPN',
+            ('MPN', 'Manufacturer Part Number'),
         ]),
         ('inventorymanagement', None, []),
         ('vendorbillmatching', None, []),
@@ -173,15 +173,12 @@ LAYOUT = {
     ],
     ACCT: [
         ('accounts', None, []),
-        ('taxtariff', None, [
-            'TAXSCHEDULE',
-        ]),
+        # Premier is on SuiteTax: exclusions come from per-state item non-taxability
+        # lists, and everything else is address- or customer-driven. Tax Item Type is the
+        # only item-level tax field that still has an effect (Jesse, 2026-08-28); the rest
+        # are legacy or actively get in SuiteTax's way, so they leave the form.
         ('fieldgroup_xo_tax', 'Tax', [
-            'custitem_ste_taxschedule',
             'custitem_ste_item_taxitem_type',
-            'custitem_ste_taxschedule_coachingtext',
-            'custitem_ste_oss_taxschedule',
-            'custitem_tss_non_taxable',
         ]),
     ],
     INTEG: [
@@ -210,6 +207,7 @@ LAYOUT = {
             'custitem_fa_shpfy_pubscope',
             'custitem_list_on_shopify_temporary_fie',
             'custitem_leaves_shopify_inventory',
+            'custitem_category',
         ]),
         ('fieldgroup_xo_connector', 'NetSuite Connector', [
             'custitemlastpostedtofarapp',
@@ -224,8 +222,6 @@ LAYOUT = {
 
 # Moved but deliberately left hidden - homed on the form, not shown.
 KEEP_HIDDEN = {
-    # EU one-stop-shop schedule from the tax bundle; no US relevance at Premier.
-    'custitem_ste_oss_taxschedule',
     # native identity fields that are hidden on the current form; the redesign homes
     # them but does not change that decision
     'PARENT',
@@ -235,6 +231,18 @@ KEEP_HIDDEN = {
     'STOCKDESCRIPTION',
     'MATCHBILLTORECEIPT',
     'TRACKLANDEDCOST',
+}
+
+# Native fields the redesign drops from the form. The dict is for extra element overrides;
+# it is empty for all of them because NetSuite refuses the one override we wanted:
+# clearing <mandatory> on TAXSCHEDULE is rejected with "Internal Server Error" (bisected in
+# SB1 2026-08-28), while hiding it is fine. Under SuiteTax the field is legacy - exclusions
+# come from per-state item non-taxability lists - so it is hidden but still flagged
+# mandatory. WATCH FOR: a brand-new item that has no tax schedule may refuse to save.
+NATIVE_HIDDEN = {
+    'CONSUMPTIONUNIT': {},
+    'COUNTRYOFMANUFACTURE': {},
+    'TAXSCHEDULE': {},
 }
 
 # Sublists that move tabs. sublist id -> destination tab id.
@@ -252,6 +260,12 @@ SUBLIST_MOVES = {
 # SDF reject the whole form with a bare "Internal Server Error" (bisected in SB1 2026-08-28);
 # removing the element installs cleanly. Matrix items are not used at Premier.
 SUBTABS_REMOVED = ['ITEMMATRIX']
+
+# Dropped entirely because they belong to features Premier does not use (Jesse, 2026-08-28).
+# Leaving the elements in makes `project:adddependencies` declare MERCHANDISEHIERARCHY
+# required, which would fail install in any account where the feature is off.
+TABS_REMOVED = ['ITEMMERCHANDISEHIERARCHY']
+SUBLISTS_REMOVED = ['ITEMHIERARCHYVERSIONS']
 
 # Sublists hidden on a tab that stays visible (section 3 does not list them).
 SUBLISTS_HIDDEN = [
@@ -488,9 +502,15 @@ def build(report=False):
         el.find('visible').text = 'F'
 
     # native fields the redesign explicitly drops
-    for key in ('CONSUMPTIONUNIT', 'COUNTRYOFMANUFACTURE'):
-        if key in form.fields:
-            form.hide(key)
+    for key, extra in NATIVE_HIDDEN.items():
+        if key not in form.fields:
+            continue
+        el = form.fields[key][0]
+        el.find('visible').text = 'F'
+        for tag, val in extra.items():
+            node = el.find(tag)
+            if node is not None:
+                node.text = val
 
     for sublist_id, tab_id in SUBLIST_MOVES.items():
         if sublist_id in form.sublists:
@@ -505,6 +525,15 @@ def build(report=False):
         for subtab in list(subitems if subitems is not None else []):
             if subtab.tag == 'subTab' and subtab.findtext('id') in SUBTABS_REMOVED:
                 subitems.remove(subtab)
+    for sublist_id in SUBLISTS_REMOVED:
+        if sublist_id in form.sublists:
+            el, parent = form.sublists.pop(sublist_id)
+            parent.remove(el)
+    tabs_el = form.root.find('tabs')
+    for tab_id in TABS_REMOVED:
+        tab = form.tabs.pop(tab_id, None)
+        if tab is not None:
+            tabs_el.remove(tab)
 
     for tab_id, tab in form.tabs.items():
         if tab_id in TAB_ORDER:

@@ -14,6 +14,9 @@ account, and encodes the specific traps this project hit:
     be present
   * every [scriptid=...] reference must resolve inside the project or be
     declared in manifest.xml dependencies
+  * manifest must not require a feature Premier does not run - `project:adddependencies`
+    re-adds these every time it is run, and each one fails ACCOUNT_SETTINGS_VALIDATION or
+    blocks install in an account without the feature
   * entry forms: no subList duplicating a subTab id (breaks install); scriptid must not be UI-generated
   * field labels must be unique (NetSuite silently auto-suffixes "(2)")
 
@@ -36,6 +39,17 @@ FORBIDDEN = {
 }
 REF_RE = re.compile(r'\[scriptid=([\w.]+)\]')
 
+# Features the manifest must never require. The first two come back on every
+# `project:adddependencies` run and have to be deleted again (standing step in CLAUDE.md).
+# The last two only reappear if someone puts matrix / merchandise-hierarchy elements back
+# into the form, which is why build_form.py removes them at the source.
+FORBIDDEN_FEATURES = {
+    'CHARGEBASEDBILLING': 'not enabled - fails ACCOUNT_SETTINGS_VALIDATION',
+    'SUBSCRIPTIONBILLING': 'not enabled - fails ACCOUNT_SETTINGS_VALIDATION',
+    'MATRIXITEMS': 'Premier does not use matrix items (Jesse 2026-08-28)',
+    'MERCHANDISEHIERARCHY': 'Premier does not use merchandise hierarchy (Jesse 2026-08-28)',
+}
+
 
 def main():
     problems = []
@@ -46,6 +60,12 @@ def main():
         print(f'FAIL manifest.xml is not well-formed: {e}')
         return 1
     declared = {o.text.strip() for o in manifest.iter('object') if o.text}
+
+    for feat in manifest.iter('feature'):
+        name = (feat.text or '').strip()
+        if name in FORBIDDEN_FEATURES and feat.get('required') == 'true':
+            problems.append(f'manifest.xml requires feature {name} - {FORBIDDEN_FEATURES[name]}; '
+                            'delete it (it comes back on every project:adddependencies run)')
 
     files = sorted(ACP_OBJECTS.rglob('*.xml'))
     if not files:

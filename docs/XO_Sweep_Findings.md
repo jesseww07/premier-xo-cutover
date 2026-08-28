@@ -154,13 +154,17 @@ entryForm payload is unacceptable", not as a network blip.
 2. **Do not set `<visible>F</visible>` on the `ITEMMATRIX` subtab.** Removing the element instead
    deploys fine - and NetSuite re-adds it on install anyway, so **Matrix Items still appears as a
    subtab under Accounting**. Cosmetic; hide it from the UI later if it annoys.
+3. **Do not clear `<mandatory>` on a natively-required field.** `TAXSCHEDULE` can be hidden; setting
+   its `mandatory` to `F` in the same breath is refused. Hide, and leave the flag alone.
 
 #### Manifest
 
-`project:adddependencies` on the ACP now pulls in 159 objects, 3 SuiteApps and 17 features, because
-the form references nearly every item field in the account. Two of those features are **not enabled
-in SB1 and must be deleted from `manifest.xml` after every `adddependencies` run**:
-`CHARGEBASEDBILLING` and `SUBSCRIPTIONBILLING`. Everything else validates.
+`project:adddependencies` on the ACP pulls in 159 objects, 3 SuiteApps and 13 features, because the
+form references nearly every item field in the account. Two of those features are **not enabled in SB1
+and come back on every `adddependencies` run, so they must be deleted from `manifest.xml` every
+time**: `CHARGEBASEDBILLING` and `SUBSCRIPTIONBILLING`. (MATRIXITEMS and MERCHANDISEHIERARCHY used to
+join them; since the form no longer carries those elements, `adddependencies` stops asking - see
+decision 5.) `check_acp.py` fails the build if any of the four is declared. Everything else validates.
 `scripts/check_acp.py` now resolves dotted sublist references (`record.field`) against the manifest,
 so it catches a field added to `LAYOUT` whose dependency was never declared.
 
@@ -171,23 +175,35 @@ Jesse cleared some of the bisection forms; **13 remain** and are all inactive:
 `custform_xo_confirm`, plus the new `custform_xo_probe` (the mechanics probe from this session).
 Keep `custform_xo_confirm` until the redesign is signed off - it is the committed build input.
 
-#### Open questions for Jesse (the form is deployed but NOT preferred - nothing changed for users)
+#### Jesse's five decisions, 2026-08-28 - all applied and redeployed to SB1
 
-1. **`MPN` is labelled "Part # from Bid"** and today sits ungrouped on Sales / Pricing. Section 3 homes
-   MPN under Purchasing › Manufacturing, so the build moved it there **keeping that label**. Is
-   "Part # from Bid" an estimating convention worth keeping, and does Manufacturing still read right?
-2. **Accounting now shows two tax groups.** Native "Tax /Tariff" holds the mandatory native Tax
-   Schedule; the new "Tax" group holds the four tax-bundle `custitem_ste_*` fields (one of which is
-   *also* called "Tax Schedule") plus Non-Taxable. Section 3 said "Tax (from the Tax tab)", which is
-   what got built. Which Tax Schedule is the one people fill in? The loser should be hidden.
-3. **`custitem_category` ("Category_ID", 5,852 items)** loses its form home when the Custom tab hides.
-   It is marked OUT OF SCOPE in the matrix, so it was never dispositioned. Does anything read it?
-4. `Subitem Of`, `Internal ID`, `Department`, `Location`, `Stock Description`, `Track Landed Cost`,
-   `Match Bill To Receipt` and the EU-only `OSS Tax Schedule` are **homed but left hidden**, exactly as
-   they are on today's form. Say the word on any that should show.
-5. **RP2 auth is dead** (`account:setup` needed for authid `RP2`) - so the RP2/production feature check
-   could not run. Do that before the production deploy: prod must have MATRIXITEMS and
-   MERCHANDISEHIERARCHY enabled, or `manifest.xml` needs those declarations dropped too.
+| # | Decision | What the build does now |
+|---|---|---|
+| 1 | **MPN goes back to its native meaning**, relabelled "Manufacturer Part Number" | first field in Purchasing › Manufacturing; the "Part # from Bid" label is gone |
+| 2 | **Premier is on SuiteTax.** Exclusions come from per-state item non-taxability lists; everything else is address- or customer-driven. **Tax Item Type is the only item-level tax field with any effect** - the rest are legacy or get in SuiteTax's way | Accounting › Tax contains `custitem_ste_item_taxitem_type` and nothing else. Native `TAXSCHEDULE`, `custitem_ste_taxschedule`, `custitem_ste_oss_taxschedule`, the coaching text and `custitem_tss_non_taxable` are all hidden |
+| 3 | **`custitem_category` moves to Integrations**, with the Shopify fields | last field in Integrations › Shopify, visible |
+| 4 | The homed-but-hidden natives are fine - not fields Premier uses | unchanged |
+| 5 | **Premier uses neither matrix items nor merchandise hierarchy** - edit the manifest rather than depend on the features | the form no longer contains the ITEMMATRIX subtab, the ITEMMERCHANDISEHIERARCHY tab or the Hierarchy Versions sublist, so `adddependencies` stops asking for either feature; both are deleted from `manifest.xml` and `check_acp.py` now fails if they come back |
+
+**One caveat on decision 2, and it needs a save test.** SDF will let the form *hide* native
+`TAXSCHEDULE`, but it will **not** let the form clear that field's `mandatory` flag - trying to is the
+third member of the `Internal Server Error` family (below). So Tax Schedule is hidden with
+`mandatory=T` still on it. Existing items already carry a value; **a brand-new item created on this
+form may refuse to save**. Create one throwaway item in SB1 to find out. If it blocks, the field comes
+back visible (one line in `NATIVE_HIDDEN`).
+
+Consequence of decision 5 worth knowing: NetSuite **re-adds** the Matrix Items subtab, the Merchandise
+Hierarchy tab and the Hierarchy Versions sublist on install, hidden. Removing them from the source XML
+does not remove them from the account - what it buys is a manifest that no longer requires the
+features, so the package installs in an account that has them switched off.
+
+#### Still open
+
+- **RP2 auth is dead** (`account:setup` needed for authid `RP2`) - so no pre-production dry run.
+  With MATRIXITEMS and MERCHANDISEHIERARCHY now out of the manifest, the remaining declared features
+  are inventory/accounting core; if a prod validate ever fails on one, delete it the same way.
+- The form is deployed to SB1 but **`preferred=F`** - users still get `custform_217_7513000_136`.
+  Nothing changes for anyone until it is made preferred.
 
 ## 5. Cleanup lists (pre-inactivation work, mapped to tracker Phase 5)
 

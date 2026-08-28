@@ -4,12 +4,10 @@
   <dependencies>
     <features>
       <feature required="true">INVENTORY</feature>
-      <feature required="true">MATRIXITEMS</feature>
       <feature required="true">MULTISHIPTO</feature>
       <feature required="true">ACCOUNTING</feature>
       <feature required="true">ADVINVENTORYMGMT</feature>
       <feature required="true">INVENTORYSTATUS</feature>
-      <feature required="true">MERCHANDISEHIERARCHY</feature>
       <feature required="true">ADVTAXENGINE</feature>
       <feature required="true">SUPPLYCHAINCONTROLTOWER</feature>
       <feature required="true">MULTILOCINVT</feature>

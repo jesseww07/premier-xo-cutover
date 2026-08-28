@@ -154,9 +154,9 @@ Everything below is in the one ACP at `sdf/xo-cutover-acp/`; one `project:deploy
      so the retiring LA fields need no enumeration. `--report` lists what that hides that is visible today.
    - Do NOT try to update the UI-created `custform_217_7513000_136` via SDF - that path fails; the new form is
      born fresh and the old one retires. (Root cause and evidence: findings 4a.)
-   - Two hard-won constraints live in that script: never reorder a field inside a NetSuite-standard field group,
-     and never set `visible=F` on the ITEMMATRIX subtab. Either one makes SDF answer `Internal Server Error`
-     with no further detail. (Findings 4c.)
+   - Three hard-won constraints live in that script: never reorder a field inside a NetSuite-standard field
+     group; never set `visible=F` on the ITEMMATRIX subtab; never clear `mandatory` on a natively-required
+     field. Each one makes SDF answer `Internal Server Error` with no further detail. (Findings 4c.)
    - After changing `LAYOUT`, re-run `project:adddependencies` and delete the `CHARGEBASEDBILLING` and
      `SUBSCRIPTIONBILLING` features it re-adds. `scripts/check_acp.py` catches an undeclared dependency.
 3. **Switching users over is a separate, deliberate step.** The form deploys with `preferred=F`; nothing
