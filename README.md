@@ -37,6 +37,8 @@ Live checklist by phase: [`docs/XO_Cutover_Tracker.html`](docs/XO_Cutover_Tracke
 | [`data/XO_Search_Cleanup_List.csv`](data/XO_Search_Cleanup_List.csv) | Saved searches to fix before anything is inactivated. |
 | [`docs/XO_Cutover_NetSuite_Transition_Plan.md`](docs/XO_Cutover_NetSuite_Transition_Plan.md) | Phased retirement plan (Sep 1 freeze → Dec 1 delete). Where it conflicts with the handoff, the handoff wins. |
 | [`docs/LA_to_XO_Field_Mapping.csv`](docs/LA_to_XO_Field_Mapping.csv) | All 68 LA feed fields → XO backend columns, with transform notes. |
+| [`docs/XO_API_Integration_Handoff.md`](docs/XO_API_Integration_Handoff.md) | **The API pivot (2026-09-04).** XO's FTP has been down since 2026-08-21; the Product API replaces it via a fixed-egress relay. Decisions, verified facts, open questions. |
+| [`relay/README.md`](relay/README.md) | The relay code: XO client, transform, NetSuite/Shopify legs, tests, ops runbook. |
 
 ## Layout
 

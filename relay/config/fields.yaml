@@ -1,0 +1,78 @@
+# XO Product API `fields=` lists per pull type.
+#
+# Field NAMES marked "# verify" are taken from the backend full-catalog feed's column names
+# and have not yet been confirmed as API field names (the Product API Guide documents only a
+# subset). scripts/field_audit.py resolves this against a captured fixture or the Swagger doc
+# at https://<db>.xologic.com/api/doc. Until then, the transform layer's lookup is
+# case/space-insensitive so `Item URL` / `ItemURL` / `ItemUrl` all resolve.
+#
+# Always pass an explicit list - XO performance depends on it.
+
+identity:
+  - XOItemID
+  - ItemID
+  - VendorID
+  - VItemID
+  - VendorName
+  - ItemNumber
+  - BaseItemNumber
+  - GTIN
+  - ItemName
+
+change_dates:
+  - AvailabilityChangedDate
+  - CatalogChangedDate
+  - PriceChangedDate
+  - LastChangedDate          # verify
+
+availability:
+  - InStock
+  - BackOrderDate
+  - Discontinued
+  - AllowPurchase            # verify
+  - OrderMinimum             # verify
+  - OrderMultiple            # verify
+
+pricing:
+  - ItemCost
+  - VendorDiscountedCost
+  - CostWithShipping
+  - Price
+  - WebPrice
+  - MSRP
+  - IMAP
+  - UMAP                     # verify
+
+catalog:
+  - ShortDescription
+  - LongDescription          # verify
+  - Family                   # verify (Collection)
+  - Keywords                 # verify
+  - ItemURL                  # verify (relative path)
+  - ImagePath                # verify (primary image)
+  - Width
+  - Height
+  - Length
+  - StandardData             # flat facets: Category, Subcategory, Style, Finish, Kelvin, Lumens, Wattage, Voltage, Location Rating
+  - ExtraData                # the long tail: Bulb *, Blade *, Downrod *, Safety Rating, Location Rating, Prop 65, Title 20/24 ...
+  - FileData                 # spec / installation / warranty documents
+  - ImageData                # gallery
+
+# The weekly delta pull: identity + change_dates + availability + pricing + catalog.
+delta:
+  use: [identity, change_dates, availability, pricing, catalog]
+
+# The Shopify price/inventory/status delta needs far less.
+shopify_delta:
+  use: [identity, change_dates, availability, pricing]
+
+# Full-catalog sync (getAll=1): same as delta.
+full_catalog:
+  use: [identity, change_dates, availability, pricing, catalog]
+
+# Response shaping (handoff §4 recommendation): flat facets, structured JSON for files/images
+# so the parser is never splitting URLs on colons.
+flat_format:
+  StandardData: p
+  FileData: n
+  ImageData: n
