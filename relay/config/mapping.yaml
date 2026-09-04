@@ -1,0 +1,338 @@
+# XO field -> NetSuite column / Shopify delta column.
+#
+# NetSuite CSV headers are NetSuite field internal ids (script ids) - the same convention as
+# the existing import files produced by the netsuite-shopify-item-sync skill
+# (NetSuite_Item_UPDATE_*.csv / NetSuite_Item_ADD_*.csv in the Product Catalog folder), so
+# the saved CSV import map auto-maps them. Column ORDER here = CSV column order.
+#   ops     which files the column appears in (update / add)
+#   groups  lets a run write a subset: --groups pricing,availability
+#   rest    false = CSV-only until Phase 2 handles that field explicitly
+#   verify  true  = the XO API field NAME is unconfirmed (see config/fields.yaml + field audit)
+#
+# Locked decisions carried in here (do not relitigate without the findings report):
+#   custitem7 "XO Item ID"        <- ItemID   (NOT XOItemID)
+#   custitem_la_safety_listing    <- Extra-Safety Rating   (ETL/UL)   } the naming inversion:
+#   custitem_la_safety_rating     <- Extra-Location Rating (Damp/Wet) } labels already fixed on the form
+#   custitem5                     <- IMAP
+#   price (Base Price = price level 1, named "MSRP" in this account) <- MSRP
+#   cost  (Purchase Price)        <- ItemCost
+#   externalid                    NEVER written (occupied by the live LA process until 2026-10-01)
+#   displayname / upccode         NOT written - both are forced to internal id by workflows
+#                                 (docs/Adjacent_Item_Data_Notes.md); GTIN goes to custitem_la_upc
+#   inventory does not sync; custitem_xo_in_stock is informational
+
+version: 1
+item_url_base: ""            # set from XO_ITEM_URL_BASE at runtime if empty (open item: which domain)
+
+netsuite:
+  date_format: "%m/%d/%Y"    # account date format for CSV import
+  record_type: inventoryitem # new XO SKUs are Inventory Items (drop-ship / receive-reship / B2B stored)
+  csv_bom: true              # the existing import files are utf-8-sig
+
+  # Constant columns on the ADD file only (from the existing ADD files / template item).
+  # Never on UPDATE - overwriting subsidiary / GL accounts on existing items is destructive.
+  add_defaults:
+    taxschedule: Taxable
+    incomeaccount: 40000 Sales Revenue
+    assetaccount: "13010 Inventory Valuation : Inventory"
+    cogsaccount: "52100 Cost of Goods Sold : Material Costs : Lighting Fixtures"
+    subsidiary: "Premier Lighting, LLC"
+    unitstype: Each
+    custitem_fa_shopify_flag: Ignore
+
+  # Shopify/XO brand -> exact NetSuite vendor name for the Vendors sublist (ADD only).
+  # Unmapped brands leave `vendor` blank and are listed in the run report; look up with
+  # SELECT id, entityid, companyname FROM vendor WHERE UPPER(companyname) LIKE '%BRAND%'
+  vendor_map:
+    Innovations Lighting: INNOVATIONS LIGHTING
+    Vaxcel International: VAXCEL INTLOPUS LIVING
+    WAC US: WAC LIGHTING
+    Cyan Designs: CYAN DESIGN
+    Fredrick Ramond: FREDRICK RAYMOND
+    Kichler: KICHLER
+    Uttermost: UTTERMOST COMPANY
+    Z-Lite: Z-LITE JENAMEES US
+    Eurofase: EUROFASE
+    Modern Forms US Online: MODERN FORMS
+    Modern Forms US - Fans Only: MODERN FORMS
+    Modern Fan Co.: MODERN FAN CO.
+    Troy: TROY LIGHTING
+
+  columns:
+    # ---------------------------------------------------------------- identity
+    - header: internalid
+      source: "@internal_id"
+      ns_field: id
+      ops: [update]
+      groups: [identity, pricing, availability, catalog]
+      rest: false
+    - header: itemid
+      source: ItemNumber
+      ns_field: itemid
+      ops: [add]
+      groups: [identity, pricing, availability, catalog]
+    - header: custitem7
+      source: ItemID
+      ns_field: custitem7
+      transform: [int]
+      groups: [identity, pricing, availability, catalog]
+    - header: custitem_la_upc
+      source: GTIN
+      ns_field: custitem_la_upc
+      transform: [gtin]
+      groups: [identity]
+    - header: custitem_la_product_name
+      source: "@alias:product_name"
+      ns_field: custitem_la_product_name
+      groups: [catalog]
+    - header: manufacturer
+      source: VendorName
+      ns_field: manufacturer
+      ops: [add]
+      groups: [identity]
+    - header: vendor
+      source: VendorName
+      ns_field: vendor
+      transform: [ns_vendor]
+      ops: [add]
+      groups: [identity]
+      rest: false
+      note: "Vendors sublist : Vendor - exact NetSuite vendor name via vendor_map"
+    - header: custitem_fa_shopify_handle
+      source: "@shopify_handle"
+      ns_field: custitem_fa_shopify_handle
+      ops: [add]
+      groups: [identity]
+    - header: custitem_fa_shpfy_prodtype
+      source: Standard-Category
+      ns_field: custitem_fa_shpfy_prodtype
+      groups: [catalog]
+    - header: custitem_category
+      source: Standard-Category
+      ns_field: custitem_category
+      groups: [catalog]
+
+    # ---------------------------------------------------------------- pricing
+    - header: price
+      source: MSRP
+      ns_field: price
+      transform: [money]
+      groups: [pricing]
+      rest: false
+      note: "Base Price = price level 1 = 'MSRP' in this account"
+    - header: cost
+      source: ItemCost
+      ns_field: cost
+      transform: [money]
+      groups: [pricing]
+      note: "Purchase Price (what we buy at)"
+    - header: custitem5
+      source: IMAP
+      ns_field: custitem5
+      transform: [money]
+      groups: [pricing]
+    - header: custitem_xo_umap
+      source: UMAP
+      ns_field: custitem_xo_umap
+      transform: [money]
+      groups: [pricing]
+      verify: true
+    - header: custitem_xo_vendor_disc_cost
+      source: VendorDiscountedCost
+      ns_field: custitem_xo_vendor_disc_cost
+      transform: [money]
+      groups: [pricing]
+    - header: custitem_xo_cost_w_shipping
+      source: CostWithShipping
+      ns_field: custitem_xo_cost_w_shipping
+      transform: [money]
+      groups: [pricing]
+
+    # ---------------------------------------------------------------- availability
+    - header: custitem_xo_in_stock
+      source: InStock
+      ns_field: custitem_xo_in_stock
+      transform: [int]          # -1 is preserved as -1 (in stock, quantity unknown)
+      groups: [availability]
+    - header: custitem_xo_backorder_date
+      source: BackOrderDate
+      ns_field: custitem_xo_backorder_date
+      transform: [date]
+      groups: [availability]
+    - header: custitem_xo_order_minimum
+      source: OrderMinimum
+      ns_field: custitem_xo_order_minimum
+      transform: [int]
+      groups: [availability]
+      verify: true
+    - header: custitem_xo_order_multiple
+      source: OrderMultiple
+      ns_field: custitem_xo_order_multiple
+      transform: [int]
+      groups: [availability]
+      verify: true
+    # Discontinued has no NetSuite field in the ACP today; it drives Shopify (metafield + status).
+    # If NetSuite needs it, add custitem_xo_discontinued (CHECKBOX) to the ACP and a column here
+    # with transform [bool_tf].
+
+    # ---------------------------------------------------------------- change dates
+    - header: custitem_xo_availability_changed
+      source: AvailabilityChangedDate
+      ns_field: custitem_xo_availability_changed
+      transform: [date]
+      groups: [availability, pricing, catalog]
+    - header: custitem_xo_catalog_changed
+      source: CatalogChangedDate
+      ns_field: custitem_xo_catalog_changed
+      transform: [date]
+      groups: [availability, pricing, catalog]
+    - header: custitem_xo_price_changed
+      source: PriceChangedDate
+      ns_field: custitem_xo_price_changed
+      transform: [date]
+      groups: [availability, pricing, catalog]
+    - header: custitem_xo_last_changed
+      source: "@last_changed"
+      ns_field: custitem_xo_last_changed
+      transform: [date]
+      groups: [availability, pricing, catalog]
+
+    # ---------------------------------------------------------------- catalog / specs
+    - header: custitem_xo_keywords
+      source: Keywords
+      ns_field: custitem_xo_keywords
+      groups: [catalog]
+      verify: true
+    - header: custitem_la_product_url
+      source: ItemURL
+      ns_field: custitem_la_product_url
+      transform: [url]
+      groups: [catalog]
+      verify: true
+    - header: custitem_la_image
+      source: "@primary_image"
+      ns_field: custitem_la_image
+      groups: [catalog]
+    - header: custitem_spec_sheet_link
+      source: "@spec_sheet"
+      ns_field: custitem_spec_sheet_link
+      groups: [catalog]
+    - header: custitem_la_collection
+      source: "@alias:collection"
+      ns_field: custitem_la_collection
+      groups: [catalog]
+      verify: true
+    - header: custitem_la_finish
+      source: "@alias:finish_verbatim"
+      ns_field: custitem_la_finish
+      groups: [catalog]
+    - header: custitem_la_material
+      source: "@alias:material"
+      ns_field: custitem_la_material
+      groups: [catalog]
+    - header: custitem_la_width
+      source: Width
+      ns_field: custitem_la_width
+      transform: [strip_units]
+      groups: [catalog]
+    - header: custitem_la_height
+      source: Height
+      ns_field: custitem_la_height
+      transform: [strip_units]
+      groups: [catalog]
+    - header: custitem_la_length
+      source: Length
+      ns_field: custitem_la_length
+      transform: [strip_units]
+      groups: [catalog]
+    - header: custitem_la_bulb_type
+      source: Extra-Bulb Type
+      ns_field: custitem_la_bulb_type
+      groups: [catalog]
+    - header: custitem_la_bulb_base
+      source: Extra-Bulb Base
+      ns_field: custitem_la_bulb_base
+      groups: [catalog]
+    - header: custitem_la_number_of_bulbs
+      source: "@alias:number_of_bulbs"
+      ns_field: custitem_la_number_of_bulbs
+      transform: [strip_units]
+      groups: [catalog]
+    - header: custitem_la_max_wattage
+      source: "@alias:wattage"
+      ns_field: custitem_la_max_wattage
+      transform: [strip_units]
+      groups: [catalog]
+    - header: custitem_la_color_temperature
+      source: "@alias:kelvin"
+      ns_field: custitem_la_color_temperature
+      transform: [strip_units]
+      groups: [catalog]
+    - header: custitem_la_light_output
+      source: "@alias:lumens"
+      ns_field: custitem_la_light_output
+      transform: [strip_units]
+      groups: [catalog]
+    - header: custitem_la_cri
+      source: Extra-Bulb CRI
+      ns_field: custitem_la_cri
+      transform: [strip_units]
+      groups: [catalog]
+    - header: custitem_la_voltage
+      source: "@alias:voltage"
+      ns_field: custitem_la_voltage
+      transform: [strip_units]
+      groups: [catalog]
+    - header: custitem_la_dimmable
+      source: Extra-Bulb Dimmable
+      ns_field: custitem_la_dimmable
+      groups: [catalog]
+    - header: custitem_la_safety_listing
+      source: "@alias:safety_rating"       # ETL / UL - XO's 'Safety Rating' = LA's 'Safety Listing'; label now "Safety Rating"
+      ns_field: custitem_la_safety_listing
+      groups: [catalog]
+    - header: custitem_la_safety_rating
+      source: "@alias:location_rating"     # Damp / Wet - LA's 'Safety Rating' held location; label now "Location Rating"
+      ns_field: custitem_la_safety_rating
+      groups: [catalog]
+    - header: custitem_xo_prop65
+      source: Extra-Prop 65
+      ns_field: custitem_xo_prop65
+      groups: [catalog]
+    - header: custitem_xo_prop65_desc
+      source: Extra-Prop 65 Description
+      ns_field: custitem_xo_prop65_desc
+      groups: [catalog]
+    - header: custitem_xo_title20
+      source: Extra-Title 20
+      ns_field: custitem_xo_title20
+      groups: [catalog]
+    - header: custitem_xo_title24
+      source: Extra-Title 24
+      ns_field: custitem_xo_title24
+      groups: [catalog]
+
+# --------------------------------------------------------------------------- Shopify
+# The Matrixify Products delta. Same contract as the scheduled xologic-weekly-delta-import
+# task. The two metafield headers below are copied verbatim from XO's own FTP delta file
+# (shoppremier_shopify_delta.csv, 2026-08-03) - they are unstructured metafields (no
+# definition in the store), so the header text is the only contract. Do not reformat them.
+shopify:
+  price_source: WebPrice       # feed "Regular Price" == XO Web Price (100% fill, verified)
+  cost_source: ItemCost
+  columns:
+    vendor: Vendor
+    sku: Variant Sku
+    qty: Variant Inventory Qty
+    cost: Variant Cost
+    price: Variant Price
+    command: Command
+    discontinued: "Variant Metafield: custom.discontinued_ [single_line_text_field]"
+    backorder_date: "Variant Metafield: custom.backorder_date [single_line_text_field]"
+    compare_at: Variant Compare At Price
+  built_to_order_vendors:      # untracked brands: never write a quantity (hand-maintained list)
+    - Hubbardton Forge
+    - Justice Design Group
+    - Hammerton
+  suspicious_drop_pct: 70
+  max_clear_rate_pct: 30

@@ -241,3 +241,37 @@ features, so the package installs in an account that has them switched off.
    The new form already shows "XO Style"; this is for searches, reports and CSV import.
 6. Tyler escalation list unchanged (5 items, incl. XOItemID mangling + ship-method domains + full-catalog format confirmation).
 7. Sep 1 freeze steps per Part 3 (unchanged), with the **Zastro carve-out list from §3 excluded from retirement**.
+
+## 8. 2026-09-04 - XO FTP outage -> Product API relay
+
+**What happened.** XO's FTP server has been down since ~2026-08-21 with no ETA. The scheduled
+`xologic-weekly-delta-import` task (FTP -> transform -> Matrixify) has had nothing to import, so
+Shopify pricing, inventory and discontinued status are stale and Premier has been selling dead
+product. XO's GM confirmed 2026-09-03 the **Product API is unaffected** and is their recommended
+integration; Jesse verified the backend data layer is current (change dates after 8/21).
+
+**Decision.** NetSuite will not call XO directly: XO allowlists static IPv4 only (no FQDN), and
+`outboundips.netsuite.com` resolves to 41 rotating Oracle Cloud addresses that Oracle will not
+publish or support. A relay with one fixed egress IPv4 pulls XO and pushes inward to NetSuite
+(SuiteTalk REST, token auth, no IP requirement) and Shopify (Matrixify, unchanged). Full
+reasoning and verified facts: `docs/XO_API_Integration_Handoff.md`.
+
+**Built today (`relay/`, 134 tests, no live calls):** IPv4-pinned read-only XO client with
+throttle/retry; typed record with the documented `InStock` semantics (-1 = in stock, qty unknown)
+and the explicit `Discontinued` flag; the §7 transform rules as tested code; NetSuite OAuth 2.0
+client-credentials auth, batched SuiteQL internal-id resolution (custitem7 first, then itemid,
+dedupe before create); Phase 1 UPDATE/ADD CSV emit with the same script-id headers as the
+existing `NetSuite_Item_*.csv` import files; the Matrixify delta builder carrying every rule of
+the scheduled task (negatives -> 0, blank passthrough, built-to-order guard, compare-at,
+validation); a scheduled entry point that runs end to end from fixtures.
+
+**Blocked (IT ticket / XO Client Services):** Premier's public egress IPv4 and the host; bearer
+token; client database name; read-only token scoping. **Open before the mapping locks:** API
+field-name confirmation (`scripts/field_audit.py` after `scripts/capture_fixtures.py`), the
+`Item URL` domain, whether NetSuite needs a Discontinued field, and the FarApp UE deployment
+audience restriction for the integration role (`relay/ops/schedule.md` §6).
+
+**Correction flagged, not applied silently:** the handoff's "split FileData tokens on the last
+colon" rule breaks https URLs in the API's documented `Label:Value|Label:Value` form; the relay
+splits on the first colon for known labels and requests structured JSON (`FlatFormat[FileData]=n`)
+so no splitting is needed. Confirm on captured fixtures.

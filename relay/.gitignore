@@ -1,0 +1,8 @@
+.env
+out/
+__pycache__/
+.pytest_cache/
+*.pem
+*.key
+*.p12
+tests/fixtures/live_*.json

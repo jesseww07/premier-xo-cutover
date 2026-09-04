@@ -1,0 +1,13 @@
+{
+  "by_xo_item_id": {
+    "3372700111": {"id": "887136", "itemid": "38259-023"}
+  },
+  "by_itemid": {
+    "2343NI": {"id": "123001", "itemid": "2343NI"},
+    "HF-134501-SKT-07": {"id": "123002", "itemid": "HF-134501-SKT-07"},
+    "F844-BN": {"id": "123003", "itemid": "F844-BN"},
+    "48508-022": {"id": "900001", "itemid": "48508-022"},
+    "AMBIG-1": [{"id": "500001", "itemid": "AMBIG-1"}, {"id": "500002", "itemid": "AMBIG-1"}],
+    "OLD-INACTIVE": {"id": "600001", "itemid": "OLD-INACTIVE", "isinactive": "T"}
+  }
+}
